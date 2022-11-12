@@ -38,13 +38,13 @@ export const LoginForm = () => {
             <MDBTabs pills justify className='mb-3 d-flex flex-row justify-content-between'>
                 <MDBTabsItem>
                     <MDBTabsLink onClick={() => handleClick('login')} active={activeTab === 'login'}
-                                 style={{backgroundColor: activeTab == 'login' ? "teal" : ""}}>
+                                 style={{backgroundColor: activeTab === 'login' ? "teal" : ""}}>
                         Login
                     </MDBTabsLink>
                 </MDBTabsItem>
                 <MDBTabsItem>
                     <MDBTabsLink onClick={() => handleClick('register')} active={activeTab === 'register'}
-                                 style={{backgroundColor: activeTab == 'register' ? "teal" : ""}}>
+                                 style={{backgroundColor: activeTab === 'register' ? "teal" : ""}}>
                         Register
                     </MDBTabsLink>
                 </MDBTabsItem>
