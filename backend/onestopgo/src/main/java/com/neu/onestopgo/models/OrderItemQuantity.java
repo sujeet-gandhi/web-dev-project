@@ -18,7 +18,7 @@ public class OrderItemQuantity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
-    private Order order;
+    private Order1 order1;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
@@ -34,12 +34,12 @@ public class OrderItemQuantity {
         this.id = id;
     }
 
-    public Order getOrder() {
-        return order;
+    public Order1 getOrder() {
+        return order1;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setOrder(Order1 order1) {
+        this.order1 = order1;
     }
 
     public Item getItem() {

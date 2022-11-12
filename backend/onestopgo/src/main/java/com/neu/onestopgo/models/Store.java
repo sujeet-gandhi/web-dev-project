@@ -20,7 +20,7 @@ public class Store {
     private Date closingTime;
 
     @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
-    private Set<Order> orders;
+    private Set<Order1> order1s;
 
     @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
     private Set<StoreItemQuantity> orderItemQuantitySet;
@@ -73,12 +73,12 @@ public class Store {
         this.closingTime = closingTime;
     }
 
-    public Set<Order> getOrders() {
-        return orders;
+    public Set<Order1> getOrders() {
+        return order1s;
     }
 
-    public void setOrders(Set<Order> orders) {
-        this.orders = orders;
+    public void setOrders(Set<Order1> order1s) {
+        this.order1s = order1s;
     }
 
     public Set<StoreItemQuantity> getOrderItemQuantitySet() {
