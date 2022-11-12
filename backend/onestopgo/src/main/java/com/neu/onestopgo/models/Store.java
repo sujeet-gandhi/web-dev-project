@@ -19,6 +19,8 @@ public class Store {
     private Date openingTime;
     private Date closingTime;
 
+    private String imageUrl;
+
     @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
     private Set<Order1> order1s;
 
@@ -29,63 +31,89 @@ public class Store {
         return id;
     }
 
-    public void setId(int id) {
+    public Store setId(int id) {
         this.id = id;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public Store setName(String name) {
         this.name = name;
+        return this;
     }
 
     public String getLocation() {
         return location;
     }
 
-    public void setLocation(String location) {
+    public Store setLocation(String location) {
         this.location = location;
+        return this;
     }
 
     public String getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public Store setType(String type) {
         this.type = type;
+        return this;
     }
 
     public Date getOpeningTime() {
         return openingTime;
     }
 
-    public void setOpeningTime(Date openingTime) {
+    public Store setOpeningTime(Date openingTime) {
         this.openingTime = openingTime;
+        return this;
     }
 
     public Date getClosingTime() {
         return closingTime;
     }
 
-    public void setClosingTime(Date closingTime) {
+    public Store setClosingTime(Date closingTime) {
         this.closingTime = closingTime;
+        return this;
     }
 
     public Set<Order1> getOrders() {
         return order1s;
     }
 
-    public void setOrders(Set<Order1> order1s) {
+    public Store setOrders(Set<Order1> order1s) {
         this.order1s = order1s;
+        return this;
     }
 
     public Set<StoreItemQuantity> getOrderItemQuantitySet() {
         return orderItemQuantitySet;
     }
 
-    public void setOrderItemQuantitySet(Set<StoreItemQuantity> orderItemQuantitySet) {
+    public Store setOrderItemQuantitySet(Set<StoreItemQuantity> orderItemQuantitySet) {
         this.orderItemQuantitySet = orderItemQuantitySet;
+        return this;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public Store setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+        return this;
+    }
+
+    public Set<Order1> getOrder1s() {
+        return order1s;
+    }
+
+    public Store setOrder1s(Set<Order1> order1s) {
+        this.order1s = order1s;
+        return this;
     }
 }

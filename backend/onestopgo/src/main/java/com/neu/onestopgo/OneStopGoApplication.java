@@ -2,12 +2,13 @@ package com.neu.onestopgo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-public class OnestopgoApplication {
+public class OneStopGoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(OnestopgoApplication.class, args);
+		SpringApplication.run(OneStopGoApplication.class, args);
 	}
 
 }
