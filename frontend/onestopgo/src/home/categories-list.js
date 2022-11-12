@@ -6,7 +6,7 @@ const CategoriesList = ({categoriesArray}) => {
         <div className="col">
             <ul className="wd-category-list">
                 {
-                    categoriesArray.map (
+                    categoriesArray.map(
                         category =>
                             <CategoryItem key={category.id}  category={category}/>
                     )
