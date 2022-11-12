@@ -1,5 +1,7 @@
 package com.neu.onestopgo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
@@ -9,6 +11,7 @@ public class Store {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "store_id")
+    @JsonIgnore
     private int id;
 
     private String name;
@@ -20,9 +23,11 @@ public class Store {
     private Date closingTime;
 
     @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<Order1> order1s;
 
     @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<StoreItemQuantity> orderItemQuantitySet;
 
     public int getId() {
