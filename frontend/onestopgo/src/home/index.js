@@ -11,10 +11,7 @@ export const HomeComponent = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log(homeData)
         dispatch(getHomeDataThunk())
-        console.log(homeData)
-
     }, []);
 
     if (!homeData) return null;

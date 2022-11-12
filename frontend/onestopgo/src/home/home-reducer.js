@@ -11,7 +11,6 @@ const homeSlice = createSlice({
     initialState: initialState,
     extraReducers: {
         [getHomeDataThunk.pending]: (state) => {
-            console.log("HI");
             state.loading = true
             state.homeData = []
         },
