@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import CategoriesList from "./categories-list";
 import axios from "axios";
 
-const baseURL = "http://localhost:8080/home";
+const baseURL = "http://localhost:8080/api/v1/home";
 
 export default function HomeComponent() {
     const [home, setHome] = React.useState(null);
