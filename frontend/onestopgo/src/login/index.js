@@ -1,23 +1,21 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
-    MDBRow,
+    MDBBtn,
+    MDBCheckbox,
     MDBCol,
     MDBContainer,
+    MDBInput,
+    MDBRow,
     MDBTabs,
+    MDBTabsContent,
     MDBTabsItem,
     MDBTabsLink,
-    MDBTabsContent,
-    MDBTabsPane,
-    MDBBtn,
-    MDBIcon,
-    MDBInput,
-    MDBCheckbox
-}
-    from 'mdb-react-ui-kit';
+    MDBTabsPane
+} from 'mdb-react-ui-kit';
 
-function LoginPage() {
+export const LoginForm = () => {
 
-    const [activeTab, setActiveTab] = useState('login');;
+    const [activeTab, setActiveTab] = useState('login');
 
     const handleClick = (value) => {
         if (value === activeTab) {
@@ -30,20 +28,23 @@ function LoginPage() {
     return (
         <MDBContainer className="p-3 my-5 w-50">
             <MDBRow>
-                <MDBCol col ='6' className={'md-5'}>
+                <MDBCol col='6' className={'md-5'}>
                     <div className={"text-center"}>
-                        <img src ="../images/OneStopGo.PNG" className='img-fluid shadow-4' style={{width:'300px'}} alt='...'/>
+                        <img src="../images/OneStopGo.PNG" className='img-fluid shadow-4' style={{width: '300px'}}
+                             alt='...'/>
                     </div>
                 </MDBCol>
             </MDBRow>
             <MDBTabs pills justify className='mb-3 d-flex flex-row justify-content-between'>
                 <MDBTabsItem>
-                    <MDBTabsLink onClick={() => handleClick('login') } active={activeTab === 'login'} style={{backgroundColor:activeTab=='login'?"teal":""}}>
+                    <MDBTabsLink onClick={() => handleClick('login')} active={activeTab === 'login'}
+                                 style={{backgroundColor: activeTab == 'login' ? "teal" : ""}}>
                         Login
                     </MDBTabsLink>
                 </MDBTabsItem>
                 <MDBTabsItem>
-                    <MDBTabsLink onClick={() => handleClick('register')} active={activeTab === 'register'} style={{backgroundColor:activeTab=='register'?"teal":""}}>
+                    <MDBTabsLink onClick={() => handleClick('register')} active={activeTab === 'register'}
+                                 style={{backgroundColor: activeTab == 'register' ? "teal" : ""}}>
                         Register
                     </MDBTabsLink>
                 </MDBTabsItem>
@@ -51,7 +52,7 @@ function LoginPage() {
 
             <MDBTabsContent>
 
-                <MDBTabsPane show={activeTab === 'login'} >
+                <MDBTabsPane show={activeTab === 'login'}>
 
                     <div className="text-center mb-3">
                         <p>Sign in</p>
@@ -60,12 +61,12 @@ function LoginPage() {
                     <MDBInput wrapperClass='mb-4' label='Password' id='form2' type='password'/>
 
                     <div className="d-flex justify-content-between mx-4 mb-4">
-                        <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
+                        <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me'/>
                         <a href="!#">Forgot password?</a>
                     </div>
 
-                    <MDBBtn className="mb-4 w-100" style={{backgroundColor:"teal"}}>Sign in</MDBBtn>
-                    <p className="text-center">Not a member? <a href="#!">Register</a></p>
+                    <MDBBtn className="mb-4 w-100" style={{backgroundColor: "teal"}}>Sign in</MDBBtn>
+                    <p className="text-center">Not a member? <a href="src/login/index.js">Register</a></p>
 
                 </MDBTabsPane>
 
@@ -81,10 +82,10 @@ function LoginPage() {
                     <MDBInput wrapperClass='mb-4' label='Password' id='form1' type='password'/>
 
                     <div className='d-flex justify-content-center mb-4'>
-                        <MDBCheckbox name='flexCheck' id='flexCheckDefault' label='I have read and agree to the terms' />
+                        <MDBCheckbox name='flexCheck' id='flexCheckDefault' label='I have read and agree to the terms'/>
                     </div>
 
-                    <MDBBtn className="mb-4 w-100" style={{backgroundColor:"teal"}}>Sign up</MDBBtn>
+                    <MDBBtn className="mb-4 w-100" style={{backgroundColor: "teal"}}>Sign up</MDBBtn>
 
                 </MDBTabsPane>
 
@@ -93,5 +94,3 @@ function LoginPage() {
         </MDBContainer>
     );
 }
-
-export default LoginPage;

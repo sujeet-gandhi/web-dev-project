@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 
-import LoginForm from './LoginPage'
+import {LoginForm} from './login'
 import React from "react";
 
 function App() {
