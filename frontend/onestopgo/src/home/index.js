@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import StoreList from "../store/store-list";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import CategoriesList from "./categories-list";
+import CategoriesList from "../categories/categories-list";
 import {useDispatch, useSelector} from "react-redux";
 import {getHomeDataThunk} from "./home-thunk";
 
