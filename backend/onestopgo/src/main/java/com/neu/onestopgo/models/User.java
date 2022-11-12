@@ -1,20 +1,25 @@
 package com.neu.onestopgo.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "user_id")
     private int id;
     private String email;
     private String password;
 
     private String address;
     private String contact;
+
+    private boolean active;
+
+    @OneToMany(targetEntity = Order.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private Set<Order> orders;
 
     public int getId() {
         return id;
@@ -54,5 +59,21 @@ public class User {
 
     public void setContact(String contact) {
         this.contact = contact;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
     }
 }
