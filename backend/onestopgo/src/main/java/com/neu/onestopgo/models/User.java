@@ -17,8 +17,7 @@ public class User {
 
     private boolean active;
 
-    @OneToMany(targetEntity = Order.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private Set<Order> orders;
 
     public int getId() {

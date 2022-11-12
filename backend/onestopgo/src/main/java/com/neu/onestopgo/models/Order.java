@@ -14,16 +14,15 @@ public class Order {
     @Column(name = "order_id", columnDefinition = "VARCHAR(255)")
     private UUID id;
 
-    @ManyToOne
-    @Column(name = "user_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne
-    @Column(name = "store_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "store_id")
     private Store store;
 
-    @OneToMany(targetEntity = OrderItemQuantity.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id")
+    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
     private Set<OrderItemQuantity> orderItemQuantitySet;
 
     public UUID getId() {

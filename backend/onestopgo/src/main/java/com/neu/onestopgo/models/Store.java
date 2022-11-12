@@ -19,12 +19,10 @@ public class Store {
     private Date openingTime;
     private Date closingTime;
 
-    @OneToMany(targetEntity = Order.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "store_id")
+    @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
     private Set<Order> orders;
 
-    @OneToMany(targetEntity = StoreItemQuantity.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "store_id")
+    @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
     private Set<StoreItemQuantity> orderItemQuantitySet;
 
     public int getId() {

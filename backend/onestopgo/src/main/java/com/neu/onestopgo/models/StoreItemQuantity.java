@@ -16,12 +16,12 @@ public class StoreItemQuantity {
     @Column(name = "store_item_id", columnDefinition = "VARCHAR(255)")
     private UUID id;
 
-    @ManyToOne
-    @Column(name = "store_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "store_id")
     private Store store;
 
-    @ManyToOne
-    @Column(name = "item_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "item_id")
     private Item item;
 
     private float quantity;
