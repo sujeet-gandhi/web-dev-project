@@ -21,7 +21,7 @@ public class Store {
 
     private String imageUrl;
 
-    @ManyToMany(mappedBy = "stores", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "store", fetch = FetchType.LAZY)
     private Set<Order1> order1s;
 
     @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)

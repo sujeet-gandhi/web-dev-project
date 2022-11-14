@@ -21,8 +21,8 @@ public class Order1 {
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "store_order",
-            inverseJoinColumns = @JoinColumn(name = "order_id"),
-            joinColumns = @JoinColumn(name = "store_id"))
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "store_id"))
     private Set<Store> stores;
 
     @OneToMany(mappedBy = "order1", fetch = FetchType.LAZY)
