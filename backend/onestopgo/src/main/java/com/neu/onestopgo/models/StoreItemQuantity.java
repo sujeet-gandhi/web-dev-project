@@ -7,13 +7,13 @@ import java.util.UUID;
 
 @Entity
 @Table(uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"store_id", "item_id"})
+        @UniqueConstraint(columnNames = {"store_id", "product_id"})
 })
 public class StoreItemQuantity {
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(name = "store_item_id", columnDefinition = "VARCHAR(255)")
+    @Column(name = "store_product_id", columnDefinition = "VARCHAR(255)")
     private UUID id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -21,8 +21,8 @@ public class StoreItemQuantity {
     private Store store;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "item_id")
-    private Item item;
+    @JoinColumn(name = "product_id")
+    private Product product;
 
     private float quantity;
 
@@ -42,12 +42,12 @@ public class StoreItemQuantity {
         this.store = store;
     }
 
-    public Item getItem() {
-        return item;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setItem(Item item) {
-        this.item = item;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public float getQuantity() {

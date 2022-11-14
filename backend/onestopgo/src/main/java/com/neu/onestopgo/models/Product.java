@@ -10,11 +10,11 @@ import java.util.Date;
 import java.util.UUID;
 
 @Entity
-public class Item {
+public class Product {
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(name = "item_id", columnDefinition = "VARCHAR(255)")
+    @Column(name = "product_id", columnDefinition = "VARCHAR(255)")
     private UUID id;
 
     private String name;

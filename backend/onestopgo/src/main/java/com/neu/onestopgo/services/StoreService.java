@@ -29,4 +29,8 @@ public class StoreService {
         return storeRepository.save(store);
     }
 
+    public List<Store> performStoreSearch(String searchTerm) {
+        return (List<Store>) storeRepository.findAll();
+    }
+
 }

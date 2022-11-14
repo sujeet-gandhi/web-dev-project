@@ -29,4 +29,8 @@ public class CategoryService {
         return categoryRepository.save(category);
     }
 
+    public List<Category> performCategorySearch(String searchTerm) {
+        return (List<Category>) categoryRepository.findAll();
+    }
+
 }

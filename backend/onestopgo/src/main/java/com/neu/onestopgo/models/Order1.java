@@ -18,9 +18,12 @@ public class Order1 {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "store_id")
-    private Store store;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "store_order",
+            inverseJoinColumns = @JoinColumn(name = "order_id"),
+            joinColumns = @JoinColumn(name = "store_id"))
+    private Set<Store> stores;
 
     @OneToMany(mappedBy = "order1", fetch = FetchType.LAZY)
     private Set<OrderItemQuantity> orderItemQuantitySet;
@@ -41,12 +44,12 @@ public class Order1 {
         this.user = user;
     }
 
-    public Store getStore() {
-        return store;
+    public Set<Store> getStores() {
+        return stores;
     }
 
-    public void setStore(Store store) {
-        this.store = store;
+    public void setStores(Set<Store> stores) {
+        this.stores = stores;
     }
 
     public Set<OrderItemQuantity> getOrderItemQuantitySet() {
