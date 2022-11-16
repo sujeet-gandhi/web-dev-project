@@ -17,6 +17,8 @@ public class User {
 
     private boolean active;
 
+    private String type;
+
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private Set<Order1> order1s;
 
@@ -68,11 +70,19 @@ public class User {
         this.active = active;
     }
 
-    public Set<Order1> getOrders() {
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Set<Order1> getOrder1s() {
         return order1s;
     }
 
-    public void setOrders(Set<Order1> order1s) {
+    public void setOrder1s(Set<Order1> order1s) {
         this.order1s = order1s;
     }
 }
