@@ -21,7 +21,11 @@ public class Store {
 
     private String imageUrl;
 
-    @ManyToMany(mappedBy = "store", fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "store_order",
+            joinColumns = @JoinColumn(name = "store_id"),
+            inverseJoinColumns = @JoinColumn(name = "order_id"))
     private Set<Order1> order1s;
 
     @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
