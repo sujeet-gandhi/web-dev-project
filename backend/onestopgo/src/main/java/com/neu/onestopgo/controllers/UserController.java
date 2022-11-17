@@ -19,8 +19,12 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<User> getUserFromId(@PathVariable int userId) {
-        return ResponseEntity.ok(userService.getUserFromId(userId));
+    public ResponseEntity getUserFromId(@PathVariable int userId) {
+        try {
+            return ResponseEntity.ok(userService.getUserFromId(userId));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PostMapping()
