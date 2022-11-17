@@ -31,6 +31,9 @@ public class Store {
     @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
     private Set<StoreItemQuantity> orderItemQuantitySet;
 
+    @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
+    private Set<User> storeAdmins;
+
     public int getId() {
         return id;
     }
@@ -119,5 +122,13 @@ public class Store {
     public Store setOrder1s(Set<Order1> order1s) {
         this.order1s = order1s;
         return this;
+    }
+
+    public Set<User> getStoreAdmins() {
+        return storeAdmins;
+    }
+
+    public void setStoreAdmins(Set<User> storeAdmins) {
+        this.storeAdmins = storeAdmins;
     }
 }

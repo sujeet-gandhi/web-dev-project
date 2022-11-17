@@ -19,6 +19,11 @@ public class User {
 
     private String type;
 
+    // for store admins
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "store_id")
+    private Store store;
+
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private Set<Order1> order1s;
 
@@ -84,5 +89,13 @@ public class User {
 
     public void setOrder1s(Set<Order1> order1s) {
         this.order1s = order1s;
+    }
+
+    public Store getStore() {
+        return store;
+    }
+
+    public void setStore(Store store) {
+        this.store = store;
     }
 }
