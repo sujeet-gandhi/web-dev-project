@@ -1,6 +1,6 @@
 package com.neu.onestopgo.controllers;
 
-import com.neu.onestopgo.dao.UserDAO;
+import com.neu.onestopgo.dao.UserRequestObject;
 import com.neu.onestopgo.models.User;
 import com.neu.onestopgo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,14 +28,14 @@ public class UserController {
     }
 
     @PostMapping()
-    public ResponseEntity<User> createUser(@RequestBody UserDAO userDAO) {
-        return ResponseEntity.ok(userService.createNewUser(userDAO));
+    public ResponseEntity<User> createUser(@RequestBody UserRequestObject userRequestObject) {
+        return ResponseEntity.ok(userService.createNewUser(userRequestObject));
     }
 
     @PostMapping("/storeadmin")
-    public ResponseEntity createStoreAdmin(@RequestBody UserDAO userDAO) {
+    public ResponseEntity createStoreAdmin(@RequestBody UserRequestObject userRequestObject) {
         try {
-            User storeAdmin = userService.createNewStoreAdmin(userDAO);
+            User storeAdmin = userService.createNewStoreAdmin(userRequestObject);
             return ResponseEntity.ok(storeAdmin);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());

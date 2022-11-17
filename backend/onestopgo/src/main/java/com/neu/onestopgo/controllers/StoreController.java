@@ -1,6 +1,6 @@
 package com.neu.onestopgo.controllers;
 
-import com.neu.onestopgo.dao.StoreDAO;
+import com.neu.onestopgo.dao.StoreRequestObject;
 import com.neu.onestopgo.models.Store;
 import com.neu.onestopgo.services.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class StoreController {
     }
 
     @PostMapping
-    public ResponseEntity<Store> createStore(@RequestBody StoreDAO storeDao) {
-        return ResponseEntity.ok(storeService.createStore(storeDao.getModelFromDao()));
+    public ResponseEntity<Store> createStore(@RequestBody StoreRequestObject storeRequestObject) {
+        return ResponseEntity.ok(storeService.createStore(storeRequestObject.getModelFromDao()));
     }
 }

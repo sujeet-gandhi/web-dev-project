@@ -2,7 +2,7 @@ package com.neu.onestopgo.dao;
 
 import com.neu.onestopgo.models.User;
 
-public class UserDAO {
+public class UserRequestObject {
     private String email;
     private String password;
     private String address;

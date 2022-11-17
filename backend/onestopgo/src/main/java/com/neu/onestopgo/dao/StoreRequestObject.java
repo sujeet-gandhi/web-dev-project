@@ -4,7 +4,7 @@ import com.neu.onestopgo.models.Store;
 
 import java.util.Date;
 
-public class StoreDAO {
+public class StoreRequestObject {
     private String name;
     private String location;
     private String type;
