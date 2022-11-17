@@ -6,6 +6,7 @@ import {LoginForm} from "./login";
 import {configureStore} from "@reduxjs/toolkit";
 import homeReducer from "./home/home-reducer";
 import {Provider} from "react-redux";
+import RootOperations from "./root-operations";
 
 
 function App() {
@@ -17,9 +18,9 @@ function App() {
             <BrowserRouter>
                 <div className="container">
                     <Routes>
-
                         <Route index element={<HomeComponent/>}/>
                         <Route path="/login" element={<LoginForm/>}/>
+                        <Route path="/root" element={<RootOperations/>}/>
                     </Routes>
                 </div>
             </BrowserRouter>
