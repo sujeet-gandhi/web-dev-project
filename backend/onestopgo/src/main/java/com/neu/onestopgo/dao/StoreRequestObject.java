@@ -60,7 +60,7 @@ public class StoreRequestObject {
         this.imageUrl = imageUrl;
     }
 
-    public Store getModelFromDao() {
+    public Store getModelObject() {
         return new Store()
                 .setName(this.name)
                 .setLocation(this.location)

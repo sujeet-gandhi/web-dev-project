@@ -25,13 +25,13 @@ public class UserService {
     }
 
     public User createNewUser(UserRequestObject userRequestObject) {
-        User newUser = userRequestObject.getModelFromDao();
+        User newUser = userRequestObject.getModelObject();
         newUser.setType("CUSTOMER");
         return userRepository.save(newUser);
     }
 
     public User createNewStoreAdmin(UserRequestObject userRequestObject) throws Exception {
-        User newUser = userRequestObject.getModelFromDao();
+        User newUser = userRequestObject.getModelObject();
         newUser.setType("STORE_ADMIN");
         if (Utils.IsNullOrEmpty(userRequestObject.getStoreId())) {
             throw new Exception("empty store id");

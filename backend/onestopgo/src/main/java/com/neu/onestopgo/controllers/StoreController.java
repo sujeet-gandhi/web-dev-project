@@ -21,6 +21,6 @@ public class StoreController {
 
     @PostMapping
     public ResponseEntity<Store> createStore(@RequestBody StoreRequestObject storeRequestObject) {
-        return ResponseEntity.ok(storeService.createStore(storeRequestObject.getModelFromDao()));
+        return ResponseEntity.ok(storeService.createStore(storeRequestObject.getModelObject()));
     }
 }

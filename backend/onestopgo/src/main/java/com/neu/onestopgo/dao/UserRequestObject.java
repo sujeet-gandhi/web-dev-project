@@ -48,7 +48,7 @@ public class UserRequestObject {
         this.storeId = storeId;
     }
 
-    public User getModelFromDao() {
+    public User getModelObject() {
         return new User()
                 .setEmail(this.email)
                 .setPassword(this.password)
