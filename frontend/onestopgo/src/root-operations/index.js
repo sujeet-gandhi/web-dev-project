@@ -1,15 +1,39 @@
 import {useDispatch, useSelector} from "react-redux";
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {getHomeDataThunk} from "../home/home-thunk";
 import {StoreItemDetails} from "../store/store-item-details";
 
 const RootOperations = () => {
     const {homeData, loading} = useSelector(state => state.home)
     const dispatch = useDispatch();
+    const [createStoreState, setCreateStoreState] = useState({});
+    const [createStoreAdminState, setCreateStoreAdminState] = useState({});
+
 
     // useEffect(() => {
     //     dispatch(getHomeDataThunk())
     // }, []);
+
+    const handleDataEntryStore = ({target}) => {
+        setCreateStoreState({
+            ...createStoreState,
+            [target.name]: target.value
+        })
+    }
+
+    const handleDataEntryStoreAdmin = ({target}) => {
+        let key = target.name;
+        if (key === "adminContact") {
+            key = "contact";
+        }
+        else if (key === "adminAddress") {
+            key = "address";
+        }
+        setCreateStoreState({
+            ...createStoreState,
+            [key]: target.value
+        })
+    }
 
     return (
         <div className="mt-2">
@@ -32,16 +56,16 @@ const RootOperations = () => {
                             </div>
                             <div className="form-floating wd-top-margin-form">
                                 <input type="text" className="form-control text-bg-light" id="name" name="name"
-                                       value=""/>
+                                       value={createStoreState.name} onChange={handleDataEntryStore}/>
                                 <label htmlFor="name">Name</label>
                             </div>
                             <div className="form-floating mt-2">
                                 <input type="text" className="form-control text-bg-light" id="location" name="location"
-                                       value=""/>
+                                       value={createStoreState.location} onChange={handleDataEntryStore}/>
                                 <label htmlFor="location">Location</label>
                             </div>
                             <div className="form-floating mt-2">
-                                <select className="form-control text-bg-light" id="type" name="type">
+                                <select className="form-control text-bg-light" id="type" name="type" onSelect={handleDataEntryStore}>
                                     <option value="SUPERMARKET">SUPERMARKET</option>
                                     <option value="GROCERY">GROCERY</option>
                                     <option value="HARDWARE">HARDWARE</option>
@@ -51,22 +75,55 @@ const RootOperations = () => {
                             <div className="form-floating mt-2">
                                 <input type="time" className="form-control text-bg-light" id="openingTime"
                                        name="openingTime"
-                                       value=""/>
+                                       value={createStoreState.openingTime} onChange={handleDataEntryStore}/>
                                 <label htmlFor="openingTime">Opening Time</label>
                             </div>
                             <div className="form-floating mt-2">
                                 <input type="time" className="form-control text-bg-light" id="closingTime"
                                        name="closingTime"
-                                       value=""/>
+                                       value={createStoreState.closingTime} onChange={handleDataEntryStore}/>
                                 <label htmlFor="closingTime">Closing Time</label>
                             </div>
                             <div>
                                 <input type="file" className="form-control text-bg-light" id="storeImage"
-                                       name="storeImage"/>
+                                       name="storeImage" value={createStoreState.storeImage} onChange={handleDataEntryStore}/>
                                 <label htmlFor="storeImage">Store Image</label>
                             </div>
                             <div className="text-center">
                                 <button className="rounded-pill w-50">Create Store</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="mt-5 border border-1">
+                        <div className="ms-2 me-2 mt-2 mb-2">
+                            <div className="fs-2 text-center">
+                                Create Store Admin
+                            </div>
+                            <div className="form-floating wd-top-margin-form">
+                                <input type="email" className="form-control text-bg-light" id="email" name="email"
+                                       value={createStoreAdminState.email} onChange={handleDataEntryStoreAdmin}/>
+                                <label htmlFor="email">Email</label>
+                            </div>
+                            <div className="form-floating mt-2">
+                                <input type="text" className="form-control text-bg-light" id="password" name="password"
+                                       value={createStoreAdminState.password} onChange={handleDataEntryStoreAdmin}/>
+                                <label htmlFor="password">Password</label>
+                            </div>
+                            <div className="form-floating mt-2">
+                                <input type="text" className="form-control text-bg-light" id="adminAddress"
+                                       name="adminAddress"
+                                       value={createStoreAdminState.address} onChange={handleDataEntryStoreAdmin}/>
+                                <label htmlFor="adminAddress">Address</label>
+                            </div>
+                            <div className="form-floating mt-2">
+                                <input type="text" className="form-control text-bg-light" id="adminContact"
+                                       name="adminContact"
+                                       value={createStoreAdminState.contact} onChange={handleDataEntryStoreAdmin}/>
+                                <label htmlFor="adminContact">Admin Contact</label>
+                            </div>
+                            <div className="text-center">
+                                <button className="rounded-pill w-50">Create Store Admin</button>
                             </div>
                         </div>
                     </div>
