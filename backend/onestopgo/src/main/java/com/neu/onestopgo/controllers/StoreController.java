@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api/v1/store")
@@ -17,6 +19,11 @@ public class StoreController {
     @Autowired
     public StoreController(StoreService storeService) {
         this.storeService = storeService;
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Store>> getAllStores() {
+        return ResponseEntity.ok(storeService.getAllStores());
     }
 
     @PostMapping
