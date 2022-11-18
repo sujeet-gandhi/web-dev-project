@@ -8,11 +8,12 @@ import homeReducer from "./home/home-reducer";
 import {Provider} from "react-redux";
 import RootOperations from "./root-operations";
 import storeReducer from "./store/store-reducer";
+import userReducer from "./user/user-reducer";
 
 
 function App() {
     const store = configureStore({
-        reducer: {home: homeReducer, store: storeReducer}
+        reducer: {home: homeReducer, store: storeReducer, user: userReducer}
     });
     return (
         <Provider store={store}>

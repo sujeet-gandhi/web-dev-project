@@ -2,6 +2,7 @@ import {useDispatch, useSelector} from "react-redux";
 import React, {useEffect, useState} from "react";
 import {StoreItemDetails} from "../store/store-item-details";
 import {createStoreThunk, getStoresThunk} from "../store/store-thunk";
+import {createUserThunk} from "../user/user-thunk";
 
 const RootOperations = () => {
     const {storeData, loading} = useSelector(state => state.store)
@@ -36,6 +37,11 @@ const RootOperations = () => {
 
     const handleCreateStoreSubmit = () => {
         dispatch(createStoreThunk(createStoreState))
+    }
+
+    const handleCreateStoreAdminSubmit = () => {
+        dispatch(createUserThunk(createStoreAdminState))
+        dispatch(getStoresThunk())
     }
 
     return (
@@ -96,7 +102,8 @@ const RootOperations = () => {
                                 <label htmlFor="storeImage">Store Image</label>
                             </div>
                             <div className="text-center">
-                                <button className="rounded-pill w-50" onClick={handleCreateStoreSubmit}>Create Store</button>
+                                <button className="rounded-pill w-50" onClick={handleCreateStoreSubmit}>Create Store
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -143,7 +150,7 @@ const RootOperations = () => {
                                 </div>
                             }
                             <div className="text-center">
-                                <button className="rounded-pill w-50">Create Store Admin</button>
+                                <button className="rounded-pill w-50" onClick={handleCreateStoreAdminSubmit}>Create Store Admin</button>
                             </div>
                         </div>
                     </div>
