@@ -6,7 +6,7 @@ const initialState = {
     loading: true
 }
 
-const homeSlice = createSlice({
+const storeSlice = createSlice({
     name: 'store',
     initialState: initialState,
     extraReducers: {
@@ -28,6 +28,6 @@ const homeSlice = createSlice({
     }
 })
 
-export default homeSlice.reducer;
+export default storeSlice.reducer;
 
 

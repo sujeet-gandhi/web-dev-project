@@ -12,7 +12,7 @@ export const StoreItemDetails = ({store}) => {
             </div>
             <div className="row">
                 <ul>
-                    {store.storeAdmins.map((each) => <li>{each.email}</li>)}
+                    {store.storeAdmins && store.storeAdmins.map((each) => <li>{each.email}</li>)}
                 </ul>
             </div>
         </div>

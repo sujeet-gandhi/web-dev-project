@@ -90,8 +90,8 @@ const RootOperations = () => {
                                 <label htmlFor="closingTime">Closing Time</label>
                             </div>
                             <div>
-                                <input type="file" className="form-control text-bg-light" id="storeImage"
-                                       name="storeImage" value={createStoreState.storeImage}
+                                <input type="file" className="form-control text-bg-light" id="imageUrl"
+                                       name="imageUrl" value={createStoreState.storeImage}
                                        onChange={handleDataEntryStore}/>
                                 <label htmlFor="storeImage">Store Image</label>
                             </div>
