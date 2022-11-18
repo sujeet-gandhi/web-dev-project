@@ -9,10 +9,9 @@ const RootOperations = () => {
     const [createStoreState, setCreateStoreState] = useState({});
     const [createStoreAdminState, setCreateStoreAdminState] = useState({});
 
-
-    // useEffect(() => {
-    //     dispatch(getHomeDataThunk())
-    // }, []);
+    useEffect(() => {
+        dispatch(getHomeDataThunk())
+    }, []);
 
     const handleDataEntryStore = ({target}) => {
         setCreateStoreState({
@@ -29,10 +28,11 @@ const RootOperations = () => {
         else if (key === "adminAddress") {
             key = "address";
         }
-        setCreateStoreState({
-            ...createStoreState,
+        setCreateStoreAdminState({
+            ...createStoreAdminState,
             [key]: target.value
         })
+        console.log(createStoreAdminState)
     }
 
     return (
@@ -65,7 +65,8 @@ const RootOperations = () => {
                                 <label htmlFor="location">Location</label>
                             </div>
                             <div className="form-floating mt-2">
-                                <select className="form-control text-bg-light" id="type" name="type" onSelect={handleDataEntryStore}>
+                                <select className="form-control text-bg-light" id="type" name="type" onChange={handleDataEntryStore}>
+                                    <option value="" selected disabled hidden>Choose Type Here</option>
                                     <option value="SUPERMARKET">SUPERMARKET</option>
                                     <option value="GROCERY">GROCERY</option>
                                     <option value="HARDWARE">HARDWARE</option>
@@ -122,6 +123,20 @@ const RootOperations = () => {
                                        value={createStoreAdminState.contact} onChange={handleDataEntryStoreAdmin}/>
                                 <label htmlFor="adminContact">Admin Contact</label>
                             </div>
+                            {!loading &&
+                                <div className="form-floating mt-2">
+                                    <select className="form-control text-bg-light" id="storeId" name="storeId"
+                                            onSelect={handleDataEntryStoreAdmin}>
+                                        <option value="" selected disabled hidden>Choose Store Here</option>
+                                        {
+                                            homeData.stores.map((store) =>
+                                                <option value={store.id}>{store.name}
+                                                </option>)
+                                        }
+                                    </select>
+                                    <label htmlFor="storeId">Store</label>
+                                </div>
+                            }
                             <div className="text-center">
                                 <button className="rounded-pill w-50">Create Store Admin</button>
                             </div>
