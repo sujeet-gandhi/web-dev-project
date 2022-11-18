@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {getStoresThunk} from "./store-thunk";
+import {createStoreThunk, getStoresThunk} from "./store-thunk";
 
 const initialState = {
     storeData: [],
@@ -17,6 +17,13 @@ const homeSlice = createSlice({
         [getStoresThunk.fulfilled]: (state, {payload}) => {
             state.loading = false
             state.storeData = payload
+        },
+        [createStoreThunk.pending]: (state) => {
+            state.loading = true
+        },
+        [createStoreThunk.fulfilled]: (state, {payload}) => {
+            state.loading = false
+            state.storeData.unshift(payload)
         }
     }
 })
