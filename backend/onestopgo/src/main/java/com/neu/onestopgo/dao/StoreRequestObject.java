@@ -8,8 +8,10 @@ public class StoreRequestObject {
     private String name;
     private String location;
     private String type;
-    private Date openingTime;
-    private Date closingTime;
+
+    private String openingTime;
+
+    private String closingTime;
     private String imageUrl;
 
     public String getName() {
@@ -36,19 +38,19 @@ public class StoreRequestObject {
         this.type = type;
     }
 
-    public Date getOpeningTime() {
+    public String getOpeningTime() {
         return openingTime;
     }
 
-    public void setOpeningTime(Date openingTime) {
+    public void setOpeningTime(String openingTime) {
         this.openingTime = openingTime;
     }
 
-    public Date getClosingTime() {
+    public String getClosingTime() {
         return closingTime;
     }
 
-    public void setClosingTime(Date closingTime) {
+    public void setClosingTime(String closingTime) {
         this.closingTime = closingTime;
     }
 
