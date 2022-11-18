@@ -7,11 +7,12 @@ import {configureStore} from "@reduxjs/toolkit";
 import homeReducer from "./home/home-reducer";
 import {Provider} from "react-redux";
 import RootOperations from "./root-operations";
+import storeReducer from "./store/store-reducer";
 
 
 function App() {
     const store = configureStore({
-        reducer: {home: homeReducer}
+        reducer: {home: homeReducer, store: storeReducer}
     });
     return (
         <Provider store={store}>

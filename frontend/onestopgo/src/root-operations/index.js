@@ -1,16 +1,16 @@
 import {useDispatch, useSelector} from "react-redux";
 import React, {useEffect, useState} from "react";
-import {getHomeDataThunk} from "../home/home-thunk";
 import {StoreItemDetails} from "../store/store-item-details";
+import {getStoresThunk} from "../store/store-thunk";
 
 const RootOperations = () => {
-    const {homeData, loading} = useSelector(state => state.home)
+    const {storeData, loading} = useSelector(state => state.store)
     const dispatch = useDispatch();
     const [createStoreState, setCreateStoreState] = useState({});
     const [createStoreAdminState, setCreateStoreAdminState] = useState({});
 
     useEffect(() => {
-        dispatch(getHomeDataThunk())
+        dispatch(getStoresThunk())
     }, []);
 
     const handleDataEntryStore = ({target}) => {
@@ -24,8 +24,7 @@ const RootOperations = () => {
         let key = target.name;
         if (key === "adminContact") {
             key = "contact";
-        }
-        else if (key === "adminAddress") {
+        } else if (key === "adminAddress") {
             key = "address";
         }
         setCreateStoreAdminState({
@@ -33,6 +32,10 @@ const RootOperations = () => {
             [key]: target.value
         })
         console.log(createStoreAdminState)
+    }
+
+    const handleCreateStoreSubmit = () => {
+
     }
 
     return (
@@ -43,7 +46,7 @@ const RootOperations = () => {
                     {!loading &&
                         <>
                             <ul>
-                                {homeData.stores.map((store) => <StoreItemDetails key={store.id} store={store}/>)}
+                                {storeData.map((store) => <StoreItemDetails key={store.id} store={store}/>)}
                             </ul>
                         </>
                     }
@@ -65,7 +68,8 @@ const RootOperations = () => {
                                 <label htmlFor="location">Location</label>
                             </div>
                             <div className="form-floating mt-2">
-                                <select className="form-control text-bg-light" id="type" name="type" onChange={handleDataEntryStore}>
+                                <select className="form-control text-bg-light" id="type" name="type"
+                                        onChange={handleDataEntryStore}>
                                     <option value="" selected disabled hidden>Choose Type Here</option>
                                     <option value="SUPERMARKET">SUPERMARKET</option>
                                     <option value="GROCERY">GROCERY</option>
@@ -87,7 +91,8 @@ const RootOperations = () => {
                             </div>
                             <div>
                                 <input type="file" className="form-control text-bg-light" id="storeImage"
-                                       name="storeImage" value={createStoreState.storeImage} onChange={handleDataEntryStore}/>
+                                       name="storeImage" value={createStoreState.storeImage}
+                                       onChange={handleDataEntryStore}/>
                                 <label htmlFor="storeImage">Store Image</label>
                             </div>
                             <div className="text-center">
@@ -129,7 +134,7 @@ const RootOperations = () => {
                                             onSelect={handleDataEntryStoreAdmin}>
                                         <option value="" selected disabled hidden>Choose Store Here</option>
                                         {
-                                            homeData.stores.map((store) =>
+                                            storeData.map((store) =>
                                                 <option value={store.id}>{store.name}
                                                 </option>)
                                         }
