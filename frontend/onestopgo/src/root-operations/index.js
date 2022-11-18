@@ -6,13 +6,14 @@ import {createUserThunk} from "../user/user-thunk";
 
 const RootOperations = () => {
     const {storeData, loading} = useSelector(state => state.store)
+    const {userData, _} = useSelector(state => state.user)
     const dispatch = useDispatch();
     const [createStoreState, setCreateStoreState] = useState({});
     const [createStoreAdminState, setCreateStoreAdminState] = useState({});
 
     useEffect(() => {
         dispatch(getStoresThunk())
-    }, []);
+    }, [userData]);
 
     const handleDataEntryStore = ({target}) => {
         setCreateStoreState({
@@ -40,7 +41,6 @@ const RootOperations = () => {
 
     const handleCreateStoreAdminSubmit = () => {
         dispatch(createUserThunk(createStoreAdminState))
-        dispatch(getStoresThunk())
     }
 
     return (
