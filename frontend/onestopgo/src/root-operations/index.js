@@ -32,7 +32,6 @@ const RootOperations = () => {
             ...createStoreAdminState,
             [key]: target.value
         })
-        console.log(createStoreAdminState)
     }
 
     const handleCreateStoreSubmit = () => {
@@ -138,7 +137,7 @@ const RootOperations = () => {
                             {!loading &&
                                 <div className="form-floating mt-2">
                                     <select className="form-control text-bg-light" id="storeId" name="storeId"
-                                            onSelect={handleDataEntryStoreAdmin}>
+                                            onChange={handleDataEntryStoreAdmin}>
                                         <option value="" selected disabled hidden>Choose Store Here</option>
                                         {
                                             storeData.map((store) =>
