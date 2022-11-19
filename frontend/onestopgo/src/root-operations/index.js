@@ -16,9 +16,15 @@ const RootOperations = () => {
     }, [userData]);
 
     const handleDataEntryStore = ({target}) => {
+        let val = target.value;
+        let name = target.name;
+        if (name === "imageUrl") {
+            val = target.files[0]
+            name = "image";
+        }
         setCreateStoreState({
             ...createStoreState,
-            [target.name]: target.value
+            [name]: val
         })
     }
 
@@ -96,9 +102,9 @@ const RootOperations = () => {
                             </div>
                             <div>
                                 <input type="file" className="form-control text-bg-light" id="imageUrl"
-                                       name="imageUrl" value={createStoreState.storeImage}
+                                       name="imageUrl"
                                        onChange={handleDataEntryStore}/>
-                                <label htmlFor="storeImage">Store Image</label>
+                                <label htmlFor="imageUrl">Store Image</label>
                             </div>
                             <div className="text-center">
                                 <button className="rounded-pill w-50" onClick={handleCreateStoreSubmit}>Create Store

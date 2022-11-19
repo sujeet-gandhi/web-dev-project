@@ -8,5 +8,21 @@ export const getAllStores = async () => {
 }
 
 export const createStore = async (store) => {
-    return (await axios.post(STORE_API, store)).data
+    const imageData = store.image;
+    delete store.image;
+
+    const json = JSON.stringify(store);
+    const blob = new Blob([json], {
+        type: 'application/json'
+    });
+
+    const formData = new FormData();
+    formData.append("store", blob);
+    formData.append("image", imageData);
+
+    return (await axios.post(STORE_API, formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    })).data
 }
