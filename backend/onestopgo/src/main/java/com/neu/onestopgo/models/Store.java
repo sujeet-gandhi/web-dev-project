@@ -1,6 +1,9 @@
 package com.neu.onestopgo.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.Set;
 
@@ -16,8 +19,8 @@ public class Store {
     private String location;
     private String type;
 
-    private Date openingTime;
-    private Date closingTime;
+    private String openingTime;
+    private String closingTime;
 
     private String imageUrl;
 
@@ -70,20 +73,20 @@ public class Store {
         return this;
     }
 
-    public Date getOpeningTime() {
+    public String getOpeningTime() {
         return openingTime;
     }
 
-    public Store setOpeningTime(Date openingTime) {
+    public Store setOpeningTime(String openingTime) {
         this.openingTime = openingTime;
         return this;
     }
 
-    public Date getClosingTime() {
+    public String getClosingTime() {
         return closingTime;
     }
 
-    public Store setClosingTime(Date closingTime) {
+    public Store setClosingTime(String closingTime) {
         this.closingTime = closingTime;
         return this;
     }
