@@ -1,16 +1,23 @@
 package com.neu.onestopgo.models;
 
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.TermVector;
+
 import javax.persistence.*;
 
 @Entity
+@Indexed
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "category_id")
     private int id;
 
+    @Field(termVector = TermVector.YES)
     private String name;
 
+    @Field(termVector = TermVector.YES)
     private String description;
 
     private String imageUrl;

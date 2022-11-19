@@ -1,6 +1,9 @@
 package com.neu.onestopgo.models;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.TermVector;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +13,7 @@ import java.util.Date;
 import java.util.UUID;
 
 @Entity
+@Indexed
 public class Product {
     @Id
     @GeneratedValue(generator = "uuid2")
@@ -17,12 +21,14 @@ public class Product {
     @Column(name = "product_id", columnDefinition = "VARCHAR(255)")
     private UUID id;
 
+    @Field(termVector = TermVector.YES)
     private String name;
 
     private Date expiry;
 
     private float price;
 
+    @Field
     private String type;
 
     public UUID getId() {

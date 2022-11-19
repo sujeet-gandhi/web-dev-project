@@ -30,7 +30,7 @@ public class StoreService {
     }
 
     public List<Store> performStoreSearch(String searchTerm) {
-        return (List<Store>) storeRepository.findAll();
+        return getAllStores();
     }
 
 }
