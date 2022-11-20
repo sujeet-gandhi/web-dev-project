@@ -2,10 +2,9 @@ package com.neu.onestopgo.services;
 
 import com.neu.onestopgo.models.Product;
 import com.neu.onestopgo.repositories.ProductRepository;
-import org.apache.lucene.search.Query;
+import com.neu.onestopgo.utils.Utils;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.Search;
-import org.hibernate.search.query.dsl.QueryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +13,7 @@ import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -54,24 +54,11 @@ public class ProductService {
 
     @Transactional
     public List<Product> performProductSearch(String searchTerm) {
-
-        FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(entityManager);
-        QueryBuilder qb = fullTextEntityManager.getSearchFactory().buildQueryBuilder().forEntity(Product.class).get();
-        Query luceneQuery = qb.keyword()
-                .fuzzy()
-                .withEditDistanceUpTo(1)
-                .withPrefixLength(1)
-                .onFields("name")
-                .matching(searchTerm)
-                .createQuery();
-
-        javax.persistence.Query jpaQuery = fullTextEntityManager.createFullTextQuery(luceneQuery, Product.class);
-
-        List<Product> productList = null;
+        List<Product> productList;
         try {
-            productList = jpaQuery.getResultList();
+            productList = Utils.getSearchQuery(Product.class, entityManager, searchTerm, "name").getResultList();
         } catch (NoResultException nre) {
-            ;// do nothing
+            productList = new ArrayList<>();
         }
 
         return productList;

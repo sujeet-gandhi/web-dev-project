@@ -42,7 +42,6 @@ public class HomeController {
         return ResponseEntity.ok(response);
     }
 
-//    https://mkyong.com/spring-boot/spring-boot-hibernate-search-example/
     @GetMapping(path = "/search")
     public ResponseEntity<Map<String, Object>> search(@PathParam("searchTerm") String searchTerm) {
         Map<String, Object> response = new HashMap<>();

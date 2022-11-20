@@ -2,10 +2,9 @@ package com.neu.onestopgo.services;
 
 import com.neu.onestopgo.models.Category;
 import com.neu.onestopgo.repositories.CategoryRepository;
-import org.apache.lucene.search.Query;
+import com.neu.onestopgo.utils.Utils;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.Search;
-import org.hibernate.search.query.dsl.QueryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +13,7 @@ import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -53,26 +53,12 @@ public class CategoryService {
 
     @Transactional
     public List<Category> performCategorySearch(String searchTerm) {
-
-        FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(entityManager);
-        QueryBuilder qb = fullTextEntityManager.getSearchFactory().buildQueryBuilder().forEntity(Category.class).get();
-        Query luceneQuery = qb.keyword()
-                .fuzzy()
-                .withEditDistanceUpTo(1)
-                .withPrefixLength(1)
-                .onFields("name")
-                .matching(searchTerm)
-                .createQuery();
-
-        javax.persistence.Query jpaQuery = fullTextEntityManager.createFullTextQuery(luceneQuery, Category.class);
-
-        List<Category> categoryList = null;
+        List<Category> categoryList;
         try {
-            categoryList = jpaQuery.getResultList();
+            categoryList = Utils.getSearchQuery(Category.class, entityManager, searchTerm, "name").getResultList();
         } catch (NoResultException nre) {
-            ;// do nothing
+            categoryList = new ArrayList<>();
         }
-
         return categoryList;
     }
 
