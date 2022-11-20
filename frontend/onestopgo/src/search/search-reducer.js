@@ -1,25 +1,25 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {getHomeDataThunk} from "./search-thunk";
+import {getSearchDataThunk} from "../home/home-thunk";
 
 const initialState = {
     homeData: [],
     loading: true
 }
 
-const homeSlice = createSlice({
-    name: 'home',
+const searchSlice = createSlice({
+    name: 'search',
     initialState: initialState,
     extraReducers: {
-        [getHomeDataThunk.pending]: (state) => {
+        [getSearchDataThunk.pending]: (state) => {
             state.loading = true
-            state.homeData = []
+            state.searchData = []
         },
-        [getHomeDataThunk.fulfilled]: (state, {payload}) => {
+        [getSearchDataThunk.fulfilled]: (state, {payload}) => {
             state.loading = false
-            state.homeData = payload
+            state.searchData = payload
         }
     }
 })
 
-export default homeSlice.reducer;
+export default searchSlice.reducer;
 
