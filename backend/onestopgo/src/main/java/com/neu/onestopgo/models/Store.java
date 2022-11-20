@@ -1,22 +1,25 @@
 package com.neu.onestopgo.models;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.*;
-import java.time.LocalTime;
-import java.util.Date;
 import java.util.Set;
 
 @Entity
+@Indexed
 public class Store {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "store_id")
     private int id;
 
+    @Field
     private String name;
 
     private String location;
+
+    @Field
     private String type;
 
     private String openingTime;

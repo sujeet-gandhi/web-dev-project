@@ -5,8 +5,12 @@ import com.neu.onestopgo.services.ProductService;
 import com.neu.onestopgo.services.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import javax.websocket.server.PathParam;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,15 +42,20 @@ public class HomeController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping(path = "/search/{searchTerm}")
-    public ResponseEntity<Map<String, Object>> searchGlobal(@PathVariable String searchTerm) {
+    @GetMapping(path = "/search")
+    public ResponseEntity<Map<String, Object>> search(@PathParam("searchTerm") String searchTerm) {
         Map<String, Object> response = new HashMap<>();
 
-        response.put("userId", 1);
-
-        response.put("stores", storeService.performStoreSearch(searchTerm));
-        response.put("categories", categoryService.performCategorySearch(searchTerm));
-        response.put("products", productService.performProductSearch(searchTerm));
+        try {
+            response.put("searchTerm", searchTerm);
+            response.put("products", productService.performProductSearch(searchTerm));
+            response.put("stores", storeService.performStoreSearch(searchTerm));
+            response.put("categories", categoryService.performCategorySearch(searchTerm));
+        } catch (Exception ex) {
+            // here you should handle unexpected errors
+            // ...
+            // throw ex;
+        }
 
         return ResponseEntity.ok(response);
     }

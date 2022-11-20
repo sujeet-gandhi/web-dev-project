@@ -7,12 +7,12 @@ import com.neu.onestopgo.utils.ImageUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -36,7 +36,7 @@ public class StoreController {
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<Store> createStore(@RequestPart("store") StoreRequestObject storeRequestObject,
                                              @RequestPart("image") MultipartFile multipartFile) throws IOException {
-        String fileName = UUID.randomUUID() + "." + multipartFile.getOriginalFilename().split("\\.")[1];
+        String fileName = UUID.randomUUID() + "." + Objects.requireNonNull(multipartFile.getOriginalFilename()).split("\\.")[1];
         storeRequestObject.setImageUrl(STORE_IMAGE_DIR + fileName);
         ImageUploadUtil.saveFile(STORE_IMAGE_DIR, fileName, multipartFile);
         return ResponseEntity.ok(storeService.createStore(storeRequestObject.getModelObject()));

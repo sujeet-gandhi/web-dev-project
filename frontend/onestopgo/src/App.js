@@ -9,11 +9,13 @@ import {Provider} from "react-redux";
 import RootOperations from "./root-operations";
 import storeReducer from "./store/store-reducer";
 import userReducer from "./user/user-reducer";
+import searchReducer from "./search/search-reducer";
+import {SearchComponent} from "./search";
 
 
 function App() {
     const store = configureStore({
-        reducer: {home: homeReducer, store: storeReducer, user: userReducer}
+        reducer: {home: homeReducer, store: storeReducer, user: userReducer, search: searchReducer}
     });
     return (
         <Provider store={store}>
@@ -21,6 +23,7 @@ function App() {
                 <div className="container">
                     <Routes>
                         <Route index element={<HomeComponent/>}/>
+                        <Route path="/search" element={<SearchComponent/>}/>
                         <Route path="/login" element={<LoginForm/>}/>
                         <Route path="/root" element={<RootOperations/>}/>
                     </Routes>
