@@ -11,8 +11,7 @@ import java.nio.file.StandardCopyOption;
 
 public class ImageUploadUtil {
     // inspiration from https://www.codejava.net/frameworks/spring-boot/spring-boot-file-upload-tutorial
-    public static void saveFile(String uploadDir, String fileName,
-                                MultipartFile multipartFile) throws IOException {
+    public static void saveFile(String uploadDir, String fileName, MultipartFile multipartFile) throws IOException {
         Path uploadPath = Paths.get(uploadDir);
 
         if (!Files.exists(uploadPath)) {

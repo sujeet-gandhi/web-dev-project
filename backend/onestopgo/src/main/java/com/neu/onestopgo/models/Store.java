@@ -1,10 +1,7 @@
 package com.neu.onestopgo.models;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
-import org.hibernate.search.annotations.TermVector;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -17,7 +14,7 @@ public class Store {
     @Column(name = "store_id")
     private int id;
 
-    @Field(termVector = TermVector.YES)
+    @Field
     private String name;
 
     private String location;

@@ -2,12 +2,15 @@ package com.neu.onestopgo.controllers;
 
 import com.neu.onestopgo.services.CategoryService;
 import com.neu.onestopgo.services.ProductService;
-import com.neu.onestopgo.services.SearchService;
 import com.neu.onestopgo.services.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import javax.websocket.server.PathParam;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,14 +25,11 @@ public class HomeController {
 
     private final ProductService productService;
 
-    private final SearchService searchService;
-
     @Autowired
-    public HomeController(StoreService storeService, CategoryService categoryService, ProductService productService, SearchService searchService) {
+    public HomeController(StoreService storeService, CategoryService categoryService, ProductService productService) {
         this.storeService = storeService;
         this.categoryService = categoryService;
         this.productService = productService;
-        this.searchService = searchService;
     }
 
     @GetMapping(path = "/home")
@@ -42,25 +42,16 @@ public class HomeController {
         return ResponseEntity.ok(response);
     }
 
-//    @GetMapping(path = "/search/{searchTerm}")
-//    public ResponseEntity<Map<String, Object>> searchGlobal(@PathVariable String searchTerm) {
-//        Map<String, Object> response = new HashMap<>();
-//
-//        response.put("userId", 1);
-//
-//        response.put("stores", storeService.performStoreSearch(searchTerm));
-//        response.put("categories", categoryService.performCategorySearch(searchTerm));
-//        response.put("products", productService.performProductSearch(searchTerm));
-//
-//        return ResponseEntity.ok(response);
-//    }
-
-    @GetMapping(path = "/search/{searchTerm}")
-    public ResponseEntity<Map<String, Object>> search(@PathVariable String searchTerm) {
+//    https://mkyong.com/spring-boot/spring-boot-hibernate-search-example/
+    @GetMapping(path = "/search")
+    public ResponseEntity<Map<String, Object>> search(@PathParam("searchTerm") String searchTerm) {
         Map<String, Object> response = new HashMap<>();
 
         try {
-            response.put("products", searchService.fuzzySearch(searchTerm));
+            response.put("searchTerm", searchTerm);
+            response.put("products", productService.performProductSearch(searchTerm));
+            response.put("stores", storeService.performStoreSearch(searchTerm));
+            response.put("categories", categoryService.performCategorySearch(searchTerm));
         } catch (Exception ex) {
             // here you should handle unexpected errors
             // ...
