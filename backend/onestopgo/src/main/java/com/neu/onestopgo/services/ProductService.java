@@ -56,7 +56,7 @@ public class ProductService {
     public List<Product> performProductSearch(String searchTerm) {
         List<Product> productList;
         try {
-            productList = Utils.getSearchQuery(Product.class, entityManager, searchTerm, "name").getResultList();
+            productList = Utils.getSearchQuery(Product.class, entityManager, searchTerm, "name", "type").getResultList();
         } catch (NoResultException nre) {
             productList = new ArrayList<>();
         }

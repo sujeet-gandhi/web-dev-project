@@ -42,7 +42,7 @@ public class StoreService {
     public List<Store> performStoreSearch(String searchTerm) {
         List<Store> storeList;
         try {
-            storeList = Utils.getSearchQuery(Store.class, entityManager, searchTerm, "name").getResultList();
+            storeList = Utils.getSearchQuery(Store.class, entityManager, searchTerm, "name", "type").getResultList();
         } catch (NoResultException nre) {
             storeList = new ArrayList<>();
         }

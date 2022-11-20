@@ -55,7 +55,7 @@ public class CategoryService {
     public List<Category> performCategorySearch(String searchTerm) {
         List<Category> categoryList;
         try {
-            categoryList = Utils.getSearchQuery(Category.class, entityManager, searchTerm, "name").getResultList();
+            categoryList = Utils.getSearchQuery(Category.class, entityManager, searchTerm, "name", "description").getResultList();
         } catch (NoResultException nre) {
             categoryList = new ArrayList<>();
         }

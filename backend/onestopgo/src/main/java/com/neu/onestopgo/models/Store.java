@@ -19,6 +19,7 @@ public class Store {
 
     private String location;
 
+    @Field
     private String type;
 
     private String openingTime;
