@@ -9,7 +9,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.util.Date;
 import java.util.UUID;
 
 @Entity
@@ -24,12 +23,53 @@ public class Product {
     @Field(termVector = TermVector.YES)
     private String name;
 
-    private Date expiry;
+    @Field(termVector = TermVector.YES)
+    private String description;
+
+    private String unit;
+
+    private double quantity;
+
+    private boolean inStock;
 
     private float price;
 
     @Field
     private String type;
+
+    private String imageUrl;
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
+    public double getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(double quantity) {
+        this.quantity = quantity;
+    }
+
+    public boolean isInStock() {
+        return inStock;
+    }
+
+    public void setInStock(boolean inStock) {
+        this.inStock = inStock;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
     public UUID getId() {
         return id;
@@ -47,12 +87,12 @@ public class Product {
         this.name = name;
     }
 
-    public Date getExpiry() {
-        return expiry;
+    public String getDescription() {
+        return description;
     }
 
-    public void setExpiry(Date expiry) {
-        this.expiry = expiry;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public float getPrice() {
