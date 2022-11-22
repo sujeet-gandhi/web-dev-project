@@ -4,6 +4,7 @@ import com.neu.onestopgo.dao.ProductRequestObject;
 import com.neu.onestopgo.models.Product;
 import com.neu.onestopgo.models.Store;
 import com.neu.onestopgo.models.StoreItemQuantity;
+import com.neu.onestopgo.services.CategoryService;
 import com.neu.onestopgo.services.ProductService;
 import com.neu.onestopgo.services.StoreItemService;
 import com.neu.onestopgo.services.StoreService;
@@ -29,11 +30,15 @@ public class ProductController {
 
     private final StoreItemService storeItemService;
 
+    private final CategoryService categoryService;
+
     @Autowired
-    public ProductController(ProductService productService, StoreService storeService, StoreItemService storeItemService) {
+    public ProductController(ProductService productService, StoreService storeService,
+                             StoreItemService storeItemService, CategoryService categoryService) {
         this.productService = productService;
         this.storeService = storeService;
         this.storeItemService = storeItemService;
+        this.categoryService = categoryService;
     }
 
 
@@ -48,6 +53,9 @@ public class ProductController {
         if (store == null)
             return ResponseEntity.badRequest().body("Invalid store id : " + productRequestObject.getStoreId());
 
+        if (!categoryService.categoryExistsOrNot(productRequestObject.getType()))
+            return ResponseEntity.badRequest().body("Invalid product type : " + productRequestObject.getType());
+
         Product newProduct = productService.createProduct(productRequestObject.getModelObject());
         StoreItemQuantity storeItemQuantity = new StoreItemQuantity()
                 .setQuantity(productRequestObject.getStoreQuantity())
@@ -55,6 +63,12 @@ public class ProductController {
                 .setStore(store);
         storeItemService.createStoreItemQuantity(storeItemQuantity);
 
-        return ResponseEntity.ok("created");
+        return ResponseEntity.ok(storeItemQuantity);
+    }
+
+    @PutMapping
+    public ResponseEntity updateProductWithQuantity(ProductRequestObject productRequestObject) {
+        return ResponseEntity.ok(storeItemService.updateStoreIdAndProductIdQuantity(productRequestObject.getStoreId(),
+                productRequestObject.getProductId(), productRequestObject.getStoreQuantity()));
     }
 }

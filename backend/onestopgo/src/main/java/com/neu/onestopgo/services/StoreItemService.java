@@ -18,4 +18,10 @@ public class StoreItemService {
     public StoreItemQuantity createStoreItemQuantity(StoreItemQuantity storeItemQuantity) {
         return storeItemRepository.save(storeItemQuantity);
     }
+
+    public StoreItemQuantity updateStoreIdAndProductIdQuantity(int storeId, String productId, float quantity) {
+        StoreItemQuantity storeItemQuantity = storeItemRepository.findByStoreIdAndProductId(storeId, productId);
+        storeItemQuantity.setQuantity(storeItemQuantity.getQuantity() + quantity);
+        return storeItemRepository.save(storeItemQuantity);
+    }
 }

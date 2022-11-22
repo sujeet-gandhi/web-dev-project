@@ -51,6 +51,10 @@ public class CategoryService {
         return categoryRepository.save(category);
     }
 
+    public boolean categoryExistsOrNot(String categoryName) {
+        return categoryRepository.existsByName(categoryName);
+    }
+
     @Transactional
     public List<Category> performCategorySearch(String searchTerm) {
         List<Category> categoryList;

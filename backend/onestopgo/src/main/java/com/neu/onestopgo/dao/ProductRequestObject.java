@@ -3,6 +3,7 @@ package com.neu.onestopgo.dao;
 import com.neu.onestopgo.models.Product;
 
 public class ProductRequestObject {
+    private String productId;
     private String name;
 
     private String description;
@@ -101,6 +102,14 @@ public class ProductRequestObject {
 
     public void setStoreQuantity(float storeQuantity) {
         this.storeQuantity = storeQuantity;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
     public Product getModelObject() {
