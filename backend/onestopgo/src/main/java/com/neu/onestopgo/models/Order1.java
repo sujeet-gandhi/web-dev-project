@@ -1,5 +1,6 @@
 package com.neu.onestopgo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -23,9 +24,11 @@ public class Order1 {
             name = "store_order",
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "store_id"))
+    @JsonIgnore
     private Set<Store> stores;
 
     @OneToMany(mappedBy = "order1", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<OrderItemQuantity> orderItemQuantitySet;
 
     public UUID getId() {

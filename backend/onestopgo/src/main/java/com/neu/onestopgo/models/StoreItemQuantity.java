@@ -38,23 +38,26 @@ public class StoreItemQuantity {
         return store;
     }
 
-    public void setStore(Store store) {
+    public StoreItemQuantity setStore(Store store) {
         this.store = store;
+        return this;
     }
 
     public Product getProduct() {
         return product;
     }
 
-    public void setProduct(Product product) {
+    public StoreItemQuantity setProduct(Product product) {
         this.product = product;
+        return this;
     }
 
     public float getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(float quantity) {
+    public StoreItemQuantity setQuantity(float quantity) {
         this.quantity = quantity;
+        return this;
     }
 }
