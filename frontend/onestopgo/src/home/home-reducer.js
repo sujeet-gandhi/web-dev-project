@@ -1,5 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {getHomeDataThunk} from "./home-thunk";
+import {createCategoriesThunk} from "../categories/category-thunk";
 
 const initialState = {
     homeData: [],
@@ -17,6 +18,9 @@ const homeSlice = createSlice({
         [getHomeDataThunk.fulfilled]: (state, {payload}) => {
             state.loading = false
             state.homeData = payload
+        },
+        [createCategoriesThunk.fulfilled]: (state, {payload}) => {
+            state.homeData.categories.unshift(payload)
         }
     }
 })
