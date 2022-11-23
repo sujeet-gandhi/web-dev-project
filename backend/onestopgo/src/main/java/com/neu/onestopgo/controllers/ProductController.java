@@ -42,7 +42,7 @@ public class ProductController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping("/{storeId}")
+    @GetMapping("/store/{storeId}")
     public ResponseEntity<List<StoreItemQuantity>> getAllProductsInAStore(@PathVariable("storeId") int storeId) {
         return ResponseEntity.ok(storeItemService.getProductsInAStore(storeId));
     }
