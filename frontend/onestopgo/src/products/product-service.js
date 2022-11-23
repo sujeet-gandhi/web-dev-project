@@ -2,6 +2,12 @@ import axios from 'axios';
 
 const ONESTOPGO_API = process.env.REACT_APP_ONESTOPGO_API_BASE;
 const PRODUCT_API = `${ONESTOPGO_API}/api/v1/product`;
+const PRODUCT_STORE_API = `${ONESTOPGO_API}/api/v1/product/store/`;
+
+
+export const getAllProductsOfStore = async (storeId) => {
+    return (await axios.get(PRODUCT_STORE_API + storeId)).data
+}
 
 
 export const createProduct = async (product) => {
