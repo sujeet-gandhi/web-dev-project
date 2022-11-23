@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -41,15 +42,20 @@ public class ProductController {
         this.categoryService = categoryService;
     }
 
+    @GetMapping("/{storeId}")
+    public ResponseEntity<List<StoreItemQuantity>> getAllProductsInAStore(@PathVariable("storeId") int storeId) {
+        return ResponseEntity.ok(storeItemService.getProductsInAStore(storeId));
+    }
+
 
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity createProductWithQuantity(@RequestPart("image") MultipartFile multipartFile,
-                                                             @RequestPart("product") ProductRequestObject productRequestObject) throws Exception {
+                                                    @RequestPart("product") ProductRequestObject productRequestObject) throws Exception {
         String fileName = UUID.randomUUID() + "." + Objects.requireNonNull(multipartFile.getOriginalFilename()).split("\\.")[1];
         productRequestObject.setImageUrl(PRODUCT_IMAGE_DIR + fileName);
         ImageUploadUtil.saveFile(PRODUCT_IMAGE_DIR, fileName, multipartFile);
 
-        Store store =  storeService.getStoreById(productRequestObject.getStoreId());
+        Store store = storeService.getStoreById(productRequestObject.getStoreId());
         if (store == null)
             return ResponseEntity.badRequest().body("Invalid store id : " + productRequestObject.getStoreId());
 
