@@ -1,6 +1,7 @@
 package com.neu.onestopgo.models;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.TermVector;
@@ -18,6 +19,7 @@ public class Product {
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "product_id", columnDefinition = "VARCHAR(255)")
+    @Type(type = "uuid-char")
     private UUID id;
 
     @Field(termVector = TermVector.YES)
