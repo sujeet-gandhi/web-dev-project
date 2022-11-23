@@ -11,6 +11,7 @@ import storeReducer from "./store/store-reducer";
 import userReducer from "./user/user-reducer";
 import searchReducer from "./search/search-reducer";
 import {SearchComponent} from "./search";
+import StoreAdmin from "./store-admin";
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
                         <Route path="/search" element={<SearchComponent/>}/>
                         <Route path="/login" element={<LoginForm/>}/>
                         <Route path="/root" element={<RootOperations/>}/>
+                        <Route path="/storeAdmin" element={<StoreAdmin/>}/>
                     </Routes>
                 </div>
             </BrowserRouter>
