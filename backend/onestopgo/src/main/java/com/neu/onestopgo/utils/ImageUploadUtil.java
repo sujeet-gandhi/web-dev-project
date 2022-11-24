@@ -8,8 +8,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
-public class FileUploadUtil {
+public class ImageUploadUtil {
     // Inspiration from https://www.codejava.net/frameworks/spring-boot/spring-boot-file-upload-tutorial
+    // This is used to save the uploaded images to server
     public static void saveFileAndCreateDirectory(String uploadDirectory, String fileName, MultipartFile fileToBeSaved) throws IOException {
         Path path = Paths.get(uploadDirectory);
 

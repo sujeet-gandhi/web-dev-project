@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 @Configuration
 public class FileAccessConfiguration implements WebMvcConfigurer {
     // Inspiration from: https://www.codejava.net/frameworks/spring-boot/spring-boot-file-upload-tutorial
+    // This code is used to configure spring boot to server images from the /images path
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry handlerRegistry) {
         exposeImagesFolder(handlerRegistry);
