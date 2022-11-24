@@ -16,7 +16,7 @@ public class Utils {
         return data < 0;
     }
 
-    //    https://mkyong.com/spring-boot/spring-boot-hibernate-search-example/
+    // Inspiration from: https://mkyong.com/spring-boot/spring-boot-hibernate-search-example/
     public static javax.persistence.Query getSearchQuery(Class<?> entityClass, EntityManager entityManager, String searchTerm, String... fields) {
         FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(entityManager);
         QueryBuilder qb = fullTextEntityManager.getSearchFactory().buildQueryBuilder().forEntity(entityClass).get();
