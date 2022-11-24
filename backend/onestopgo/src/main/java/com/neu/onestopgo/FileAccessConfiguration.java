@@ -4,7 +4,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @Configuration
@@ -17,11 +16,11 @@ public class FileAccessConfiguration implements WebMvcConfigurer {
     }
 
     private void exposeImagesFolder(ResourceHandlerRegistry handlerRegistry) {
-        Path imagesDirectoryPath = Paths.get("images");
-        String uploadPath = imagesDirectoryPath.toFile().getAbsolutePath();
-
         handlerRegistry
                 .addResourceHandler("/" + "images" + "/**")
-                .addResourceLocations("file:/"+ uploadPath + "/");
+                .addResourceLocations("file:/" +
+                        Paths.get("images")
+                                .toFile()
+                                .getAbsolutePath() + "/");
     }
 }
