@@ -66,7 +66,7 @@ export const LoginForm = () => {
                     </div>
 
                     <MDBBtn className="mb-4 w-100" style={{backgroundColor: "teal"}}>Sign in</MDBBtn>
-                    <p className="text-center">Not a member? <a href="src/login/index.js">Register</a></p>
+                    <p className="text-center">Not a member? <a href="#" onClick={() => handleClick('register')}>Register</a></p>
 
                 </MDBTabsPane>
 
