@@ -1,5 +1,6 @@
 package com.neu.onestopgo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
 
@@ -32,9 +33,11 @@ public class Store {
             name = "store_order",
             joinColumns = @JoinColumn(name = "store_id"),
             inverseJoinColumns = @JoinColumn(name = "order_id"))
+    @JsonIgnore
     private Set<Order1> order1s;
 
     @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<StoreItemQuantity> orderItemQuantitySet;
 
     @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)

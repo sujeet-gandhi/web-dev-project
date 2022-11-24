@@ -3,6 +3,7 @@ import React, {useEffect, useState} from "react";
 import {StoreItemDetails} from "../store/store-item-details";
 import {createStoreThunk, getStoresThunk} from "../store/store-thunk";
 import {createUserThunk} from "../user/user-thunk";
+import {createCategoriesThunk} from "../categories/category-thunk";
 
 const RootOperations = () => {
     const {storeData, loading} = useSelector(state => state.store)
@@ -10,6 +11,7 @@ const RootOperations = () => {
     const dispatch = useDispatch();
     const [createStoreState, setCreateStoreState] = useState({});
     const [createStoreAdminState, setCreateStoreAdminState] = useState({});
+    const [createCategoryState, setCreateCategoryState] = useState({});
 
     useEffect(() => {
         dispatch(getStoresThunk())
@@ -39,6 +41,23 @@ const RootOperations = () => {
             ...createStoreAdminState,
             [key]: target.value
         })
+    }
+
+    const handleDataEntryCreateCategory = ({target}) => {
+        let val = target.value;
+        let name = target.name;
+        if (name === "imageUrl") {
+            val = target.files[0]
+            name = "image";
+        }
+        setCreateCategoryState({
+            ...createCategoryState,
+            [name]: val
+        })
+    }
+
+    const handleCreateCategorySubmit = () => {
+        dispatch(createCategoriesThunk(createCategoryState))
     }
 
     const handleCreateStoreSubmit = () => {
@@ -156,6 +175,33 @@ const RootOperations = () => {
                             }
                             <div className="text-center">
                                 <button className="rounded-pill w-50" onClick={handleCreateStoreAdminSubmit}>Create Store Admin</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="mt-5 border border-1">
+                        <div className="ms-2 me-2 mt-2 mb-2">
+                            <div className="fs-2 text-center">
+                                Create Category
+                            </div>
+                            <div className="form-floating wd-top-margin-form">
+                                <input type="text" className="form-control text-bg-light" id="categoryName" name="name"
+                                       value={createCategoryState.name} onChange={handleDataEntryCreateCategory}/>
+                                <label htmlFor="categoryName">Name</label>
+                            </div>
+                            <div className="form-floating wd-top-margin-form">
+                                <input type="text" className="form-control text-bg-light" id="categoryDes" name="description"
+                                       value={createCategoryState.description} onChange={handleDataEntryCreateCategory}/>
+                                <label htmlFor="categoryDes">Description</label>
+                            </div>
+                            <div>
+                                <input type="file" className="form-control text-bg-light" id="categoryImageUrl"
+                                       name="imageUrl"
+                                       onChange={handleDataEntryCreateCategory}/>
+                                <label htmlFor="categoryImageUrl">Category Image URL</label>
+                            </div>
+                            <div className="text-center">
+                                <button className="rounded-pill w-50" onClick={handleCreateCategorySubmit}>Create Category</button>
                             </div>
                         </div>
                     </div>

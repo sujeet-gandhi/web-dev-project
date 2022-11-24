@@ -1,6 +1,7 @@
 package com.neu.onestopgo.models;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.TermVector;
@@ -18,6 +19,7 @@ public class Product {
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "product_id", columnDefinition = "VARCHAR(255)")
+    @Type(type = "uuid-char")
     private UUID id;
 
     @Field(termVector = TermVector.YES)
@@ -43,71 +45,80 @@ public class Product {
         return unit;
     }
 
-    public void setUnit(String unit) {
+    public Product setUnit(String unit) {
         this.unit = unit;
+        return this;
     }
 
     public double getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(double quantity) {
+    public Product setQuantity(double quantity) {
         this.quantity = quantity;
+        return this;
     }
 
     public boolean isInStock() {
         return inStock;
     }
 
-    public void setInStock(boolean inStock) {
+    public Product setInStock(boolean inStock) {
         this.inStock = inStock;
+        return this;
     }
 
     public String getImageUrl() {
         return imageUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
+    public Product setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+        return this;
     }
 
     public UUID getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public Product setId(UUID id) {
         this.id = id;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public Product setName(String name) {
         this.name = name;
+        return this;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public Product setDescription(String description) {
         this.description = description;
+        return this;
     }
 
     public float getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public Product setPrice(float price) {
         this.price = price;
+        return this;
     }
 
     public String getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public Product setType(String type) {
         this.type = type;
+        return this;
     }
 }

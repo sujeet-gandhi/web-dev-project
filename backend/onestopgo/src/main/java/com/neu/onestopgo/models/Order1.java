@@ -1,6 +1,8 @@
 package com.neu.onestopgo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -12,6 +14,7 @@ public class Order1 {
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "order_id", columnDefinition = "VARCHAR(255)")
+    @Type(type = "uuid-char")
     private UUID id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -23,9 +26,11 @@ public class Order1 {
             name = "store_order",
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "store_id"))
+    @JsonIgnore
     private Set<Store> stores;
 
     @OneToMany(mappedBy = "order1", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<OrderItemQuantity> orderItemQuantitySet;
 
     public UUID getId() {

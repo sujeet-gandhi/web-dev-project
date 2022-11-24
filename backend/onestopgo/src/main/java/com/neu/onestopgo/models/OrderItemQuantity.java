@@ -1,6 +1,7 @@
 package com.neu.onestopgo.models;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.UUID;
@@ -14,6 +15,7 @@ public class OrderItemQuantity {
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "order_product_id", columnDefinition = "VARCHAR(255)")
+    @Type(type = "uuid-char")
     private UUID id;
 
     @ManyToOne(fetch = FetchType.LAZY)

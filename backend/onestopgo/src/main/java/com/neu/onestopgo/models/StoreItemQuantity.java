@@ -1,6 +1,8 @@
 package com.neu.onestopgo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.UUID;
@@ -14,10 +16,12 @@ public class StoreItemQuantity {
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "store_product_id", columnDefinition = "VARCHAR(255)")
+    @Type(type = "uuid-char")
     private UUID id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id")
+    @JsonIgnore
     private Store store;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -38,23 +42,26 @@ public class StoreItemQuantity {
         return store;
     }
 
-    public void setStore(Store store) {
+    public StoreItemQuantity setStore(Store store) {
         this.store = store;
+        return this;
     }
 
     public Product getProduct() {
         return product;
     }
 
-    public void setProduct(Product product) {
+    public StoreItemQuantity setProduct(Product product) {
         this.product = product;
+        return this;
     }
 
     public float getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(float quantity) {
+    public StoreItemQuantity setQuantity(float quantity) {
         this.quantity = quantity;
+        return this;
     }
 }
