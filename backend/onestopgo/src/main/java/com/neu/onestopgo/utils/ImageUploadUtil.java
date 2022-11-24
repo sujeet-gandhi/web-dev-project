@@ -11,17 +11,13 @@ import java.nio.file.StandardCopyOption;
 public class ImageUploadUtil {
     // Inspiration from https://www.codejava.net/frameworks/spring-boot/spring-boot-file-upload-tutorial
     // This code is used to save the uploaded images to server
-    public static void saveFileAndCreateDirectory(String uploadDirectory, String fileName, MultipartFile fileToBeSaved) throws IOException {
-        Path path = Paths.get(uploadDirectory);
-
-        if (!Files.exists(path)) {
-            Files.createDirectories(path);
-        }
-
+    public static void saveFileAndCreateDirectory(String directory, String fileName, MultipartFile fileToBeSaved) throws IOException {
         try {
-            Files.copy(fileToBeSaved.getInputStream(),
-                    path.resolve(fileName),
-                    StandardCopyOption.REPLACE_EXISTING);
+            Path savePath = Paths.get(directory);
+            if (Files.notExists(savePath))
+                Files.createDirectories(savePath);
+
+            Files.copy(fileToBeSaved.getInputStream(), savePath.resolve(fileName), StandardCopyOption.REPLACE_EXISTING);
         } catch (Exception e) {
             throw new IOException("error creating image file : " + fileName, e);
         }
