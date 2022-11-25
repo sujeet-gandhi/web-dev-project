@@ -6,6 +6,7 @@ import CategoriesList from "../categories/categories-list";
 import {useDispatch, useSelector} from "react-redux";
 import {getSearchDataThunk} from "../home/home-thunk";
 import {useLocation} from "react-router";
+import ProductList from "../products/product-list";
 
 export const SearchComponent = () => {
     const {searchData, loading} = useSelector(state => state.search)
@@ -48,6 +49,7 @@ export const SearchComponent = () => {
                     </nav>
 
                     <h1>Products</h1>
+                    <ProductList productArray={searchData.products}/>
 
                     <h1>Stores</h1>
                     <StoreList storeArray={searchData.stores}/>

@@ -59,3 +59,7 @@ nav {
   margin-right: 0;
   margin-bottom: 24px;
 }
+
+.wd-small-padding {
+  padding: 5px;
+}
