@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -68,15 +67,15 @@ public class OrderManagementController {
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping(path = "/placeOrder")
-    public ResponseEntity<Map<String, Object>> placeOrder(@PathParam("orderId") String orderId) {
+    @PutMapping(path = "/placeOrder/{orderId}")
+    public ResponseEntity<Map<String, Object>> placeOrder(@PathVariable String orderId) {
         Map<String, Object> response = new HashMap<>();
         response.put(CART, orderService.updateOrderStatus(UUID.fromString(orderId), OrderState.PLACED));
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping(path = "/deliverOrder")
-    public ResponseEntity<Map<String, Object>> deliverOrder(@PathParam("orderId") String orderId) {
+    @PutMapping(path = "/deliverOrder/{orderId}")
+    public ResponseEntity<Map<String, Object>> deliverOrder(@PathVariable String orderId) {
         Map<String, Object> response = new HashMap<>();
         response.put(CART, orderService.updateOrderStatus(UUID.fromString(orderId), OrderState.DELIVERED));
         return ResponseEntity.ok(response);
