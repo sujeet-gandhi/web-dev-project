@@ -1,9 +1,12 @@
 package com.neu.onestopgo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.neu.onestopgo.response.OrderItemQuantityResponseObject;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -20,6 +23,7 @@ public class OrderItemQuantity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
+    @JsonIgnore
     private Order1 order1;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -58,5 +62,26 @@ public class OrderItemQuantity {
 
     public void setQuantity(float quantity) {
         this.quantity = quantity;
+    }
+
+    public OrderItemQuantityResponseObject getResponseObject() {
+        OrderItemQuantityResponseObject orderItemQuantityResponseObject = new OrderItemQuantityResponseObject();
+        orderItemQuantityResponseObject.setId(this.id);
+        orderItemQuantityResponseObject.setProduct(this.getProduct());
+        orderItemQuantityResponseObject.setQuantity(this.getQuantity());
+        return orderItemQuantityResponseObject;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OrderItemQuantity that = (OrderItemQuantity) o;
+        return id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

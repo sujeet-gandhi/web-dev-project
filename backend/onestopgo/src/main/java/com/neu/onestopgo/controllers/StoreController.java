@@ -1,5 +1,6 @@
 package com.neu.onestopgo.controllers;
 
+import com.neu.onestopgo.dao.GetAllStoresResponseObject;
 import com.neu.onestopgo.dao.StoreRequestObject;
 import com.neu.onestopgo.models.Store;
 import com.neu.onestopgo.services.StoreService;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
@@ -29,8 +31,12 @@ public class StoreController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Store>> getAllStores() {
-        return ResponseEntity.ok(storeService.getAllStores());
+    public ResponseEntity<List<GetAllStoresResponseObject>> getAllStores() {
+        return ResponseEntity.ok(storeService
+                .getAllStores()
+                .stream()
+                .map(Store::getAllStoresResponseObject)
+                .collect(Collectors.toList()));
     }
 
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})

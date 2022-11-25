@@ -14,6 +14,8 @@ import javax.websocket.server.PathParam;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.neu.onestopgo.utils.Constants.*;
+
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api/v1")
@@ -35,9 +37,9 @@ public class HomeController {
     @GetMapping(path = "/home")
     public ResponseEntity<Map<String, Object>> getHome() {
         Map<String, Object> response = new HashMap<>();
-        response.put("userId", 1);
-        response.put("stores", storeService.getAllStores());
-        response.put("categories", categoryService.getAllCategories());
+        response.put(USER_ID, 1);
+        response.put(STORES, storeService.getAllStores());
+        response.put(CATEGORIES, categoryService.getAllCategories());
 
         return ResponseEntity.ok(response);
     }
@@ -47,10 +49,11 @@ public class HomeController {
         Map<String, Object> response = new HashMap<>();
 
         try {
-            response.put("searchTerm", searchTerm);
-            response.put("products", productService.performProductSearch(searchTerm));
-            response.put("stores", storeService.performStoreSearch(searchTerm));
-            response.put("categories", categoryService.performCategorySearch(searchTerm));
+            response.put(USER_ID, 1);
+            response.put(SEARCH_TERM, searchTerm);
+            response.put(PRODUCTS, productService.performProductSearch(searchTerm));
+            response.put(STORES, storeService.performStoreSearch(searchTerm));
+            response.put(CATEGORIES, categoryService.performCategorySearch(searchTerm));
         } catch (Exception ex) {
             // here you should handle unexpected errors
             // ...
