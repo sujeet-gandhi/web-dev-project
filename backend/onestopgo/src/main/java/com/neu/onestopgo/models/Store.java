@@ -1,6 +1,7 @@
 package com.neu.onestopgo.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.neu.onestopgo.dao.GetAllStoresResponseObject;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
 
@@ -18,6 +19,7 @@ public class Store {
     @Field
     private String name;
 
+    @Field
     private String location;
 
     @Field
@@ -41,6 +43,7 @@ public class Store {
     private Set<StoreItemQuantity> orderItemQuantitySet;
 
     @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<User> storeAdmins;
 
     public int getId() {
@@ -139,5 +142,17 @@ public class Store {
 
     public void setStoreAdmins(Set<User> storeAdmins) {
         this.storeAdmins = storeAdmins;
+    }
+
+    public GetAllStoresResponseObject getAllStoresResponseObject() {
+        return new GetAllStoresResponseObject()
+                .setId(id)
+                .setName(name)
+                .setLocation(location)
+                .setType(type)
+                .setOpeningTime(openingTime)
+                .setClosingTime(closingTime)
+                .setImageUrl(imageUrl)
+                .setStoreAdmins(storeAdmins);
     }
 }
