@@ -41,6 +41,22 @@ public class Product {
 
     private String imageUrl;
 
+    public Product() {
+
+    }
+
+    public Product(Product other) {
+        this.id = other.getId();
+        this.name = other.getName();
+        this.description = other.getDescription();
+        this.unit = other.getUnit();
+        this.quantity = other.getQuantity();
+        this.inStock = other.isInStock();
+        this.price = other.getPrice();
+        this.type = other.getType();
+        this.imageUrl = other.getImageUrl();
+    }
+
     public String getUnit() {
         return unit;
     }

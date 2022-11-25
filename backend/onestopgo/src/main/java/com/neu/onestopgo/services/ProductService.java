@@ -45,7 +45,7 @@ public class ProductService {
     }
 
     public Product getProductById(UUID productId) {
-        return productRepository.findById(productId).orElse(null);
+        return productRepository.findById(productId).orElseThrow();
     }
 
     public Product createProduct(Product product) {

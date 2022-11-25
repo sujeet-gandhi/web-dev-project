@@ -18,6 +18,7 @@ public class Store {
     @Field
     private String name;
 
+    @Field
     private String location;
 
     @Field
@@ -41,6 +42,7 @@ public class Store {
     private Set<StoreItemQuantity> orderItemQuantitySet;
 
     @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<User> storeAdmins;
 
     public int getId() {
