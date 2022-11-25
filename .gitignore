@@ -218,3 +218,5 @@ $RECYCLE.BIN/
 .mvn/
 .idea/
 target/
+data/
+/backend/onestopgo/data/

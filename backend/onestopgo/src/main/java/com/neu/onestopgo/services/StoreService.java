@@ -3,10 +3,13 @@ package com.neu.onestopgo.services;
 import com.neu.onestopgo.models.Store;
 import com.neu.onestopgo.repositories.StoreRepository;
 import com.neu.onestopgo.utils.Utils;
+import org.hibernate.search.jpa.FullTextEntityManager;
+import org.hibernate.search.jpa.Search;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
@@ -24,6 +27,16 @@ public class StoreService {
     public StoreService(final EntityManagerFactory entityManagerFactory, StoreRepository storeRepository) {
         this.storeRepository = storeRepository;
         this.entityManager = entityManagerFactory.createEntityManager();
+    }
+
+    @PostConstruct
+    public void initializeHibernateSearch() {
+        try {
+            FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(entityManager);
+            fullTextEntityManager.createIndexer().startAndWait();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public List<Store> getAllStores() {
