@@ -1,4 +1,4 @@
-package com.neu.onestopgo.models;
+package com.neu.onestopgo.security;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 
