@@ -1,10 +1,11 @@
-* {
-  box-sizing: border-box;
+main {
+  flex: 1 0 auto;
 }
 
 body, html {
-  margin: 0 auto;
-  padding: 0;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -62,4 +63,20 @@ nav {
 
 .wd-small-padding {
   padding: 5px;
+}
+
+.wd-margin-top-bottom {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  float: end;
+}
+
+.wd-product-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.wd-product-list > li {
 }

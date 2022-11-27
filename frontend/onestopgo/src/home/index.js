@@ -6,6 +6,7 @@ import CategoriesList from "../categories/categories-list";
 import {useDispatch, useSelector} from "react-redux";
 import {getHomeDataThunk} from "./home-thunk";
 import {useNavigate} from "react-router";
+import Loader from "../components/loader";
 
 export const HomeComponent = () => {
     const {homeData, loading} = useSelector(state => state.home)
@@ -37,7 +38,7 @@ export const HomeComponent = () => {
 
     return (
         <>
-            {loading && <h1>Loading Data ...</h1>}
+            {loading && <Loader/>}
             {!loading &&
                 <>
                     <nav>

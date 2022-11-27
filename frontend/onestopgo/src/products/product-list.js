@@ -1,13 +1,16 @@
 import React from "react";
 import ProductItem from "./product-item";
 
-const ProductList = ({productArray}) => {
-    if (!productArray) return null;
+const ProductList = ({storeItemQuantityArray}) => {
+    if (!storeItemQuantityArray) return null;
+    console.log(storeItemQuantityArray)
     return(
-        <div className="col m3 l2">
-            <ul className="list-group wd-horizontal-list">
+        <div className="col">
+            <ul className="wd-category-list">
                 {
-                    productArray.map ((product) => <ProductItem key={product.id} product={product}/>)
+                    storeItemQuantityArray.map ((storeItemQuantity) =>
+                        <ProductItem key={storeItemQuantity.id} storeId={storeItemQuantity.storeId} product={storeItemQuantity.product}/>
+                    )
                 }
             </ul>
         </div>

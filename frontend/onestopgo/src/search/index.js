@@ -28,7 +28,7 @@ export const SearchComponent = () => {
     const handleOnSearchSubmit = () => {
         dispatch(getSearchDataThunk(searchText))
     }
-
+    console.log(searchData.products)
     return (
         <>
             {loading && <h1>Looking up "{searchText}" ...</h1>}
@@ -49,7 +49,7 @@ export const SearchComponent = () => {
                     </nav>
 
                     <h1>Products</h1>
-                    <ProductList productArray={searchData.products}/>
+                    <ProductList storeItemQuantityArray={searchData.products}/>
 
                     <h1>Stores</h1>
                     <StoreList storeArray={searchData.stores}/>
