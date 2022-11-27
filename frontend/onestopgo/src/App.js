@@ -13,11 +13,12 @@ import searchReducer from "./search/search-reducer";
 import {SearchComponent} from "./search";
 import StoreAdmin from "./store-admin";
 import productReducer from "./products/product-reducer";
+import loginReducer from "./login/login-reducer";
 
 
 function App() {
     const store = configureStore({
-        reducer: {home: homeReducer, store: storeReducer, user: userReducer, search: searchReducer, product: productReducer}
+        reducer: {home: homeReducer, store: storeReducer, user: userReducer, search: searchReducer, product: productReducer, login : loginReducer}
     });
     return (
         <Provider store={store}>
