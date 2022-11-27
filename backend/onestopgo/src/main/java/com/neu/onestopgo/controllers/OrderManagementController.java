@@ -13,8 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import static com.neu.onestopgo.utils.Constants.CART;
-import static com.neu.onestopgo.utils.Constants.ORDERS;
+import static com.neu.onestopgo.utils.Constants.*;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
@@ -46,10 +45,10 @@ public class OrderManagementController {
         return ResponseEntity.ok(response);
     }
 
-    @DeleteMapping(path = "/removeFromCart")
-    public ResponseEntity<Map<String, Object>> removeProductFromCart(@RequestBody OrderItemQuantityRequestObject orderItemQuantity) {
+    @DeleteMapping(path = "/removeFromCart/{orderItemId}")
+    public ResponseEntity<Map<String, Object>> removeProductFromCart(@PathVariable String orderItemId) {
         Map<String, Object> response = new HashMap<>();
-        response.put(CART, orderService.removeFromCart(orderItemQuantity, userService.getUserFromId(getCurrentUserId())));
+        response.put(CART, orderService.removeFromCart(orderItemId, userService.getUserFromId(getCurrentUserId())));
         return ResponseEntity.ok(response);
     }
 
@@ -70,14 +69,14 @@ public class OrderManagementController {
     @PutMapping(path = "/placeOrder/{orderId}")
     public ResponseEntity<Map<String, Object>> placeOrder(@PathVariable String orderId) {
         Map<String, Object> response = new HashMap<>();
-        response.put(CART, orderService.updateOrderStatus(UUID.fromString(orderId), OrderState.PLACED));
+        response.put(ORDER, orderService.updateOrderStatus(UUID.fromString(orderId), OrderState.PLACED));
         return ResponseEntity.ok(response);
     }
 
     @PutMapping(path = "/deliverOrder/{orderId}")
     public ResponseEntity<Map<String, Object>> deliverOrder(@PathVariable String orderId) {
         Map<String, Object> response = new HashMap<>();
-        response.put(CART, orderService.updateOrderStatus(UUID.fromString(orderId), OrderState.DELIVERED));
+        response.put(ORDER, orderService.updateOrderStatus(UUID.fromString(orderId), OrderState.DELIVERED));
         return ResponseEntity.ok(response);
     }
 

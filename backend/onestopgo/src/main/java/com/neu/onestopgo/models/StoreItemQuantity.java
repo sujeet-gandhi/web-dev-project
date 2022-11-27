@@ -1,6 +1,7 @@
 package com.neu.onestopgo.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.neu.onestopgo.response.StoreItemQuantityResponseObject;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
@@ -64,4 +65,9 @@ public class StoreItemQuantity {
         this.quantity = quantity;
         return this;
     }
+
+    public StoreItemQuantityResponseObject getResponseObject() {
+        return new StoreItemQuantityResponseObject(this.getId(), this.getStore().getId(), this.getProduct(), this.getQuantity());
+    }
+
 }
