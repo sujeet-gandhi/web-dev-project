@@ -6,6 +6,7 @@ import CategoriesList from "../categories/categories-list";
 import {useDispatch, useSelector} from "react-redux";
 import {getHomeDataThunk} from "./home-thunk";
 import {useNavigate} from "react-router";
+import StoreMap from "../store-map";
 
 export const HomeComponent = () => {
     const {homeData, loading} = useSelector(state => state.home)
@@ -54,6 +55,7 @@ export const HomeComponent = () => {
                     </nav>
                     <StoreList storeArray={homeData.stores}/>
                     <CategoriesList categoriesArray={homeData.categories}/>
+                    <StoreMap storeArray={homeData.stores}/>
                 </>
             }
         </>
