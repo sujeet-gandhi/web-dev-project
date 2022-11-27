@@ -2,6 +2,7 @@ package com.neu.onestopgo.response;
 
 import com.neu.onestopgo.models.OrderState;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -12,6 +13,26 @@ public class OrderResponseObject {
     private OrderState orderState;
 
     private List<OrderItemQuantityResponseObject> items;
+
+    private Date orderDate;
+
+    private Date orderDeliveryDate;
+
+    public Date getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    public Date getOrderDeliveryDate() {
+        return orderDeliveryDate;
+    }
+
+    public void setOrderDeliveryDate(Date orderDeliveryDate) {
+        this.orderDeliveryDate = orderDeliveryDate;
+    }
 
     public UUID getId() {
         return id;

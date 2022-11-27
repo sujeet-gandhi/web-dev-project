@@ -8,10 +8,7 @@ import com.neu.onestopgo.response.OrderResponseObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -77,10 +74,10 @@ public class OrderService {
         return orderRepository.saveAndFlush(cart).getResponseObject();
     }
 
-    public OrderResponseObject removeFromCart(OrderItemQuantityRequestObject requestObject, User user) {
+    public OrderResponseObject removeFromCart(String orderItemId, User user) {
         var cart = getCart(user);
         var orderItem = orderItemQuantityRepository
-                .findById(UUID.fromString(requestObject.getOrderItemQuantityId()))
+                .findById(UUID.fromString(orderItemId))
                 .orElseThrow();
         if (cart.getOrderItemQuantitySet().contains(orderItem)) {
             cart.getOrderItemQuantitySet().remove(orderItem);
@@ -100,7 +97,9 @@ public class OrderService {
             throw new IllegalArgumentException("Cannot modify item that is in other carts");
         }
 
-        if (storeItemService.getQuantity(requestObject.getStoreId(), orderItem.getProduct().getId().toString()) < requestObject.getQuantity()) {
+        var storeItem = storeItemService.getByProductId(orderItem.getProduct().getId());
+
+        if (storeItem.getQuantity() < requestObject.getQuantity()) {
             throw new IllegalStateException("Unable to update quantity. Store does not have enough quantity");
         }
 
@@ -126,6 +125,11 @@ public class OrderService {
         var order = getOrderById(orderId);
         if (order != null) {
             order.setState(state);
+            if (state == OrderState.PLACED) {
+                order.setOrderDate(new Date());
+            } else if (state == OrderState.DELIVERED) {
+                order.setOrderDeliveryDate(new Date());
+            }
             if (verifyPayment(orderId)) {
                 return orderRepository.save(order).getResponseObject();
             } else {

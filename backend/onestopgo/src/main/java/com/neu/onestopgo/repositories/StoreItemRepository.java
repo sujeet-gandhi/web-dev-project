@@ -9,4 +9,6 @@ import java.util.UUID;
 public interface StoreItemRepository extends CrudRepository<StoreItemQuantity, UUID> {
     public StoreItemQuantity findByStoreIdAndProductId(int storeId, UUID productId);
     public List<StoreItemQuantity> findAllByStoreId(int storeId);
+
+    public StoreItemQuantity findByProductId(UUID productId);
 }

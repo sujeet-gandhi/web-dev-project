@@ -9,6 +9,8 @@ public class Constants {
 
     public static final String ORDERS = "orders";
 
+    public static final String ORDER = "order";
+
     public static final String SEARCH_TERM = "searchTerm";
 
     public static final String USER_ID = "userId";

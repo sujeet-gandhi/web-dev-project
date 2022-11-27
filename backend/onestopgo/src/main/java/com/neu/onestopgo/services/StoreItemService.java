@@ -22,6 +22,10 @@ public class StoreItemService {
         return storeItemRepository.save(storeItemQuantity);
     }
 
+    public StoreItemQuantity getByProductId(UUID productId) {
+        return storeItemRepository.findByProductId(productId);
+    }
+
     public StoreItemQuantity updateStoreIdAndProductIdQuantity(int storeId, String productId, float quantity) {
         StoreItemQuantity storeItemQuantity = storeItemRepository.findByStoreIdAndProductId(storeId, UUID.fromString(productId));
         storeItemQuantity.setQuantity(quantity);

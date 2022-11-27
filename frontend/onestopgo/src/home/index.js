@@ -6,6 +6,7 @@ import CategoriesList from "../categories/categories-list";
 import {useDispatch, useSelector} from "react-redux";
 import {getHomeDataThunk} from "./home-thunk";
 import {useNavigate} from "react-router";
+import Loader from "../components/loader";
 import StoreMap from "../store-map";
 
 export const HomeComponent = () => {
@@ -38,7 +39,7 @@ export const HomeComponent = () => {
 
     return (
         <>
-            {loading && <h1>Loading Data ...</h1>}
+            {loading && <Loader/>}
             {!loading &&
                 <>
                     <nav>

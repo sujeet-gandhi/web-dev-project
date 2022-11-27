@@ -2,7 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 import {getSearchDataThunk} from "../home/home-thunk";
 
 const initialState = {
-    homeData: [],
+    searchData: {},
     loading: true
 }
 
@@ -12,7 +12,7 @@ const searchSlice = createSlice({
     extraReducers: {
         [getSearchDataThunk.pending]: (state) => {
             state.loading = true
-            state.searchData = []
+            state.searchData = {}
         },
         [getSearchDataThunk.fulfilled]: (state, {payload}) => {
             state.loading = false

@@ -6,6 +6,7 @@ import CategoriesList from "../categories/categories-list";
 import {useDispatch, useSelector} from "react-redux";
 import {getSearchDataThunk} from "../home/home-thunk";
 import {useLocation} from "react-router";
+import ProductList from "../products/product-list";
 import StoreMap from "../store-map";
 
 export const SearchComponent = () => {
@@ -28,7 +29,7 @@ export const SearchComponent = () => {
     const handleOnSearchSubmit = () => {
         dispatch(getSearchDataThunk(searchText))
     }
-
+    console.log(searchData.products)
     return (
         <>
             {loading && <h1>Looking up "{searchText}" ...</h1>}
@@ -49,6 +50,7 @@ export const SearchComponent = () => {
                     </nav>
 
                     <h1>Products</h1>
+                    <ProductList storeItemQuantityArray={searchData.products}/>
 
                     <h1>Stores</h1>
                     <StoreList storeArray={searchData.stores}/>

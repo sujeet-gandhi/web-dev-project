@@ -6,6 +6,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -36,6 +37,26 @@ public class Order1 {
 
     @OneToMany(mappedBy = "order1", fetch = FetchType.LAZY)
     private Set<OrderItemQuantity> orderItemQuantitySet;
+
+    private Date orderDate;
+
+    private Date orderDeliveryDate;
+
+    public Date getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    public Date getOrderDeliveryDate() {
+        return orderDeliveryDate;
+    }
+
+    public void setOrderDeliveryDate(Date orderDeliveryDate) {
+        this.orderDeliveryDate = orderDeliveryDate;
+    }
 
     public UUID getId() {
         return id;

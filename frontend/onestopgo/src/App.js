@@ -13,11 +13,15 @@ import searchReducer from "./search/search-reducer";
 import {SearchComponent} from "./search";
 import StoreAdmin from "./store-admin";
 import productReducer from "./products/product-reducer";
-
+import cartReducer from "./cart/cart-reducer";
+import {CartComponent} from "./cart";
+import ordersReducer from "./orders/orders-reducer";
+import {OrdersComponents} from "./orders";
 
 function App() {
     const store = configureStore({
-        reducer: {home: homeReducer, store: storeReducer, user: userReducer, search: searchReducer, product: productReducer}
+        reducer: {home: homeReducer, store: storeReducer, user: userReducer, search: searchReducer,
+            product: productReducer, cart: cartReducer, order: ordersReducer}
     });
     return (
         <Provider store={store}>
@@ -28,8 +32,11 @@ function App() {
                         <Route path="/search" element={<SearchComponent/>}/>
                         <Route path="/login" element={<LoginForm/>}/>
                         <Route path="/root" element={<RootOperations/>}/>
+                        <Route path="/cart" element={<CartComponent/>}/>
+                        <Route path="/orders" element={<OrdersComponents/>}/>
                         <Route path="/storeAdmin" element={<StoreAdmin/>}/>
                     </Routes>
+                    {/*<Footer/>*/}
                 </div>
             </BrowserRouter>
         </Provider>
