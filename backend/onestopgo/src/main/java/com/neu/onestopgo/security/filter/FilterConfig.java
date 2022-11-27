@@ -18,4 +18,16 @@ public class FilterConfig {
 
         return registrationBean;
     }
+
+    @Bean
+    public FilterRegistrationBean<CorsFilter> loggingInFilter(){
+        FilterRegistrationBean<CorsFilter> registrationBean
+                = new FilterRegistrationBean<>();
+
+        registrationBean.setFilter(new CorsFilter());
+        registrationBean.addUrlPatterns("/*");
+        registrationBean.setOrder(1);
+
+        return registrationBean;
+    }
 }
