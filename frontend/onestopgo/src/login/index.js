@@ -12,10 +12,15 @@ import {
     MDBTabsLink,
     MDBTabsPane
 } from 'mdb-react-ui-kit';
+import {useDispatch, useSelector} from "react-redux";
+import {loginThunk} from "./login-thunk";
 
 export const LoginForm = () => {
-
+    const {loginData, loading} = useSelector(state => state.login)
     const [activeTab, setActiveTab] = useState('login');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const dispatch= useDispatch();
 
     const handleClick = (value) => {
         if (value === activeTab) {
@@ -23,6 +28,17 @@ export const LoginForm = () => {
         }
 
         setActiveTab(value);
+    };
+
+    const handleSubmit = event => {
+        console.log('handleSubmit ran');
+        event.preventDefault();
+        console.log('email ', email);
+        console.log('password ', password);
+        const loginDetails = {
+            email : email,
+            password : password};
+        dispatch(loginThunk(loginDetails));
     };
 
     return (
@@ -57,16 +73,18 @@ export const LoginForm = () => {
                     <div className="text-center mb-3">
                         <p>Sign in</p>
                     </div>
-                    <MDBInput wrapperClass='mb-4' label='Email address' id='form1' type='email'/>
-                    <MDBInput wrapperClass='mb-4' label='Password' id='form2' type='password'/>
+                    <MDBInput wrapperClass='mb-4' label='Email address' id='form1' type='email' onChange={event => setEmail(event.target.value)}
+                              value={email}/>
+                    <MDBInput wrapperClass='mb-4' label='Password' id='form2' type='password' onChange={event => setPassword(event.target.value)}
+                              value={password}/>
 
                     <div className="d-flex justify-content-between mx-4 mb-4">
                         <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me'/>
                         <a href="!#">Forgot password?</a>
                     </div>
 
-                    <MDBBtn className="mb-4 w-100" style={{backgroundColor: "teal"}}>Sign in</MDBBtn>
-                    <p className="text-center">Not a member? <a href="#" onClick={() => handleClick('register')}>Register</a></p>
+                    <MDBBtn onClick={handleSubmit} className="mb-4 w-100" style={{backgroundColor: "teal"}}>Sign in</MDBBtn>
+                    <p className="text-center">Not a member? <a href="src/login/index.js">Register</a></p>
 
                 </MDBTabsPane>
 

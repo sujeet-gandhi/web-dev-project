@@ -17,11 +17,13 @@ import cartReducer from "./cart/cart-reducer";
 import {CartComponent} from "./cart";
 import ordersReducer from "./orders/orders-reducer";
 import {OrdersComponents} from "./orders";
+import loginReducer from "./login/login-reducer";
+
 
 function App() {
     const store = configureStore({
         reducer: {home: homeReducer, store: storeReducer, user: userReducer, search: searchReducer,
-            product: productReducer, cart: cartReducer, order: ordersReducer}
+            product: productReducer, cart: cartReducer, order: ordersReducer, login : loginReducer}
     });
     return (
         <Provider store={store}>
