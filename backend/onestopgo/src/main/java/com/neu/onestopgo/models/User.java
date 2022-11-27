@@ -11,15 +11,43 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
     private int id;
+    private String username;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
     private String email;
+    private boolean enabled;
     private String password;
 
     private String address;
     private String contact;
+    private Role role;
 
     private boolean active;
 
     private String type;
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
     // for store admins
     @ManyToOne(fetch = FetchType.LAZY)
