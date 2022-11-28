@@ -10,7 +10,7 @@ const StoreItem = ({store}) => {
                 <div className="card-panel">
                     <Link to={'/store'}>
                         <div className={'col center'}>
-                                <img width={100} className={'rounded-circle border-3 wd-margin-bottom'} src={ONESTOPGO_API + "/" + store.imageUrl}/>
+                                <img width={100} height={100} className={'rounded-circle border-3 wd-margin-bottom'} src={ONESTOPGO_API + "/" + store.imageUrl}/>
                                 <p className="card-title fw-bolder black-text">{store.name}</p>
                                 <p className="green-text">
                                     {store.openingTime} - {store.closingTime}<br/>
@@ -22,13 +22,6 @@ const StoreItem = ({store}) => {
                     </Link>
                 </div>
             </div>
-        // <li className="list-group-item">
-        //     <div className="row">
-        //         <div>
-        //             <img className="rounded-circle" width={150} height={150} src={ONESTOPGO_API + "/" + store.imageUrl} alt={store.name}/>
-        //         </div>
-        //     </div>
-        // </li>
     );
 };
 export default StoreItem;

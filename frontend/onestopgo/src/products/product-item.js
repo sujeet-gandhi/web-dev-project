@@ -24,8 +24,8 @@ const ProductItem = ({product, storeId}) => {
         <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-6">
             <div className="card">
                 <div className="card-image">
-                    <img src={ONESTOPGO_API + "/" + product.imageUrl} className={'fw-bolder'} alt={product.name}/>
-                        <span className="card-title">{product.name}</span>
+                    <img height={200} src={ONESTOPGO_API + "/" + product.imageUrl} className={'fw-bolder'} alt={product.name}/>
+                        <span className="card-title fw-bolder">{product.name}</span>
                         <a onClick={handleAddToCartClick} className="btn-floating halfway-fab waves-effect waves-light teal"><i
                             className="material-icons">add_shopping_cart</i></a>
                 </div>
