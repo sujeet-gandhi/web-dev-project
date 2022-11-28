@@ -6,3 +6,8 @@ export const loginThunk = createAsyncThunk (
     async (loginDetails) => await service.hitLogin(loginDetails)
 )
 
+export const registerThunk = createAsyncThunk (
+    'onestopgo/login',
+    async (userDetails) => await service.registerUser(userDetails)
+)
+
