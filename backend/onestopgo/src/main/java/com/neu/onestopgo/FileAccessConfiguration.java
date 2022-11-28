@@ -18,7 +18,7 @@ public class FileAccessConfiguration implements WebMvcConfigurer {
     private void exposeImagesFolder(ResourceHandlerRegistry handlerRegistry) {
         handlerRegistry
                 .addResourceHandler("/" + "images" + "/**")
-                .addResourceLocations("file:/" +
+                .addResourceLocations("file:" +
                         Paths.get("images")
                                 .toFile()
                                 .getAbsolutePath() + "/");
