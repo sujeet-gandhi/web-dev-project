@@ -8,6 +8,23 @@ import javax.persistence.*;
 @Entity
 @Indexed
 public class Authorities {
+
+    @Column(name = "username", columnDefinition = "VARCHAR(255)")
+    private String username;
+    @Column(name = "authority", columnDefinition = "VARCHAR(255)")
+    private String authority;
+    @Id
+    private Long id;
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Id
+    public Long getId() {
+        return id;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -22,22 +39,5 @@ public class Authorities {
 
     public void setAuthority(String authority) {
         this.authority = authority;
-    }
-
-    @Column(name = "username", columnDefinition = "VARCHAR(255)")
-    private String username;
-    @Column(name = "authority", columnDefinition = "VARCHAR(255)")
-    private String authority;
-
-    @Id
-    private Long id;
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Id
-    public Long getId() {
-        return id;
     }
 }

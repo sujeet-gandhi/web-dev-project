@@ -49,12 +49,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
-//        http.httpBasic().disable().authenticationEntryPoint((httpServletRequest, httpServletResponse, e) -> {
-//            if (httpServletRequest.getServletPath().startsWith("/api/")) {
-//                httpServletResponse.setStatus(403);
-//            }
-//        });
         http.httpBasic().disable()
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeRequests()
@@ -62,11 +56,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/v1/search").permitAll()
                 .antMatchers("/api/v1/signup").permitAll()
                 .antMatchers("/login/*").permitAll()
-
                 .anyRequest().authenticated()
                 .and().csrf().disable()
-              // .exceptionHandling()
-               // .and()
                 .formLogin().permitAll()
                 .successHandler((request, response, authentication) -> {
                     UserDetails userDetails = (UserDetails) authentication.getPrincipal();
@@ -80,7 +71,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                    response.setStatus(HttpStatus.NO_CONTENT.value());
                     response.sendRedirect("/api/v1/login/success");
                 })
-                //.failureHandler((request, response, authentication) -> {response.sendRedirect("/api/v1/login/failure");})
               .and()
                 .logout(logout -> logout
                         .logoutUrl("/csd/csdlogout")

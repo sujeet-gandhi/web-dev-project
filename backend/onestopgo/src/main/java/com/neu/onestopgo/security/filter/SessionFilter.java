@@ -8,12 +8,6 @@ import java.io.IOException;
 
 public class SessionFilter implements Filter {
     @Override
-    public void destroy() {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
     public void doFilter(ServletRequest req, ServletResponse res,
                          FilterChain arg2) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) req;
@@ -28,6 +22,10 @@ public class SessionFilter implements Filter {
                 response.addCookie(cookie);
             }
         }
+    }
+
+    @Override
+    public void destroy() {
     }
 
 }
