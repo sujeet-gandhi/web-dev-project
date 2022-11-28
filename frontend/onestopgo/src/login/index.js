@@ -13,13 +13,20 @@ import {
     MDBTabsPane
 } from 'mdb-react-ui-kit';
 import {useDispatch, useSelector} from "react-redux";
-import {loginThunk} from "./login-thunk";
+import {loginThunk, registerThunk} from "./login-thunk";
 
 export const LoginForm = () => {
     const {loginData, loading} = useSelector(state => state.login)
     const [activeTab, setActiveTab] = useState('login');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [registerName, setRegisterName] = useState('');
+    const [registerUsername, setRegisterUsername] = useState('');
+    const [registerEmail, setRegisterEmail] = useState('');
+    const [registerPassword, setRegisterPassword] = useState('');
+    const [registerAddress, setRegisterAddress] = useState('');
+    const [registerContact, setRegisterContact] = useState('');
+    const [userRegistrationDetails, setUserRegistrationDetails] = useState('');
     const dispatch= useDispatch();
 
     const handleClick = (value) => {
@@ -40,6 +47,22 @@ export const LoginForm = () => {
             password : password};
         dispatch(loginThunk(loginDetails));
     };
+
+    const handleRegistration = event => {
+      const userDetails = {
+          username : registerUsername,
+          email: registerEmail,
+          password:registerPassword,
+          address:registerAddress,
+          contact:registerContact
+      }
+
+        dispatch(registerThunk(userDetails));
+    };
+
+
+
+
 
     return (
         <MDBContainer className="p-3 my-5 w-50">
@@ -95,15 +118,17 @@ export const LoginForm = () => {
                     </div>
 
                     <MDBInput wrapperClass='mb-4' label='Name' id='form1' type='text'/>
-                    <MDBInput wrapperClass='mb-4' label='Username' id='form1' type='text'/>
-                    <MDBInput wrapperClass='mb-4' label='Email' id='form1' type='email'/>
-                    <MDBInput wrapperClass='mb-4' label='Password' id='form1' type='password'/>
+                    <MDBInput wrapperClass='mb-4' label='Username' id='form1' type='text' onChange={event => setRegisterUsername(event.target.value)}/>
+                    <MDBInput wrapperClass='mb-4' label='Email' id='form1' type='email' onChange={event => setRegisterEmail(event.target.value)}/>
+                    <MDBInput wrapperClass='mb-4' label='Password' id='form1' type='password' onChange={event => setRegisterPassword(event.target.value)}/>
+                    <MDBInput wrapperClass='mb-4' label='Address' id='form1' type='text' onChange={event => setEmail(event.target.value)}/>
+                    <MDBInput wrapperClass='mb-4' label='Contact' id='form1' type='tel'/>
 
                     <div className='d-flex justify-content-center mb-4'>
                         <MDBCheckbox name='flexCheck' id='flexCheckDefault' label='I have read and agree to the terms'/>
                     </div>
 
-                    <MDBBtn className="mb-4 w-100" style={{backgroundColor: "teal"}}>Sign up</MDBBtn>
+                    <MDBBtn onClick={handleRegistration} className="mb-4 w-100" style={{backgroundColor: "teal"}}>Sign up</MDBBtn>
 
                 </MDBTabsPane>
 
