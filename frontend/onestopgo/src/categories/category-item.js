@@ -9,7 +9,6 @@ const CategoryItem = ({category: category}) => {
                 <Link to={'/category/'+category.id}>
                     <div className="card teal wd-remove-text-decoration">
                         <div className="card-content center white-text wd-category-text">
-                            <img src={ONESTOPGO_API + "/" + category.imageUrl} className="mh-100 mw-100 rounded rounded-circle"/>
                             <span className="card-title fw-bold">{category.name}</span>
                             <span>{category.description}</span>
                         </div>
