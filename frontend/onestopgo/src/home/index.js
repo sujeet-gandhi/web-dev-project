@@ -40,10 +40,10 @@ export const HomeComponent = () => {
 
     return (
         <>
+            <NavBar links={[{link : 'cart', name : 'Cart'}, {link : 'orders', name : 'Orders'}]}/>
             {loading && <Loader/>}
             {!loading &&
                 <>
-                    <NavBar links={[{link : 'cart', name : 'Cart'}, {link : 'orders', name : 'Orders'}]}/>
                     <nav>
                         <div className="nav-wrapper green">
                             <form onSubmit={handleOnSearchSubmit}>

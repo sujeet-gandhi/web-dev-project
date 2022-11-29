@@ -29,10 +29,10 @@ export const CartComponent = () => {
     if (!cartData) return null;
     return (
         <>
+            <NavBar links={[{link : '', name : 'Home'}, {link : 'orders', name : 'Orders'}]}/>
             {loading && <Loader/>}
             {!loading &&
                 <>
-                    <NavBar links={[{link : '', name : 'Home'}, {link : 'orders', name : 'Orders'}]}/>
                     <h1>Your OneStopGo Cart</h1>
                     <br></br>
                     <CartList cartItems={cartData.cart.items} />

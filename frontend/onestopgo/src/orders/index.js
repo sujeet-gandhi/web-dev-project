@@ -18,10 +18,10 @@ export const OrdersComponents = () => {
     if (!ordersData) return null;
     return (
         <>
+            <NavBar links={[{link : '', name : 'Home'}]}/>
             {loading && <Loader/>}
             {!loading &&
                 <>
-                    <NavBar links={[{link : '', name : 'Home'}]}/>
                     <h1>Your OneStopGo Orders</h1>
                     <ul>
                         {
