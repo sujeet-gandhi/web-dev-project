@@ -15,16 +15,6 @@ export const OrdersComponents = () => {
         dispatch(getOrderListThunk())
     }, []);
 
-    const nav = useNavigate()
-
-    const handleOnOrderClicked = () => {
-        nav('/orderDetails')
-    }
-
-    const handleOnHomeClicked = () => {
-        nav('/')
-    }
-
     if (!ordersData) return null;
     return (
         <>

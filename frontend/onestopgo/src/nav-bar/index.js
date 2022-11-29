@@ -11,6 +11,7 @@ const NavBar = ({links}) => {
                     {
                         links.map((each) => <li onClick={() => nav('/' + each.link)}><a>{each.name}</a></li>)
                     }
+
                 </ul>
             </div>
         </nav>
