@@ -1,7 +1,9 @@
 import React from "react";
 import {useNavigate} from "react-router";
 
-const NavBar = ({links}) => {
+const ONESTOPGO_API = process.env.REACT_APP_ONESTOPGO_API_BASE;
+
+const NavBar = ({links, userData}) => {
     const nav = useNavigate();
     return (
         <nav>
@@ -11,6 +13,8 @@ const NavBar = ({links}) => {
                     {
                         links.map((each) => <li onClick={() => nav('/' + each.link)}><a>{each.name}</a></li>)
                     }
+                    {userData && <li className="me-2"><img width={50} height={50} src={ONESTOPGO_API + "/" + userData.imageUrl} className="circle"/></li>}
+                    {!userData && <li onClick={() => nav('/login')}><a className="waves-effect waves-light btn light-blue">Login</a></li>}
                 </ul>
             </div>
         </nav>
