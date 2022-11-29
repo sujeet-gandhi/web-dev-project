@@ -15,10 +15,16 @@ export const OrdersComponents = () => {
         dispatch(getOrderListThunk())
     }, []);
 
+    const mockUserData = () => {
+        return {
+            imageUrl: 'images/user/190015bd-511a-41f5-ac17-f401aef8df46.jpg'
+        }
+    }
+
     if (!ordersData) return null;
     return (
         <>
-            <NavBar links={[{link : '', name : 'Home'}]}/>
+            <NavBar links={[{link : '', name : 'Home'}]} userData={mockUserData()}/>
             {loading && <Loader/>}
             {!loading &&
                 <>

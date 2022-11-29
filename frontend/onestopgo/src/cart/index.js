@@ -26,10 +26,16 @@ export const CartComponent = () => {
         handleOnOrdersClicked()
     }
 
+    const mockUserData = () => {
+        return {
+            data: 'data'
+        }
+    }
+
     if (!cartData) return null;
     return (
         <>
-            <NavBar links={[{link : '', name : 'Home'}, {link : 'orders', name : 'Orders'}]}/>
+            <NavBar links={[{link : '', name : 'Home'}, {link : 'orders', name : 'Orders'}]} userData={mockUserData()}/>
             {loading && <Loader/>}
             {!loading &&
                 <>

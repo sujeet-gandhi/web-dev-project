@@ -179,7 +179,7 @@ const RootOperations = () => {
                                 </div>
                             }
                             <div>
-                                <input type="file" className="form-control text-bg-light" id="storeAdminImage"
+                                <input type="file" className="form-control text-bg-light mt-2" id="storeAdminImage"
                                        name="imageUrl"
                                        onChange={handleDataEntryStoreAdmin}/>
                                 <label htmlFor="storeAdminImage">Store Admin Image</label>
