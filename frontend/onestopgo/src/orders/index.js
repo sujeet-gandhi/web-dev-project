@@ -4,6 +4,7 @@ import {useNavigate} from "react-router";
 import {getOrderListThunk} from "./orders-thunk";
 import Loader from "../components/loader";
 import {OrderItem} from "./order-item";
+import NavBar from "../nav-bar";
 
 export const OrdersComponents = () => {
     const {ordersData, loading} = useSelector(state => state.order)
@@ -30,14 +31,7 @@ export const OrdersComponents = () => {
             {loading && <Loader/>}
             {!loading &&
                 <>
-                    <nav>
-                        <div className="nav-wrapper teal">
-                            <a href="#" className="brand-logo center"><img width={75} height={75} src={'../../images/shop.jpg'}/></a>
-                            <ul id="nav-mobile" className="left hide-on-med-and-down">
-                                <li onClick={handleOnHomeClicked}><a href="#">Home</a></li>
-                            </ul>
-                        </div>
-                    </nav>
+                    <NavBar links={[{link : '', name : 'Home'}]}/>
                     <h1>Your OneStopGo Orders</h1>
                     <ul>
                         {

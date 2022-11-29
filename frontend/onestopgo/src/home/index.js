@@ -8,6 +8,7 @@ import {getHomeDataThunk} from "./home-thunk";
 import {useNavigate} from "react-router";
 import Loader from "../components/loader";
 import StoreMap from "../store-map";
+import NavBar from "../nav-bar";
 
 export const HomeComponent = () => {
     const {homeData, loading} = useSelector(state => state.home)
@@ -42,8 +43,9 @@ export const HomeComponent = () => {
             {loading && <Loader/>}
             {!loading &&
                 <>
+                    <NavBar links={[{link : 'cart', name : 'Cart'}, {link : 'orders', name : 'Orders'}]}/>
                     <nav>
-                        <div className="nav-wrapper teal">
+                        <div className="nav-wrapper green">
                             <form onSubmit={handleOnSearchSubmit}>
                                 <div className="input-field">
                                     <input id="search" type="search" onChange={handleChange} required/>

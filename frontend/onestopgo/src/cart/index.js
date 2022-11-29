@@ -4,6 +4,7 @@ import {useNavigate} from "react-router";
 import {getCartThunk, placeOrderThunk} from "./cart-thunk";
 import CartList from "./cart-list";
 import Loader from "../components/loader";
+import NavBar from "../nav-bar";
 
 export const CartComponent = () => {
     const {cartData, loading} = useSelector(state => state.cart)
@@ -14,10 +15,6 @@ export const CartComponent = () => {
     }, []);
 
     const nav = useNavigate()
-
-    const handleOnHomeClicked = () => {
-        nav('/')
-    }
 
     const handleOnOrdersClicked = () => {
         nav('/orders')
@@ -35,15 +32,7 @@ export const CartComponent = () => {
             {loading && <Loader/>}
             {!loading &&
                 <>
-                    <nav>
-                        <div className="nav-wrapper teal">
-                            <a onClick={handleOnHomeClicked} className="brand-logo center"><img width={75} height={75} src={'../../images/shop.jpg'}/></a>
-                            <ul id="nav-mobile" className="left hide-on-med-and-down">
-                                <li onClick={handleOnHomeClicked}><a>Home</a></li>
-                                <li onClick={handleOnOrdersClicked}><a>Orders</a></li>
-                            </ul>
-                        </div>
-                    </nav>
+                    <NavBar links={[{link : '', name : 'Home'}, {link : 'orders', name : 'Orders'}]}/>
                     <h1>Your OneStopGo Cart</h1>
                     <br></br>
                     <CartList cartItems={cartData.cart.items} />
