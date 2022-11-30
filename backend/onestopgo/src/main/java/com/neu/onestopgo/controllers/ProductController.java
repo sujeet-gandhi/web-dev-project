@@ -8,7 +8,7 @@ import com.neu.onestopgo.services.CategoryService;
 import com.neu.onestopgo.services.ProductService;
 import com.neu.onestopgo.services.StoreItemService;
 import com.neu.onestopgo.services.StoreService;
-import com.neu.onestopgo.utils.ImageUploadUtil;
+import com.neu.onestopgo.utils.ImageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -53,7 +53,7 @@ public class ProductController {
                                                     @RequestPart("product") ProductRequestObject productRequestObject) throws Exception {
         String fileName = UUID.randomUUID() + "." + Objects.requireNonNull(multipartFile.getOriginalFilename()).split("\\.")[1];
         productRequestObject.setImageUrl(PRODUCT_IMAGE_DIR + fileName);
-        ImageUploadUtil.saveFileAndCreateDirectory(PRODUCT_IMAGE_DIR, fileName, multipartFile);
+        ImageUtil.saveFileAndCreateDirectory(PRODUCT_IMAGE_DIR, fileName, multipartFile);
 
         Store store = storeService.getStoreById(productRequestObject.getStoreId());
         if (store == null)

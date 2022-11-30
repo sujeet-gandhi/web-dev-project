@@ -3,7 +3,7 @@ package com.neu.onestopgo.controllers;
 import com.neu.onestopgo.dao.CategoryRequestObject;
 import com.neu.onestopgo.models.Category;
 import com.neu.onestopgo.services.CategoryService;
-import com.neu.onestopgo.utils.ImageUploadUtil;
+import com.neu.onestopgo.utils.ImageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +38,7 @@ public class CategoryController {
                                                    @RequestPart("category") CategoryRequestObject categoryRequestObject) throws IOException {
         String fileName = UUID.randomUUID() + "." + Objects.requireNonNull(multipartFile.getOriginalFilename()).split("\\.")[1];
         categoryRequestObject.setImageUrl(CATEGORY_IMAGE_DIR + fileName);
-        ImageUploadUtil.saveFileAndCreateDirectory(CATEGORY_IMAGE_DIR, fileName, multipartFile);
+        ImageUtil.saveFileAndCreateDirectory(CATEGORY_IMAGE_DIR, fileName, multipartFile);
         return ResponseEntity.ok(categoryService.createCategory(categoryRequestObject.getModelObject()));
     }
 }

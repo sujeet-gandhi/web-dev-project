@@ -4,7 +4,7 @@ import com.neu.onestopgo.dao.GetAllStoresResponseObject;
 import com.neu.onestopgo.dao.StoreRequestObject;
 import com.neu.onestopgo.models.Store;
 import com.neu.onestopgo.services.StoreService;
-import com.neu.onestopgo.utils.ImageUploadUtil;
+import com.neu.onestopgo.utils.ImageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -44,7 +44,7 @@ public class StoreController {
                                              @RequestPart("image") MultipartFile multipartFile) throws IOException {
         String fileName = UUID.randomUUID() + "." + Objects.requireNonNull(multipartFile.getOriginalFilename()).split("\\.")[1];
         storeRequestObject.setImageUrl(STORE_IMAGE_DIR + fileName);
-        ImageUploadUtil.saveFileAndCreateDirectory(STORE_IMAGE_DIR, fileName, multipartFile);
+        ImageUtil.saveFileAndCreateDirectory(STORE_IMAGE_DIR, fileName, multipartFile);
         return ResponseEntity.ok(storeService.createStore(storeRequestObject.getModelObject()));
     }
 }
