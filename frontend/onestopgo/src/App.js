@@ -17,6 +17,7 @@ import cartReducer from "./cart/cart-reducer";
 import {CartComponent} from "./cart";
 import ordersReducer from "./orders/orders-reducer";
 import {OrdersComponents} from "./orders";
+import ProfilePage from "./profile";
 
 function App() {
     const store = configureStore({
@@ -35,6 +36,7 @@ function App() {
                         <Route path="/cart" element={<CartComponent/>}/>
                         <Route path="/orders" element={<OrdersComponents/>}/>
                         <Route path="/storeAdmin" element={<StoreAdmin/>}/>
+                        <Route path="/profile" element={<ProfilePage/>}/>
                     </Routes>
                     {/*<Footer/>*/}
                 </div>
