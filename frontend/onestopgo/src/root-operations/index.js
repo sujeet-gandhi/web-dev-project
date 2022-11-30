@@ -32,14 +32,19 @@ const RootOperations = () => {
 
     const handleDataEntryStoreAdmin = ({target}) => {
         let key = target.name;
+        let val = target.value;
         if (key === "adminContact") {
             key = "contact";
         } else if (key === "adminAddress") {
             key = "address";
         }
+        if (key === "imageUrl") {
+            val = target.files[0]
+            key = "image";
+        }
         setCreateStoreAdminState({
             ...createStoreAdminState,
-            [key]: target.value
+            [key]: val
         })
     }
 
@@ -173,6 +178,12 @@ const RootOperations = () => {
                                     <label htmlFor="storeId">Store</label>
                                 </div>
                             }
+                            <div>
+                                <input type="file" className="form-control text-bg-light mt-2" id="storeAdminImage"
+                                       name="imageUrl"
+                                       onChange={handleDataEntryStoreAdmin}/>
+                                <label htmlFor="storeAdminImage">Store Admin Image</label>
+                            </div>
                             <div className="text-center">
                                 <button className="rounded-pill w-50" onClick={handleCreateStoreAdminSubmit}>Create Store Admin</button>
                             </div>

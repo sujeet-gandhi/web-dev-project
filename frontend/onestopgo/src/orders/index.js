@@ -4,6 +4,7 @@ import {useNavigate} from "react-router";
 import {getOrderListThunk} from "./orders-thunk";
 import Loader from "../components/loader";
 import {OrderItem} from "./order-item";
+import NavBar from "../nav-bar";
 
 export const OrdersComponents = () => {
     const {ordersData, loading} = useSelector(state => state.order)
@@ -14,30 +15,19 @@ export const OrdersComponents = () => {
         dispatch(getOrderListThunk())
     }, []);
 
-    const nav = useNavigate()
-
-    const handleOnOrderClicked = () => {
-        nav('/orderDetails')
-    }
-
-    const handleOnHomeClicked = () => {
-        nav('/')
+    const mockUserData = () => {
+        return {
+            imageUrl: 'images/user/190015bd-511a-41f5-ac17-f401aef8df46.jpg'
+        }
     }
 
     if (!ordersData) return null;
     return (
         <>
+            <NavBar links={[{link : '', name : 'Home'}]} userData={mockUserData()}/>
             {loading && <Loader/>}
             {!loading &&
                 <>
-                    <nav>
-                        <div className="nav-wrapper teal">
-                            <a href="#" className="brand-logo center"><img width={75} height={75} src={'../../images/shop.jpg'}/></a>
-                            <ul id="nav-mobile" className="left hide-on-med-and-down">
-                                <li onClick={handleOnHomeClicked}><a href="#">Home</a></li>
-                            </ul>
-                        </div>
-                    </nav>
                     <h1>Your OneStopGo Orders</h1>
                     <ul>
                         {

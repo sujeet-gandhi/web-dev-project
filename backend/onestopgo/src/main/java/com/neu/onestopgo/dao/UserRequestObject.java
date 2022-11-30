@@ -8,6 +8,7 @@ public class UserRequestObject {
     private String address;
     private String contact;
     private int storeId;
+    private String imageUrl;
 
     public String getEmail() {
         return email;
@@ -48,12 +49,21 @@ public class UserRequestObject {
         this.storeId = storeId;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
     public User getModelObject() {
         return new User()
                 .setEmail(this.email)
                 .setPassword(this.password)
                 .setActive(true)
                 .setAddress(this.address)
-                .setContact(this.contact);
+                .setContact(this.contact)
+                .setImageUrl(this.imageUrl);
     }
 }

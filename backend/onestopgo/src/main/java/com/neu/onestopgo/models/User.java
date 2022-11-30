@@ -21,6 +21,8 @@ public class User {
 
     private String type;
 
+    private String imageUrl;
+
     // for store admins
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id")
@@ -108,6 +110,15 @@ public class User {
 
     public User setStore(Store store) {
         this.store = store;
+        return this;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public User setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
         return this;
     }
 }
