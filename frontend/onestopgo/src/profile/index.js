@@ -72,7 +72,7 @@ const ProfilePage = () => {
                         </div>
                         <div className="form-floating wd-top-margin-form">
                             <input type="password" className="form-control text-bg-light" id="password" name="password"
-                                   value={localUserData.password} disabled={disabled}/>
+                                   value={localUserData.password} disabled={disabled} onChange={handleDataEntry}/>
                             <label htmlFor="password">Password</label>
                         </div>
                         <div className="form-floating wd-top-margin-form">
