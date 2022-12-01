@@ -4,6 +4,7 @@ import com.neu.onestopgo.dao.ProductRequestObject;
 import com.neu.onestopgo.models.Product;
 import com.neu.onestopgo.models.Store;
 import com.neu.onestopgo.models.StoreItemQuantity;
+import com.neu.onestopgo.response.StoreItemQuantityResponseObject;
 import com.neu.onestopgo.services.CategoryService;
 import com.neu.onestopgo.services.ProductService;
 import com.neu.onestopgo.services.StoreItemService;
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
@@ -43,10 +45,9 @@ public class ProductController {
     }
 
     @GetMapping("/store/{storeId}")
-    public ResponseEntity<List<StoreItemQuantity>> getAllProductsInAStore(@PathVariable("storeId") int storeId) {
-        return ResponseEntity.ok(storeItemService.getProductsInAStore(storeId));
+    public ResponseEntity<List<StoreItemQuantityResponseObject>> getAllProductsInAStore(@PathVariable("storeId") int storeId) {
+        return ResponseEntity.ok(storeItemService.getProductsInAStore(storeId).stream().map((StoreItemQuantity::getResponseObject)).collect(Collectors.toList()));
     }
-
 
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity createProductWithQuantity(@RequestPart("image") MultipartFile multipartFile,
