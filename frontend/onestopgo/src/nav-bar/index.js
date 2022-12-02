@@ -40,16 +40,20 @@ const NavBar = ({links, userData}) => {
                 </ul>
                 <ul className="right hide-on-med-and-down">
                     {
-                        links.map((each) => <li onClick={() => nav('/' + each.link)}><a>{each.name}</a></li>)
+                        links.map((each) => <li onClick={() => nav('/' + each.link)}>
+                                            <a data-toggle="tooltip" data-placement="top" title={each.name}>
+                                                <i className="tiny material-icons">{each.icon}</i>
+                                                </a>
+                                            </li>)
                     }
                     {userData && userData.imageUrl &&
-                        <li onClick={() => nav('/profile')} className="me-2 waves-effect waves-light"><img width={50}
+                        <li onClick={() => nav('/profile')} className="me-2 waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="profile"><img width={50}
                                                                                                            height={50}
                                                                                                            src={ONESTOPGO_API + "/" + userData.imageUrl}
                                                                                                            className="circle"/>
                         </li>}
                     {userData && !userData.imageUrl &&
-                        <li onClick={() => nav('/profile')} className="me-2 waves-effect waves-light"><img width={50}
+                        <li onClick={() => nav('/profile')} className="me-2 waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="profile"><img width={50}
                                                                                                            height={50}
                                                                                                            src={ONESTOPGO_API + "/images/user/empty_profile.jpg"}
                                                                                                            className="circle"/>
