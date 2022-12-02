@@ -30,9 +30,16 @@ public class StoreItemService {
         return storeItemRepository.findByProductId(productId);
     }
 
-    public StoreItemQuantity updateStoreIdAndProductIdQuantity(int storeId, String productId, float quantity) {
+    public StoreItemQuantity updateStoreIdAndProductIdQuantity(int storeId, String productId, float quantity, boolean increment) {
         StoreItemQuantity storeItemQuantity = storeItemRepository.findByStoreIdAndProductId(storeId, UUID.fromString(productId));
-        storeItemQuantity.setQuantity(quantity);
+        float newQuantity = quantity;
+        if (increment)
+            newQuantity += storeItemQuantity.getQuantity();
+        storeItemQuantity.setQuantity(newQuantity);
+        return storeItemRepository.save(storeItemQuantity);
+    }
+
+    public StoreItemQuantity updateStoreItemQuantity(StoreItemQuantity storeItemQuantity) {
         return storeItemRepository.save(storeItemQuantity);
     }
 

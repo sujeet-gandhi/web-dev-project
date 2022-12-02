@@ -85,6 +85,6 @@ public class ProductController {
     @PutMapping
     public ResponseEntity updateProductWithQuantity(ProductRequestObject productRequestObject) {
         return ResponseEntity.ok(storeItemService.updateStoreIdAndProductIdQuantity(productRequestObject.getStoreId(),
-                productRequestObject.getProductId(), productRequestObject.getStoreQuantity()));
+                productRequestObject.getProductId(), productRequestObject.getStoreQuantity(), false));
     }
 }
