@@ -3,6 +3,20 @@ import React from "react";
 
 export const OrderItem = ({order}) => {
 
+    const uniqueStoreNames = new Set();
+    order.items.forEach((each) => uniqueStoreNames.add(each.storeName))
+
+    const storeAndStoreOrderItems = {}
+    uniqueStoreNames.forEach((eachStore) => {
+        order.items.forEach((eachCartItem) => {
+            if (eachStore in storeAndStoreOrderItems) {
+                storeAndStoreOrderItems[eachStore].push(eachCartItem)
+            } else {
+                storeAndStoreOrderItems[eachStore] = [eachCartItem]
+            }
+        })
+    })
+
     return <div className="row">
         <div className="col s12 m6">
             <div className="card teal">
@@ -14,7 +28,11 @@ export const OrderItem = ({order}) => {
                 <div className={'card-action'}>
                     <ul className={'collection'}>
                         {
-                            order.items.map ((cartItem) => <CartItem cartItem={cartItem}/>)
+                            Object.entries(storeAndStoreOrderItems)
+                                .map(([key, val]) => <>
+                                    <li className="collection-item fw-bolder">{key}</li>
+                                    {val.map((each) => <CartItem cartItem={each}/>)}
+                                </>)
                         }
                     </ul>
                 </div>
