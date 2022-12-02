@@ -20,6 +20,7 @@ import {OrdersComponents} from "./orders";
 import ProfilePage from "./profile";
 import StoreDetailItem from "./store/detail-page/store-detail-item";
 import ProductDetailItem from "./products/detail-page/product-detail-item";
+import CategorySummary from "./categories";
 
 function App() {
     const store = configureStore({
@@ -41,6 +42,7 @@ function App() {
                         <Route path="/orders" element={<OrdersComponents/>}/>
                         <Route path="/storeAdmin" element={<StoreAdmin/>}/>
                         <Route path="/profile" element={<ProfilePage/>}/>
+                        <Route path="/category/:categoryId" element={<CategorySummary/>}/>
                     </Routes>
                     {/*<Footer/>*/}
                 </div>
