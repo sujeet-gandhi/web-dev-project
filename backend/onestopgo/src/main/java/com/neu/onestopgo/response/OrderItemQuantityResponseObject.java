@@ -13,7 +13,7 @@ public class OrderItemQuantityResponseObject {
 
     private float quantity;
 
-    private Store store;
+    private String storeName;
 
     public UUID getId() {
         return id;
@@ -39,11 +39,11 @@ public class OrderItemQuantityResponseObject {
         this.quantity = quantity;
     }
 
-    public Store getStore() {
-        return store;
+    public String getStoreName() {
+        return storeName;
     }
 
-    public void setStore(Store store) {
-        this.store = store;
+    public void setStoreName(String storeName) {
+        this.storeName = storeName;
     }
 }

@@ -83,7 +83,7 @@ public class OrderItemQuantity {
         orderItemQuantityResponseObject.setId(this.id);
         orderItemQuantityResponseObject.setProduct(this.getProduct());
         orderItemQuantityResponseObject.setQuantity(this.getQuantity());
-        orderItemQuantityResponseObject.setStore(this.getStore());
+        orderItemQuantityResponseObject.setStoreName(this.getStore().getName());
         return orderItemQuantityResponseObject;
     }
 
