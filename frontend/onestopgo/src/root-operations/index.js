@@ -133,7 +133,7 @@ const RootOperations = () => {
                                 <label htmlFor="imageUrl">Store Image</label>
                             </div>
                             <div className="text-center">
-                                <button className="rounded-pill w-50" onClick={handleCreateStoreSubmit}>Create Store
+                                <button className="btn waves-effect waves-light" type="submit" onClick={handleCreateStoreSubmit}>Create Store
                                 </button>
                             </div>
                         </div>
@@ -187,7 +187,7 @@ const RootOperations = () => {
                                 <label htmlFor="storeAdminImage">Store Admin Image</label>
                             </div>
                             <div className="text-center">
-                                <button className="rounded-pill w-50" onClick={handleCreateStoreAdminSubmit}>Create Store Admin</button>
+                                <button className="btn waves-effect waves-light" onClick={handleCreateStoreAdminSubmit}>Create Store Admin</button>
                             </div>
                         </div>
                     </div>
@@ -214,7 +214,7 @@ const RootOperations = () => {
                                 <label htmlFor="categoryImageUrl">Category Image URL</label>
                             </div>
                             <div className="text-center">
-                                <button className="rounded-pill w-50" onClick={handleCreateCategorySubmit}>Create Category</button>
+                                <button className="btn waves-effect waves-light" onClick={handleCreateCategorySubmit}>Create Category</button>
                             </div>
                         </div>
                     </div>
