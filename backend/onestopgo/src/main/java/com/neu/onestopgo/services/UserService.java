@@ -43,4 +43,19 @@ public class UserService {
         newUser.setStore(store);
         return userRepository.save(newUser);
     }
+
+    public User updateUserProfile(UserRequestObject userRequestObject, int userId) {
+        User currentUser = userRepository.findById(userId).orElseThrow();
+        currentUser.setAddress(userRequestObject.getAddress())
+                .setPassword(userRequestObject.getPassword())
+                .setContact(userRequestObject.getContact())
+                .setImageUrl(userRequestObject.getImageUrl());
+
+        return userRepository.save(currentUser);
+    }
+
+    public String getExistingImageUrlOfUser(int userId) {
+        User user = userRepository.findById(userId).orElseThrow();
+        return user.getImageUrl();
+    }
 }
