@@ -47,16 +47,16 @@ const NavBar = ({links, userData}) => {
                                             </li>)
                     }
                     {userData && userData.imageUrl &&
-                        <li onClick={() => nav('/profile')} className="me-2 waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="profile"><img width={50}
+                        <li onClick={() => nav('/profile')} className="me-1 waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="profile"><img width={50}
                                                                                                            height={50}
                                                                                                            src={ONESTOPGO_API + "/" + userData.imageUrl}
-                                                                                                           className="circle"/>
+                                                                                                           className="rounded-pill mb-2"/>
                         </li>}
                     {userData && !userData.imageUrl &&
-                        <li onClick={() => nav('/profile')} className="me-2 waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="profile"><img width={50}
+                        <li onClick={() => nav('/profile')} className="me-1 waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="profile"><img width={50}
                                                                                                            height={50}
                                                                                                            src={ONESTOPGO_API + "/images/user/empty_profile.jpg"}
-                                                                                                           className="circle"/>
+                                                                                                           className="rounded-pill mb-2"/>
                         </li>}
                     {!userData && <li onClick={() => nav('/login')}><a
                         className="waves-effect waves-light btn light-blue">Login</a></li>}
