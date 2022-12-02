@@ -18,6 +18,8 @@ import {CartComponent} from "./cart";
 import ordersReducer from "./orders/orders-reducer";
 import {OrdersComponents} from "./orders";
 import ProfilePage from "./profile";
+import StoreDetailItem from "./store/detail-page/store-detail-item";
+import ProductDetailItem from "./products/detail-page/product-detail-item";
 
 function App() {
     const store = configureStore({
@@ -31,6 +33,8 @@ function App() {
                     <Routes>
                         <Route index element={<HomeComponent/>}/>
                         <Route path="/search" element={<SearchComponent/>}/>
+                        <Route path="/store" element={<StoreDetailItem/>}/>
+                        <Route path="/product" element={<ProductDetailItem/>}/>
                         <Route path="/login" element={<LoginForm/>}/>
                         <Route path="/root" element={<RootOperations/>}/>
                         <Route path="/cart" element={<CartComponent/>}/>

@@ -31,7 +31,7 @@ const NavBar = ({links, userData}) => {
                             <form onSubmit={handleOnSearchSubmit} className="ms-2">
                                 <div className="input-field">
                                     <i className="grey-text material-icons prefix">search</i>
-                                    <input placeholder="search"
+                                    <input placeholder="Search Store, Categories and Products"
                                            className="black-text" type="text" onChange={handleChange} required/>
                                 </div>
                             </form>
