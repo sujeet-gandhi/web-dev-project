@@ -9,7 +9,7 @@ const CartList = ({cartItems}) => {
         <div>
             <ul className={'collection'}>
                 {
-                    cartItems.map ((cartItem) => <CartItem cartItem={cartItem}/>)
+                    cartItems.map ((cartItem) => <CartItem cartItem={cartItem} orderState={'IN_CART'}/>)
                 }
             </ul>
         </div>
