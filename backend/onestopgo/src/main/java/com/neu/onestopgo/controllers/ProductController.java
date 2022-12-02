@@ -49,6 +49,15 @@ public class ProductController {
         return ResponseEntity.ok(storeItemService.getProductsInAStore(storeId).stream().map((StoreItemQuantity::getResponseObject)).collect(Collectors.toList()));
     }
 
+    @GetMapping("/category/{categoryId}")
+    public ResponseEntity<List<StoreItemQuantityResponseObject>> getAllProductsInACategory(@PathVariable("categoryId") int categoryId) {
+        return ResponseEntity.ok(storeItemService
+                .getProductInStoreBelongingToACategory(categoryId)
+                .stream()
+                .map((StoreItemQuantity::getResponseObject))
+                .collect(Collectors.toList()));
+    }
+
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity createProductWithQuantity(@RequestPart("image") MultipartFile multipartFile,
                                                     @RequestPart("product") ProductRequestObject productRequestObject) throws Exception {

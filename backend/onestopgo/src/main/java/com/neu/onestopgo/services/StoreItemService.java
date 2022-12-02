@@ -1,5 +1,6 @@
 package com.neu.onestopgo.services;
 
+import com.neu.onestopgo.models.Category;
 import com.neu.onestopgo.models.StoreItemQuantity;
 import com.neu.onestopgo.repositories.StoreItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +14,12 @@ public class StoreItemService {
 
     private final StoreItemRepository storeItemRepository;
 
+    private final CategoryService categoryService;
+
     @Autowired
-    public StoreItemService(StoreItemRepository storeItemRepository) {
+    public StoreItemService(StoreItemRepository storeItemRepository, CategoryService categoryService) {
         this.storeItemRepository = storeItemRepository;
+        this.categoryService = categoryService;
     }
 
     public StoreItemQuantity createStoreItemQuantity(StoreItemQuantity storeItemQuantity) {
@@ -34,6 +38,11 @@ public class StoreItemService {
 
     public List<StoreItemQuantity> getProductsInAStore(int storeId) {
         return storeItemRepository.findAllByStoreId(storeId);
+    }
+
+    public List<StoreItemQuantity> getProductInStoreBelongingToACategory(int categoryId) {
+        Category category = categoryService.getCategoryById(categoryId);
+        return storeItemRepository.findAllByProduct_Type(category.getName());
     }
 
     public StoreItemQuantity getProductInAStore(int storeId, String productId) {

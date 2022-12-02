@@ -14,11 +14,14 @@ public class StoreItemQuantityResponseObject {
 
     private float quantity;
 
-    public StoreItemQuantityResponseObject(UUID id, int storeId, Product product, float quantity) {
+    private String storeName;
+
+    public StoreItemQuantityResponseObject(UUID id, int storeId, Product product, float quantity, String storeName) {
         this.id = id;
         this.storeId = storeId;
         this.product = product;
         this.quantity = quantity;
+        this.storeName = storeName;
     }
 
     public UUID getId() {
@@ -51,5 +54,13 @@ public class StoreItemQuantityResponseObject {
 
     public void setStoreId(int storeId) {
         this.storeId = storeId;
+    }
+
+    public String getStoreName() {
+        return storeName;
+    }
+
+    public void setStoreName(String storeName) {
+        this.storeName = storeName;
     }
 }
