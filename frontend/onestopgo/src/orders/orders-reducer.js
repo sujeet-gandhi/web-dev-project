@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {getOrderListThunk} from "./orders-thunk";
+import {cancelOrderThunk, getOrderListThunk} from "./orders-thunk";
 
 const initialState = {
     ordersData: {},
@@ -18,6 +18,15 @@ const ordersSlice = createSlice({
             state.ordersData = payload
             state.loading = false
         },
+        [cancelOrderThunk.fulfilled]:
+            (state, {payload}) => {
+                state.loading = false
+                const orderIndex = state.ordersData.findIndex(o => o.id.toString() === payload.id.toString())
+                state.ordersData[orderIndex] = {
+                    ...state.ordersData[orderIndex],
+                    ...payload
+                }
+            }
     }
     });
 

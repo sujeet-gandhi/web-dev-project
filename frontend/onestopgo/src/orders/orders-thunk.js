@@ -5,3 +5,8 @@ export const getOrderListThunk = createAsyncThunk (
     'onestopgo/getOrderList',
     async () => await service.orderList()
 )
+
+export const cancelOrderThunk = createAsyncThunk (
+    'onestopgo/cancelOrder',
+    async (order) => await service.cancelOrder(order.id)
+)
