@@ -10,7 +10,7 @@ axios.defaults.withCredentials=true
 
 
 export const postLoginData = async () => {
-    return (await axios.get(COOKIE_API).then(response =>  {console.log(response.data);window.user = response.data.cookie;}))
+    return (await axios.get(COOKIE_API).then(response =>  {console.log(response.data)}))
 }
 
 
