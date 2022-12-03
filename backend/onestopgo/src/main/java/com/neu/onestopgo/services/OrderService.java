@@ -113,23 +113,28 @@ public class OrderService {
     }
 
     public List<OrderResponseObject> getOrdersList(User user) {
-        List<Order1> orders = new ArrayList<>();
-
-        orders.addAll(orderRepository.findAllByUserAndState(user, OrderState.DELIVERED));
-        orders.addAll(orderRepository.findAllByUserAndState(user, OrderState.PLACED));
-
-        return orders.stream().map(Order1::getResponseObject).collect(Collectors.toList());
+        List<Order1> orders = new ArrayList<>(orderRepository.findAllByUser(user));
+        return orders
+                .stream()
+                .map(Order1::getResponseObject)
+                .filter(orderResponseObject -> orderResponseObject.getOrderState() != OrderState.IN_CART)
+                //.sorted((o1, o2) -> o2.getOrderDate().compareTo(o1.getOrderDate()))
+                .collect(Collectors.toList());
     }
 
     public OrderResponseObject updateOrderStatus(UUID orderId, OrderState state) {
         var order = getOrderById(orderId);
         if (order != null) {
-            order.setState(state);
             if (state == OrderState.PLACED) {
                 order.setOrderDate(new Date());
             } else if (state == OrderState.DELIVERED) {
                 order.setOrderDeliveryDate(new Date());
+            } else if (state == OrderState.CANCELLED) {
+                if (order.getState() != OrderState.PLACED) {
+                    throw new IllegalArgumentException("Only Orders that are not yet delivered can be cancelled");
+                }
             }
+            order.setState(state);
             if (verifyPayment(orderId)) {
                 return orderRepository.save(order).getResponseObject();
             } else {
