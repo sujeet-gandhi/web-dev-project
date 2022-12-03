@@ -30,6 +30,11 @@ public class OrderItemQuantity {
     @JoinColumn(name = "product_id")
     private Product product;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "store_id")
+    @JsonIgnore
+    private Store store;
+
     private float quantity;
 
     public UUID getId() {
@@ -64,11 +69,21 @@ public class OrderItemQuantity {
         this.quantity = quantity;
     }
 
+    public Store getStore() {
+        return store;
+    }
+
+    public OrderItemQuantity setStore(Store store) {
+        this.store = store;
+        return this;
+    }
+
     public OrderItemQuantityResponseObject getResponseObject() {
         OrderItemQuantityResponseObject orderItemQuantityResponseObject = new OrderItemQuantityResponseObject();
         orderItemQuantityResponseObject.setId(this.id);
         orderItemQuantityResponseObject.setProduct(this.getProduct());
         orderItemQuantityResponseObject.setQuantity(this.getQuantity());
+        orderItemQuantityResponseObject.setStoreName(this.getStore().getName());
         return orderItemQuantityResponseObject;
     }
 

@@ -5,11 +5,29 @@ const CartList = ({cartItems}) => {
     if (!cartItems) return null;
     console.log(cartItems);
 
-    return(
+    const uniqueStoreNames = new Set();
+    cartItems.forEach((each) => uniqueStoreNames.add(each.storeName))
+
+    const storeAndStoreCartItems = {}
+    uniqueStoreNames.forEach((eachStore) => {
+        cartItems.forEach((eachCartItem) => {
+            if (eachStore in storeAndStoreCartItems) {
+                storeAndStoreCartItems[eachStore].push(eachCartItem)
+            } else {
+                storeAndStoreCartItems[eachStore] = [eachCartItem]
+            }
+        })
+    })
+
+    return (
         <div>
             <ul className={'collection'}>
                 {
-                    cartItems.map ((cartItem) => <CartItem cartItem={cartItem} orderState={'IN_CART'}/>)
+                    Object.entries(storeAndStoreCartItems)
+                        .map(([key, val]) => <>
+                            <li className="collection-item fw-bolder">{key}</li>
+                            {val.map((each) => <CartItem cartItem={each} orderState={'IN_CART'}/>)}
+                            </>)
                 }
             </ul>
         </div>

@@ -67,7 +67,7 @@ public class StoreItemQuantity {
     }
 
     public StoreItemQuantityResponseObject getResponseObject() {
-        return new StoreItemQuantityResponseObject(this.getId(), this.getStore().getId(), this.getProduct(), this.getQuantity());
+        return new StoreItemQuantityResponseObject(this.getId(), this.getStore().getId(), this.getProduct(), this.getQuantity(), this.getStore().getName());
     }
 
 }

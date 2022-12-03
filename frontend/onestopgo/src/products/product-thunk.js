@@ -6,6 +6,11 @@ export const getProductsOfStoreThunk = createAsyncThunk (
     async (storeId) => await service.getAllProductsOfStore(storeId)
 )
 
+export const getProductsOfCategoryThunk = createAsyncThunk (
+    'onestopgi/getAllProductsOfACategory',
+    async (categoryId) => await service.getProductsRelatedToCategory(categoryId)
+)
+
 export const createProductThunk = createAsyncThunk (
     'onestopgo/createProduct',
     async (product) => await service.createProduct(product)
