@@ -19,11 +19,12 @@ import ordersReducer from "./orders/orders-reducer";
 import {OrdersComponents} from "./orders";
 import loginReducer from "./login/login-reducer";
 import {Logout} from "./logout";
+import logoutReducer from "./logout/logout-reducer";
 
 function App() {
     const store = configureStore({
         reducer: {home: homeReducer, store: storeReducer, user: userReducer, search: searchReducer,
-            product: productReducer, cart: cartReducer, order: ordersReducer, login : loginReducer}
+            product: productReducer, cart: cartReducer, order: ordersReducer, login : loginReducer, logout : logoutReducer}
     });
     return (
         <Provider store={store}>
