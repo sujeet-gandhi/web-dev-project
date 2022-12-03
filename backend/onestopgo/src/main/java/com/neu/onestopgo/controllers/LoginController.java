@@ -3,10 +3,8 @@ package com.neu.onestopgo.controllers;
 import com.neu.onestopgo.constants.StringConstants;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
@@ -21,6 +19,12 @@ public class LoginController {
         Map<String, Object> response = new HashMap<>();
        response.put(StringConstants.LOGGED_IN_USER,session.getAttribute(StringConstants.LOGGED_IN_USER));
         return ResponseEntity.ok(response);
+    }
+
+    @RequestMapping(value = "/username", method = RequestMethod.GET)
+    @ResponseBody
+    public String currentUserName(Authentication authentication) {
+        return authentication.getName();
     }
 
     @GetMapping(path = "/failure")

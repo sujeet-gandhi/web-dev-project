@@ -5,12 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,7 +20,6 @@ import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
-
 import static org.springframework.security.web.header.writers.ClearSiteDataHeaderWriter.Directive.*;
 
 @Configuration
@@ -50,12 +49,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic().disable()
-                .cors(AbstractHttpConfigurer::disable)
                 .authorizeRequests()
                 .antMatchers("/api/v1/home").permitAll()
                 .antMatchers("/api/v1/search").permitAll()
+                .antMatchers("/api/v1/login/cookie").permitAll()
                 .antMatchers("/api/v1/signup").permitAll()
                 .antMatchers("/login/*").permitAll()
+                .antMatchers("/login").permitAll()
+                .antMatchers(HttpMethod.OPTIONS,"/**").permitAll()
                 .anyRequest().authenticated()
                 .and().csrf().disable()
                 .formLogin().permitAll()
@@ -67,15 +68,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         session.setAttribute(StringConstants.LOGGED_IN_USER, username);
                     }
                     System.out.println("The user " + username + " has logged in.");
-                    request.setAttribute("currentUser",username);
                    response.setStatus(HttpStatus.NO_CONTENT.value());
-                    response.sendRedirect("/api/v1/login/success");
+                   response.addHeader("username",username);
                 })
               .and()
                 .logout(logout -> logout
                         .logoutUrl("/csd/csdlogout")
                         .addLogoutHandler(new HeaderWriterLogoutHandler(new ClearSiteDataHeaderWriter(SOURCE)))
-                .clearAuthentication(true).deleteCookies("JSESSIONID").invalidateHttpSession(true));
+                .clearAuthentication(true).deleteCookies("JSESSIONID").invalidateHttpSession(true).logoutSuccessHandler((request, response, authentication) -> {
+                    response.setHeader("username",null);
+                        }));
     }
 
 

@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {loginThunk, registerThunk} from "./login-thunk";
+import {loginThunk, registerThunk, cookieThunk, category} from "./login-thunk";
 
 
 const initialState = {
@@ -26,7 +26,7 @@ const loginSlice = createSlice({
         [registerThunk.fulfilled]: (state, {payload}) => {
             state.loginData = payload
             state.loading = false
-        },
+        }
     }
 });
 

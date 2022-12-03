@@ -18,7 +18,7 @@ import {CartComponent} from "./cart";
 import ordersReducer from "./orders/orders-reducer";
 import {OrdersComponents} from "./orders";
 import loginReducer from "./login/login-reducer";
-
+import {Logout} from "./logout";
 
 function App() {
     const store = configureStore({
@@ -36,6 +36,7 @@ function App() {
                         <Route path="/root" element={<RootOperations/>}/>
                         <Route path="/cart" element={<CartComponent/>}/>
                         <Route path="/orders" element={<OrdersComponents/>}/>
+                        <Route path="/logout" element={<Logout/>}/>
                         <Route path="/storeAdmin" element={<StoreAdmin/>}/>
                     </Routes>
                     {/*<Footer/>*/}

@@ -1,7 +1,8 @@
 package com.neu.onestopgo.security.filter;
 
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.*;
 import javax.servlet.FilterConfig;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
+@Order(Ordered.HIGHEST_PRECEDENCE)
 public class CorsFilter implements Filter {
 
 
@@ -22,9 +24,16 @@ public class CorsFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
         response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-        response.setHeader("Access-Control-Allow-Headers", "*");
+        response.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+        response.setHeader("Access-Control-Expose-Headers","*");
+        response.setHeader("Access-Control-Allow-Credentials","true");
+        if(request.getMethod().equals("POST")) {
+            System.out.println("Here" + request.getSession());
+            System.out.println(request.getRequestURL());
+            System.out.println("Cookies" + response.getHeader("Set-Cookie"));
+        }
         filterChain.doFilter(request, response);
     }
 

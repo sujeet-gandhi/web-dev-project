@@ -26,7 +26,19 @@ public class FilterConfig {
 
         registrationBean.setFilter(new CorsFilter());
         registrationBean.addUrlPatterns("/*");
-        registrationBean.setOrder(1);
+        registrationBean.setOrder(0);
+
+        return registrationBean;
+    }
+
+    @Bean
+    public FilterRegistrationBean<CookieFilter> cookie(){
+        FilterRegistrationBean<CookieFilter> registrationBean
+                = new FilterRegistrationBean<>();
+
+        registrationBean.setFilter(new CookieFilter());
+        registrationBean.addUrlPatterns("/*");
+        registrationBean.setOrder(2);
 
         return registrationBean;
     }
