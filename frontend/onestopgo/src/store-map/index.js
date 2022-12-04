@@ -2,9 +2,8 @@ import {GoogleApiWrapper, Map, Marker} from 'google-maps-react';
 
 const StoreMap = ({google, storeArray}) => {
     return (
-        <div className="row">
-            <div className="col-2"></div>
-            <div className="col-8">
+        <div className="row w-75">
+            <div className="col-8 center">
                 <div className="row fw-bolder text-center">
                     Our Stores
                 </div>
@@ -31,7 +30,6 @@ const StoreMap = ({google, storeArray}) => {
                     </Map>
                 </div>
             </div>
-            <div className="col-2"></div>
         </div>
     );
 }

@@ -4,7 +4,6 @@ import {useNavigate} from "react-router";
 import {getCartThunk, placeOrderThunk} from "./cart-thunk";
 import CartList from "./cart-list";
 import Loader from "../components/loader";
-import NavBar from "../nav-bar";
 
 export const CartComponent = () => {
     const {cartData, loading} = useSelector(state => state.cart)
@@ -35,19 +34,16 @@ export const CartComponent = () => {
     if (!cartData) return null;
     return (
         <>
-            <NavBar links={[{link : '', name : 'Home'}, {link : 'orders', name : 'Orders'}]} userData={mockUserData()}/>
             {loading && <Loader/>}
             {!loading &&
-                <>
-                    <h1>Your OneStopGo Cart</h1>
-                    <br></br>
+                <div className={'list-group container wd-cart-item'}>
                     <CartList cartItems={cartData.cart.items} />
                     <div>
-                        <button onClick={handleOnCheckoutClicked} className="btn waves-effect waves-light teal white-text wd-margin-top-bottom center" type="submit" name="action">
+                        <button onClick={handleOnCheckoutClicked} className="btn waves-effect waves-light teal white-text wd-margin-top-bottom right" type="submit" name="action">
                             Checkout <i className="material-icons right">shopping_cart</i>
                         </button>
                     </div>
-                </>
+                </div>
             }
         </>
     );

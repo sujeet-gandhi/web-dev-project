@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import StoreList from "../store/store-list";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -7,17 +7,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {getHomeDataThunk} from "./home-thunk";
 import Loader from "../components/loader";
 import StoreMap from "../store-map";
-import NavBar from "../nav-bar";
 
 export const HomeComponent = () => {
     const {homeData, loading} = useSelector(state => state.home)
     const dispatch = useDispatch();
-
-    const mockUserData = () => {
-        return {
-            imageUrl: 'images/user/190015bd-511a-41f5-ac17-f401aef8df46.jpg'
-        }
-    }
 
     useEffect(() => {
         dispatch(getHomeDataThunk())
@@ -27,10 +20,12 @@ export const HomeComponent = () => {
 
     return (
         <>
-            <NavBar links={[{link : 'cart', name : 'Cart'}, {link : 'orders', name : 'Orders'}]} userData={mockUserData()}/>
             {loading && <Loader/>}
             {!loading &&
                 <>
+                    <div className="position-relative mb-2 border-3">
+                        <img src="/images/one.png" className="w-100 rounded-3"/>
+                    </div>
                     <StoreList storeArray={homeData.stores}/>
                     <CategoriesList categoriesArray={homeData.categories}/>
                     <StoreMap storeArray={homeData.stores}/>

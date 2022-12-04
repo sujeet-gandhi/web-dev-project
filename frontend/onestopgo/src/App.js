@@ -1,6 +1,5 @@
 import './App.css';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import {HomeComponent} from "./home";
 import '@fortawesome/fontawesome-free/css/all.css';
 import {LoginForm} from "./login";
 import {configureStore} from "@reduxjs/toolkit";
@@ -21,6 +20,7 @@ import ProfilePage from "./profile";
 import StoreDetailItem from "./store/detail-page/store-detail-item";
 import ProductDetailItem from "./products/detail-page/product-detail-item";
 import CategorySummary from "./categories";
+import OneStopGo from "./onestopgo";
 
 function App() {
     const store = configureStore({
@@ -30,9 +30,11 @@ function App() {
     return (
         <Provider store={store}>
             <BrowserRouter>
-                <div className="container">
+                <div className={'w-100'}>
                     <Routes>
-                        <Route index element={<HomeComponent/>}/>
+                        {/*<Route path="/*"*/}
+                        {/*       element={<OneStopGo/>}/>*/}
+                        <Route index element={<OneStopGo/>}/>
                         <Route path="/search" element={<SearchComponent/>}/>
                         <Route path="/store" element={<StoreDetailItem/>}/>
                         <Route path="/product" element={<ProductDetailItem/>}/>

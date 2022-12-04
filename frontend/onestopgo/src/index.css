@@ -1,21 +1,15 @@
-main {
-  flex: 1 0 auto;
-}
-
-body, html {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
+body {
+  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  monospace;
 }
 
 .wd-horizontal-list {
@@ -41,8 +35,10 @@ code {
 
 .wd-category-list > div {
   display: inline-block;
-  padding-right: 10px;
-  padding-left: 10px;
+}
+
+.wd-category-list > div > div {
+  margin: 16px;
 }
 
 .wd-category-text {
@@ -53,12 +49,6 @@ code {
 .wd-remove-text-decoration {
   text-decoration: none;
   text-underline: none;
-}
-
-nav {
-  margin-left: 0;
-  margin-right: 0;
-  margin-bottom: 24px;
 }
 
 .wd-small-padding {
@@ -85,3 +75,11 @@ nav {
   margin-bottom: 8px;
 }
 
+nav {
+  margin-bottom: 12px;
+}
+
+.wd-cart-item {
+  margin-right: 8px;
+  padding: 8px;
+}
