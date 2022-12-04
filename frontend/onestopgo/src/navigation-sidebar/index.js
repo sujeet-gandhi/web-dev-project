@@ -2,31 +2,36 @@ import React from "react";
 import {Link} from "react-router-dom";
 import {useLocation} from "react-router";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faBicycle, faBookmark, faBoxes, faCartShopping, faHome, faUser} from "@fortawesome/free-solid-svg-icons";
+import {faBicycle, faBoxes, faCartShopping, faHome, faSearch, faStore, faUser} from "@fortawesome/free-solid-svg-icons";
 import "./index.css"
 
 const NavigationSidebar = () => {
     const {pathname} = useLocation();
     const paths = pathname.split('/')
-    const active = paths[2];
+    const active = paths[1];
     return (
         <div className="list-group">
             <Link to="/" className= {'list-group-item wd-sidenav-side-item'}>
                 <FontAwesomeIcon className="wd-sidenav-icon" icon={faCartShopping}/> OneStopGo
             </Link>
-            <Link to="/" className={`list-group-item wd-sidenav-side-item ${active === undefined ? 'teal' : ''}`}>
+            <Link to="/" className={`list-group-item wd-sidenav-side-item ${active === '' ? 'teal' : ''}`}>
                 <FontAwesomeIcon className="wd-sidenav-icon" icon={faHome}/> Home
             </Link>
-            <Link to="/orders" className={`list-group-item wd-sidenav-side-item ${active === 'messages' ? 'teal' : ''}`}>
+
+            <Link to="/search" className={`list-group-item wd-sidenav-side-item ${active === 'search' ? 'teal' : ''}`}>
+                <FontAwesomeIcon className="wd-sidenav-icon" icon={faSearch}/> Search
+            </Link>
+
+            <Link to="/orders" className={`list-group-item wd-sidenav-side-item ${active === 'orders' ? 'teal' : ''}`}>
                 <FontAwesomeIcon icon={faBoxes} className="wd-sidenav-icon" /> Orders
             </Link>
-            <Link to="/cart" className={`list-group-item wd-sidenav-side-item ${active === 'bookmarks' ? 'teal' : ''}`}>
-                <FontAwesomeIcon icon={faBookmark} className="wd-sidenav-icon" /> Stores
+            <Link to="/stores" className={`list-group-item wd-sidenav-side-item ${active === 'stores' ? 'teal' : ''}`}>
+                <FontAwesomeIcon icon={faStore} className="wd-sidenav-icon" /> Stores
             </Link>
-            <Link to="/tuiter/lists" className={`list-group-item wd-sidenav-side-item ${active === 'lists' ? 'teal' : ''}`}>
+            <Link to="/products" className={`list-group-item wd-sidenav-side-item ${active === 'products' ? 'teal' : ''}`}>
                 <FontAwesomeIcon icon={faBicycle} className="wd-sidenav-icon" /> Products
             </Link>
-            <Link to="/tuiter/profile"
+            <Link to="/profile"
                   className={`list-group-item wd-sidenav-side-item ${active === 'profile' || active === 'edit-profile' ? 'teal' : ''}`}>
                 <FontAwesomeIcon icon={faUser} className="wd-sidenav-icon" /> Profile
             </Link>

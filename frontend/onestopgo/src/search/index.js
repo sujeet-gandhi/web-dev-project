@@ -35,20 +35,6 @@ export const SearchComponent = () => {
             {loading && <h1>Looking up "{searchText}" ...</h1>}
             {!loading &&
                 <>
-                    <nav>
-                        <div className="nav-wrapper teal">
-                            <form onSubmit={handleOnSearchSubmit}>
-                                <div className="input-field">
-                                    <input id="search" type="search" defaultValue={searchText} onChange={handleChange} required/>
-                                    <label className="label-icon" htmlFor="search">
-                                        <i className="material-icons">search</i>
-                                    </label>
-                                    <i className="material-icons">close</i>
-                                </div>
-                            </form>
-                        </div>
-                    </nav>
-
                     <h1>Products</h1>
                     <ProductList storeItemQuantityArray={searchData.products}/>
 

@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import NavBar from "../nav-bar";
 
 const ONESTOPGO_API = process.env.REACT_APP_ONESTOPGO_API_BASE;
 
@@ -39,9 +38,7 @@ const ProfilePage = () => {
 
     return (
         <>
-            <NavBar links={[{link: 'cart', name: 'Cart'}, {link: 'orders', name: 'Orders'}]}
-                              userData={mockUserData()}/>
-            <div className="row mt-2">
+            <div className="row mt-4">
                 <div className="col-4 float-end">
                     <img width={150}
                          height={150}

@@ -11,11 +11,11 @@ import {Route, Routes} from "react-router-dom";
 import {HomeComponent} from "../home";
 import {OrdersComponents} from "../orders";
 import ProfilePage from "../profile";
-import Profile from "../profile";
 import {Provider} from "react-redux";
 import NavigationSidebar from "../navigation-sidebar";
 import NavBar from "../nav-bar";
 import React from "react";
+import {SearchComponent} from "../search";
 
 const store = configureStore({
     reducer: {home: homeReducer, store: storeReducer, user: userReducer, search: searchReducer,
@@ -36,21 +36,22 @@ function OneStopGo() {
                 <div className="col-2 col-md-2 col-lg-1 col-xl-2">
                     <NavigationSidebar active="home"/>
                 </div>
-                <div className="col-12 col-md-12 col-lg-8 col-xl-8"
+                <div className="col-12 col-md-12 col-lg-7 col-xl-7"
                      style={{"position": "relative"}}>
                     <Routes>
                         <Route path="" element={<HomeComponent/>}/>
                         <Route path="orders" element={<OrdersComponents/>}/>
-                        <Route path="messages" element={<h1>Messages Coming Soon</h1>}/>
-                        <Route path="bookmarks" element={<h1>Bookmarks Coming Soon</h1>}/>
+                        <Route path="products" element={<h1>We will display all the products here</h1>}/>
+                        <Route path="stores" element={<h1>All Store list here</h1>}/>
                         <Route path="notifications" element={<h1>Notifications Coming Soon</h1>}/>
                         <Route path="lists" element={<h1>Lists Coming Soon</h1>}/>
                         <Route path="profile" element={<ProfilePage/>}/>
-                        <Route path="more" element={<h1>More Coming Soon</h1>}/>
-                        <Route path="edit-profile" element={<Profile/>}/>
+                        <Route path="cart" element={<CartComponent/>}/>
+                        <Route path="search" element={<SearchComponent/>}/>
+                        <Route path="edit-profile" element={<ProfilePage/>}/>
                     </Routes>
                 </div>
-                <div className="d-sm-none d-md-none d-lg-block col-lg-2 col-xl-2">
+                <div className="d-sm-none d-md-none d-lg-block col-lg-3 col-xl-3">
                     <CartComponent/>
                 </div>
             </div>
