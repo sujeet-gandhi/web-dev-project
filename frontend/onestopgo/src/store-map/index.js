@@ -6,7 +6,7 @@ const StoreMap = ({google, storeArray}) => {
             <div className="col-2"></div>
             <div className="col-8">
                 <div className="row fw-bolder text-center">
-                    Our Stores
+                    Our Locations
                 </div>
                 <div className="row w-75 h-75">
                     <Map

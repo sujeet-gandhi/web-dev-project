@@ -51,7 +51,7 @@ code {
 }
 
 .wd-remove-text-decoration {
-  text-decoration: none;
+  text-decoration: none !important;
   text-underline: none;
 }
 

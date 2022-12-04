@@ -27,7 +27,9 @@ export const HomeComponent = () => {
 
     return (
         <>
-            <NavBar links={[{link : 'cart', name : 'Cart'}, {link : 'orders', name : 'Orders'}]} userData={mockUserData()}/>
+            <NavBar links={[{link : 'cart', name : 'Cart', icon : 'shopping_cart'},
+                            {link : 'orders', name : 'Orders', icon : 'kitchen'}]}
+                            userData={mockUserData()}/>
             {loading && <Loader/>}
             {!loading &&
                 <>
