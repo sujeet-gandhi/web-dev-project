@@ -21,11 +21,14 @@ import ProfilePage from "./profile";
 import StoreDetailItem from "./store/detail-page/store-detail-item";
 import ProductDetailItem from "./products/detail-page/product-detail-item";
 import CategorySummary from "./categories";
+import loginReducer from "./login/login-reducer";
+import {Logout} from "./logout";
+import logoutReducer from "./logout/logout-reducer";
 
 function App() {
     const store = configureStore({
         reducer: {home: homeReducer, store: storeReducer, user: userReducer, search: searchReducer,
-            product: productReducer, cart: cartReducer, order: ordersReducer}
+            product: productReducer, cart: cartReducer, order: ordersReducer, login : loginReducer, logout : logoutReducer}
     });
     return (
         <Provider store={store}>
@@ -40,6 +43,7 @@ function App() {
                         <Route path="/root" element={<RootOperations/>}/>
                         <Route path="/cart" element={<CartComponent/>}/>
                         <Route path="/orders" element={<OrdersComponents/>}/>
+                        <Route path="/logout" element={<Logout/>}/>
                         <Route path="/storeAdmin" element={<StoreAdmin/>}/>
                         <Route path="/profile" element={<ProfilePage/>}/>
                         <Route path="/category/:categoryId" element={<CategorySummary/>}/>

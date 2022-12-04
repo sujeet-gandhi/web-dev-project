@@ -1,6 +1,7 @@
 package com.neu.onestopgo.services;
 
 import com.neu.onestopgo.dao.UserRequestObject;
+import com.neu.onestopgo.models.Authorities;
 import com.neu.onestopgo.models.Store;
 import com.neu.onestopgo.models.User;
 import com.neu.onestopgo.repositories.UserRepository;
@@ -13,6 +14,9 @@ public class UserService {
     private final UserRepository userRepository;
 
     private final StoreService storeService;
+
+    @Autowired
+    private AuthoritiesService authoritiesService;
 
     @Autowired
     public UserService(UserRepository userRepository, StoreService storeService) {
@@ -28,6 +32,17 @@ public class UserService {
         User newUser = userRequestObject.getModelObject();
         newUser.setType("CUSTOMER");
         return userRepository.save(newUser);
+    }
+
+    public User createNewUserFromSignUp(User user) {
+        user.setType("ADMIN");
+        user.setEnabled(true);
+        Authorities authorities = new Authorities();
+        authorities.setAuthority("ROLE_ADMIN");
+        authorities.setId(10L);
+        authorities.setUsername(user.getEmail());
+        authoritiesService.createNewAuthorities(authorities);
+        return userRepository.save(user);
     }
 
     public User createNewStoreAdmin(UserRequestObject userRequestObject) throws Exception {
