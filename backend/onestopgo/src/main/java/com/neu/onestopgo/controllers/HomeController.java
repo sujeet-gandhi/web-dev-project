@@ -75,22 +75,5 @@ public class HomeController {
         return ResponseEntity.ok(response);
     }
 
-//    @GetMapping
-//    @RequestMapping(value = {"logout"},method = RequestMethod.GET)
-//    public ResponseEntity Logout(HttpServletRequest request, SessionStatus
-//            status, HttpSession session, HttpServletResponse response){
-//        session.invalidate();
-//        Cookie[] cookies = request.getCookies();
-//        if(cookies!=null) {
-//            for (Cookie cookie : cookies) {
-//                cookie.setMaxAge(0);
-//                cookie.setValue(null);
-//                cookie.setPath("/");
-//                response.addCookie(cookie);
-//            }
-//        }
-//        request.getSession().invalidate();
-//        return new ResponseEntity(HttpStatus.OK);
-//    }
 
 }
