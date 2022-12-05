@@ -13,7 +13,7 @@ import {
     MDBTabsPane
 } from 'mdb-react-ui-kit';
 import {useDispatch, useSelector} from "react-redux";
-import {category, cookieThunk, loginThunk, registerThunk} from "./login-thunk";
+import {loginThunk, registerThunk} from "./login-thunk";
 
 export const LoginForm = () => {
     const {loginData, loading} = useSelector(state => state.login)
@@ -38,15 +38,11 @@ export const LoginForm = () => {
     };
 
     const handleSubmit = event => {
-        console.log('handleSubmit ran');
         event.preventDefault();
-        console.log('email ', email);
-        console.log('password ', password);
         const loginDetails = {
             email : email,
             password : password};
         dispatch(loginThunk(loginDetails));
-        getCookie();
     };
 
     const handleRegistration = event => {
@@ -60,12 +56,6 @@ export const LoginForm = () => {
 
         dispatch(registerThunk(userDetails));
     };
-
-    const getCookie = event => {
-
-        dispatch(cookieThunk());
-    };
-
 
 
 
