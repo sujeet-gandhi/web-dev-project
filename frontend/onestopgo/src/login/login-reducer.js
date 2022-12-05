@@ -28,8 +28,13 @@ const loginSlice = createSlice({
             state.loggedIn = false
         },
         [getUserDataThunk.fulfilled]: (state, {payload}) => {
-            state.loggedIn = true
-            state.loggedInUser = payload
+            if ("<html>" in payload) {
+                state.loggedIn = false
+                state.loggedInUser = {}
+            } else {
+                state.loggedIn = true
+                state.loggedInUser = payload
+            }
             return state
         },
         [registerThunk.pending]: (state) => {
