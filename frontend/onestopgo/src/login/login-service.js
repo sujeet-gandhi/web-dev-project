@@ -3,7 +3,7 @@ import {useState} from "react";
 
 const ONESTOPGO_API = process.env.REACT_APP_ONESTOPGO_API_BASE;
 const LOGIN_API = `${ONESTOPGO_API}/login`;
-const REGISTER_API = `${ONESTOPGO_API}/api/v1/signup`;
+const CREATE_NEW_USER = `${ONESTOPGO_API}/api/v1/user`;
 const USER_DETAILS_API = `${ONESTOPGO_API}/api/v1/login/userdata`;
 axios.defaults.withCredentials = true
 
@@ -29,5 +29,5 @@ export const getLoggedInUserData = async () => {
 }
 
 export const registerUser = async (userDetails) => {
-    return (await axios.post(REGISTER_API, userDetails)).data
+    return (await axios.post(CREATE_NEW_USER, userDetails)).data
 }
