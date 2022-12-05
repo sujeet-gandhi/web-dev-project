@@ -79,12 +79,21 @@ nav {
   margin-bottom: 12px;
 }
 
-.wd-cart-item {
-  margin-right: 8px;
-  padding: 8px;
-}
-
 .wd-main-body {
   margin-left: 8rem;
   margin-right: 8rem;
+}
+
+.wd-cart-item {
+  padding: 0.5rem;
+  margin-right: 1rem;
+}
+
+.wd-side-nav {
+  margin-left: 1rem;
+}
+
+.wd-remove-link-text-decor {
+  text-decoration: none;
+  font-size: 1.2rem;
 }

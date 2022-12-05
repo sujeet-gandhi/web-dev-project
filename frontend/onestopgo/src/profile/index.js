@@ -30,24 +30,23 @@ const ProfileComponent = () => {
                 <Link to="/tuiter/edit-profile">
                     <button className="btn btn-outline-dark rounded-pill wd-top-bottom-small-border">Edit Profile</button>
                 </Link>
-                <span className="fw-bolder wd-profile-name">{localUserData.name}</span>
-                <span className="text-secondary ">{localUserData.email}</span>
-                <span className="text-body wd-margin-bottom-small wd-top-bottom-small-border">{localUserData.email}</span>
-                <div className={'row'}>
+                <span className="wd-profile-name">{localUserData.name}</span>
+                <span className="text-secondary wd-profile-email-font-size">{localUserData.email}</span>
+                <div className={'row wd-top-bottom-medium-border'}>
                     <div className={'col-sm'}>
-                        <a href="src/profile/components/profile-info#" className="wd-remove-link-text-decor wd-reaction-count">
+                        <a href="src/profile/components/profile-info#" className="text-secondary wd-remove-link-text-decor">
                             <FontAwesomeIcon className="wd-right-margin" icon={faMapMarkerAlt}/>
                             <span className="wd-reaction-count">{localUserData.address}</span>
                         </a>
                     </div>
                     <div className={'col-sm'}>
-                        <a href="src/profile/components/profile-info#" className="wd-remove-link-text-decor wd-reaction-count">
+                        <a href="src/profile/components/profile-info#" className="text-secondary wd-remove-link-text-decor">
                             <FontAwesomeIcon className="wd-right-margin" icon={faBirthdayCake}/>
                             <span className="wd-reaction-count">Born {localUserData.address}</span>
                         </a>
                     </div>
                     <div className={'col-sm'}>
-                        <a href="src/profile/components/profile-info#" className="wd-remove-link-text-decor wd-reaction-count">
+                        <a href="src/profile/components/profile-info#" className="text-secondary wd-remove-link-text-decor">
                             <FontAwesomeIcon className="wd-right-margin" icon={faCalendar}/>
                             <span className="wd-reaction-count">Joined {localUserData.contact}</span>
                         </a>

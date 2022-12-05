@@ -46,11 +46,6 @@
     margin-left: 18px;
 }
 
-.wd-profile-name {
-    font-size: 20px;
-}
-
-
 .wd-border {
     margin-top: 2rem;
     margin-bottom: 2rem;
@@ -87,4 +82,22 @@
 .wd-searchbar {
     margin-top: 0.6rem;
     margin-left: -1.5rem;
+}
+
+.wd-profile-name {
+    font-size: 3.5rem;
+}
+
+.wd-profile-email-font-size {
+    font-size: 2.5rem;
+}
+
+.wd-top-bottom-medium-border {
+    margin-top: 4rem;
+    margin-bottom: 3rem;
+    text-decoration: none;
+}
+
+.wd-right-margin {
+    margin-right: 0.4rem;
 }
