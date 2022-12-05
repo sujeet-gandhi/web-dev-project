@@ -18,8 +18,10 @@ export const hitLogin = async (loginDetails) => {
             'Content-Type': 'multipart/form-data'
         }
     }).then(() => {
-        return "success"
-    }).catch(error => error)
+        console.log("login success")
+    }).catch(error => {
+        console.log("logging error ", error)
+    })
 }
 
 export const getLoggedInUserData = async () => {

@@ -1,5 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {getUserDataThunk, loginThunk, registerThunk} from "./login-thunk";
+import {logoutThunk} from "../logout/logout-thunk";
 
 
 const initialState = {
@@ -16,6 +17,12 @@ const loginSlice = createSlice({
         },
         [loginThunk.fulfilled]: (state, {payload}) => {
             state.loggedIn = true
+            return state
+        },
+        [logoutThunk.fulfilled]: (state, {payload}) => {
+            state.loggedIn = false
+            state.loggedInUser = {}
+            return state
         },
         [getUserDataThunk.pending]: (state) => {
             state.loggedIn = false
@@ -23,6 +30,7 @@ const loginSlice = createSlice({
         [getUserDataThunk.fulfilled]: (state, {payload}) => {
             state.loggedIn = true
             state.loggedInUser = payload
+            return state
         },
         [registerThunk.pending]: (state) => {
             state.loggedIn = false

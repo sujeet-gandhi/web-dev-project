@@ -18,6 +18,7 @@ export const HomeComponent = () => {
 
     useEffect(() => {
         dispatch(getHomeDataThunk())
+        dispatch(getUserDataThunk())
     }, []);
 
 
@@ -27,7 +28,7 @@ export const HomeComponent = () => {
         <>
             <NavBar links={[{link : 'cart', name : 'Cart', icon : 'shopping_cart'},
                             {link : 'orders', name : 'Orders', icon : 'kitchen'}]}
-                            userData={loggedInUser}/>
+                            userData={loggedInUser} loggedIn={loggedIn}/>
             {loading && <Loader/>}
             {!loading &&
                 <>
