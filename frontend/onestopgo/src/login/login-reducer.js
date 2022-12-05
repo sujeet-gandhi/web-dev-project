@@ -28,7 +28,7 @@ const loginSlice = createSlice({
             state.loggedIn = false
         },
         [getUserDataThunk.fulfilled]: (state, {payload}) => {
-            if ("<html>" in payload) {
+            if ("<html" in payload) {
                 state.loggedIn = false
                 state.loggedInUser = {}
             } else {
