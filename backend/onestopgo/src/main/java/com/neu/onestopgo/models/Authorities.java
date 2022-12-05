@@ -15,14 +15,12 @@ public class Authorities {
     private String authority;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long id;
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
-
-    @Id
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
