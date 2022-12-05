@@ -10,7 +10,7 @@ const NavigationSidebar = () => {
     const paths = pathname.split('/')
     const active = paths[1];
     return (
-        <div className="card list-group">
+        <div className="card list-group wd-side-nav">
             <Link to="/" className= {'list-group-item wd-sidenav-side-item'}>
                 <FontAwesomeIcon className="wd-sidenav-icon" icon={faCartShopping}/> OneStopGo
             </Link>

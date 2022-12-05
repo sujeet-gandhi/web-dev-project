@@ -30,7 +30,7 @@ export const CartComponent = () => {
         <>
             {loading && <Loader/>}
             {!loading &&
-                <div className={'card list-group'}>
+                <div className={'card wd-cart-item'}>
                     <CartList cartItems={cartData.cart.items} />
                     <div>
                         <button onClick={handleOnCheckoutClicked} className="btn waves-effect waves-light teal white-text wd-margin-top-bottom right" type="submit" name="action">
