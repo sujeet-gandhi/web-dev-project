@@ -18,22 +18,22 @@ const StoreItem = ({store}) => {
 
     if (!store) return null;
     return (
-            <div className="col-xxl-2 col-xl-2 col-lg-2 col-md-6 col-sm-6">
-                <div className="card-panel" onClick={handleOnStoreClicked}>
-                    <a className="wd-remove-text-decoration">
-                        <div className={'col center'}>
-                                <img width={100} height={100} className={'rounded-circle border-3 wd-margin-bottom'} src={ONESTOPGO_API + "/" + store.imageUrl}/>
-                                <p className="card-title fw-bolder black-text">{store.name}</p>
-                                <p className="green-text text-decoration-none">
-                                    {store.openingTime} - {store.closingTime}<br/>
-                                    <span className="card-title text-secondary" >
+        <div className="col-sm">
+            <a>
+                <div className="card wd-remove-text-decoration"  onClick={handleOnStoreClicked}>
+                    <div className="card-content center white-text wd-category-text">
+                        <img width={100} height={100} className={'rounded-circle border-3 wd-margin-bottom'} src={ONESTOPGO_API + "/" + store.imageUrl}/>
+                        <p className="card-title fw-bolder black-text">{store.name}</p>
+                        <p className="green-text">
+                            {store.openingTime} - {store.closingTime}<br/>
+                            <span className="card-title text-secondary">
                                         {store.type}
                                     </span>
-                                </p>
-                            </div>
-                    </a>
+                        </p>
+                    </div>
                 </div>
-            </div>
+            </a>
+        </div>
     );
 };
 export default StoreItem;

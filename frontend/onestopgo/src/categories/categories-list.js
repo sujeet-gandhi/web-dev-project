@@ -3,8 +3,8 @@ import CategoryItem from "./category-item";
 
 const CategoriesList = ({categoriesArray}) => {
     return(
-        <div className="col">
-            <ul className="wd-category-list">
+        <div className="row">
+            <ul className="center wd-category-list">
                 {
                     categoriesArray.map(
                         category =>

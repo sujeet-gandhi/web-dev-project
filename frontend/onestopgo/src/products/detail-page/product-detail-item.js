@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
 import {addToCartThunk} from "../../cart/cart-thunk";
-import NavBar from "../../nav-bar";
 import {useLocation} from "react-router";
 
 const ONESTOPGO_API = process.env.REACT_APP_ONESTOPGO_API_BASE;
@@ -37,7 +36,6 @@ const ProductDetailItem = () => {
     if (!product) return null;
     return (
         <div>
-            <NavBar links={[{link : 'cart', name : 'Cart'}, {link : 'orders', name : 'Orders'}]} userData={mockUserData()}/>
             <div className="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
                 <div className="card">
                     <div className="card-image">
