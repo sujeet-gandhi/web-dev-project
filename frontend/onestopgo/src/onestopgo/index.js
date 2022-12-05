@@ -10,12 +10,14 @@ import {CartComponent} from "../cart";
 import {Route, Routes} from "react-router-dom";
 import {HomeComponent} from "../home";
 import {OrdersComponents} from "../orders";
-import ProfilePage from "../profile";
 import {Provider} from "react-redux";
 import NavigationSidebar from "../navigation-sidebar";
 import NavBar from "../nav-bar";
 import React from "react";
 import {SearchComponent} from "../search";
+import {EmptySearchView} from "../search/empty-search";
+import ProfileComponent from "../profile";
+import ProductDetailItem from "../products/detail-page/product-detail-item";
 
 const store = configureStore({
     reducer: {home: homeReducer, store: storeReducer, user: userReducer, search: searchReducer,
@@ -43,12 +45,13 @@ function OneStopGo() {
                         <Route path="orders" element={<OrdersComponents/>}/>
                         <Route path="products" element={<h1>We will display all the products here</h1>}/>
                         <Route path="stores" element={<h1>All Store list here</h1>}/>
-                        <Route path="notifications" element={<h1>Notifications Coming Soon</h1>}/>
+                        <Route path="product" element={<ProductDetailItem/>}/>
                         <Route path="lists" element={<h1>Lists Coming Soon</h1>}/>
-                        <Route path="profile" element={<ProfilePage/>}/>
+                        <Route path="profile" element={<ProfileComponent/>}/>
                         <Route path="cart" element={<CartComponent/>}/>
-                        <Route path="search" element={<SearchComponent/>}/>
-                        <Route path="edit-profile" element={<ProfilePage/>}/>
+                        <Route path="search" element={<EmptySearchView/>}/>
+                        <Route path="results/*" element={<SearchComponent/>}/>
+                        <Route path="edit-profile" element={<ProfileComponent/>}/>
                     </Routes>
                 </div>
                 <div className="d-sm-none d-md-none d-lg-block col-lg-3 col-xl-3">

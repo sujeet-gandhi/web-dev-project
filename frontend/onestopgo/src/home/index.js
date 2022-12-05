@@ -23,7 +23,7 @@ export const HomeComponent = () => {
             {loading && <Loader/>}
             {!loading &&
                 <>
-                    <div className="position-relative mb-2 border-3">
+                    <div className="position-relative mb-2 border-3 card">
                         <img src="/images/one.png" className="w-100 rounded-3"/>
                     </div>
                     <StoreList storeArray={homeData.stores}/>

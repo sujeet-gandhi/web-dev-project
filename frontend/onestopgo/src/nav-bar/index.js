@@ -12,28 +12,27 @@ const NavBar = ({links, userData}) => {
     }
 
     const handleOnSearchSubmit = () => {
-        nav("/search", {
-            state:
-                {
-                    searchTerm: searchText
-                }
-        })
+        nav("/results/"+searchText);
     }
 
     return (
         <div>
             <nav>
                 <div className="nav-wrapper teal">
-                    <a onClick={() => nav('/')} className="brand-logo center"><img width={75} height={75}
-                                                                                   src={'../../images/onestopgologo.png'}/></a>
+
                     <ul className="left hide-on-med-and-down">
+                        <li>
+                            <a onClick={() => nav('/')} className={'center'}><img width={65} height={65}
+                                                                                         src={'../../images/onestopgologo.png'}/></a>
+                        </li>
                         <li>
                             <div className="left row">
                                 <form onSubmit={handleOnSearchSubmit} className="ms-2">
-                                    <div className="input-field">
-                                        <i className="grey-text material-icons prefix">search</i>
-                                        <input placeholder="Search Store, Categories and Products"
-                                               className="black-text" type="text" onChange={handleChange} required/>
+                                    <div className="col-12 wd-searchbar rounded-pill">
+                                        <input onChange={handleChange} placeholder="Search OneStopGo"
+                                               className="bg-white form-control ps-5 rounded-pill"/>
+                                        {/*<i className="grey-text material-icons prefix rounded-pill">search</i>*/}
+                                        {/*<i className="bi bi-search position-absolute wd-nudge-up"></i>*/}
                                     </div>
                                 </form>
                             </div>

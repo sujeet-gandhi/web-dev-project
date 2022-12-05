@@ -19,11 +19,12 @@ export const OrdersComponents = () => {
             {loading && <Loader/>}
             {!loading &&
                 <>
-                    <h1>Your OneStopGo Orders</h1>
+                    <center>
+                        <h1>Your OneStopGo Orders</h1>
+                    </center>
                     <ul>
                         {
-                            ordersData
-                                .orders.map ((order) =>
+                            ordersData.orders.map ((order) =>
                                 <l1>
                                     <OrderItem order={order} />
                                 </l1>

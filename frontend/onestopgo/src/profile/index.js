@@ -1,99 +1,61 @@
 import React, {useState} from "react";
+import "./index.css"
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faBirthdayCake, faCalendar, faMapMarkerAlt} from "@fortawesome/free-solid-svg-icons";
+import {Link} from "react-router-dom";
 
 const ONESTOPGO_API = process.env.REACT_APP_ONESTOPGO_API_BASE;
 
-const ProfilePage = () => {
-
-    const mockUserData = () => {
+const ProfileComponent = () => {
+    const profile = () => {
         return {
             imageUrl: 'images/user/190015bd-511a-41f5-ac17-f401aef8df46.jpg',
             email: 'arnold@onestopgo',
+            name: 'Arnold Shivajinagar',
             password: 'arnold789',
             address: 'Boston, MA',
             contact: '+12345'
         }
     }
 
-    const [disabled, setDisabled] = useState(true);
-    const [localUserData, setLocalUserData] = useState(mockUserData());
-
-    const handleDataEntry = ({target}) => {
-        let val = target.value;
-        let name = target.name;
-        if (name === "imageUrl") {
-            val = target.files[0]
-            name = "image";
-        }
-        setLocalUserData({
-            ...localUserData,
-            [name]: val
-        })
-    }
-
-    const handleSaveProfile = () => {
-        // TODO: add update user logic here
-        console.log(localUserData)
-        setDisabled(!disabled)
-    }
+    const [localUserData, setLocalUserData] = useState(profile());
 
     return (
-        <>
-            <div className="row mt-4">
-                <div className="col-4 float-end">
-                    <img width={150}
-                         height={150}
-                         src={ONESTOPGO_API + "/" + localUserData.imageUrl}
-                         className="circle float-end mt-5"/>
+        <div className="card">
+            <div className="row center">
+                <div className="rounded-circle">
+                    <img className="rounded-circle wd-border"
+                         src={ONESTOPGO_API + "/" + localUserData.imageUrl} width={250} height={250} alt={'profile-pic'}/>
                 </div>
-                <div className="col-8">
-                    <div className="ms-2 me-2 mt-2 mb-2 align-content-between">
-                        <div className="fs-2 text-center">
-                            Personal Data
-                            {
-                                disabled &&
-                                <button className="float-end rounded-pill teal fs-5 me-2 fw-light btn-small" onClick={() => setDisabled(!disabled)}>
-                                    Edit
-                                </button>
-                            }
-                            {
-                                !disabled &&
-                                <button className="float-end rounded-pill fs-5 me-2 fw-light btn-small" onClick={handleSaveProfile}>
-                                    Save
-                                </button>
-                            }
-                        </div>
-                        <div className="form-floating wd-top-margin-form">
-                            <input type="email" className="form-control text-bg-light" id="email" name="email"
-                                   value={localUserData.email} disabled={true}/>
-                            <label htmlFor="email">Email</label>
-                        </div>
-                        <div className="form-floating wd-top-margin-form">
-                            <input type="password" className="form-control text-bg-light" id="password" name="password"
-                                   value={localUserData.password} disabled={disabled} onChange={handleDataEntry}/>
-                            <label htmlFor="password">Password</label>
-                        </div>
-                        <div className="form-floating wd-top-margin-form">
-                            <input type="text" className="form-control text-bg-light" id="address" name="address"
-                                   value={localUserData.address} disabled={disabled} onChange={handleDataEntry}/>
-                            <label htmlFor="address">Address</label>
-                        </div>
-                        <div className="form-floating mt-2">
-                            <input type="text" className="form-control text-bg-light" id="contact" name="contact"
-                                   value={localUserData.contact} disabled={disabled} onChange={handleDataEntry}/>
-                            <label htmlFor="contact">Contact</label>
-                        </div>
-                        <div>
-                            <input type="file" className="form-control text-bg-light mt-2" id="imageUrl"
-                                   name="imageUrl"
-                                   disabled={disabled}
-                                   onChange={handleDataEntry}/>
-                            <label htmlFor="imageUrl">Update profile pic</label>
-                        </div>
+                <Link to="/tuiter/edit-profile">
+                    <button className="btn btn-outline-dark rounded-pill wd-top-bottom-small-border">Edit Profile</button>
+                </Link>
+                <span className="fw-bolder wd-profile-name">{localUserData.name}</span>
+                <span className="text-secondary ">{localUserData.email}</span>
+                <span className="text-body wd-margin-bottom-small wd-top-bottom-small-border">{localUserData.email}</span>
+                <div className={'row'}>
+                    <div className={'col-sm'}>
+                        <a href="src/profile/components/profile-info#" className="wd-remove-link-text-decor wd-reaction-count">
+                            <FontAwesomeIcon className="wd-right-margin" icon={faMapMarkerAlt}/>
+                            <span className="wd-reaction-count">{localUserData.address}</span>
+                        </a>
+                    </div>
+                    <div className={'col-sm'}>
+                        <a href="src/profile/components/profile-info#" className="wd-remove-link-text-decor wd-reaction-count">
+                            <FontAwesomeIcon className="wd-right-margin" icon={faBirthdayCake}/>
+                            <span className="wd-reaction-count">Born {localUserData.address}</span>
+                        </a>
+                    </div>
+                    <div className={'col-sm'}>
+                        <a href="src/profile/components/profile-info#" className="wd-remove-link-text-decor wd-reaction-count">
+                            <FontAwesomeIcon className="wd-right-margin" icon={faCalendar}/>
+                            <span className="wd-reaction-count">Joined {localUserData.contact}</span>
+                        </a>
                     </div>
                 </div>
-            </div>
-        </>
-    );
-}
 
-export default ProfilePage;
+            </div>
+        </div>
+    );
+};
+export default ProfileComponent;

@@ -10,7 +10,7 @@ const NavigationSidebar = () => {
     const paths = pathname.split('/')
     const active = paths[1];
     return (
-        <div className="list-group">
+        <div className="card list-group">
             <Link to="/" className= {'list-group-item wd-sidenav-side-item'}>
                 <FontAwesomeIcon className="wd-sidenav-icon" icon={faCartShopping}/> OneStopGo
             </Link>
@@ -18,7 +18,7 @@ const NavigationSidebar = () => {
                 <FontAwesomeIcon className="wd-sidenav-icon" icon={faHome}/> Home
             </Link>
 
-            <Link to="/search" className={`list-group-item wd-sidenav-side-item ${active === 'search' ? 'teal' : ''}`}>
+            <Link to="/search" className={`list-group-item wd-sidenav-side-item ${active === 'search' || active === 'results' ? 'teal' : ''}`}>
                 <FontAwesomeIcon className="wd-sidenav-icon" icon={faSearch}/> Search
             </Link>
 

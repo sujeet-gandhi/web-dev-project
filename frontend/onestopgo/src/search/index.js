@@ -11,13 +11,15 @@ import StoreMap from "../store-map";
 
 export const SearchComponent = () => {
     const {searchData, loading} = useSelector(state => state.search)
-    const dispatch = useDispatch();
-    const location = useLocation();
     const [searchText, setSearchText] = useState("");
+    const dispatch = useDispatch();
+    const {pathname} = useLocation();
+    const paths = pathname.split('/')
+    const searchTerm = paths[2];
 
     useEffect(() => {
-        setSearchText(location.state.searchTerm);
-        dispatch(getSearchDataThunk(location.state.searchTerm))
+        setSearchText(searchTerm);
+        dispatch(getSearchDataThunk(searchTerm))
     }, []);
 
     function handleChange(e) {
@@ -25,11 +27,7 @@ export const SearchComponent = () => {
     }
 
     if (!searchData) return null;
-
-    const handleOnSearchSubmit = () => {
-        dispatch(getSearchDataThunk(searchText))
-    }
-    console.log(searchData.products)
+    console.log("Search Data = " +searchData);
     return (
         <>
             {loading && <h1>Looking up "{searchText}" ...</h1>}
