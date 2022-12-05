@@ -12,3 +12,8 @@ export const registerThunk = createAsyncThunk (
     async (userDetails) => await service.registerUser(userDetails)
 )
 
+
+export const getLoggedInUserThunk = createAsyncThunk (
+    'onestopgo/getLoggedInUser',
+    async (username) => await service.getLoggedInUser(username)
+)

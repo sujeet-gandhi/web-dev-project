@@ -1,10 +1,10 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {loginThunk, registerThunk, cookieThunk, category} from "./login-thunk";
+import {getLoggedInUserThunk, loginThunk, registerThunk} from "./login-thunk";
 
 
 const initialState = {
-    loginData: [],
-    loading: true
+    loggedIn : false,
+    loggedInUser: {}
 }
 
 const loginSlice = createSlice({
@@ -12,20 +12,23 @@ const loginSlice = createSlice({
     initialState: initialState,
     extraReducers: {
         [loginThunk.pending]: (state) => {
-            state.loading = true
-            state.loginData = []
+            state.loggedIn = false
         },
         [loginThunk.fulfilled]: (state, {payload}) => {
-            state.loginData = payload
-            state.loading = false
+            state.loggedIn = true
         },
         [registerThunk.pending]: (state) => {
-            state.loading = true
-            state.loginData = []
+            state.loggedIn = false
         },
         [registerThunk.fulfilled]: (state, {payload}) => {
-            state.loginData = payload
-            state.loading = false
+            state.loggedIn = false
+        },
+        [getLoggedInUserThunk.pending] : (state) => {
+            state.loggedIn = false
+        },
+        [getLoggedInUserThunk.fulfilled] : (state, {payload}) => {
+            state.loggedIn = true
+            state.loggedInUser = payload
         }
     }
 });

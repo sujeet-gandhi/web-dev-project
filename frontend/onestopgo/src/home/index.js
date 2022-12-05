@@ -13,6 +13,7 @@ export const HomeComponent = () => {
     const {homeData, loading} = useSelector(state => state.home)
     const dispatch = useDispatch();
 
+
     const mockUserData = () => {
         return {
             imageUrl: 'images/user/190015bd-511a-41f5-ac17-f401aef8df46.jpg'
