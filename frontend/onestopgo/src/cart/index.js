@@ -5,13 +5,16 @@ import {getCartThunk, placeOrderThunk} from "./cart-thunk";
 import CartList from "./cart-list";
 import Loader from "../components/loader";
 import NavBar from "../nav-bar";
+import {getUserDataThunk} from "../login/login-thunk";
 
 export const CartComponent = () => {
     const {cartData, loading} = useSelector(state => state.cart)
+    const {loggedIn, loggedInUser} = useSelector(state => state.login)
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getCartThunk())
+        dispatch(getUserDataThunk())
     }, []);
 
     const nav = useNavigate()
@@ -26,16 +29,10 @@ export const CartComponent = () => {
         handleOnOrdersClicked()
     }
 
-    const mockUserData = () => {
-        return {
-            data: 'data'
-        }
-    }
-
     if (!cartData) return null;
     return (
         <>
-            <NavBar links={[{link : '', name : 'Home'}, {link : 'orders', name : 'Orders'}]} userData={mockUserData()}/>
+            <NavBar links={[{link : '', name : 'Home'}, {link : 'orders', name : 'Orders'}]} userData={loggedInUser} loggedIn={loggedIn}/>
             {loading && <Loader/>}
             {!loading &&
                 <>

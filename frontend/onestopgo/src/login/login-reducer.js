@@ -1,10 +1,11 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {loginThunk, registerThunk, cookieThunk, category} from "./login-thunk";
+import {getUserDataThunk, loginThunk, registerThunk} from "./login-thunk";
+import {logoutThunk} from "../logout/logout-thunk";
 
 
 const initialState = {
-    loginData: [],
-    loading: true
+    loggedIn : false,
+    loggedInUser: {}
 }
 
 const loginSlice = createSlice({
@@ -12,21 +13,36 @@ const loginSlice = createSlice({
     initialState: initialState,
     extraReducers: {
         [loginThunk.pending]: (state) => {
-            state.loading = true
-            state.loginData = []
+            state.loggedIn = false
         },
         [loginThunk.fulfilled]: (state, {payload}) => {
-            state.loginData = payload
-            state.loading = false
+            state.loggedIn = true
+            return state
+        },
+        [logoutThunk.fulfilled]: (state, {payload}) => {
+            state.loggedIn = false
+            state.loggedInUser = {}
+            return state
+        },
+        [getUserDataThunk.pending]: (state) => {
+            state.loggedIn = false
+        },
+        [getUserDataThunk.fulfilled]: (state, {payload}) => {
+            if ("<html" in payload) {
+                state.loggedIn = false
+                state.loggedInUser = {}
+            } else {
+                state.loggedIn = true
+                state.loggedInUser = payload
+            }
+            return state
         },
         [registerThunk.pending]: (state) => {
-            state.loading = true
-            state.loginData = []
+            state.loggedIn = false
         },
         [registerThunk.fulfilled]: (state, {payload}) => {
-            state.loginData = payload
-            state.loading = false
-        }
+            state.loggedIn = false
+        },
     }
 });
 

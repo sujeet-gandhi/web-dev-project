@@ -23,12 +23,11 @@ import ProductDetailItem from "./products/detail-page/product-detail-item";
 import CategorySummary from "./categories";
 import loginReducer from "./login/login-reducer";
 import {Logout} from "./logout";
-import logoutReducer from "./logout/logout-reducer";
 
 function App() {
     const store = configureStore({
         reducer: {home: homeReducer, store: storeReducer, user: userReducer, search: searchReducer,
-            product: productReducer, cart: cartReducer, order: ordersReducer, login : loginReducer, logout : logoutReducer}
+            product: productReducer, cart: cartReducer, order: ordersReducer, login : loginReducer}
     });
     return (
         <Provider store={store}>

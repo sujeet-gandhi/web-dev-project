@@ -14,14 +14,16 @@ import {
 } from 'mdb-react-ui-kit';
 import {useDispatch, useSelector} from "react-redux";
 import {logoutThunk} from "./logout-thunk";
+import {useNavigate} from "react-router";
 
 export const Logout = () => {
     const dispatch= useDispatch();
+    const navigate = useNavigate();
 
     const handleSubmit = event => {
-        console.log('handleSubmit ran');
         event.preventDefault();
         dispatch(logoutThunk());
+        navigate("/");
     };
     return (
         <MDBContainer className="p-3 my-5 w-50">

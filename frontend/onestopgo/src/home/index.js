@@ -8,20 +8,19 @@ import {getHomeDataThunk} from "./home-thunk";
 import Loader from "../components/loader";
 import StoreMap from "../store-map";
 import NavBar from "../nav-bar";
+import {getUserDataThunk} from "../login/login-thunk";
 
 export const HomeComponent = () => {
     const {homeData, loading} = useSelector(state => state.home)
+    const {loggedIn, loggedInUser} = useSelector(state => state.login)
     const dispatch = useDispatch();
 
-    const mockUserData = () => {
-        return {
-            imageUrl: 'images/user/190015bd-511a-41f5-ac17-f401aef8df46.jpg'
-        }
-    }
 
     useEffect(() => {
         dispatch(getHomeDataThunk())
+        dispatch(getUserDataThunk())
     }, []);
+
 
     if (!homeData) return null;
 
@@ -29,7 +28,7 @@ export const HomeComponent = () => {
         <>
             <NavBar links={[{link : 'cart', name : 'Cart', icon : 'shopping_cart'},
                             {link : 'orders', name : 'Orders', icon : 'kitchen'}]}
-                            userData={mockUserData()}/>
+                            userData={loggedInUser} loggedIn={loggedIn}/>
             {loading && <Loader/>}
             {!loading &&
                 <>

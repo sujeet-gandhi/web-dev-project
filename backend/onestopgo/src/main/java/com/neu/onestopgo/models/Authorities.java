@@ -14,14 +14,13 @@ public class Authorities {
     @Column(name = "authority", columnDefinition = "VARCHAR(255)")
     private String authority;
     @Id
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
-
-    @Id
-    public Long getId() {
+    public long getId() {
         return id;
     }
 

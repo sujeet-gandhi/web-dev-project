@@ -7,6 +7,7 @@ import com.neu.onestopgo.services.OrderService;
 import com.neu.onestopgo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -32,37 +33,37 @@ public class OrderManagementController {
     }
 
     @GetMapping(path = "/cart")
-    public ResponseEntity<Map<String, Object>> getCart() {
+    public ResponseEntity<Map<String, Object>> getCart(Authentication authentication) {
         Map<String, Object> response = new HashMap<>();
-        response.put(CART, orderService.getCartResponse(userService.getUserFromId(getCurrentUserId())));
+        response.put(CART, orderService.getCartResponse(userService.getUserFromId(getCurrentUserId(authentication))));
         return ResponseEntity.ok(response);
     }
 
     @PostMapping(path = "/addToCart")
-    public ResponseEntity<Map<String, Object>> addProductToCart(@RequestBody OrderItemQuantityRequestObject orderItemQuantity) {
+    public ResponseEntity<Map<String, Object>> addProductToCart(@RequestBody OrderItemQuantityRequestObject orderItemQuantity, Authentication authentication) {
         Map<String, Object> response = new HashMap<>();
-        response.put(CART, orderService.addToCart(orderItemQuantity, userService.getUserFromId(getCurrentUserId())));
+        response.put(CART, orderService.addToCart(orderItemQuantity, userService.getUserFromId(getCurrentUserId(authentication))));
         return ResponseEntity.ok(response);
     }
 
     @DeleteMapping(path = "/removeFromCart/{orderItemId}")
-    public ResponseEntity<Map<String, Object>> removeProductFromCart(@PathVariable String orderItemId) {
+    public ResponseEntity<Map<String, Object>> removeProductFromCart(@PathVariable String orderItemId, Authentication authentication) {
         Map<String, Object> response = new HashMap<>();
-        response.put(CART, orderService.removeFromCart(orderItemId, userService.getUserFromId(getCurrentUserId())));
+        response.put(CART, orderService.removeFromCart(orderItemId, userService.getUserFromId(getCurrentUserId(authentication))));
         return ResponseEntity.ok(response);
     }
 
     @PutMapping(path = "/updateCart")
-    public ResponseEntity<Map<String, Object>> updateCartQuantity(@RequestBody OrderItemQuantityRequestObject orderItemQuantity) {
+    public ResponseEntity<Map<String, Object>> updateCartQuantity(@RequestBody OrderItemQuantityRequestObject orderItemQuantity, Authentication authentication) {
         Map<String, Object> response = new HashMap<>();
-        response.put(CART, orderService.updateItemInCart(orderItemQuantity, userService.getUserFromId(getCurrentUserId())));
+        response.put(CART, orderService.updateItemInCart(orderItemQuantity, userService.getUserFromId(getCurrentUserId(authentication))));
         return ResponseEntity.ok(response);
     }
 
     @GetMapping(path = "/orderList")
-    public ResponseEntity<Map<String, Object>> getOrders() {
+    public ResponseEntity<Map<String, Object>> getOrders(Authentication authentication) {
         Map<String, Object> response = new HashMap<>();
-        response.put(ORDERS, orderService.getOrdersList(userService.getUserFromId(getCurrentUserId())));
+        response.put(ORDERS, orderService.getOrdersList(userService.getUserFromId(getCurrentUserId(authentication))));
         return ResponseEntity.ok(response);
     }
 
@@ -80,13 +81,8 @@ public class OrderManagementController {
         return ResponseEntity.ok(response);
     }
 
-    /**
-     * Dummy method for now, to be replaced with actual method after the session implementation is done.
-     *
-     * @return  userId
-     */
-    private int getCurrentUserId() {
-        return 14;
+    private int getCurrentUserId(Authentication authentication) {
+        return userService.getUserFromUserName(authentication.getName()).getId();
     }
 
 }

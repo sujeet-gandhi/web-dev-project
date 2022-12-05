@@ -1,11 +1,13 @@
 import React, {useState} from "react";
 import {useNavigate} from "react-router";
+import {useSelector} from "react-redux";
 
 const ONESTOPGO_API = process.env.REACT_APP_ONESTOPGO_API_BASE;
 
-const NavBar = ({links, userData}) => {
+const NavBar = ({links, userData, loggedIn}) => {
     const nav = useNavigate();
     const [searchText, setSearchText] = useState("");
+    console.log(userData, loggedIn)
 
     function handleChange(e) {
         setSearchText(e.target.value);
@@ -46,20 +48,22 @@ const NavBar = ({links, userData}) => {
                                                 </a>
                                             </li>)
                     }
-                    {userData && userData.imageUrl &&
+                    {loggedIn && userData.imageUrl &&
                         <li onClick={() => nav('/profile')} className="me-1 waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="profile"><img width={50}
                                                                                                            height={50}
                                                                                                            src={ONESTOPGO_API + "/" + userData.imageUrl}
                                                                                                            className="rounded-pill mb-2"/>
                         </li>}
-                    {userData && !userData.imageUrl &&
+                    {loggedIn && !userData.imageUrl &&
                         <li onClick={() => nav('/profile')} className="me-1 waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="profile"><img width={50}
                                                                                                            height={50}
                                                                                                            src={ONESTOPGO_API + "/images/user/empty_profile.jpg"}
                                                                                                            className="rounded-pill mb-2"/>
                         </li>}
-                    {!userData && <li onClick={() => nav('/login')}><a
+                    {!loggedIn && <li onClick={() => nav('/login')}><a
                         className="waves-effect waves-light btn light-blue">Login</a></li>}
+                    {loggedIn && <li onClick={() => nav('/logout')}><a
+                        className="waves-effect waves-light btn light-blue ms-2">Logout</a></li>}
                 </ul>
             </div>
         </nav>

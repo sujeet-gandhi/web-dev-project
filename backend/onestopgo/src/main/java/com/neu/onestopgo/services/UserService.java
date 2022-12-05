@@ -30,24 +30,25 @@ public class UserService {
 
     public User createNewUser(UserRequestObject userRequestObject) {
         User newUser = userRequestObject.getModelObject();
-        newUser.setType("CUSTOMER");
-        return userRepository.save(newUser);
-    }
+        newUser.setType("USER");
 
-    public User createNewUserFromSignUp(User user) {
-        user.setType("ADMIN");
-        user.setEnabled(true);
         Authorities authorities = new Authorities();
-        authorities.setAuthority("ROLE_ADMIN");
-        authorities.setId(10L);
-        authorities.setUsername(user.getEmail());
+        authorities.setAuthority("ROLE_USER");
+        authorities.setUsername(userRequestObject.getEmail());
         authoritiesService.createNewAuthorities(authorities);
-        return userRepository.save(user);
+
+        return userRepository.save(newUser);
     }
 
     public User createNewStoreAdmin(UserRequestObject userRequestObject) throws Exception {
         User newUser = userRequestObject.getModelObject();
-        newUser.setType("STORE_ADMIN");
+        newUser.setType("STOREADMIN");
+
+        Authorities authorities = new Authorities();
+        authorities.setAuthority("ROLE_STOREADMIN");
+        authorities.setUsername(userRequestObject.getEmail());
+        authoritiesService.createNewAuthorities(authorities);
+
         if (Utils.IsNullOrEmpty(userRequestObject.getStoreId())) {
             throw new Exception("empty store id");
         }
@@ -72,5 +73,9 @@ public class UserService {
     public String getExistingImageUrlOfUser(int userId) {
         User user = userRepository.findById(userId).orElseThrow();
         return user.getImageUrl();
+    }
+
+    public User getUserFromUserName(String userName) {
+        return userRepository.findUserByEmail(userName);
     }
 }

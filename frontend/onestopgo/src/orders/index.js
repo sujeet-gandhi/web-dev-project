@@ -1,30 +1,26 @@
 import {useDispatch, useSelector} from "react-redux";
 import React, {useEffect} from "react";
-import {useNavigate} from "react-router";
 import {getOrderListThunk} from "./orders-thunk";
 import Loader from "../components/loader";
 import {OrderItem} from "./order-item";
 import NavBar from "../nav-bar";
+import {getUserDataThunk} from "../login/login-thunk";
 
 export const OrdersComponents = () => {
     const {ordersData, loading} = useSelector(state => state.order)
+    const {loggedIn, loggedInUser} = useSelector(state => state.login)
     const dispatch = useDispatch();
 
 
     useEffect(() => {
         dispatch(getOrderListThunk())
+        dispatch(getUserDataThunk())
     }, []);
-
-    const mockUserData = () => {
-        return {
-            imageUrl: 'images/user/190015bd-511a-41f5-ac17-f401aef8df46.jpg'
-        }
-    }
 
     if (!ordersData) return null;
     return (
         <>
-            <NavBar links={[{link : '', name : 'Home'}]} userData={mockUserData()}/>
+            <NavBar links={[{link : '', name : 'Home'}]} userData={loggedInUser} loggedIn={loggedIn}/>
             {loading && <Loader/>}
             {!loading &&
                 <>
