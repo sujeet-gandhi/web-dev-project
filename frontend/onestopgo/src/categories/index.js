@@ -6,12 +6,7 @@ import {getProductsOfCategoryThunk} from "../products/product-thunk";
 import ProductList from "../products/product-list";
 
 const CategorySummary = () => {
-    const mockUserData = () => {
-        return {
-            imageUrl: 'images/user/190015bd-511a-41f5-ac17-f401aef8df46.jpg'
-        }
-    }
-
+    const {loggedIn, loggedInUser} = useSelector(state => state.login)
     const dispatch = useDispatch();
     const {categoryProductData, categoryProductDataLoading} = useSelector(state => state.product)
     const {categoryId} = useParams();
@@ -24,7 +19,7 @@ const CategorySummary = () => {
     return (
         <>
             <NavBar links={[{link: 'cart', name: 'Cart'}, {link: 'orders', name: 'Orders'}, {link: '', name: 'Home'}]}
-                    userData={mockUserData()}/>
+                    userData={loggedInUser} loggedIn={loggedIn}/>
             {!categoryProductDataLoading &&
                 <>
                     <ProductList storeItemQuantityArray={categoryProductData}/>

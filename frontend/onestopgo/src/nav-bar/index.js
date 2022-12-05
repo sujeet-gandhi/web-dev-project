@@ -62,6 +62,8 @@ const NavBar = ({links, userData, loggedIn}) => {
                         </li>}
                     {!loggedIn && <li onClick={() => nav('/login')}><a
                         className="waves-effect waves-light btn light-blue">Login</a></li>}
+                    {loggedIn && <li onClick={() => nav('/logout')}><a
+                        className="waves-effect waves-light btn light-blue ms-2">Logout</a></li>}
                 </ul>
             </div>
         </nav>
