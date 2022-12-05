@@ -73,4 +73,8 @@ public class UserService {
         User user = userRepository.findById(userId).orElseThrow();
         return user.getImageUrl();
     }
+
+    public User getUserFromUserName(String userName) {
+        return userRepository.findUserByEmail(userName);
+    }
 }

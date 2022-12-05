@@ -36,6 +36,15 @@ public class UserController {
         }
     }
 
+    @GetMapping("/{username}")
+    public ResponseEntity getUserfromUserName(@PathVariable String username) {
+        try {
+            return ResponseEntity.ok(userService.getUserFromUserName(username));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
     @PostMapping()
     public ResponseEntity<User> createUser(@RequestBody UserRequestObject userRequestObject) {
         return ResponseEntity.ok(userService.createNewUser(userRequestObject));

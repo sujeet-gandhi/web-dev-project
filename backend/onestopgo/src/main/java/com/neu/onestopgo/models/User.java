@@ -11,45 +11,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
     private int id;
-    private String username;
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
     private String email;
     private boolean enabled;
     private String password;
 
     private String address;
     private String contact;
-    private Role role;
-
-    private boolean active;
-
     private String type;
-
     private String imageUrl;
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
 
     // for store admins
     @ManyToOne(fetch = FetchType.LAZY)
@@ -105,15 +74,6 @@ public class User {
         return this;
     }
 
-    public boolean isActive() {
-        return active;
-    }
-
-    public User setActive(boolean active) {
-        this.active = active;
-        return this;
-    }
-
     public String getType() {
         return type;
     }
@@ -147,6 +107,15 @@ public class User {
 
     public User setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+        return this;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public User setEnabled(boolean enabled) {
+        this.enabled = enabled;
         return this;
     }
 }
