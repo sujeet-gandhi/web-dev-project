@@ -14,6 +14,7 @@ public class Authorities {
     @Column(name = "authority", columnDefinition = "VARCHAR(255)")
     private String authority;
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     public void setId(Long id) {
