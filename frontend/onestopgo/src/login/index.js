@@ -13,7 +13,8 @@ import {
     MDBTabsPane
 } from 'mdb-react-ui-kit';
 import {useDispatch, useSelector} from "react-redux";
-import {getLoggedInUserThunk, loginThunk, registerThunk} from "./login-thunk";
+import {loginThunk, registerThunk} from "./login-thunk";
+import {useNavigate} from "react-router";
 
 export const LoginForm = () => {
     const [activeTab, setActiveTab] = useState('login');
@@ -27,6 +28,7 @@ export const LoginForm = () => {
     const [registerContact, setRegisterContact] = useState('');
     const [userRegistrationDetails, setUserRegistrationDetails] = useState('');
     const dispatch= useDispatch();
+    const navigate = useNavigate();
 
     const handleClick = (value) => {
         if (value === activeTab) {
@@ -43,7 +45,7 @@ export const LoginForm = () => {
             password : password};
 
         dispatch(loginThunk(loginDetails));
-        dispatch(getLoggedInUserThunk(email))
+        navigate("/");
     };
 
     const handleRegistration = event => {

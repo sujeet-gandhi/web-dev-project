@@ -1,6 +1,8 @@
 package com.neu.onestopgo.controllers;
 
 import com.neu.onestopgo.constants.StringConstants;
+import com.neu.onestopgo.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -14,6 +16,14 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/v1/login")
 public class LoginController {
+
+    private final UserService userService;
+
+    @Autowired
+    public LoginController(UserService userService) {
+        this.userService = userService;
+    }
+
     @GetMapping(path = "/success")
     public ResponseEntity<Map<String, Object>> loginSuccess(HttpSession session) {
         Map<String, Object> response = new HashMap<>();
@@ -25,6 +35,11 @@ public class LoginController {
     @ResponseBody
     public String currentUserName(Authentication authentication) {
         return authentication.getName();
+    }
+
+    @RequestMapping(value = "/userdata", method = RequestMethod.GET)
+    public ResponseEntity currentUserData(Authentication authentication) {
+        return ResponseEntity.ok(userService.getUserFromUserName(authentication.getName()));
     }
 
     @GetMapping(path = "/failure")
