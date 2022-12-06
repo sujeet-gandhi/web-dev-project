@@ -22,8 +22,12 @@ export const Logout = () => {
 
     const handleSubmit = event => {
         event.preventDefault();
-        dispatch(logoutThunk());
-        navigate("/");
+        dispatch(logoutThunk())
+            .unwrap()
+            .then((response) => {
+                console.log("logout successful")
+                navigate("/");
+            });
     };
     return (
         <MDBContainer className="p-3 my-5 w-50">

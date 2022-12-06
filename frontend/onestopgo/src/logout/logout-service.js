@@ -2,15 +2,14 @@ import axios from 'axios';
 
 const ONESTOPGO_API = process.env.REACT_APP_ONESTOPGO_API_BASE;
 const LOGOUT_API = `${ONESTOPGO_API}/logout`;
-
 axios.defaults.withCredentials = true
+
 export const hitLogout = async () => {
     return (await axios.post(LOGOUT_API, {
         mode: 'no-cors',
     })
-        .then((request, response) => {
+        .then(() => {
             console.log("user logged out")
-        }).catch(error => {
-            console.log(error)
-        }));
+            return "logout success"
+        }).catch(error => error)).data;
 }

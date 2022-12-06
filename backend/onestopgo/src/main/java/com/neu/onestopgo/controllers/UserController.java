@@ -36,9 +36,18 @@ public class UserController {
         }
     }
 
-    @PostMapping()
-    public ResponseEntity<User> createUser(@RequestBody UserRequestObject userRequestObject) {
-        return ResponseEntity.ok(userService.createNewUser(userRequestObject));
+    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity createUser(@RequestPart("image") MultipartFile multipartFile,
+                                           @RequestPart("user") UserRequestObject userRequestObject) {
+        try {
+            String fileName = UUID.randomUUID() + "." + Objects.requireNonNull(multipartFile.getOriginalFilename()).split("\\.")[1];
+            userRequestObject.setImageUrl(USER_IMAGE_DIR + fileName);
+            ImageUtil.saveFileAndCreateDirectory(USER_IMAGE_DIR, fileName, multipartFile);
+
+            return ResponseEntity.ok(userService.createNewUser(userRequestObject));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PutMapping(path = "/{userId}", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})

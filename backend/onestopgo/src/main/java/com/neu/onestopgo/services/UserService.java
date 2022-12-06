@@ -78,4 +78,7 @@ public class UserService {
     public User getUserFromUserName(String userName) {
         return userRepository.findUserByEmail(userName);
     }
+    public int getStoreIdOfStoreAdmin(String emailIdOfStoreAdmin) {
+        return userRepository.findUserByEmail(emailIdOfStoreAdmin).getStore().getId();
+    }
 }

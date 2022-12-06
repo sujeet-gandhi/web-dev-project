@@ -2,6 +2,7 @@ package com.neu.onestopgo.security.filter;
 
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
@@ -29,12 +30,11 @@ public class CorsFilter implements Filter {
         response.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
         response.setHeader("Access-Control-Expose-Headers","*");
         response.setHeader("Access-Control-Allow-Credentials","true");
-        if(request.getMethod().equals("POST")) {
-            System.out.println("Here" + request.getSession());
-            System.out.println(request.getRequestURL());
-            System.out.println("Cookies" + response.getHeader("Set-Cookie"));
+        if (HttpMethod.OPTIONS.name().equalsIgnoreCase(((HttpServletRequest) servletRequest).getMethod())) {
+            response.setStatus(HttpServletResponse.SC_OK);
+        } else {
+            filterChain.doFilter(request, response);
         }
-        filterChain.doFilter(request, response);
     }
 
     @Override
