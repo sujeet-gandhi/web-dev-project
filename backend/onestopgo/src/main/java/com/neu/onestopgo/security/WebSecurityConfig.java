@@ -18,6 +18,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.HeaderWriterLogoutHandler;
 import org.springframework.security.web.header.writers.ClearSiteDataHeaderWriter;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
@@ -92,5 +94,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         web
             .ignoring()
             .antMatchers("/images/**");
+    }
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry
+                        .addMapping("/**")
+                        .allowedMethods("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS");
+            }
+        };
     }
 }
