@@ -3,7 +3,7 @@ import {
     createProductThunk,
     getAllProductsOfStoreAdminThunk,
     getProductsOfCategoryThunk,
-    getProductsOfStoreThunk
+    getProductsOfStoreThunk, updateProductThunk
 } from "./product-thunk";
 
 const initialState = {
@@ -43,6 +43,11 @@ const productSlice = createSlice({
         [getProductsOfCategoryThunk.rejected]: (state) => {
             state.categoryProductData = []
             state.categoryProductDataLoading = true
+        },
+        [updateProductThunk.fulfilled]: (state, {payload}) => {
+            const index = state.productData.findIndex((each) => each.productId === payload.productId)
+            state.productData[index] = payload
+            state.productLoading = false
         }
     }
     });

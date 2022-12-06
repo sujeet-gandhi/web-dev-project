@@ -40,3 +40,7 @@ export const createProduct = async (product) => {
 export const getProductsRelatedToCategory = async (categoryId) => {
     return (await axios.get(CATEGORY_PRODUCT_API + categoryId)).data
 }
+
+export const updateProductQuantity = async (updateProductQuantity) => {
+    return (await axios.put(PRODUCT_API, updateProductQuantity)).data
+}

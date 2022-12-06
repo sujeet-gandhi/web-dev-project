@@ -93,8 +93,15 @@ public class ProductController {
     }
 
     @PutMapping
-    public ResponseEntity updateProductWithQuantity(ProductRequestObject productRequestObject) {
-        return ResponseEntity.ok(storeItemService.updateStoreIdAndProductIdQuantity(productRequestObject.getStoreId(),
-                productRequestObject.getProductId(), productRequestObject.getStoreQuantity(), false));
+    public ResponseEntity updateProductWithQuantity(@RequestBody ProductRequestObject productRequestObject,
+                                                    Authentication authentication) {
+        return ResponseEntity.ok(
+                storeItemService.updateStoreIdAndProductIdQuantity(
+                        userService.getStoreIdOfStoreAdmin(authentication.getName()),
+                        productRequestObject.getProductId(),
+                        productRequestObject.getStoreQuantity(),
+                        true
+                )
+        );
     }
 }

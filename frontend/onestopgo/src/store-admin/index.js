@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import React, {useEffect, useState} from "react";
-import {createProductThunk, getAllProductsOfStoreAdminThunk} from "../products/product-thunk";
+import {createProductThunk, getAllProductsOfStoreAdminThunk, updateProductThunk} from "../products/product-thunk";
 import {getHomeDataThunk} from "../home/home-thunk";
 import {getUserDataThunk} from "../login/login-thunk";
 
@@ -36,6 +36,15 @@ const StoreAdmin = () => {
         })
     }
 
+    const handleQuantityIncrement = (id, incrementAmount) => {
+        const incrementQuantityData = {
+            productId: id,
+            storeQuantity: incrementAmount
+        }
+
+        dispatch(updateProductThunk(incrementQuantityData))
+    }
+
     const handleCreateProductSubmit = () => {
         dispatch(createProductThunk(createProductState));
     }
@@ -63,7 +72,10 @@ const StoreAdmin = () => {
                                                 <div>Name : {each.product.name}</div>
                                                 <div>Price : {each.product.price}</div>
                                                 <div>Item Quantity : {each.product.quantity}</div>
-                                                <div>Quantity At Store : {each.quantity}</div>
+                                                <div>Quantity At Store : {each.quantity} : <button
+                                                    className="rounded-pill"
+                                                    onClick={() => handleQuantityIncrement(each.product.id, 10)}>+10</button>
+                                                </div>
                                                 <img width={150} height={150}
                                                      src={ONESTOPGO_API + "/" + each.product.imageUrl}
                                                      alt={each.product.name}/>
