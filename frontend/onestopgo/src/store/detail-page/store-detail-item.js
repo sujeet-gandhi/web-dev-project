@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import {useLocation} from "react-router";
-import NavBar from "../../nav-bar";
 import ProductList from "../../products/product-list";
 import {getProductsOfStoreThunk} from "../../products/product-thunk";
 import {useDispatch, useSelector} from "react-redux";
@@ -14,12 +13,6 @@ const StoreDetailItem = () => {
     const location = useLocation()
     const dispatch = useDispatch()
 
-    const mockUserData = () => {
-        return {
-            imageUrl: 'images/user/190015bd-511a-41f5-ac17-f401aef8df46.jpg'
-        }
-    }
-
     useEffect(() => {
         dispatch(getProductsOfStoreThunk(location.state.store.id))
         setStore(location.state.store);
@@ -29,7 +22,6 @@ const StoreDetailItem = () => {
     if (!store) return null;
     return (
         <div>
-            <NavBar links={[{link : 'cart', name : 'Cart'}, {link : 'orders', name : 'Orders'}]} userData={mockUserData()}/>
             <div className="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
             <div className="card-panel">
                 <div className={'col center'}>

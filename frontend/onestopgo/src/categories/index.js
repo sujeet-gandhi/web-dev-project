@@ -1,4 +1,3 @@
-import NavBar from "../nav-bar";
 import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router";
@@ -20,8 +19,6 @@ const CategorySummary = () => {
 
     return (
         <>
-            <NavBar links={[{link: 'cart', name: 'Cart'}, {link: 'orders', name: 'Orders'}, {link: '', name: 'Home'}]}
-                    userData={loggedInUser} loggedIn={loggedIn}/>
             {!categoryProductDataLoading &&
                 <>
                     <ProductList storeItemQuantityArray={categoryProductData}/>

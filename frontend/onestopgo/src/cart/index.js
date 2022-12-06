@@ -28,7 +28,7 @@ export const CartComponent = () => {
         handleOnOrdersClicked()
     }
 
-    if (!cartData) return null;
+    if (!loggedIn) return <div className={'card'}><center><h2>Login to See Cart</h2></center></div>;
     return (
         <>
             {loading && <Loader/>}

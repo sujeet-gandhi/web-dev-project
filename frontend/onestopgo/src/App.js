@@ -11,7 +11,8 @@ import productReducer from "./products/product-reducer";
 import cartReducer from "./cart/cart-reducer";
 import ordersReducer from "./orders/orders-reducer";
 import OneStopGo from "./onestopgo";
-import {Logout} from "./logout";
+import loginReducer from "./login/login-reducer";
+import {LoginForm} from "./login";
 
 function App() {
     const store = configureStore({
@@ -24,7 +25,7 @@ function App() {
                 <div className={'w-100'}>
                     <Routes>
                         <Route path="/*" element={<OneStopGo/>}/>
-                        <Route path="/logout" element={<Logout/>}/>
+                        <Route path="/login" element={<LoginForm/>}/>
                     </Routes>
                     {/*<Footer/>*/}
                 </div>

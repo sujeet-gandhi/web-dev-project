@@ -4,11 +4,13 @@ import {useLocation} from "react-router";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBicycle, faBoxes, faCartShopping, faHome, faSearch, faStore, faUser} from "@fortawesome/free-solid-svg-icons";
 import "./index.css"
+import {useSelector} from "react-redux";
 
 const NavigationSidebar = () => {
     const {pathname} = useLocation();
     const paths = pathname.split('/')
     const active = paths[1];
+    const {loggedIn, loggedInUser} = useSelector(state => state.login)
     return (
         <div className="card list-group wd-side-nav">
             <Link to="/" className= {'list-group-item wd-sidenav-side-item'}>
@@ -31,10 +33,13 @@ const NavigationSidebar = () => {
             <Link to="/products" className={`list-group-item wd-sidenav-side-item ${active === 'products' ? 'teal' : ''}`}>
                 <FontAwesomeIcon icon={faBicycle} className="wd-sidenav-icon" /> Products
             </Link>
-            <Link to="/profile"
-                  className={`list-group-item wd-sidenav-side-item ${active === 'profile' || active === 'edit-profile' ? 'teal' : ''}`}>
-                <FontAwesomeIcon icon={faUser} className="wd-sidenav-icon" /> Profile
-            </Link>
+            {loggedIn
+                &&
+                <Link to="/profile"
+                      className={`list-group-item wd-sidenav-side-item ${active === 'profile' || active === 'edit-profile' ? 'teal' : ''}`}>
+                    <FontAwesomeIcon icon={faUser} className="wd-sidenav-icon" /> Profile
+                </Link>
+            }
         </div>
     );
 };

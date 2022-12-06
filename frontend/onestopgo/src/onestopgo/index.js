@@ -18,22 +18,18 @@ import {SearchComponent} from "../search";
 import {EmptySearchView} from "../search/empty-search";
 import ProfileComponent from "../profile";
 import ProductDetailItem from "../products/detail-page/product-detail-item";
+import loginReducer from "../login/login-reducer";
+import {Logout} from "../logout";
 
 const store = configureStore({
     reducer: {home: homeReducer, store: storeReducer, user: userReducer, search: searchReducer,
-        product: productReducer, cart: cartReducer, order: ordersReducer}
+        product: productReducer, cart: cartReducer, order: ordersReducer, login: loginReducer}
 });
-
-const mockUserData = () => {
-    return {
-        imageUrl: 'images/user/190015bd-511a-41f5-ac17-f401aef8df46.jpg'
-    }
-}
 
 function OneStopGo() {
     return (
         <Provider store={store}>
-            <NavBar links={[{link : 'cart', name : 'Cart'}, {link : 'orders', name : 'Orders'}]} userData={mockUserData()}/>
+            <NavBar links={[{link : 'cart', name : 'Cart', icon : 'shopping_cart'}, {link : 'orders', name : 'Orders', icon : 'kitchen'}]}/>
             <div className="row mt-4">
                 <div className="col-2 col-md-2 col-lg-1 col-xl-2">
                     <NavigationSidebar active="home"/>
@@ -52,6 +48,7 @@ function OneStopGo() {
                         <Route path="search" element={<EmptySearchView/>}/>
                         <Route path="results/*" element={<SearchComponent/>}/>
                         <Route path="edit-profile" element={<ProfileComponent/>}/>
+                        <Route path="logout" element={<Logout/>}/>
                     </Routes>
                 </div>
                 <div className="d-sm-none d-md-none d-lg-block col-lg-3 col-xl-3">

@@ -16,6 +16,7 @@ export const OrdersComponents = () => {
         dispatch(getUserDataThunk())
     }, []);
 
+    if (!loggedIn) return <div className={'card'}><center><h2>Login to See Orders</h2></center></div>;
     if (!ordersData) return null;
     return (
         <>
