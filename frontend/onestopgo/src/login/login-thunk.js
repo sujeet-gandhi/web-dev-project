@@ -1,5 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import * as service from "../login/login-service";
+import {registerUser} from "../user/user-service";
 
 export const loginThunk = createAsyncThunk (
     'onestopgo/login',
@@ -13,5 +14,5 @@ export const getUserDataThunk = createAsyncThunk (
 
 export const registerThunk = createAsyncThunk (
     'onestopgo/login',
-    async (userDetails) => await service.registerUser(userDetails)
+    async (userDetails) => await registerUser(userDetails)
 )

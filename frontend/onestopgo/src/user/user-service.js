@@ -24,6 +24,26 @@ export const createStoreAdmin = async (user) => {
     })).data
 }
 
+export const registerUser = async (user) => {
+    const imageData = user.image;
+    delete user.image;
+
+    const json = JSON.stringify(user);
+    const blob = new Blob([json], {
+        type: 'application/json'
+    });
+
+    const formData = new FormData();
+    formData.append("user", blob);
+    formData.append("image", imageData);
+
+    return (await axios.post(USER_API, formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    })).data
+}
+
 
 export const updateUser = async (user, userId) => {
     const imageData = user.image;
