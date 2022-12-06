@@ -20,6 +20,7 @@ import ProfileComponent from "../profile";
 import ProductDetailItem from "../products/detail-page/product-detail-item";
 import loginReducer from "../login/login-reducer";
 import {Logout} from "../logout";
+import RootOperations from "../root-operations";
 
 const store = configureStore({
     reducer: {home: homeReducer, store: storeReducer, user: userReducer, search: searchReducer,
@@ -48,6 +49,7 @@ function OneStopGo() {
                         <Route path="search" element={<EmptySearchView/>}/>
                         <Route path="results/*" element={<SearchComponent/>}/>
                         <Route path="edit-profile" element={<ProfileComponent/>}/>
+                        <Route path="root" element={<RootOperations/>}/>
                         <Route path="logout" element={<Logout/>}/>
                     </Routes>
                 </div>
