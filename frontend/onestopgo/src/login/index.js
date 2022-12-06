@@ -22,13 +22,11 @@ export const LoginForm = () => {
     const [activeTab, setActiveTab] = useState('login');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [registerName, setRegisterName] = useState('');
-    const [registerUsername, setRegisterUsername] = useState('');
     const [registerEmail, setRegisterEmail] = useState('');
     const [registerPassword, setRegisterPassword] = useState('');
     const [registerAddress, setRegisterAddress] = useState('');
     const [registerContact, setRegisterContact] = useState('');
-    const [userRegistrationDetails, setUserRegistrationDetails] = useState('');
+    const [userImage, setImage] = useState({});
     const dispatch= useDispatch();
     const navigate = useNavigate();
 
@@ -52,11 +50,11 @@ export const LoginForm = () => {
 
     const handleRegistration = event => {
       const userDetails = {
-          username : registerUsername,
           email: registerEmail,
           password:registerPassword,
           address:registerAddress,
-          contact:registerContact
+          contact:registerContact,
+          image: userImage
       }
 
         dispatch(registerThunk(userDetails));
@@ -118,12 +116,11 @@ export const LoginForm = () => {
 
                         <MDBTabsPane show={activeTab === 'register'}>
 
-                            <MDBInput wrapperClass='mb-4' label='Name' id='form1' type='text'/>
-                            <MDBInput wrapperClass='mb-4' label='Username' id='form1' type='text' onChange={event => setRegisterUsername(event.target.value)}/>
-                            <MDBInput wrapperClass='mb-4' label='Email' id='form1' type='email' onChange={event => setRegisterEmail(event.target.value)}/>
-                            <MDBInput wrapperClass='mb-4' label='Password' id='form1' type='password' onChange={event => setRegisterPassword(event.target.value)}/>
-                            <MDBInput wrapperClass='mb-4' label='Address' id='form1' type='text' onChange={event => setEmail(event.target.value)}/>
-                            <MDBInput wrapperClass='mb-4' label='Contact' id='form1' type='tel'/>
+                            <MDBInput wrapperClass='mb-4' label='Email' type='email' onChange={event => setRegisterEmail(event.target.value)}/>
+                            <MDBInput wrapperClass='mb-4' label='Password'  type='password' onChange={event => setRegisterPassword(event.target.value)}/>
+                            <MDBInput wrapperClass='mb-4' label='Address' type='text' onChange={event => setRegisterAddress(event.target.value)}/>
+                            <MDBInput wrapperClass='mb-4' label='Contact' type='tel' onChange={event => setRegisterContact(event.target.value)}/>
+                            <MDBInput wrapperClass='mb-4' label='Image' type='image' onChange={event => setImage(event.target.files[0])}
 
                             <div className='d-flex justify-content-center mb-4'>
                                 <MDBCheckbox name='flexCheck' id='flexCheckDefault' label='I have read and agree to the terms'/>
