@@ -1,0 +1,103 @@
+.h-10 {
+    height: 30vh;
+    width: 100%;
+}
+
+.wd-overlap-profile {
+    margin-left: 2%;
+    margin-top: -2.5rem;
+    float: start;
+}
+
+.wd-override-overlap {
+    margin-left: 0;
+    margin-top: -3rem;
+    margin-right: 8px;
+    float: end;
+    text-decoration-color: black;
+}
+
+.wd-profile-stats {
+    list-style-type: none;
+    display: flex;
+    width: 80%;
+    justify-content: space-between;
+    color: #a7a2a2;
+    padding-top: 12px;
+    padding-inline-start: 0;
+    margin-bottom: 8px;
+}
+
+.wd-margin-bottom-large {
+    margin-bottom: 30px;
+}
+
+.wd-margin-bottom-small {
+    margin-bottom: 10px;
+}
+
+.wd-margin-top-small {
+    margin-top: 15px;
+}
+
+
+.wd-toolbar-header {
+    font-size: 20px;
+    margin-left: 18px;
+}
+
+.wd-border {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 125px;
+    border: 5px solid teal;
+}
+
+.wd-margin-left-smaller {
+    margin-left: 15px;
+}
+
+.wd-div-padding {
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.wd-div-padding-v {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.wd-followers-count {
+    width: 40%;
+    list-style: none;
+    justify-content: start;
+}
+
+
+.wd-top-bottom-small-border {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.wd-searchbar {
+    margin-top: 0.6rem;
+    margin-left: -1.5rem;
+}
+
+.wd-profile-name {
+    font-size: 3.5rem;
+}
+
+.wd-profile-email-font-size {
+    font-size: 2.5rem;
+}
+
+.wd-top-bottom-medium-border {
+    margin-top: 4rem;
+    margin-bottom: 3rem;
+    text-decoration: none;
+}
+
+.wd-right-margin {
+    margin-right: 0.4rem;
+}

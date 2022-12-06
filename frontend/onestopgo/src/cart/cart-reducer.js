@@ -1,7 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {addToCartThunk, getCartThunk, removeFromCartThunk, updateCartThunk} from "./cart-thunk";
-import M from 'materialize-css';
-
 
 const initialState = {
     cartData: {},
@@ -28,7 +26,6 @@ const cartSlice = createSlice({
         [addToCartThunk.fulfilled]: (state, {payload}) => {
             state.cartData = payload
             state.loading = false
-            M.toast({html: 'Item Added to Cart!'});
         },
 
         [removeFromCartThunk.pending]: (state) => {
