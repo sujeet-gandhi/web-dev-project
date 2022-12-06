@@ -1,6 +1,11 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import * as service from './product-service'
 
+export const getAllProductsOfStoreAdminThunk = createAsyncThunk (
+    'onestopgo/getAllProductsOfStoreAdmin',
+    async () => await service.getAllProductsOfStoreAdmin()
+)
+
 export const getProductsOfStoreThunk = createAsyncThunk (
     'onestopgo/getAllProductsOfStore',
     async (storeId) => await service.getAllProductsOfStore(storeId)

@@ -5,14 +5,12 @@ import com.neu.onestopgo.models.Product;
 import com.neu.onestopgo.models.Store;
 import com.neu.onestopgo.models.StoreItemQuantity;
 import com.neu.onestopgo.response.StoreItemQuantityResponseObject;
-import com.neu.onestopgo.services.CategoryService;
-import com.neu.onestopgo.services.ProductService;
-import com.neu.onestopgo.services.StoreItemService;
-import com.neu.onestopgo.services.StoreService;
+import com.neu.onestopgo.services.*;
 import com.neu.onestopgo.utils.ImageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,13 +33,25 @@ public class ProductController {
 
     private final CategoryService categoryService;
 
+    private final UserService userService;
+
     @Autowired
     public ProductController(ProductService productService, StoreService storeService,
-                             StoreItemService storeItemService, CategoryService categoryService) {
+                             StoreItemService storeItemService, CategoryService categoryService, UserService userService) {
         this.productService = productService;
         this.storeService = storeService;
         this.storeItemService = storeItemService;
         this.categoryService = categoryService;
+        this.userService = userService;
+    }
+
+    @GetMapping("/storeadmin")
+    public ResponseEntity<List<StoreItemQuantityResponseObject>> getAllProductsOfStoreAdmin(Authentication authentication) {
+        return ResponseEntity.ok(storeItemService
+                .getProductsInAStore(userService.getStoreIdOfStoreAdmin(authentication.getName()))
+                .stream()
+                .map((StoreItemQuantity::getResponseObject))
+                .collect(Collectors.toList()));
     }
 
     @GetMapping("/store/{storeId}")

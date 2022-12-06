@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import React, {useEffect, useState} from "react";
-import {createProductThunk, getProductsOfStoreThunk} from "../products/product-thunk";
+import {createProductThunk, getAllProductsOfStoreAdminThunk} from "../products/product-thunk";
 import {getHomeDataThunk} from "../home/home-thunk";
 import {getUserDataThunk} from "../login/login-thunk";
 
@@ -10,20 +10,17 @@ const StoreAdmin = () => {
     const {homeData, loading} = useSelector(state => state.home)
     const {productData, productLoading} = useSelector(state => state.product)
     const {loggedIn, loggedInUser} = useSelector(state => state.login)
-
-    const [createProductState, setCreateProductState] = useState({
-        storeId: 9, // walmart
-        inStock: true,
-    });
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getHomeDataThunk())
         dispatch(getUserDataThunk())
-        if (loggedIn && loggedInUser) {
-            dispatch(getProductsOfStoreThunk(loggedInUser.storeId))
-        }
+        dispatch(getAllProductsOfStoreAdminThunk())
     }, []);
+
+    const [createProductState, setCreateProductState] = useState({
+        inStock: true,
+    });
 
 
     const handleProductDataEntry = ({target}) => {
