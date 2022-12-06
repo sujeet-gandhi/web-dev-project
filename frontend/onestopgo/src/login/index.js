@@ -120,7 +120,7 @@ export const LoginForm = () => {
                             <MDBInput wrapperClass='mb-4' label='Password'  type='password' onChange={event => setRegisterPassword(event.target.value)}/>
                             <MDBInput wrapperClass='mb-4' label='Address' type='text' onChange={event => setRegisterAddress(event.target.value)}/>
                             <MDBInput wrapperClass='mb-4' label='Contact' type='tel' onChange={event => setRegisterContact(event.target.value)}/>
-                            <MDBInput wrapperClass='mb-4' label='Image' type='image' onChange={event => setImage(event.target.files[0])}
+                            <MDBInput wrapperClass='mb-4' label='Image' type='file' onChange={event => setImage(event.target.files[0])}/>
 
                             <div className='d-flex justify-content-center mb-4'>
                                 <MDBCheckbox name='flexCheck' id='flexCheckDefault' label='I have read and agree to the terms'/>
