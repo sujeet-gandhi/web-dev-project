@@ -4,6 +4,9 @@ import {getOrderListThunk} from "./orders-thunk";
 import Loader from "../components/loader";
 import {OrderItem} from "./order-item";
 import {getUserDataThunk} from "../login/login-thunk";
+import {LoginSuggest} from "../components/login-prompt";
+import Lottie from "lottie-react";
+import order from "../lottie/order.json";
 
 export const OrdersComponents = () => {
     const {ordersData, loading} = useSelector(state => state.order)
@@ -16,7 +19,7 @@ export const OrdersComponents = () => {
         dispatch(getUserDataThunk())
     }, []);
 
-    if (!loggedIn) return <div className={'card'}><center><h2>Login to See Orders</h2></center></div>;
+    if (!loggedIn) return <LoginSuggest pageName={'Orders'}/>;
     if (!ordersData) return null;
     return (
         <>
@@ -24,7 +27,9 @@ export const OrdersComponents = () => {
             {!loading &&
                 <>
                     <center>
-                        <h1>Your OneStopGo Orders</h1>
+                        <div className={'container w-25'}>
+                            <Lottie width={10} animationData={order} loop={false} />
+                        </div>
                     </center>
                     <ul>
                         {

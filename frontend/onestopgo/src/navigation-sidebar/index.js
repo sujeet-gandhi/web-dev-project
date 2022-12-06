@@ -23,10 +23,11 @@ const NavigationSidebar = () => {
             <Link to="/search" className={`list-group-item wd-sidenav-side-item ${active === 'search' || active === 'results' ? 'teal' : ''}`}>
                 <FontAwesomeIcon className="wd-sidenav-icon" icon={faSearch}/> Search
             </Link>
-
-            <Link to="/orders" className={`list-group-item wd-sidenav-side-item ${active === 'orders' ? 'teal' : ''}`}>
-                <FontAwesomeIcon icon={faBoxes} className="wd-sidenav-icon" /> Orders
-            </Link>
+            {loggedIn &&
+                <Link to="/orders" className={`list-group-item wd-sidenav-side-item ${active === 'orders' ? 'teal' : ''}`}>
+                    <FontAwesomeIcon icon={faBoxes} className="wd-sidenav-icon" /> Orders
+                </Link>
+            }
             <Link to="/stores" className={`list-group-item wd-sidenav-side-item ${active === 'stores' ? 'teal' : ''}`}>
                 <FontAwesomeIcon icon={faStore} className="wd-sidenav-icon" /> Stores
             </Link>

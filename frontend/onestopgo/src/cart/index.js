@@ -5,6 +5,7 @@ import {getCartThunk, placeOrderThunk} from "./cart-thunk";
 import CartList from "./cart-list";
 import Loader from "../components/loader";
 import {getUserDataThunk} from "../login/login-thunk";
+import {LoginSuggest} from "../components/login-prompt";
 
 export const CartComponent = () => {
     const {cartData, loading} = useSelector(state => state.cart)
@@ -28,7 +29,7 @@ export const CartComponent = () => {
         handleOnOrdersClicked()
     }
 
-    if (!loggedIn) return <div className={'card'}><center><h2>Login to See Cart</h2></center></div>;
+    if (!loggedIn) return <LoginSuggest pageName={'Shopping Cart'} />;
     return (
         <>
             {loading && <Loader/>}

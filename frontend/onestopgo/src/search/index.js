@@ -8,6 +8,8 @@ import {getSearchDataThunk} from "../home/home-thunk";
 import {useLocation} from "react-router";
 import ProductList from "../products/product-list";
 import StoreMap from "../store-map";
+import Lottie from "lottie-react";
+import searching from "../lottie/searching.json";
 
 export const SearchComponent = () => {
     const {searchData, loading} = useSelector(state => state.search)
@@ -22,15 +24,16 @@ export const SearchComponent = () => {
         dispatch(getSearchDataThunk(searchTerm))
     }, []);
 
-    function handleChange(e) {
-        setSearchText(e.target.value);
-    }
-
     if (!searchData) return null;
     console.log("Search Data = " +searchData);
     return (
         <>
-            {loading && <h1>Looking up "{searchText}" ...</h1>}
+            {loading &&
+                <div className={'center'}>
+                    <h1>Looking up "{searchText}" ...</h1>
+                    <Lottie width={100} animationData={searching} loop={true} />;
+                </div>
+            }
             {!loading &&
                 <>
                     <h1>Products</h1>
