@@ -21,6 +21,8 @@ import ProductDetailItem from "../products/detail-page/product-detail-item";
 import loginReducer from "../login/login-reducer";
 import {Logout} from "../logout";
 import RootOperations from "../root-operations";
+import StoreAdmin from "../store-admin";
+import StoreDetailItem from "../store/detail-page/store-detail-item";
 
 const store = configureStore({
     reducer: {home: homeReducer, store: storeReducer, user: userReducer, search: searchReducer,
@@ -42,6 +44,7 @@ function OneStopGo() {
                         <Route path="orders" element={<OrdersComponents/>}/>
                         <Route path="products" element={<h1>We will display all the products here</h1>}/>
                         <Route path="stores" element={<h1>All Store list here</h1>}/>
+                        <Route path="/store" element={<StoreDetailItem/>}/>
                         <Route path="product" element={<ProductDetailItem/>}/>
                         <Route path="lists" element={<h1>Lists Coming Soon</h1>}/>
                         <Route path="profile" element={<ProfileComponent/>}/>
@@ -50,6 +53,7 @@ function OneStopGo() {
                         <Route path="results/*" element={<SearchComponent/>}/>
                         <Route path="edit-profile" element={<ProfileComponent/>}/>
                         <Route path="root" element={<RootOperations/>}/>
+                        <Route path="storeadmin" element={<StoreAdmin/>}/>
                         <Route path="logout" element={<Logout/>}/>
                     </Routes>
                 </div>
