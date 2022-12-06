@@ -11,5 +11,5 @@ export const hitLogout = async () => {
         .then(() => {
             console.log("user logged out")
             return "logout success"
-        }).catch(error => error));
+        }).catch(error => error)).data;
 }

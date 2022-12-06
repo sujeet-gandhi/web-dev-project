@@ -14,9 +14,11 @@ const loginSlice = createSlice({
     extraReducers: {
         [loginThunk.pending]: (state) => {
             state.loggedIn = false
+            state.loggedInUser = {}
         },
         [loginThunk.fulfilled]: (state, {payload}) => {
             state.loggedIn = true
+            state.loggedInUser = payload
             return state
         },
         [logoutThunk.fulfilled]: (state, {payload}) => {

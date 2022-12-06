@@ -11,16 +11,15 @@ export const hitLogin = async (loginDetails) => {
     formData.append("username", loginDetails.email);
     formData.append("password", loginDetails.password);
 
-    return await axios.post(LOGIN_API, formData, {
+    return (await axios.post(LOGIN_API, formData, {
         mode: 'no-cors',
         headers: {
             'Content-Type': 'multipart/form-data'
         }
-    }).then(() => {
+    }).then(async () => {
         console.log("login success")
-    }).catch(error => {
-        console.log("logging error ", error)
-    })
+        return (await axios.get(USER_DETAILS_API)).data
+    }).catch(error => error)).data
 }
 
 
