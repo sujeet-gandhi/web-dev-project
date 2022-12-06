@@ -71,7 +71,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     if(session!=null) {
                         session.setAttribute(StringConstants.LOGGED_IN_USER, username);
                     }
-                    System.out.println("The user " + username + " has logged in.");
                    response.setStatus(HttpStatus.NO_CONTENT.value());
                    response.addHeader("username",username);
                 })
