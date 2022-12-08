@@ -37,6 +37,9 @@ export const CartComponent = () => {
                 <div className={'card wd-cart-item'}>
                     <CartList cartItems={cartData.cart.items} userType={loggedInUser.type}/>
                     <div>
+                        <h4 className={'right'}>Total: ${cartData.cart.orderTotal}</h4>
+                    </div>
+                    <div>
                         {
                             (loggedInUser.type === "USER") &&
                             <button onClick={handleOnCheckoutClicked} className="btn waves-effect waves-light teal white-text wd-margin-top-bottom right" type="submit" name="action">

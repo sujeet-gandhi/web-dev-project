@@ -35,7 +35,7 @@ function OneStopGo() {
         <Provider store={store}>
             <NavBar links={[{link : 'cart', name : 'Cart', icon : 'shopping_cart'}, {link : 'orders', name : 'Orders', icon : 'kitchen'}]}/>
             <div className="row mt-4">
-                <div className="col-2 col-md-2 col-lg-1 col-xl-2">
+                <div className="col-xl-2 hide-on-med-and-down">
                     <NavigationSidebar active="home"/>
                 </div>
                 <div className="col-12 col-md-12 col-lg-7 col-xl-7"
@@ -45,9 +45,8 @@ function OneStopGo() {
                         <Route path="orders" element={<OrdersComponents/>}/>
                         <Route path="products" element={<h1>We will display all the products here</h1>}/>
                         <Route path="stores" element={<h1>All Store list here</h1>}/>
-                        <Route path="/store" element={<StoreDetailItem/>}/>
+                        <Route path="store" element={<StoreDetailItem/>}/>
                         <Route path="product" element={<ProductDetailItem/>}/>
-                        <Route path="lists" element={<h1>Lists Coming Soon</h1>}/>
                         <Route path="profile" element={<ProfileComponent/>}/>
                         <Route path="cart" element={<CartComponent/>}/>
                         <Route path="search" element={<EmptySearchView/>}/>
@@ -59,7 +58,7 @@ function OneStopGo() {
                         <Route path="category/:categoryId" element={<CategorySummary/>}/>
                     </Routes>
                 </div>
-                <div className="d-sm-none d-md-none d-lg-block col-lg-3 col-xl-3">
+                <div className="col-lg-3 col-xl-3 hide-on-med-and-down">
                     <CartComponent/>
                 </div>
             </div>

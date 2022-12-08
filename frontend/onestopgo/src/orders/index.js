@@ -7,6 +7,7 @@ import {getUserDataThunk} from "../login/login-thunk";
 import {LoginSuggest} from "../components/login-prompt";
 import Lottie from "lottie-react";
 import order from "../lottie/order.json";
+import '../index.css';
 
 export const OrdersComponents = () => {
     const {ordersData, loading} = useSelector(state => state.order)
@@ -26,12 +27,12 @@ export const OrdersComponents = () => {
             {loading && <Loader/>}
             {!loading &&
                 <>
-                    <center>
-                        <div className={'container w-25'}>
-                            <Lottie width={10} animationData={order} loop={false} />
+                    <center className={'wd-screen-top-lottie'}>
+                        <div className={'container w-50 h-50 wd-screen-top-lottie'}>
+                            <Lottie className={'w-50 h-50 wd-screen-top-lottie'} width={10} animationData={order} loop={false} />
                         </div>
                     </center>
-                    <ul>
+                    <ul className={'wd-screen-top-lottie'}>
                         {
                             ordersData.orders.map ((order) =>
                                 <l1>

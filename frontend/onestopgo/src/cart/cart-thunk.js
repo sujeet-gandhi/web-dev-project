@@ -18,7 +18,7 @@ export const removeFromCartThunk = createAsyncThunk (
 )
 
 export const updateCartThunk = createAsyncThunk (
-    'onestopgo/removeFromCart',
+    'onestopgo/updateCart',
     async (orderItemQuantity) => await service.updateCart(orderItemQuantity)
 )
 

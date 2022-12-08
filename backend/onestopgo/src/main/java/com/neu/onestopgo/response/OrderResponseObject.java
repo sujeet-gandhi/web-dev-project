@@ -18,6 +18,16 @@ public class OrderResponseObject {
 
     private Date orderDeliveryDate;
 
+    private float orderTotal;
+
+    public float getOrderTotal() {
+        return orderTotal;
+    }
+
+    public void setOrderTotal(float orderTotal) {
+        this.orderTotal = orderTotal;
+    }
+
     public Date getOrderDate() {
         return orderDate;
     }
