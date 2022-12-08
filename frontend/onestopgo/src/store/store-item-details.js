@@ -1,20 +1,36 @@
+import React from "react";
+import {Link} from "react-router-dom";
+
+const ONESTOPGO_API = process.env.REACT_APP_ONESTOPGO_API_BASE;
+
+
 export const StoreItemDetails = ({store}) => {
     return (
-        <div className="border border-1 row">
-            <div className="row fs-3 fw-bold">
-                {store.name}
-            </div>
-            <div className="row">
-                {store.location}
-            </div>
-            <div className="row">
-                {store.type}
-            </div>
-            <div className="row">
-                <ul>
-                    {store.storeAdmins && store.storeAdmins.map((each) => <li>{each.email}</li>)}
-                </ul>
+        <div className="row">
+            <div className="card">
+                <div className="card-image">
+                    <img src={ONESTOPGO_API + "/" + store.imageUrl}/>
+                </div>
+                <div className="card-content">
+                    <div className="fs-5 fw-bold">
+                        {store.name}
+                    </div>
+                    <div >
+                        <i className="material-icons me-1 tiny text-danger">location_on</i>{store.location}
+                    </div>
+                    <div >
+                        <i className="material-icons me-1 tiny">store</i>{store.type}
+                    </div>
+                    <div >
+                        <ul>
+                            {store.storeAdmins && store.storeAdmins.map((each) =>
+                                <li><i className="material-icons me-1 tiny">mail</i>{each.email}</li>)}
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
+
     );
 }
+

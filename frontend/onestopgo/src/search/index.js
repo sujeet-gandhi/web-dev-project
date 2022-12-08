@@ -8,47 +8,34 @@ import {getSearchDataThunk} from "../home/home-thunk";
 import {useLocation} from "react-router";
 import ProductList from "../products/product-list";
 import StoreMap from "../store-map";
+import Lottie from "lottie-react";
+import searching from "../lottie/searching.json";
 
 export const SearchComponent = () => {
     const {searchData, loading} = useSelector(state => state.search)
-    const dispatch = useDispatch();
-    const location = useLocation();
     const [searchText, setSearchText] = useState("");
+    const dispatch = useDispatch();
+    const {pathname} = useLocation();
+    const paths = pathname.split('/')
+    const searchTerm = paths[2];
 
     useEffect(() => {
-        setSearchText(location.state.searchTerm);
-        dispatch(getSearchDataThunk(location.state.searchTerm))
+        setSearchText(searchTerm);
+        dispatch(getSearchDataThunk(searchTerm))
     }, []);
 
-    function handleChange(e) {
-        setSearchText(e.target.value);
-    }
-
     if (!searchData) return null;
-
-    const handleOnSearchSubmit = () => {
-        dispatch(getSearchDataThunk(searchText))
-    }
-    console.log(searchData.products)
+    console.log("Search Data = " +searchData);
     return (
         <>
-            {loading && <h1>Looking up "{searchText}" ...</h1>}
+            {loading &&
+                <div className={'center'}>
+                    <h1>Looking up "{searchText}" ...</h1>
+                    <Lottie width={100} animationData={searching} loop={true} />;
+                </div>
+            }
             {!loading &&
                 <>
-                    <nav>
-                        <div className="nav-wrapper teal">
-                            <form onSubmit={handleOnSearchSubmit}>
-                                <div className="input-field">
-                                    <input id="search" type="search" defaultValue={searchText} onChange={handleChange} required/>
-                                    <label className="label-icon" htmlFor="search">
-                                        <i className="material-icons">search</i>
-                                    </label>
-                                    <i className="material-icons">close</i>
-                                </div>
-                            </form>
-                        </div>
-                    </nav>
-
                     <h1>Products</h1>
                     <ProductList storeItemQuantityArray={searchData.products}/>
 

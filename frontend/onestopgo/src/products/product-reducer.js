@@ -1,9 +1,16 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {createProductThunk, getProductsOfStoreThunk} from "./product-thunk";
+import {
+    createProductThunk,
+    getAllProductsOfStoreAdminThunk,
+    getProductsOfCategoryThunk,
+    getProductsOfStoreThunk, updateProductThunk
+} from "./product-thunk";
 
 const initialState = {
     productData: [],
-    loading: true
+    productLoading: true,
+    categoryProductData: [],
+    categoryProductDataLoading: true,
 }
 
 const productSlice = createSlice({
@@ -11,15 +18,36 @@ const productSlice = createSlice({
     initialState: initialState,
     extraReducers: {
         [getProductsOfStoreThunk.pending]: (state) => {
-            state.loading = true
+            state.productLoading = true
             state.productData = []
         },
         [getProductsOfStoreThunk.fulfilled]: (state, {payload}) => {
             state.productData = payload
-            state.loading = false
+            state.productLoading = false
+        },
+        [getAllProductsOfStoreAdminThunk.pending]: (state) => {
+            state.productLoading = true
+            state.productData = []
+        },
+        [getAllProductsOfStoreAdminThunk.fulfilled]: (state, {payload}) => {
+            state.productData = payload
+            state.productLoading = false
         },
         [createProductThunk.fulfilled]: (state, {payload}) => {
             state.productData.unshift(payload)
+        },
+        [getProductsOfCategoryThunk.fulfilled]: (state, {payload}) => {
+            state.categoryProductData = payload
+            state.categoryProductDataLoading = false
+        },
+        [getProductsOfCategoryThunk.rejected]: (state) => {
+            state.categoryProductData = []
+            state.categoryProductDataLoading = true
+        },
+        [updateProductThunk.fulfilled]: (state, {payload}) => {
+            const index = state.productData.findIndex((each) => each.productId === payload.productId)
+            state.productData[index] = payload
+            state.productLoading = false
         }
     }
     });

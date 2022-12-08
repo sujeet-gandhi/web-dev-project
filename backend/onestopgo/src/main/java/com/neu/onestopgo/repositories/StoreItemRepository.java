@@ -11,4 +11,6 @@ public interface StoreItemRepository extends CrudRepository<StoreItemQuantity, U
     public List<StoreItemQuantity> findAllByStoreId(int storeId);
 
     public StoreItemQuantity findByProductId(UUID productId);
+
+    public List<StoreItemQuantity> findAllByProduct_Type(String categoryName);
 }

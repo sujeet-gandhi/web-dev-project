@@ -4,14 +4,17 @@ import {useNavigate} from "react-router";
 import {getCartThunk, placeOrderThunk} from "./cart-thunk";
 import CartList from "./cart-list";
 import Loader from "../components/loader";
-import NavBar from "../nav-bar";
+import {getUserDataThunk} from "../login/login-thunk";
+import {LoginSuggest} from "../components/login-prompt";
 
 export const CartComponent = () => {
     const {cartData, loading} = useSelector(state => state.cart)
+    const {loggedIn, loggedInUser} = useSelector(state => state.login)
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getCartThunk())
+        dispatch(getUserDataThunk())
     }, []);
 
     const nav = useNavigate()
@@ -26,28 +29,19 @@ export const CartComponent = () => {
         handleOnOrdersClicked()
     }
 
-    const mockUserData = () => {
-        return {
-            data: 'data'
-        }
-    }
-
-    if (!cartData) return null;
+    if (!loggedIn) return <LoginSuggest pageName={'Shopping Cart'} />;
     return (
         <>
-            <NavBar links={[{link : '', name : 'Home'}, {link : 'orders', name : 'Orders'}]} userData={mockUserData()}/>
             {loading && <Loader/>}
             {!loading &&
-                <>
-                    <h1>Your OneStopGo Cart</h1>
-                    <br></br>
+                <div className={'card wd-cart-item'}>
                     <CartList cartItems={cartData.cart.items} />
                     <div>
-                        <button onClick={handleOnCheckoutClicked} className="btn waves-effect waves-light teal white-text wd-margin-top-bottom center" type="submit" name="action">
+                        <button onClick={handleOnCheckoutClicked} className="btn waves-effect waves-light teal white-text wd-margin-top-bottom right" type="submit" name="action">
                             Checkout <i className="material-icons right">shopping_cart</i>
                         </button>
                     </div>
-                </>
+                </div>
             }
         </>
     );

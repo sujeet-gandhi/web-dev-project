@@ -21,7 +21,7 @@ public class OrderService {
     private final StoreItemService storeItemService;
 
     @Autowired
-    public OrderService(OrderRepository orderRepository,OrderItemQuantityRepository orderItemQuantityRepository, StoreItemService storeItemService) {
+    public OrderService(OrderRepository orderRepository, OrderItemQuantityRepository orderItemQuantityRepository, StoreItemService storeItemService) {
         this.orderRepository = orderRepository;
         this.storeItemService = storeItemService;
         this.orderItemQuantityRepository = orderItemQuantityRepository;
@@ -54,11 +54,17 @@ public class OrderService {
         if (storeProduct.getQuantity() < requestObject.getQuantity()) {
             throw new IllegalStateException("Cannot full-fill order, not enough quantity");
         }
+
+        storeProduct.setQuantity(storeProduct.getQuantity() - requestObject.getQuantity());
+        storeItemService.updateStoreItemQuantity(storeProduct);
+        Store currentStore = storeProduct.getStore();
+
         var cart = getCart(user);
 
         OrderItemQuantity orderItemQuantity = new OrderItemQuantity();
         orderItemQuantity.setProduct(new Product(storeProduct.getProduct()));
         orderItemQuantity.setQuantity(requestObject.getQuantity());
+        orderItemQuantity.setStore(currentStore);
         orderItemQuantity.setOrder(cart);
 
         var cartItems = cart.getOrderItemQuantitySet();
@@ -82,6 +88,12 @@ public class OrderService {
         if (cart.getOrderItemQuantitySet().contains(orderItem)) {
             cart.getOrderItemQuantitySet().remove(orderItem);
             orderItemQuantityRepository.deleteById(orderItem.getId());
+
+            storeItemService.updateStoreIdAndProductIdQuantity(orderItem.getStore().getId(),
+                    orderItem.getProduct().getId().toString(),
+                    orderItem.getQuantity(),
+                    true);
+
             return orderRepository.save(cart).getResponseObject();
         } else {
             throw new IllegalStateException("Item not in cart or already removed");
@@ -148,8 +160,8 @@ public class OrderService {
     /**
      * Do a synchronous call to verify that the payment is made.
      *
-     * @param orderId   unique identifier of the order
-     * @return  verification status of the payment
+     * @param orderId unique identifier of the order
+     * @return verification status of the payment
      */
     private boolean verifyPayment(UUID orderId) {
         return true;

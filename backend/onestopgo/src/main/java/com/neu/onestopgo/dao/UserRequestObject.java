@@ -61,7 +61,7 @@ public class UserRequestObject {
         return new User()
                 .setEmail(this.email)
                 .setPassword(this.password)
-                .setActive(true)
+                .setEnabled(true)
                 .setAddress(this.address)
                 .setContact(this.contact)
                 .setImageUrl(this.imageUrl);

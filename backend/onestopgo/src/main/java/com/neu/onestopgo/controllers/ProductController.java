@@ -4,20 +4,20 @@ import com.neu.onestopgo.dao.ProductRequestObject;
 import com.neu.onestopgo.models.Product;
 import com.neu.onestopgo.models.Store;
 import com.neu.onestopgo.models.StoreItemQuantity;
-import com.neu.onestopgo.services.CategoryService;
-import com.neu.onestopgo.services.ProductService;
-import com.neu.onestopgo.services.StoreItemService;
-import com.neu.onestopgo.services.StoreService;
-import com.neu.onestopgo.utils.ImageUploadUtil;
+import com.neu.onestopgo.response.StoreItemQuantityResponseObject;
+import com.neu.onestopgo.services.*;
+import com.neu.onestopgo.utils.ImageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
@@ -33,27 +33,47 @@ public class ProductController {
 
     private final CategoryService categoryService;
 
+    private final UserService userService;
+
     @Autowired
     public ProductController(ProductService productService, StoreService storeService,
-                             StoreItemService storeItemService, CategoryService categoryService) {
+                             StoreItemService storeItemService, CategoryService categoryService, UserService userService) {
         this.productService = productService;
         this.storeService = storeService;
         this.storeItemService = storeItemService;
         this.categoryService = categoryService;
+        this.userService = userService;
+    }
+
+    @GetMapping("/storeadmin")
+    public ResponseEntity<List<StoreItemQuantityResponseObject>> getAllProductsOfStoreAdmin(Authentication authentication) {
+        return ResponseEntity.ok(storeItemService
+                .getProductsInAStore(userService.getStoreIdOfStoreAdmin(authentication.getName()))
+                .stream()
+                .map((StoreItemQuantity::getResponseObject))
+                .collect(Collectors.toList()));
     }
 
     @GetMapping("/store/{storeId}")
-    public ResponseEntity<List<StoreItemQuantity>> getAllProductsInAStore(@PathVariable("storeId") int storeId) {
-        return ResponseEntity.ok(storeItemService.getProductsInAStore(storeId));
+    public ResponseEntity<List<StoreItemQuantityResponseObject>> getAllProductsInAStore(@PathVariable("storeId") int storeId) {
+        return ResponseEntity.ok(storeItemService.getProductsInAStore(storeId).stream().map((StoreItemQuantity::getResponseObject)).collect(Collectors.toList()));
     }
 
+    @GetMapping("/category/{categoryId}")
+    public ResponseEntity<List<StoreItemQuantityResponseObject>> getAllProductsInACategory(@PathVariable("categoryId") int categoryId) {
+        return ResponseEntity.ok(storeItemService
+                .getProductInStoreBelongingToACategory(categoryId)
+                .stream()
+                .map((StoreItemQuantity::getResponseObject))
+                .collect(Collectors.toList()));
+    }
 
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity createProductWithQuantity(@RequestPart("image") MultipartFile multipartFile,
                                                     @RequestPart("product") ProductRequestObject productRequestObject) throws Exception {
         String fileName = UUID.randomUUID() + "." + Objects.requireNonNull(multipartFile.getOriginalFilename()).split("\\.")[1];
         productRequestObject.setImageUrl(PRODUCT_IMAGE_DIR + fileName);
-        ImageUploadUtil.saveFileAndCreateDirectory(PRODUCT_IMAGE_DIR, fileName, multipartFile);
+        ImageUtil.saveFileAndCreateDirectory(PRODUCT_IMAGE_DIR, fileName, multipartFile);
 
         Store store = storeService.getStoreById(productRequestObject.getStoreId());
         if (store == null)
@@ -73,8 +93,15 @@ public class ProductController {
     }
 
     @PutMapping
-    public ResponseEntity updateProductWithQuantity(ProductRequestObject productRequestObject) {
-        return ResponseEntity.ok(storeItemService.updateStoreIdAndProductIdQuantity(productRequestObject.getStoreId(),
-                productRequestObject.getProductId(), productRequestObject.getStoreQuantity()));
+    public ResponseEntity updateProductWithQuantity(@RequestBody ProductRequestObject productRequestObject,
+                                                    Authentication authentication) {
+        return ResponseEntity.ok(
+                storeItemService.updateStoreIdAndProductIdQuantity(
+                        userService.getStoreIdOfStoreAdmin(authentication.getName()),
+                        productRequestObject.getProductId(),
+                        productRequestObject.getStoreQuantity(),
+                        true
+                )
+        );
     }
 }

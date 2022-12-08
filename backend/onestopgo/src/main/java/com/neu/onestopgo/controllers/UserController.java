@@ -3,7 +3,8 @@ package com.neu.onestopgo.controllers;
 import com.neu.onestopgo.dao.UserRequestObject;
 import com.neu.onestopgo.models.User;
 import com.neu.onestopgo.services.UserService;
-import com.neu.onestopgo.utils.ImageUploadUtil;
+import com.neu.onestopgo.utils.ImageUtil;
+import com.neu.onestopgo.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -35,9 +36,36 @@ public class UserController {
         }
     }
 
-    @PostMapping()
-    public ResponseEntity<User> createUser(@RequestBody UserRequestObject userRequestObject) {
-        return ResponseEntity.ok(userService.createNewUser(userRequestObject));
+    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity createUser(@RequestPart("image") MultipartFile multipartFile,
+                                           @RequestPart("user") UserRequestObject userRequestObject) {
+        try {
+            String fileName = UUID.randomUUID() + "." + Objects.requireNonNull(multipartFile.getOriginalFilename()).split("\\.")[1];
+            userRequestObject.setImageUrl(USER_IMAGE_DIR + fileName);
+            ImageUtil.saveFileAndCreateDirectory(USER_IMAGE_DIR, fileName, multipartFile);
+
+            return ResponseEntity.ok(userService.createNewUser(userRequestObject));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PutMapping(path = "/{userId}", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity updateUserProfile(@RequestPart("image") MultipartFile multipartFile,
+                                            @RequestPart("user") UserRequestObject userRequestObject, @PathVariable int userId) {
+        try {
+            String fileName = UUID.randomUUID() + "." + Objects.requireNonNull(multipartFile.getOriginalFilename()).split("\\.")[1];
+            userRequestObject.setImageUrl(USER_IMAGE_DIR + fileName);
+            ImageUtil.saveFileAndCreateDirectory(USER_IMAGE_DIR, fileName, multipartFile);
+
+            String existingImageUrlForDeletion = userService.getExistingImageUrlOfUser(userId);
+            if (!Utils.IsNullOrEmpty(existingImageUrlForDeletion))
+                ImageUtil.removeFileFromDirectory(USER_IMAGE_DIR, existingImageUrlForDeletion);
+
+            return ResponseEntity.ok(userService.updateUserProfile(userRequestObject, userId));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PostMapping(path = "/storeadmin", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
@@ -46,7 +74,7 @@ public class UserController {
         try {
             String fileName = UUID.randomUUID() + "." + Objects.requireNonNull(multipartFile.getOriginalFilename()).split("\\.")[1];
             userRequestObject.setImageUrl(USER_IMAGE_DIR + fileName);
-            ImageUploadUtil.saveFileAndCreateDirectory(USER_IMAGE_DIR, fileName, multipartFile);
+            ImageUtil.saveFileAndCreateDirectory(USER_IMAGE_DIR, fileName, multipartFile);
 
             return ResponseEntity.ok(userService.createNewStoreAdmin(userRequestObject));
         } catch (Exception e) {

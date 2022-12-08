@@ -12,15 +12,12 @@ public class User {
     @Column(name = "user_id")
     private int id;
     private String email;
+    private boolean enabled;
     private String password;
 
     private String address;
     private String contact;
-
-    private boolean active;
-
     private String type;
-
     private String imageUrl;
 
     // for store admins
@@ -77,15 +74,6 @@ public class User {
         return this;
     }
 
-    public boolean isActive() {
-        return active;
-    }
-
-    public User setActive(boolean active) {
-        this.active = active;
-        return this;
-    }
-
     public String getType() {
         return type;
     }
@@ -119,6 +107,15 @@ public class User {
 
     public User setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+        return this;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public User setEnabled(boolean enabled) {
+        this.enabled = enabled;
         return this;
     }
 }

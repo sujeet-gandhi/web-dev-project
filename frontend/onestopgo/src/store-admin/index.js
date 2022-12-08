@@ -1,23 +1,26 @@
 import {useDispatch, useSelector} from "react-redux";
 import React, {useEffect, useState} from "react";
-import {createProductThunk, getProductsOfStoreThunk} from "../products/product-thunk";
+import {createProductThunk, getAllProductsOfStoreAdminThunk, updateProductThunk} from "../products/product-thunk";
 import {getHomeDataThunk} from "../home/home-thunk";
+import {getUserDataThunk} from "../login/login-thunk";
 
 const ONESTOPGO_API = process.env.REACT_APP_ONESTOPGO_API_BASE;
 
 const StoreAdmin = () => {
     const {homeData, loading} = useSelector(state => state.home)
     const {productData, productLoading} = useSelector(state => state.product)
-    const [createProductState, setCreateProductState] = useState({
-        storeId: 9, // walmart
-        inStock: true,
-    });
+    const {loggedIn, loggedInUser} = useSelector(state => state.login)
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getHomeDataThunk())
-        dispatch(getProductsOfStoreThunk(9))
+        dispatch(getUserDataThunk())
+        dispatch(getAllProductsOfStoreAdminThunk())
     }, []);
+
+    const [createProductState, setCreateProductState] = useState({
+        inStock: true,
+    });
 
 
     const handleProductDataEntry = ({target}) => {
@@ -31,6 +34,15 @@ const StoreAdmin = () => {
             ...createProductState,
             [name]: val
         })
+    }
+
+    const handleQuantityIncrement = (id, incrementAmount) => {
+        const incrementQuantityData = {
+            productId: id,
+            storeQuantity: incrementAmount
+        }
+
+        dispatch(updateProductThunk(incrementQuantityData))
     }
 
     const handleCreateProductSubmit = () => {
@@ -60,7 +72,10 @@ const StoreAdmin = () => {
                                                 <div>Name : {each.product.name}</div>
                                                 <div>Price : {each.product.price}</div>
                                                 <div>Item Quantity : {each.product.quantity}</div>
-                                                <div>Quantity At Store : {each.quantity}</div>
+                                                <div>Quantity At Store : {each.quantity} : <button
+                                                    className="rounded-pill"
+                                                    onClick={() => handleQuantityIncrement(each.product.id, 10)}>+10</button>
+                                                </div>
                                                 <img width={150} height={150}
                                                      src={ONESTOPGO_API + "/" + each.product.imageUrl}
                                                      alt={each.product.name}/>

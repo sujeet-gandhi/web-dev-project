@@ -5,12 +5,15 @@ import com.neu.onestopgo.services.ProductService;
 import com.neu.onestopgo.services.StoreItemService;
 import com.neu.onestopgo.services.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.websocket.server.PathParam;
 import java.util.HashMap;
 import java.util.Map;
@@ -71,5 +74,6 @@ public class HomeController {
 
         return ResponseEntity.ok(response);
     }
+
 
 }

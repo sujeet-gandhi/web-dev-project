@@ -8,7 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
-public class ImageUploadUtil {
+public class ImageUtil {
     // Inspiration from https://www.codejava.net/frameworks/spring-boot/spring-boot-file-upload-tutorial
     // This code is used to save the uploaded images to server
     public static void saveFileAndCreateDirectory(String directory, String fileNameToBeUploaded, MultipartFile fileToBeSaved) throws IOException {
@@ -20,6 +20,18 @@ public class ImageUploadUtil {
             Files.copy(fileToBeSaved.getInputStream(), savePath.resolve(fileNameToBeUploaded), StandardCopyOption.REPLACE_EXISTING);
         } catch (Exception e) {
             throw new IOException("error creating image file : " + fileNameToBeUploaded, e);
+        }
+    }
+
+    public static void removeFileFromDirectory(String directory, String fileToBeDeleted) throws IOException {
+        try {
+            Path deletePath = Paths.get(directory);
+            if (Files.notExists(deletePath))
+                throw new Exception("file does not exist : " + fileToBeDeleted);
+
+            Files.delete(deletePath.resolve(fileToBeDeleted));
+        } catch (Exception e) {
+            throw new IOException("error deleting image file : " + fileToBeDeleted, e);
         }
     }
 }

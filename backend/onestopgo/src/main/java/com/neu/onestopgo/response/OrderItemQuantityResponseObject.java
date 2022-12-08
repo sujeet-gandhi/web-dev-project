@@ -1,6 +1,7 @@
 package com.neu.onestopgo.response;
 
 import com.neu.onestopgo.models.Product;
+import com.neu.onestopgo.models.Store;
 
 import java.util.UUID;
 
@@ -11,6 +12,8 @@ public class OrderItemQuantityResponseObject {
     private Product product;
 
     private float quantity;
+
+    private String storeName;
 
     public UUID getId() {
         return id;
@@ -34,5 +37,13 @@ public class OrderItemQuantityResponseObject {
 
     public void setQuantity(float quantity) {
         this.quantity = quantity;
+    }
+
+    public String getStoreName() {
+        return storeName;
+    }
+
+    public void setStoreName(String storeName) {
+        this.storeName = storeName;
     }
 }
