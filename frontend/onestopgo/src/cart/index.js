@@ -35,11 +35,14 @@ export const CartComponent = () => {
             {loading && <Loader/>}
             {!loading &&
                 <div className={'card wd-cart-item'}>
-                    <CartList cartItems={cartData.cart.items} />
+                    <CartList cartItems={cartData.cart.items} userType={loggedInUser.type}/>
                     <div>
-                        <button onClick={handleOnCheckoutClicked} className="btn waves-effect waves-light teal white-text wd-margin-top-bottom right" type="submit" name="action">
-                            Checkout <i className="material-icons right">shopping_cart</i>
-                        </button>
+                        {
+                            (loggedInUser.type !== "ROOT" && loggedInUser.type !== "STOREADMIN") &&
+                            <button onClick={handleOnCheckoutClicked} className="btn waves-effect waves-light teal white-text wd-margin-top-bottom right" type="submit" name="action">
+                                Checkout <i className="material-icons right">shopping_cart</i>
+                            </button>
+                        }
                     </div>
                 </div>
             }
