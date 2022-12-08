@@ -4,18 +4,28 @@ import {StoreItemDetails} from "../store/store-item-details";
 import {createStoreThunk, getStoresThunk} from "../store/store-thunk";
 import {createUserThunk} from "../user/user-thunk";
 import {createCategoriesThunk} from "../categories/category-thunk";
+import LocationPicker from "../store-map/location-picker";
 
 const RootOperations = () => {
     const {storeData, loading} = useSelector(state => state.store)
     const {userData, _} = useSelector(state => state.user)
     const dispatch = useDispatch();
-    const [createStoreState, setCreateStoreState] = useState({});
+    const [createStoreState, setCreateStoreState] = useState({
+        location: "USE LOCATION PICKER BELOW"
+    });
     const [createStoreAdminState, setCreateStoreAdminState] = useState({});
     const [createCategoryState, setCreateCategoryState] = useState({});
 
     useEffect(() => {
         dispatch(getStoresThunk())
     }, [userData]);
+
+    const handleLocationPick = (map, event, clickDetails) => {
+        setCreateStoreState({
+            ...createStoreState,
+            location: clickDetails.latLng.lat().toString().slice(0, 9) + " " + clickDetails.latLng.lng().toString().slice(0, 9)
+        })
+    }
 
     const handleDataEntryStore = ({target}) => {
         let val = target.value;
@@ -92,14 +102,14 @@ const RootOperations = () => {
                             <div className="fs-2 text-center ">
                                 Create Store
                             </div>
-                            <div className="input-field wd-top-margin-form ">
+                            <div className="input-field wd-top-margin-form">
                                 <input type="text" className="form-control text-bg-light" id="name" name="name"
-                                       value={createStoreState.name}  onChange={handleDataEntryStore}/>
+                                       value={createStoreState.name} onChange={handleDataEntryStore}/>
                                 <label htmlFor="name">Name</label>
                             </div>
                             <div className="input-field mt-2">
                                 <input type="text" className="form-control text-bg-light" id="location" name="location"
-                                       value={createStoreState.location} onChange={handleDataEntryStore}/>
+                                       value={createStoreState.location} disabled/>
                                 <label htmlFor="location">Location</label>
                             </div>
                             <div className="form-floating mt-2">
@@ -133,7 +143,8 @@ const RootOperations = () => {
                                 <label htmlFor="imageUrl">Store Image</label>
                             </div>
                             <div className="text-center">
-                                <button className="btn waves-effect waves-light" type="submit" onClick={handleCreateStoreSubmit}>Create Store
+                                <button className="btn waves-effect waves-light btn-primary" type="submit"
+                                        onClick={handleCreateStoreSubmit}>Create Store
                                 </button>
                             </div>
                         </div>
@@ -187,7 +198,9 @@ const RootOperations = () => {
                                 <label htmlFor="storeAdminImage">Store Admin Image</label>
                             </div>
                             <div className="text-center">
-                                <button className="btn waves-effect waves-light" onClick={handleCreateStoreAdminSubmit}>Create Store Admin</button>
+                                <button className="btn waves-effect waves-light btn-primary"
+                                        onClick={handleCreateStoreAdminSubmit}>Create Store Admin
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -203,8 +216,10 @@ const RootOperations = () => {
                                 <label htmlFor="categoryName">Name</label>
                             </div>
                             <div className="input-field wd-top-margin-form">
-                                <input type="text" className="form-control text-bg-light" id="categoryDes" name="description"
-                                       value={createCategoryState.description} onChange={handleDataEntryCreateCategory}/>
+                                <input type="text" className="form-control text-bg-light" id="categoryDes"
+                                       name="description"
+                                       value={createCategoryState.description}
+                                       onChange={handleDataEntryCreateCategory}/>
                                 <label htmlFor="categoryDes">Description</label>
                             </div>
                             <div>
@@ -214,7 +229,17 @@ const RootOperations = () => {
                                 <label htmlFor="categoryImageUrl">Category Image URL</label>
                             </div>
                             <div className="text-center">
-                                <button className="btn waves-effect waves-light" onClick={handleCreateCategorySubmit}>Create Category</button>
+                                <button className="btn waves-effect waves-light btn-primary"
+                                        onClick={handleCreateCategorySubmit}>Create Category
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="mt-5">
+                        <div className="ms-2 me-2 mt-2 mb-2">
+                            <div className="fs-2 text-center">
+                                For Picking Location of Store
+                                <LocationPicker clickFunction={handleLocationPick}/>
                             </div>
                         </div>
                     </div>
