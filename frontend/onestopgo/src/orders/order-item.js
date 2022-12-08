@@ -2,7 +2,6 @@ import CartItem from "../cart/cart-item";
 import React from "react";
 import {cancelOrderThunk, deliverOrderThunk} from "./orders-thunk";
 import {useDispatch} from "react-redux";
-import {useNavigate} from "react-router";
 
 export const OrderItem = ({order, userType}) => {
 
