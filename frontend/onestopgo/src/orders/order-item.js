@@ -1,14 +1,18 @@
 import CartItem from "../cart/cart-item";
 import React from "react";
-import {cancelOrderThunk} from "./orders-thunk";
+import {cancelOrderThunk, deliverOrderThunk} from "./orders-thunk";
 import {useDispatch} from "react-redux";
 
-export const OrderItem = ({order}) => {
+export const OrderItem = ({order, userType}) => {
 
     const dispatch = useDispatch();
 
     const handleCancelOrder = () => {
         dispatch(cancelOrderThunk(order));
+    }
+
+    const handleDeliverOrder = () => {
+        dispatch(deliverOrderThunk(order))
     }
     
     const uniqueStoreNames = new Set();
@@ -38,6 +42,12 @@ export const OrderItem = ({order}) => {
 
                     <p>Details </p>
                     <span className={'fw-bolder card-title'}>Order is {order.orderState.toString().toLowerCase()}</span>
+                    {
+                        ((userType === "ROOT" || userType === "STOREADMIN") && order.orderState === "PLACED") &&
+                        <div className="fw-bolder card-title">
+                            <button className="btn btn-secondary" onClick={handleDeliverOrder}>Mark as Delivered</button>
+                        </div>
+                    }
                 </div>
                 <div className={'card-action'}>
                     <ul className={'collection'}>

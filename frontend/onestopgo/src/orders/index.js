@@ -35,7 +35,7 @@ export const OrdersComponents = () => {
                         {
                             ordersData.orders.map ((order) =>
                                 <l1>
-                                    <OrderItem order={order} />
+                                    <OrderItem order={order} userType={loggedInUser.type}/>
                                 </l1>
                             )
                         }

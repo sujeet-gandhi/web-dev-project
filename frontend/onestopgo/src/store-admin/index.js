@@ -73,7 +73,7 @@ const StoreAdmin = () => {
                                                 <div>Price : {each.product.price}</div>
                                                 <div>Item Quantity : {each.product.quantity}</div>
                                                 <div>Quantity At Store : {each.quantity} : <button
-                                                    className="rounded-pill"
+                                                    className="rounded-pill btn btn-secondary"
                                                     onClick={() => handleQuantityIncrement(each.product.id, 10)}>+10</button>
                                                 </div>
                                                 <img width={150} height={150}
