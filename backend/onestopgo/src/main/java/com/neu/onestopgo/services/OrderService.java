@@ -115,6 +115,10 @@ public class OrderService {
             throw new IllegalStateException("Unable to update quantity. Store does not have enough quantity");
         }
 
+        if (requestObject.getQuantity() == 0) {
+            return removeFromCart(requestObject.getOrderItemQuantityId(), user);
+        }
+
         var orderItemQuantity = orderItemQuantityRepository
                 .findById(UUID.fromString(requestObject.getOrderItemQuantityId()))
                 .orElseThrow();

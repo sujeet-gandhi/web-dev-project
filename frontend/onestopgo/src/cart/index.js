@@ -37,7 +37,10 @@ export const CartComponent = () => {
                 <div className={'card wd-cart-item'}>
                     <CartList cartItems={cartData.cart.items} />
                     <div>
-                        <button onClick={handleOnCheckoutClicked} className="btn waves-effect waves-light teal white-text wd-margin-top-bottom right" type="submit" name="action">
+                        <h4 className={'right'}>Total: ${cartData.cart.orderTotal}</h4>
+                    </div>
+                    <div>
+                        <button onClick={handleOnCheckoutClicked} className="btn waves-effect waves-light teal white-text right  wd-margin-top-bottom" type="submit" name="action">
                             Checkout <i className="material-icons right">shopping_cart</i>
                         </button>
                     </div>

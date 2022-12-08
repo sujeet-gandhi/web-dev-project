@@ -1,7 +1,9 @@
 package com.neu.onestopgo.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.neu.onestopgo.response.OrderItemQuantityResponseObject;
 import com.neu.onestopgo.response.OrderResponseObject;
+import com.neu.onestopgo.utils.Utils;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
@@ -106,6 +108,15 @@ public class Order1 {
                 .stream()
                 .map(OrderItemQuantity::getResponseObject)
                 .collect(Collectors.toList()));
+
+        float orderTotal = 0;
+
+        for (OrderItemQuantityResponseObject item : orderResponseObject.getItems()) {
+            float total = item.getProduct().getPrice() * item.getQuantity();
+            orderTotal += total;
+        }
+
+        orderResponseObject.setOrderTotal((float)Utils.round(orderTotal, 2));
         return orderResponseObject;
     }
 
