@@ -20,12 +20,9 @@ const ordersSlice = createSlice({
         },
         [cancelOrderThunk.fulfilled]:
             (state, {payload}) => {
+                const orderIndex = state.ordersData.orders.findIndex(o => o.id === payload.orders.id)
+                state.ordersData.orders[orderIndex] = payload.orders
                 state.loading = false
-                const orderIndex = state.ordersData.findIndex(o => o.id.toString() === payload.id.toString())
-                state.ordersData[orderIndex] = {
-                    ...state.ordersData[orderIndex],
-                    ...payload
-                }
             }
     }
     });
