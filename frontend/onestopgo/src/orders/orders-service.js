@@ -7,4 +7,6 @@ export const orderList = async () => {
     return (await axios.get(ORDER_API + "/orderList")).data
 }
 
-
+export const cancelOrder = async (orderId) => {
+    return (await axios.put(ORDER_API + "/cancelOrder/" + orderId)).data
+}
