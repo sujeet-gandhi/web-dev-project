@@ -134,6 +134,20 @@ public class OrderService {
                 .collect(Collectors.toList());
     }
 
+    public List<OrderResponseObject> getOrdersOfAStore(Store store) {
+        List<OrderItemQuantity> orderItemQuantities = orderItemQuantityRepository.findAllByStore(store);
+
+        return orderItemQuantities
+                .stream()
+                .map(OrderItemQuantity::getOrder)
+                .map(Order1::getResponseObject)
+                .collect(Collectors.toList());
+    }
+
+    public List<OrderResponseObject> getAllOrders() {
+        return orderRepository.findAll().stream().map(Order1::getResponseObject).collect(Collectors.toList());
+    }
+
     public OrderResponseObject updateOrderStatus(UUID orderId, OrderState state) {
         var order = getOrderById(orderId);
         if (order != null) {

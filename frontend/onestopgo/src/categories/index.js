@@ -21,7 +21,7 @@ const CategorySummary = () => {
         <>
             {!categoryProductDataLoading &&
                 <>
-                    <ProductList storeItemQuantityArray={categoryProductData}/>
+                    <ProductList storeItemQuantityArray={categoryProductData} userType={loggedInUser.type}/>
                 </>
             }
         </>

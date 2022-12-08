@@ -1,7 +1,7 @@
 import React from "react";
 import CartItem from "./cart-item";
 
-const CartList = ({cartItems}) => {
+const CartList = ({cartItems, userType}) => {
     if (!cartItems) return null;
     console.log(cartItems);
 
@@ -23,6 +23,7 @@ const CartList = ({cartItems}) => {
         <div>
             <ul className={'collection'}>
                 {
+                    (userType === "USER") &&
                     Object.entries(storeAndStoreCartItems)
                         .map(([key, val]) => <>
                             <li className="collection-item fw-bolder">{key}</li>

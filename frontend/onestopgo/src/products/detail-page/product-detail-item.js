@@ -1,25 +1,21 @@
 import React, {useEffect, useState} from "react";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {addToCartThunk} from "../../cart/cart-thunk";
 import {useLocation} from "react-router";
+import {getUserDataThunk} from "../../login/login-thunk";
 
 const ONESTOPGO_API = process.env.REACT_APP_ONESTOPGO_API_BASE;
 
 const ProductDetailItem = () => {
     const [product, setProduct] = useState(null);
+    const {loggedIn, loggedInUser} = useSelector(state => state.login)
     const [storeId, setStoreId] = useState(0);
     const dispatch = useDispatch();
     const location = useLocation();
 
-    const mockUserData = () => {
-        return {
-            imageUrl: 'images/user/190015bd-511a-41f5-ac17-f401aef8df46.jpg'
-        }
-    }
-
     useEffect(() => {
         setProduct(location.state.product);
-        console.log(location.state.product)
+        dispatch(getUserDataThunk())
     }, []);
 
     const handleAddToCartClick = () => {
@@ -51,8 +47,10 @@ const ProductDetailItem = () => {
                             <p><span className={'card-title fw-bold'}>${product.price} / <span className={'fw-lighter'}>{product.quantity} {product.unit}</span> </span></p>
                         </div>
                         <div className={'w-25'}>
-                            <a onClick={handleAddToCartClick} className="btn-floating btn-large waves-effect waves-light teal right"><i
-                                className="material-icons">add_shopping_cart</i></a>
+                            {
+                                (loggedIn && loggedInUser.type === "USER") && <a onClick={handleAddToCartClick} className="btn-floating btn-large waves-effect waves-light teal right"><i
+                                    className="material-icons">add_shopping_cart</i></a>
+                            }
                         </div>
                     </div>
                 </div>

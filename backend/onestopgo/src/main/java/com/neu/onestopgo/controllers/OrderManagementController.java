@@ -3,6 +3,7 @@ package com.neu.onestopgo.controllers;
 
 import com.neu.onestopgo.dao.OrderItemQuantityRequestObject;
 import com.neu.onestopgo.models.OrderState;
+import com.neu.onestopgo.models.User;
 import com.neu.onestopgo.services.OrderService;
 import com.neu.onestopgo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,7 +64,16 @@ public class OrderManagementController {
     @GetMapping(path = "/orderList")
     public ResponseEntity<Map<String, Object>> getOrders(Authentication authentication) {
         Map<String, Object> response = new HashMap<>();
-        response.put(ORDERS, orderService.getOrdersList(userService.getUserFromId(getCurrentUserId(authentication))));
+        User currentUser = userService.getUserFromId(getCurrentUserId(authentication));
+        if ("USER".equalsIgnoreCase(currentUser.getType())) {
+            response.put(ORDERS, orderService.getOrdersList(currentUser));
+        }
+        else if ("STOREADMIN".equalsIgnoreCase(currentUser.getType())) {
+            response.put(ORDERS, orderService.getOrdersOfAStore(currentUser.getStore()));
+        } else if ("ROOT".equalsIgnoreCase(currentUser.getType())) {
+            response.put(ORDERS, orderService.getAllOrders());
+        }
+
         return ResponseEntity.ok(response);
     }
 
@@ -84,7 +94,7 @@ public class OrderManagementController {
     @PutMapping(path = "/deliverOrder/{orderId}")
     public ResponseEntity<Map<String, Object>> deliverOrder(@PathVariable String orderId) {
         Map<String, Object> response = new HashMap<>();
-        response.put(ORDER, orderService.updateOrderStatus(UUID.fromString(orderId), OrderState.DELIVERED));
+        response.put(ORDERS, orderService.updateOrderStatus(UUID.fromString(orderId), OrderState.DELIVERED));
         return ResponseEntity.ok(response);
     }
 

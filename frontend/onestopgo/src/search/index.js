@@ -10,10 +10,12 @@ import ProductList from "../products/product-list";
 import StoreMap from "../store-map";
 import Lottie from "lottie-react";
 import searching from "../lottie/searching.json";
+import {getUserDataThunk} from "../login/login-thunk";
 
 export const SearchComponent = () => {
     const {searchData, loading} = useSelector(state => state.search)
     const [searchText, setSearchText] = useState("");
+    const {loggedIn, loggedInUser} = useSelector(state => state.login)
     const dispatch = useDispatch();
     const {pathname} = useLocation();
     const paths = pathname.split('/')
@@ -22,6 +24,7 @@ export const SearchComponent = () => {
     useEffect(() => {
         setSearchText(searchTerm);
         dispatch(getSearchDataThunk(searchTerm))
+        dispatch(getUserDataThunk())
     }, []);
 
     if (!searchData) return null;
@@ -37,7 +40,7 @@ export const SearchComponent = () => {
             {!loading &&
                 <>
                     <h1>Products</h1>
-                    <ProductList storeItemQuantityArray={searchData.products}/>
+                    <ProductList storeItemQuantityArray={searchData.products} userType={loggedInUser.type}/>
 
                     <h1>Stores</h1>
                     <StoreList storeArray={searchData.stores}/>
