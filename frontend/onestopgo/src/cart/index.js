@@ -38,7 +38,7 @@ export const CartComponent = () => {
                     <CartList cartItems={cartData.cart.items} userType={loggedInUser.type}/>
                     <div>
                         {
-                            (loggedInUser.type !== "ROOT" && loggedInUser.type !== "STOREADMIN") &&
+                            (loggedInUser.type === "USER") &&
                             <button onClick={handleOnCheckoutClicked} className="btn waves-effect waves-light teal white-text wd-margin-top-bottom right" type="submit" name="action">
                                 Checkout <i className="material-icons right">shopping_cart</i>
                             </button>

@@ -23,7 +23,7 @@ const CartList = ({cartItems, userType}) => {
         <div>
             <ul className={'collection'}>
                 {
-                    (userType !== "ROOT" && userType !== "STOREADMIN") &&
+                    (userType === "USER") &&
                     Object.entries(storeAndStoreCartItems)
                         .map(([key, val]) => <>
                             <li className="collection-item fw-bolder">{key}</li>
