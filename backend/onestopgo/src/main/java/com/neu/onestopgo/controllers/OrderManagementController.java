@@ -84,6 +84,13 @@ public class OrderManagementController {
         return ResponseEntity.ok(response);
     }
 
+    @PutMapping(path = "/cancelOrder/{orderId}")
+    public ResponseEntity<Map<String, Object>> cancelOrder(@PathVariable String orderId) {
+        Map<String, Object> response = new HashMap<>();
+        response.put(ORDERS, orderService.updateOrderStatus(UUID.fromString(orderId), OrderState.CANCELLED));
+        return ResponseEntity.ok(response);
+    }
+
     @PutMapping(path = "/deliverOrder/{orderId}")
     public ResponseEntity<Map<String, Object>> deliverOrder(@PathVariable String orderId) {
         Map<String, Object> response = new HashMap<>();
