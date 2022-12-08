@@ -18,8 +18,7 @@ const ordersSlice = createSlice({
             state.ordersData = payload
             state.loading = false
         },
-        [cancelOrderThunk.fulfilled]:
-            (state, {payload}) => {
+        [cancelOrderThunk.fulfilled]: (state, {payload}) => {
                 const orderIndex = state.ordersData.orders.findIndex(o => o.id === payload.orders.id)
                 state.ordersData.orders[orderIndex] = payload.orders
                 state.loading = false

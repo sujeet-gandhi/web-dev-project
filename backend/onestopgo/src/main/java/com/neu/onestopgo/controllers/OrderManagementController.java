@@ -94,7 +94,7 @@ public class OrderManagementController {
     @PutMapping(path = "/deliverOrder/{orderId}")
     public ResponseEntity<Map<String, Object>> deliverOrder(@PathVariable String orderId) {
         Map<String, Object> response = new HashMap<>();
-        response.put(ORDER, orderService.updateOrderStatus(UUID.fromString(orderId), OrderState.DELIVERED));
+        response.put(ORDERS, orderService.updateOrderStatus(UUID.fromString(orderId), OrderState.DELIVERED));
         return ResponseEntity.ok(response);
     }
 
