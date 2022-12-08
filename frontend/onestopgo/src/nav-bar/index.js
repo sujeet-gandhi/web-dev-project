@@ -67,6 +67,22 @@ const NavBar = ({links}) => {
                                 className="waves-effect waves-light btn light-blue">Login</a></li>
                         </ul>
                     }
+                    {
+                        loggedIn && <>
+                            {
+                                (loggedInUser.type === "STOREADMIN") && <ul className="right hide-on-med-and-down">
+                                    <li onClick={() => nav('/storeadmin')}><a
+                                        className="waves-effect waves-light btn light-blue">Store Management</a></li>
+                                </ul>
+                            }
+                            {
+                                (loggedInUser.type === "ROOT") && <ul className="right hide-on-med-and-down">
+                                    <li onClick={() => nav('/root')}><a
+                                        className="waves-effect waves-light btn light-blue">Root Operations</a></li>
+                                </ul>
+                            }
+                        </>
+                    }
                 </div>
             </nav>
         </div>
