@@ -23,6 +23,7 @@ import {Logout} from "../logout";
 import RootOperations from "../root-operations";
 import StoreAdmin from "../store-admin";
 import StoreDetailItem from "../store/detail-page/store-detail-item";
+import CategorySummary from "../categories";
 
 const store = configureStore({
     reducer: {home: homeReducer, store: storeReducer, user: userReducer, search: searchReducer,
@@ -55,6 +56,7 @@ function OneStopGo() {
                         <Route path="root" element={<RootOperations/>}/>
                         <Route path="storeadmin" element={<StoreAdmin/>}/>
                         <Route path="logout" element={<Logout/>}/>
+                        <Route path="category/:categoryId" element={<CategorySummary/>}/>
                     </Routes>
                 </div>
                 <div className="d-sm-none d-md-none d-lg-block col-lg-3 col-xl-3">

@@ -63,7 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/v1/product/storeadmin").access("hasAuthority('ROLE_STOREADMIN')")
                 .antMatchers("/api/v1/category/").access("hasAuthority('ROLE_STOREADMIN') or hasAuthority('ROLE_USER')")
                 .antMatchers("/api/v1/product/store/*").access("hasAuthority('ROLE_STOREADMIN') or hasAuthority('ROLE_USER')")
-                .antMatchers("/api/v1/product/category/*").access("hasAuthority('ROLE_USER')")
+                .antMatchers("/api/v1/product/category/*").access("hasAuthority('ROLE_USER') or hasAuthority('ROLE_STOREADMIN')")
                 .antMatchers(HttpMethod.OPTIONS,"/**").permitAll()
                 .anyRequest().authenticated()
                 .and().csrf().disable()
