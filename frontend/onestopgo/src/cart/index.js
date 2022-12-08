@@ -24,12 +24,12 @@ export const CartComponent = () => {
     }
 
     const handleOnCheckoutClicked = () => {
-        console.log('Placing order for: '+cartData.cart.id.toString())
+        console.log('Placing order for: ' + cartData.cart.id.toString())
         dispatch(placeOrderThunk(cartData.cart.id.toString()))
         handleOnOrdersClicked()
     }
 
-    if (!loggedIn) return <LoginSuggest pageName={'Shopping Cart'} />;
+    if (!loggedIn) return <LoginSuggest pageName={'Shopping Cart'}/>;
     return (
         <>
             {loading && <Loader/>}
@@ -37,14 +37,17 @@ export const CartComponent = () => {
                 <div className={'card wd-cart-item'}>
                     <CartList cartItems={cartData.cart.items} userType={loggedInUser.type}/>
                     <div>
-                        <h4 className={'right'}>Total: ${cartData.cart.orderTotal}</h4>
-                    </div>
-                    <div>
                         {
-                            (loggedInUser.type === "USER") &&
-                            <button onClick={handleOnCheckoutClicked} className="btn waves-effect waves-light teal white-text wd-margin-top-bottom right" type="submit" name="action">
-                                Checkout <i className="material-icons right">shopping_cart</i>
-                            </button>
+                            (loggedInUser.type === "USER") && <>
+                                <div>
+                                    <h4 className={'right'}>Total: ${cartData.cart.orderTotal}</h4>
+                                </div>
+                                <button onClick={handleOnCheckoutClicked}
+                                        className="btn waves-effect waves-light teal white-text wd-margin-top-bottom right"
+                                        type="submit" name="action">
+                                    Checkout <i className="material-icons right">shopping_cart</i>
+                                </button>
+                            </>
                         }
                     </div>
                 </div>
