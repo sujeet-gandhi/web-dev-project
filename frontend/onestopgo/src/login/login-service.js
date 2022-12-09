@@ -15,11 +15,20 @@ export const hitLogin = async (loginDetails) => {
         mode: 'no-cors',
         headers: {
             'Content-Type': 'multipart/form-data'
+        },
+        maxRedirects: 0,
+        validateStatus: (status) => {
+            return status === 204 // spring login returns 204, rest all are redirects and failures
         }
     }).then(async () => {
         console.log("login success")
+        window.location.replace("/");
         return (await axios.get(USER_DETAILS_API)).data
-    }).catch(error => error)).data
+    }).catch(error => {
+        console.log("login failed")
+        window.alert("Login failed, Please check credentials.")
+        return error
+    })).data
 }
 
 

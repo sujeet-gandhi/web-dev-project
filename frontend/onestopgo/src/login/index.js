@@ -45,11 +45,6 @@ export const LoginForm = () => {
             password : password};
 
         dispatch(loginThunk(loginDetails))
-            .unwrap()
-            .then((response) => {
-                console.log("login success")
-                navigate("/")
-            });
     };
 
     const handleRegistration = event => {

@@ -13,8 +13,8 @@ const StoreMap = ({google, storeArray}) => {
                         zoom={6}
                         style={
                             {
-                                width: '50%',
-                                height: '50%',
+                                width: '75%',
+                                height: '35%',
                             }
                         }
                         initialCenter={{lat: 42.320774, lng: -71.079676}}
