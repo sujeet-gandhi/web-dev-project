@@ -20,6 +20,10 @@ public class OrderResponseObject {
 
     private float orderTotal;
 
+    private String userEmail;
+
+    private int userId;
+
     public float getOrderTotal() {
         return orderTotal;
     }
@@ -68,4 +72,19 @@ public class OrderResponseObject {
         this.items = items;
     }
 
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 }

@@ -109,6 +109,9 @@ public class Order1 {
                 .map(OrderItemQuantity::getResponseObject)
                 .collect(Collectors.toList()));
 
+        orderResponseObject.setUserEmail(user.getEmail());
+        orderResponseObject.setUserId(user.getId());
+
         float orderTotal = 0;
 
         for (OrderItemQuantityResponseObject item : orderResponseObject.getItems()) {
