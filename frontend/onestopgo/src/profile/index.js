@@ -30,38 +30,58 @@ const ProfileComponent = () => {
         return <Loader/>
 
     return (
-        <div className="card">
-            <div className="row center">
-                <div className="rounded-circle">
-                    {safeDetailsUser.imageUrl &&
-                    <img className="rounded-circle wd-border"
-                         src={ONESTOPGO_API + "/" + safeDetailsUser.imageUrl} width={250} height={250} alt={'profile-pic'}/>}
-                    {!safeDetailsUser.imageUrl &&
-                    <img className="rounded-circle wd-border"
-                         src={ONESTOPGO_API + "/images/user/empty_profile.jpg"} width={250} height={250} alt={'profile-pic'}/>}
-                </div>
-                {checkExistingUser() && <Link to="/tuiter/edit-profile">
-                    <button className="btn btn-outline-dark rounded-pill wd-top-bottom-small-border">Edit Profile</button>
-                </Link>}
-                <span className="wd-profile-name">{safeDetailsUser.name}</span>
-                <span className="text-secondary wd-profile-email-font-size">{safeDetailsUser.email}</span>
-                <div className={'row wd-top-bottom-medium-border'}>
-                    {checkExistingUser() && <div className={'col-sm'}>
-                        <a href="#" className="text-secondary wd-remove-link-text-decor">
-                            <FontAwesomeIcon className="wd-right-margin" icon={faMapMarkerAlt}/>
-                            <span className="wd-reaction-count">{loggedInUser.address}</span>
-                        </a>
-                    </div>}
-                    {checkExistingUser() && <div className={'col-sm'}>
-                        <a href="#" className="text-secondary wd-remove-link-text-decor">
-                            <FontAwesomeIcon className="wd-right-margin" icon={faPhone}/>
-                            <span className="wd-reaction-count">Contact at {loggedInUser.contact}</span>
-                        </a>
-                    </div>}
-                </div>
+        <>
+            <div className="card">
+                <div className="row center">
+                    <div className="rounded-circle">
+                        {safeDetailsUser.imageUrl &&
+                            <img className="rounded-circle wd-border"
+                                 src={ONESTOPGO_API + "/" + safeDetailsUser.imageUrl} width={250} height={250}
+                                 alt={'profile-pic'}/>}
+                        {!safeDetailsUser.imageUrl &&
+                            <img className="rounded-circle wd-border"
+                                 src={ONESTOPGO_API + "/images/user/empty_profile.jpg"} width={250} height={250}
+                                 alt={'profile-pic'}/>}
+                    </div>
+                    {checkExistingUser() && <Link to="/tuiter/edit-profile">
+                        <button className="btn btn-outline-dark rounded-pill wd-top-bottom-small-border">Edit Profile
+                        </button>
+                    </Link>}
+                    <span className="wd-profile-name">{safeDetailsUser.name}</span>
+                    <span className="text-secondary wd-profile-email-font-size">{safeDetailsUser.email}</span>
+                    <div className={'row wd-top-bottom-medium-border'}>
+                        {checkExistingUser() && <div className={'col-sm'}>
+                            <a href="#" className="text-secondary wd-remove-link-text-decor">
+                                <FontAwesomeIcon className="wd-right-margin" icon={faMapMarkerAlt}/>
+                                <span className="wd-reaction-count">{loggedInUser.address}</span>
+                            </a>
+                        </div>}
+                        {checkExistingUser() && <div className={'col-sm'}>
+                            <a href="#" className="text-secondary wd-remove-link-text-decor">
+                                <FontAwesomeIcon className="wd-right-margin" icon={faPhone}/>
+                                <span className="wd-reaction-count">Contact at {loggedInUser.contact}</span>
+                            </a>
+                        </div>}
+                    </div>
 
+                </div>
             </div>
-        </div>
+            {!safeDetailsUserLoading && safeDetailsUser && safeDetailsUser.favourites && safeDetailsUser.favourites.stores &&
+                <div className="card">
+                    <div className="row center">
+                        <div className="card-title">Favourite Stores</div>
+                    </div>
+                    <div>
+                        <ul className="collection ms-2 me-2">
+                            {
+                                safeDetailsUser.favourites.stores.map((each) => <li className="collection-item"><Link
+                                    to={"/store/" + each[1]}>{each[0]}</Link></li>)
+                            }
+                        </ul>
+                    </div>
+                </div>
+            }
+        </>
     );
 };
 export default ProfileComponent;
