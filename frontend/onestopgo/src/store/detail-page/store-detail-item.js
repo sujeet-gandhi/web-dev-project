@@ -13,21 +13,26 @@ const StoreDetailItem = () => {
     const {singleStoreDataLoading, singleStoreData} = useSelector(state => state.store)
     const {productData, productLoading} = useSelector(state => state.product)
     const {loggedIn, loggedInUser} = useSelector(state => state.login)
-    const location = useLocation()
     const dispatch = useDispatch()
     const {storeId} = useParams();
 
     const checkIfStoreIsFavourite = (userFavourites) => {
-        // userFavourites.stores.forEach((each) => {
-        //     if (storeId === each[1]) {
-        //         return true;
-        //     }
-        // })
+        if (!userFavourites.stores)
+            return false
+
+        for (var i = 0; i < userFavourites.stores.length; i++) {
+            const each = userFavourites.stores[i]
+            if (storeId === (each[1] + '')) {
+                return true;
+            }
+        }
+
         return false;
     }
 
     const handleMarkAsFavourite = () => {
         dispatch(markStoreAsFavouriteThunk(storeId))
+        dispatch(getUserDataThunk())
     }
 
     useEffect(() => {
