@@ -49,11 +49,11 @@ const NavBar = ({links}) => {
                                 )
                             }
                             {loggedInUser.imageUrl &&
-                                <li onClick={() => nav('/profile')} className="me-1 waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="profile">
+                                <li onClick={() => nav('/profile/' + loggedInUser.id)} className="me-1 waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="profile">
                                     <img width={50} height={50} src={ONESTOPGO_API + "/" + loggedInUser.imageUrl} className="rounded-pill mb-2"/>
                                 </li>}
                             {!loggedInUser.imageUrl &&
-                                <li onClick={() => nav('/profile')} className="me-1 waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="profile">
+                                <li onClick={() => nav('/profile/' + loggedInUser.id)} className="me-1 waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="profile">
                                     <img width={50} height={50} src={ONESTOPGO_API + "/images/user/empty_profile.jpg"} className="rounded-pill mb-2"/>
                                 </li>}
                             <li onClick={() => nav('/logout')}><a

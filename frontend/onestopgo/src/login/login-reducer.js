@@ -1,12 +1,14 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {getUserDataThunk, loginThunk, registerThunk} from "./login-thunk";
+import {getUserDataThunk, getUserSafeDetailsThunk, loginThunk, registerThunk} from "./login-thunk";
 import {logoutThunk} from "../logout/logout-thunk";
 import {markStoreAsFavouriteThunk} from "../store/store-thunk";
 
 
 const initialState = {
     loggedIn : false,
-    loggedInUser: {}
+    loggedInUser: {},
+    safeDetailsUserLoading: true,
+    safeDetailsUser : {}
 }
 
 const loginSlice = createSlice({
@@ -48,6 +50,10 @@ const loginSlice = createSlice({
         },
         [markStoreAsFavouriteThunk.fulfilled]: (state, {payload}) => {
             state.loggedInUser.favourites.stores.unshift(payload)
+        },
+        [getUserSafeDetailsThunk.fulfilled]: (state, {payload}) => {
+            state.safeDetailsUserLoading = false
+            state.safeDetailsUser = payload
         }
     }
 });

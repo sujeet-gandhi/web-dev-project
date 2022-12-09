@@ -102,6 +102,19 @@ public class UserService {
                 .setType(user.getType());
     }
 
+    public UserResponseObject getSafeUserDetailsFromId(int userId) {
+        User user = getUserFromId(userId);
+        Map<String, List<Object>> favouritesOfUser = favouriteService.getAllFavouriteOfUsers(user.getId());
+
+        return new UserResponseObject()
+                .setFavourites(favouritesOfUser)
+                .setId(user.getId())
+                .setEmail(user.getEmail())
+                .setImageUrl(user.getImageUrl())
+                .setEnabled(user.isEnabled())
+                .setType(user.getType());
+    }
+
     public int getStoreIdOfStoreAdmin(String emailIdOfStoreAdmin) {
         return userRepository.findUserByEmail(emailIdOfStoreAdmin).getStore().getId();
     }

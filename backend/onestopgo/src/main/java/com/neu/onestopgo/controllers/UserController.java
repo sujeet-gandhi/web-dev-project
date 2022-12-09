@@ -36,6 +36,11 @@ public class UserController {
         }
     }
 
+    @GetMapping("/safe/{userId}")
+    public ResponseEntity getUserSafeDetailFromId(@PathVariable int userId) {
+        return ResponseEntity.ok(userService.getSafeUserDetailsFromId(userId));
+    }
+
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity createUser(@RequestPart("image") MultipartFile multipartFile,
                                            @RequestPart("user") UserRequestObject userRequestObject) {
