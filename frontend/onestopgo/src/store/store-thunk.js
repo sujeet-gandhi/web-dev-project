@@ -1,6 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import * as service from "./store-service";
-import {store} from "browser-router/html5-history";
 
 export const getStoresThunk = createAsyncThunk (
     'onestopgo/getallstores',

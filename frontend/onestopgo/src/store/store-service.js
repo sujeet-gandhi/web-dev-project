@@ -38,5 +38,7 @@ export const getStoreFromId = async (storeId) => {
 }
 
 export const getUsersWhoLikeStore = async (storeId) => {
-    return (await axios.get(USER_STORE_FAVOURITE + storeId)).data
+    const data = (await axios.get(USER_STORE_FAVOURITE + storeId)).data
+    console.log(data)
+    return data
 }
