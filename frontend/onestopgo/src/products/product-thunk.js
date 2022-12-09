@@ -25,3 +25,8 @@ export const updateProductThunk = createAsyncThunk (
     'onestopgo/updateProduct',
     async (newQuantityProduct) => await service.updateProductQuantity(newQuantityProduct)
 )
+
+export const getProductFromIdThunk = createAsyncThunk (
+    'onestopgo/getproductFromId',
+    async (productId) => await service.getProductFromId(productId)
+)

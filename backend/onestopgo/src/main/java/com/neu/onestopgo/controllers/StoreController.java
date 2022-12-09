@@ -39,6 +39,11 @@ public class StoreController {
                 .collect(Collectors.toList()));
     }
 
+    @GetMapping("/{storeId}")
+    public ResponseEntity getStoreFromId(@PathVariable int storeId) {
+        return ResponseEntity.ok(storeService.getStoreById(storeId));
+    }
+
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<Store> createStore(@RequestPart("store") StoreRequestObject storeRequestObject,
                                              @RequestPart("image") MultipartFile multipartFile) throws IOException {

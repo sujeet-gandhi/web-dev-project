@@ -1,7 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {
     createProductThunk,
-    getAllProductsOfStoreAdminThunk,
+    getAllProductsOfStoreAdminThunk, getProductFromIdThunk,
     getProductsOfCategoryThunk,
     getProductsOfStoreThunk, updateProductThunk
 } from "./product-thunk";
@@ -11,6 +11,8 @@ const initialState = {
     productLoading: true,
     categoryProductData: [],
     categoryProductDataLoading: true,
+    singleProductLoading: true,
+    singleProductData: {},
 }
 
 const productSlice = createSlice({
@@ -48,6 +50,10 @@ const productSlice = createSlice({
             const index = state.productData.findIndex((each) => each.productId === payload.productId)
             state.productData[index] = payload
             state.productLoading = false
+        },
+        [getProductFromIdThunk.fulfilled]: (state, {payload}) => {
+            state.singleProductLoading = false
+            state.singleProductData = payload
         }
     }
     });

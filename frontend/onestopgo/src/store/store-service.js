@@ -2,6 +2,8 @@ import axios from 'axios';
 
 const ONESTOPGO_API = process.env.REACT_APP_ONESTOPGO_API_BASE;
 const STORE_API = `${ONESTOPGO_API}/api/v1/store`;
+const STORE_FAVOURITE = `${ONESTOPGO_API}/api/v1/favourite/mark/store/`
+const USER_STORE_FAVOURITE = `${ONESTOPGO_API}/api/v1/favourite/user/store/`
 
 export const getAllStores = async () => {
     return (await axios.get(STORE_API)).data
@@ -25,4 +27,18 @@ export const createStore = async (store) => {
             'Content-Type': 'multipart/form-data'
         }
     })).data
+}
+
+export const markStoreAsFavourite = async (storeId) => {
+    return (await axios.get(STORE_FAVOURITE + storeId)).data
+}
+
+export const getStoreFromId = async (storeId) => {
+    return (await axios.get(STORE_API + "/" + storeId)).data
+}
+
+export const getUsersWhoLikeStore = async (storeId) => {
+    const data = (await axios.get(USER_STORE_FAVOURITE + storeId)).data
+    console.log(data)
+    return data
 }

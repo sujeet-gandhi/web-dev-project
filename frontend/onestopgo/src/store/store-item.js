@@ -8,12 +8,7 @@ const StoreItem = ({store}) => {
     const nav = useNavigate();
 
     const handleOnStoreClicked = () => {
-        nav("/store", {
-            state:
-                {
-                    store: store
-                }
-        })
+        nav("/store/" + store.id)
     }
 
     if (!store) return null;

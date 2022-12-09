@@ -16,3 +16,8 @@ export const registerThunk = createAsyncThunk (
     'onestopgo/login',
     async (userDetails) => await registerUser(userDetails)
 )
+
+export const getUserSafeDetailsThunk = createAsyncThunk (
+    'onestopgo/safedetails',
+    async (userId) => await service.getSafeDataOfUserId(userId)
+)

@@ -4,6 +4,7 @@ import {useState} from "react";
 const ONESTOPGO_API = process.env.REACT_APP_ONESTOPGO_API_BASE;
 const LOGIN_API = `${ONESTOPGO_API}/login`;
 const USER_DETAILS_API = `${ONESTOPGO_API}/api/v1/login/userdata`;
+const SAFE_DETAILS = `${ONESTOPGO_API}/api/v1/user/safe/`
 axios.defaults.withCredentials = true
 
 export const hitLogin = async (loginDetails) => {
@@ -34,4 +35,8 @@ export const hitLogin = async (loginDetails) => {
 
 export const getLoggedInUserData = async () => {
     return (await axios.get(USER_DETAILS_API)).data
+}
+
+export const getSafeDataOfUserId = async (userId) => {
+    return (await axios.get(SAFE_DETAILS + userId)).data
 }
