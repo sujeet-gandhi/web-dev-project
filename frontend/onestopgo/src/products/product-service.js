@@ -44,3 +44,7 @@ export const getProductsRelatedToCategory = async (categoryId) => {
 export const updateProductQuantity = async (updateProductQuantity) => {
     return (await axios.put(PRODUCT_API, updateProductQuantity)).data
 }
+
+export const getProductFromId = async (productId) => {
+    return (await axios.get(PRODUCT_API + '/single/' + productId)).data
+}

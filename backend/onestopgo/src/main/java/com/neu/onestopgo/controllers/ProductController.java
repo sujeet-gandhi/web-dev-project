@@ -68,6 +68,11 @@ public class ProductController {
                 .collect(Collectors.toList()));
     }
 
+    @GetMapping("/single/{productId}")
+    public ResponseEntity getProductFromId(@PathVariable("productId") String productId) {
+        return ResponseEntity.ok(productService.getProductById(UUID.fromString(productId)));
+    }
+
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity createProductWithQuantity(@RequestPart("image") MultipartFile multipartFile,
                                                     @RequestPart("product") ProductRequestObject productRequestObject) throws Exception {

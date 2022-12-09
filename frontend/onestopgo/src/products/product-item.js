@@ -11,12 +11,7 @@ const ProductItem = ({product, storeId, userType}) => {
     const nav = useNavigate();
 
     const handleOnProductClicked = () => {
-        nav("/product", {
-            state:
-                {
-                    product: product
-                }
-        })
+        nav("/product/" + product.id)
     }
 
     const handleAddToCartClick = () => {
