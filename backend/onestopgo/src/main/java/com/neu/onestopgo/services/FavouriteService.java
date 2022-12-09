@@ -1,11 +1,14 @@
 package com.neu.onestopgo.services;
 
+import com.neu.onestopgo.dao.UserResponseObject;
 import com.neu.onestopgo.models.Favourite;
+import com.neu.onestopgo.models.User;
 import com.neu.onestopgo.repositories.FavouriteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class FavouriteService {
@@ -55,5 +58,24 @@ public class FavouriteService {
         }
 
         return favourites;
+    }
+
+    public List<UserResponseObject> getUsersWhoLikeGivenStore(int storeId) {
+        List<Favourite> favourites = favouriteRepository.findAllByFavouriteStore_Id(storeId);
+        if (favourites == null || favourites.size() == 0)
+            return new LinkedList<>();
+
+        Set<User> users = favourites.stream().map(Favourite::getUser).collect(Collectors.toSet());
+        List<UserResponseObject> response = new LinkedList<>();
+        for (User user : users) {
+            response.add(new UserResponseObject()
+                    .setId(user.getId())
+                    .setEmail(user.getEmail())
+                    .setImageUrl(user.getImageUrl())
+                    .setEnabled(user.isEnabled())
+                    .setType(user.getType()));
+        }
+
+        return response;
     }
 }

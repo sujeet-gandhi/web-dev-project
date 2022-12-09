@@ -28,4 +28,9 @@ public class FavouriteController {
     public ResponseEntity getAllFavouritesOfUser(@PathVariable int userId) {
         return ResponseEntity.ok(favouriteService.getAllFavouriteOfUsers(userId));
     }
+
+    @GetMapping("/user/store/{storeId}")
+    public ResponseEntity getUsersWhoLikeThisStore(@PathVariable int storeId) {
+        return ResponseEntity.ok(favouriteService.getUsersWhoLikeGivenStore(storeId));
+    }
 }

@@ -1,5 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import * as service from "./store-service";
+import {store} from "browser-router/html5-history";
 
 export const getStoresThunk = createAsyncThunk (
     'onestopgo/getallstores',
@@ -19,4 +20,9 @@ export const markStoreAsFavouriteThunk = createAsyncThunk(
 export const getStoreFromIdThunk = createAsyncThunk(
     'onestopgo/getStoreFromId',
     async (storeId) => await service.getStoreFromId(storeId)
+)
+
+export const getUsersWhoLikeStoreThunk = createAsyncThunk (
+    'onestopgo/userswholikestore',
+    async (storeId) => await service.getUsersWhoLikeStore(storeId)
 )

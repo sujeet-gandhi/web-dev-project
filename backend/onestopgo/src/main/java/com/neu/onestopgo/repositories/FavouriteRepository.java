@@ -8,4 +8,6 @@ import java.util.UUID;
 
 public interface FavouriteRepository extends CrudRepository<Favourite, UUID> {
     public List<Favourite> findAllByUser_Id(int userId);
+
+    public List<Favourite> findAllByFavouriteStore_Id(int storeId);
 }

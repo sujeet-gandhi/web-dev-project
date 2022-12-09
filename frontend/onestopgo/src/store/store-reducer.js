@@ -1,11 +1,13 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {createStoreThunk, getStoreFromIdThunk, getStoresThunk} from "./store-thunk";
+import {createStoreThunk, getStoreFromIdThunk, getStoresThunk, getUsersWhoLikeStoreThunk} from "./store-thunk";
 
 const initialState = {
     storeData: [],
     loading: true,
     singleStoreData: {},
     singleStoreDataLoading: true,
+    usersLikeStoreLoading: true,
+    userLikeStoreData: []
 }
 
 const storeSlice = createSlice({
@@ -30,6 +32,10 @@ const storeSlice = createSlice({
         [getStoreFromIdThunk.fulfilled]: (state, {payload}) => {
             state.singleStoreDataLoading = false
             state.singleStoreData = payload
+        },
+        [getUsersWhoLikeStoreThunk.fulfilled]: (state, {payload}) => {
+            state.usersLikeStoreLoading = false
+            state.userLikeStoreData = payload
         }
     }
 })
