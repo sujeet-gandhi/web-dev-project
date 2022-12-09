@@ -22,16 +22,20 @@ public class FavouriteService {
     @Autowired
     private ProductService productService;
 
-    public Favourite markStoreAsFavourite(int storeId, String userEmail) {
-        return favouriteRepository.save(new Favourite()
+    public List<Object> markStoreAsFavourite(int storeId, String userEmail) {
+        Favourite favourite = favouriteRepository.save(new Favourite()
                 .setFavouriteStore(storeService.getStoreById(storeId))
                 .setUser(userService.getUserFromUserName(userEmail)));
+
+        return List.of(favourite.getFavouriteStore().getName(), favourite.getFavouriteStore().getId());
     }
 
-    public Favourite markProductAsFavourite(String productId, String userEmail) {
-        return favouriteRepository.save(new Favourite()
+    public List<Object> markProductAsFavourite(String productId, String userEmail) {
+        Favourite favourite = favouriteRepository.save(new Favourite()
                 .setUser(userService.getUserFromUserName(userEmail))
                 .setFavouriteProduct(productService.getProductById(UUID.fromString(productId))));
+
+        return List.of(favourite.getFavouriteProduct().getName(), favourite.getFavouriteProduct().getId().toString());
     }
 
     public Map<String, List<Object>> getAllFavouriteOfUsers(int userId) {

@@ -32,7 +32,6 @@ const StoreDetailItem = () => {
 
     const handleMarkAsFavourite = () => {
         dispatch(markStoreAsFavouriteThunk(storeId))
-        dispatch(getUserDataThunk())
     }
 
     useEffect(() => {
