@@ -10,3 +10,13 @@ export const createStoreThunk = createAsyncThunk (
     'onestopgo/createstore',
     async (store) => await service.createStore(store)
 )
+
+export const markStoreAsFavouriteThunk = createStoreThunk(
+    'onestopgo/markstorefavourite',
+    async (storeId) => await service.markStoreAsFavourite(storeId)
+)
+
+export const getStoreFromIdThunk = createAsyncThunk(
+    'onestopgo/getStoreFromId',
+    async (storeId) => await service.getStoreFromId(storeId)
+)

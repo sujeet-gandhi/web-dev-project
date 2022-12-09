@@ -1,48 +1,79 @@
 import React, {useEffect, useState} from "react";
-import {useLocation} from "react-router";
+import {useLocation, useParams} from "react-router";
 import ProductList from "../../products/product-list";
 import {getProductsOfStoreThunk} from "../../products/product-thunk";
 import {useDispatch, useSelector} from "react-redux";
 import Loader from "../../components/loader";
 import {getUserDataThunk} from "../../login/login-thunk";
+import {getStoreFromIdThunk, markStoreAsFavouriteThunk} from "../store-thunk";
 
 const ONESTOPGO_API = process.env.REACT_APP_ONESTOPGO_API_BASE;
 
 const StoreDetailItem = () => {
-    const [store, setStore] = useState(null);
+    const {singleStoreDataLoading, singleStoreData} = useSelector(state => state.store)
     const {productData, productLoading} = useSelector(state => state.product)
     const {loggedIn, loggedInUser} = useSelector(state => state.login)
     const location = useLocation()
     const dispatch = useDispatch()
+    const {storeId} = useParams();
+
+    const checkIfStoreIsFavourite = (userFavourites) => {
+        // userFavourites.stores.forEach((each) => {
+        //     if (storeId === each[1]) {
+        //         return true;
+        //     }
+        // })
+        return false;
+    }
+
+    const handleMarkAsFavourite = () => {
+        dispatch(markStoreAsFavouriteThunk(storeId))
+    }
 
     useEffect(() => {
-        dispatch(getProductsOfStoreThunk(location.state.store.id))
-        setStore(location.state.store);
-        console.log(location.state.store.id)
+        dispatch(getProductsOfStoreThunk(storeId))
+        dispatch(getStoreFromIdThunk(storeId))
         dispatch(getUserDataThunk())
     }, []);
 
-    if (!store) return null;
     return (
-        <div>
-            <div className="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
-            <div className="card-panel">
-                <div className={'col center'}>
-                    <img width={200} height={200} className={'rounded-circle border-3 wd-margin-bottom'} src={ONESTOPGO_API + "/" + store.imageUrl}/>
-                    <p className="card-title fw-bolder black-text">{store.name}</p>
-                    <p className="green-text">
-                        {store.openingTime} - {store.closingTime}<br/>
-                        <span className="card-title text-secondary">
-                                        {store.type}
-                                    </span>
-                    </p>
+        <>
+            {
+                singleStoreDataLoading && <Loader/>
+            }
+            {!singleStoreDataLoading && <div>
+                <div className="right me-2">
+                    {
+                        loggedIn && checkIfStoreIsFavourite(loggedInUser.favourites) && <>
+                            <button className="btn btn-secondary" disabled>Favourite</button>
+                        </>
+                    }
+                    {
+                        loggedIn && !checkIfStoreIsFavourite(loggedInUser.favourites) && <>
+                            <button className="btn btn-primary" onClick={handleMarkAsFavourite}>Mark as favourite</button>
+                        </>
+                    }
                 </div>
-            </div>
-        </div>
-            <h1>Our Products</h1>
-            {productLoading && <Loader/>}
-            {!productLoading && <ProductList storeItemQuantityArray={productData} userType={loggedInUser.type}/>}
-        </div>
+                <div className="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <div className="card-panel">
+                        <div className={'col center'}>
+                            <img width={200} height={200} className={'rounded-circle border-3 wd-margin-bottom'}
+                                 src={ONESTOPGO_API + "/" + singleStoreData.imageUrl}/>
+                            <p className="card-title fw-bolder black-text">{singleStoreData.name}</p>
+                            <p className="green-text">
+                                {singleStoreData.openingTime} - {singleStoreData.closingTime}<br/>
+                                <span className="card-title text-secondary">
+                                        {singleStoreData.type}
+                                    </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <h1>Our Products</h1>
+                {productLoading && <Loader/>}
+                {!productLoading && <ProductList storeItemQuantityArray={productData} userType={loggedIn&&loggedInUser.type}/>}
+            </div>}
+        </>
     );
 };
 export default StoreDetailItem;

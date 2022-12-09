@@ -45,7 +45,7 @@ function OneStopGo() {
                         <Route path="orders" element={<OrdersComponents/>}/>
                         <Route path="products" element={<h1>We will display all the products here</h1>}/>
                         <Route path="stores" element={<h1>All Store list here</h1>}/>
-                        <Route path="store" element={<StoreDetailItem/>}/>
+                        <Route path="store/:storeId" element={<StoreDetailItem/>}/>
                         <Route path="product" element={<ProductDetailItem/>}/>
                         <Route path="profile" element={<ProfileComponent/>}/>
                         <Route path="cart" element={<CartComponent/>}/>
