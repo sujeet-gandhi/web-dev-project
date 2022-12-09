@@ -24,6 +24,7 @@ import RootOperations from "../root-operations";
 import StoreAdmin from "../store-admin";
 import StoreDetailItem from "../store/detail-page/store-detail-item";
 import CategorySummary from "../categories";
+import {useLocation} from "react-router";
 
 const store = configureStore({
     reducer: {home: homeReducer, store: storeReducer, user: userReducer, search: searchReducer,
@@ -31,6 +32,11 @@ const store = configureStore({
 });
 
 function OneStopGo() {
+
+    const {pathname} = useLocation();
+    const paths = pathname.split('/')
+    const active = paths[1];
+
     return (
         <Provider store={store}>
             <NavBar links={[{link : 'cart', name : 'Cart', icon : 'shopping_cart'}, {link : 'orders', name : 'Orders', icon : 'kitchen'}]}/>
@@ -59,7 +65,7 @@ function OneStopGo() {
                     </Routes>
                 </div>
                 <div className="col-lg-3 col-xl-3 hide-on-med-and-down">
-                    <CartComponent/>
+                    {active !== 'cart' && <CartComponent/>}
                 </div>
             </div>
         </Provider>

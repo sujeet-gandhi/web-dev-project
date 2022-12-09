@@ -2,7 +2,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 import {useLocation} from "react-router";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faBicycle, faBoxes, faCartShopping, faHome, faSearch, faStore, faUser} from "@fortawesome/free-solid-svg-icons";
+import {faBicycle, faBoxes, faHome, faSearch, faStore, faUser} from "@fortawesome/free-solid-svg-icons";
 import "./index.css"
 import {useSelector} from "react-redux";
 
@@ -13,9 +13,6 @@ const NavigationSidebar = () => {
     const {loggedIn, loggedInUser} = useSelector(state => state.login)
     return (
         <div className="card list-group wd-side-nav">
-            <Link to="/" className= {'list-group-item wd-sidenav-side-item'}>
-                <FontAwesomeIcon className="wd-sidenav-icon" icon={faCartShopping}/> OneStopGo
-            </Link>
             <Link to="/" className={`list-group-item wd-sidenav-side-item ${active === '' ? 'teal' : ''}`}>
                 <FontAwesomeIcon className="wd-sidenav-icon" icon={faHome}/> Home
             </Link>
