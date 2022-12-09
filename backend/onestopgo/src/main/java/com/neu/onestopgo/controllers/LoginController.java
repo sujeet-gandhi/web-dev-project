@@ -39,7 +39,7 @@ public class LoginController {
 
     @RequestMapping(value = "/userdata", method = RequestMethod.GET)
     public ResponseEntity currentUserData(Authentication authentication) {
-        return ResponseEntity.ok(userService.getUserFromUserName(authentication.getName()));
+        return ResponseEntity.ok(userService.getUserDataFromUserName(authentication.getName()));
     }
 
     @GetMapping(path = "/failure")
