@@ -68,7 +68,7 @@ public class UserService {
     return userRepository.save(newUser);
   }
 
-  public User updateUserProfile(UserRequestObject userRequestObject, int userId) {
+  public UserResponseObject updateUserProfile(UserRequestObject userRequestObject, int userId) {
     User currentUser = userRepository.findById(userId).orElseThrow();
     currentUser.setName(userRequestObject.getName())
             .setAddress(userRequestObject.getAddress())
@@ -76,7 +76,19 @@ public class UserService {
             .setContact(userRequestObject.getContact())
             .setImageUrl(userRequestObject.getImageUrl());
 
-    return userRepository.save(currentUser);
+    User user = userRepository.save(currentUser);
+    Map<String, List<Object>> favouritesOfUser = favouriteService.getAllFavouriteOfUsers(user.getId());
+    return new UserResponseObject()
+            .setFavourites(favouritesOfUser)
+            .setName(user.getName())
+            .setId(user.getId())
+            .setContact(user.getContact())
+            .setAddress(user.getAddress())
+            .setEmail(user.getEmail())
+            .setPassword(user.getPassword())
+            .setImageUrl(user.getImageUrl())
+            .setEnabled(user.isEnabled())
+            .setType(user.getType());
   }
 
   public String getExistingImageUrlOfUser(int userId) {
