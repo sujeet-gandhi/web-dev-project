@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import * as service from "../login/login-service";
-import {registerUser} from "../user/user-service";
+import {registerUser, updateUser} from "../user/user-service";
 
 export const loginThunk = createAsyncThunk (
     'onestopgo/login',
@@ -20,4 +20,9 @@ export const registerThunk = createAsyncThunk (
 export const getUserSafeDetailsThunk = createAsyncThunk (
     'onestopgo/safedetails',
     async (userId) => await service.getSafeDataOfUserId(userId)
+)
+
+export const updateUserThunk = createAsyncThunk (
+    'onestopgo/updateUser',
+    async (userDetails, userId) => await updateUser(userDetails, userId)
 )

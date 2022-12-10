@@ -1,7 +1,6 @@
 package com.neu.onestopgo.controllers;
 
 import com.neu.onestopgo.dao.UserRequestObject;
-import com.neu.onestopgo.models.User;
 import com.neu.onestopgo.services.UserService;
 import com.neu.onestopgo.utils.ImageUtil;
 import com.neu.onestopgo.utils.Utils;

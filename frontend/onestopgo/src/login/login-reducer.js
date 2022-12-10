@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {getUserDataThunk, getUserSafeDetailsThunk, loginThunk, registerThunk} from "./login-thunk";
+import {getUserDataThunk, getUserSafeDetailsThunk, loginThunk, registerThunk, updateUserThunk} from "./login-thunk";
 import {logoutThunk} from "../logout/logout-thunk";
 import {markStoreAsFavouriteThunk} from "../store/store-thunk";
 
@@ -54,6 +54,13 @@ const loginSlice = createSlice({
         [getUserSafeDetailsThunk.fulfilled]: (state, {payload}) => {
             state.safeDetailsUserLoading = false
             state.safeDetailsUser = payload
+        },
+        [updateUserThunk.pending]: (state) => {
+            state.loggedIn = true
+        },
+        [updateUserThunk.fulfilled]: (state, {payload}) => {
+            state.loggedIn = true
+            state.loggedInUser = payload
         }
     }
 });

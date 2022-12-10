@@ -8,12 +8,12 @@ const StoreItem = ({store}) => {
     const nav = useNavigate();
 
     const handleOnStoreClicked = () => {
-        nav("/store/" + store.id)
+        nav("/stores/" + store.id)
     }
 
     if (!store) return null;
     return (
-        <div className="col-sm">
+        <div className="col-6" style={{cursor: 'pointer'}}>
             <a>
                 <div className="card wd-remove-text-decoration"  onClick={handleOnStoreClicked}>
                     <div className="card-content center white-text wd-category-text">

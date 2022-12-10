@@ -43,12 +43,12 @@ const ProfileComponent = () => {
                                  src={ONESTOPGO_API + "/images/user/empty_profile.jpg"} width={250} height={250}
                                  alt={'profile-pic'}/>}
                     </div>
-                    {checkExistingUser() && <Link to="/tuiter/edit-profile">
+                    {checkExistingUser() && <Link to="/edit-profile">
                         <button className="btn btn-outline-dark rounded-pill wd-top-bottom-small-border">Edit Profile
                         </button>
                     </Link>}
                     <span className="wd-profile-name">{safeDetailsUser.name}</span>
-                    <span className="text-secondary wd-profile-email-font-size">{safeDetailsUser.email}</span>
+                    {checkExistingUser() && <span className="text-secondary wd-profile-email-font-size">{loggedInUser.email}</span>}
                     <div className={'row wd-top-bottom-medium-border'}>
                         {checkExistingUser() && <div className={'col-sm'}>
                             <a href="#" className="text-secondary wd-remove-link-text-decor">
@@ -63,24 +63,21 @@ const ProfileComponent = () => {
                             </a>
                         </div>}
                     </div>
+                    {!safeDetailsUserLoading && safeDetailsUser && safeDetailsUser.favourites && safeDetailsUser.favourites.stores &&
+                        <p>Favorite Stores :
+                            {
+                                safeDetailsUser.favourites.stores.map((each) =>
+                                    <Link style={{marginLeft:10}} to={"/stores/" + each[1]}>
+                                        <img width={40} height={40} src={ONESTOPGO_API + "/" + each[2]} alt="" className="circle"/>
+                                    </Link>
+                                )
 
+
+                            }
+                        </p>
+                    }
                 </div>
             </div>
-            {!safeDetailsUserLoading && safeDetailsUser && safeDetailsUser.favourites && safeDetailsUser.favourites.stores &&
-                <div className="card">
-                    <div className="row center">
-                        <div className="card-title">Favourite Stores</div>
-                    </div>
-                    <div>
-                        <ul className="collection ms-2 me-2">
-                            {
-                                safeDetailsUser.favourites.stores.map((each) => <li className="collection-item"><Link
-                                    to={"/store/" + each[1]}>{each[0]}</Link></li>)
-                            }
-                        </ul>
-                    </div>
-                </div>
-            }
         </>
     );
 };

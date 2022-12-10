@@ -29,10 +29,11 @@ export const OrdersComponents = () => {
                 <>
                     <center className={'wd-screen-top-lottie'}>
                         <div className={'container w-50 h-50 wd-screen-top-lottie'}>
-                            <Lottie className={'w-50 h-50 wd-screen-top-lottie'} width={10} animationData={order} loop={false} />
+                            <Lottie style={{marginTop:-110}} className={'w-50 h-50 wd-screen-top-lottie'} width={10} animationData={order} loop={false} />
+                            <h2 style={{marginTop:-80, marginBottom:20}}>Your Orders</h2>
                         </div>
                     </center>
-                    <ul className={'wd-screen-top-lottie'}>
+                    <ul style={{marginTop:20}} className={'wd-screen-top-lottie'}>
                         {
                             ordersData.orders.map ((order) =>
                                 <l1>

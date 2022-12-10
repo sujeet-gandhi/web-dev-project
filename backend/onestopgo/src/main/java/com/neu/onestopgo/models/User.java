@@ -11,6 +11,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
     private int id;
+    private String name;
     private String email;
     private boolean enabled;
     private String password;
@@ -29,6 +30,15 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     @JsonIgnore
     private Set<Order1> order1s;
+
+    public String getName() {
+        return name;
+    }
+
+    public User setName(String name) {
+        this.name = name;
+        return this;
+    }
 
     public int getId() {
         return id;

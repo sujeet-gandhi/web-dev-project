@@ -4,14 +4,12 @@ import CategoryItem from "./category-item";
 const CategoriesList = ({categoriesArray}) => {
     return(
         <div className="row">
-            <ul className="center wd-category-list">
-                {
-                    categoriesArray.map(
-                        category =>
-                            <CategoryItem key={category.id}  category={category}/>
-                    )
-                }
-            </ul>
+            {
+                categoriesArray.map(
+                    category =>
+                        <CategoryItem key={category.id}  category={category}/>
+                )
+            }
         </div>
     );
 };
