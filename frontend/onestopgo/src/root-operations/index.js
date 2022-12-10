@@ -5,10 +5,12 @@ import {createStoreThunk, getStoresThunk} from "../store/store-thunk";
 import {createUserThunk} from "../user/user-thunk";
 import {createCategoriesThunk} from "../categories/category-thunk";
 import LocationPicker from "../store-map/location-picker";
+import {UnauthorisedView} from "../components/unauthorised";
 
 const RootOperations = () => {
     const {storeData, loading} = useSelector(state => state.store)
     const {userData, _} = useSelector(state => state.user)
+    const {loggedIn, loggedInUser} = useSelector(state => state.login)
     const dispatch = useDispatch();
     const [createStoreState, setCreateStoreState] = useState({
         location: "USE LOCATION PICKER BELOW"
@@ -85,6 +87,9 @@ const RootOperations = () => {
 
     return (
         <div className="mt-2">
+            {(loggedInUser.type === 'USER' || loggedInUser.type === 'STOREADMIN' || loggedInUser.type === 'CUSTOMER')
+                && <UnauthorisedView/>}
+            {(loggedInUser.type === 'ROOT') &&
             <div className="row">
                 <div className="col-3 scrolling">
                     {loading && <h3>Loading ...</h3>}
@@ -245,7 +250,7 @@ const RootOperations = () => {
                     </div>
                 </div>
 
-            </div>
+            </div> }
         </div>
     );
 }

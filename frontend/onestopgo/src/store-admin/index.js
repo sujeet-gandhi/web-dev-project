@@ -3,6 +3,7 @@ import React, {useEffect, useState} from "react";
 import {createProductThunk, getAllProductsOfStoreAdminThunk, updateProductThunk} from "../products/product-thunk";
 import {getHomeDataThunk} from "../home/home-thunk";
 import {getUserDataThunk} from "../login/login-thunk";
+import {UnauthorisedView} from "../components/unauthorised";
 
 const ONESTOPGO_API = process.env.REACT_APP_ONESTOPGO_API_BASE;
 
@@ -52,6 +53,9 @@ const StoreAdmin = () => {
     return (
         <>
             <div className="mt-2">
+                {(loggedInUser.type === 'USER' || loggedInUser.type === 'ROOT' || loggedInUser.type === 'CUSTOMER')
+                    && <UnauthorisedView/>}
+                {(loggedInUser.type === 'STOREADMIN' || loggedInUser.type === 'ADMIN') &&
                 <div className="row">
                     {
                         loading &&
@@ -159,7 +163,7 @@ const StoreAdmin = () => {
                             </div>
                         </>
                     }
-                </div>
+                </div>}
             </div>
         </>
     );
