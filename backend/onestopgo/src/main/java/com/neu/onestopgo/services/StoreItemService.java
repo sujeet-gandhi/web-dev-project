@@ -57,9 +57,8 @@ public class StoreItemService {
     return storeItemRepository.findByStoreIdAndProductId(storeId, UUID.fromString(productId));
   }
 
-  public float getQuantity(int storeId, String productId) {
-    StoreItemQuantity storeItemQuantity = storeItemRepository.findByStoreIdAndProductId(storeId, UUID.fromString(productId));
-    return storeItemQuantity.getQuantity();
+  public List<StoreItemQuantity> getAllProducts() {
+    return (List<StoreItemQuantity>) storeItemRepository.findAll();
   }
 
 }
