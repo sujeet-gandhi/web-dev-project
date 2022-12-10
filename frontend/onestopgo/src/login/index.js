@@ -12,7 +12,7 @@ import {
     MDBTabsLink,
     MDBTabsPane
 } from 'mdb-react-ui-kit';
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {loginThunk, registerThunk} from "./login-thunk";
 import {useNavigate} from "react-router";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -28,6 +28,8 @@ export const LoginForm = () => {
     const [registerAddress, setRegisterAddress] = useState('');
     const [registerContact, setRegisterContact] = useState('');
     const [userImage, setImage] = useState({});
+    const [signInPressed, setSignInPressed] = useState(false);
+    const {loggedIn, loggedInUser} = useSelector(state => state.login)
     const dispatch= useDispatch();
     const navigate = useNavigate();
 
@@ -40,6 +42,7 @@ export const LoginForm = () => {
     };
 
     const handleSubmit = event => {
+        setSignInPressed(true);
         event.preventDefault();
         const loginDetails = {
             email : email,
@@ -117,14 +120,9 @@ export const LoginForm = () => {
                                       onChange={event => setPassword(event.target.value)}
                                       onKeyDown={event => handleEnterKeyPressed(event)}
                                       value={password}/>
-
-                            <div className="d-flex justify-content-between mx-4 mb-4">
-                                <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me'/>
-                                <a href="!#">Forgot password?</a>
-                            </div>
-
+                            {!loggedIn && signInPressed && <p className="text-center" style={{color: "red"}}>Bad Credentials, Try again</p>}
                             <MDBBtn onClick={handleSubmit} className="mb-4 w-100" style={{backgroundColor: "teal"}}>Sign in</MDBBtn>
-                            <p className="text-center">Not a member? <a href="src/login/index.js">Register</a></p>
+
 
                         </MDBTabsPane>
 
