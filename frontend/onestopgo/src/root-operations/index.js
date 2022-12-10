@@ -87,7 +87,7 @@ const RootOperations = () => {
 
     return (
         <div className="mt-2">
-            {(loggedInUser.type === 'USER' || loggedInUser.type === 'STOREADMIN' || loggedInUser.type === 'CUSTOMER')
+            {!(loggedInUser.type === 'ROOT')
                 && <UnauthorisedView/>}
             {(loggedInUser.type === 'ROOT') &&
             <div className="row">

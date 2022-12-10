@@ -53,7 +53,7 @@ const StoreAdmin = () => {
     return (
         <>
             <div className="mt-2">
-                {(loggedInUser.type === 'USER' || loggedInUser.type === 'ROOT' || loggedInUser.type === 'CUSTOMER')
+                {!(loggedInUser.type === 'STOREADMIN')
                     && <UnauthorisedView/>}
                 {(loggedInUser.type === 'STOREADMIN' || loggedInUser.type === 'ADMIN') &&
                 <div className="row">
