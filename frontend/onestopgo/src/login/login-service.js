@@ -27,7 +27,6 @@ export const hitLogin = async (loginDetails) => {
         return (await axios.get(USER_DETAILS_API)).data
     }).catch(error => {
         console.log("login failed")
-        window.alert("Login failed, Please check credentials.")
         return error
     })).data
 }
