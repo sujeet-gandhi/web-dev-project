@@ -72,7 +72,6 @@ public class UserService {
     User currentUser = userRepository.findById(userId).orElseThrow();
     currentUser.setName(userRequestObject.getName())
             .setAddress(userRequestObject.getAddress())
-            .setPassword(userRequestObject.getPassword())
             .setContact(userRequestObject.getContact())
             .setImageUrl(userRequestObject.getImageUrl());
 

@@ -56,8 +56,8 @@ public class UserController {
     }
   }
 
-    @PutMapping("/noimage")
-    public ResponseEntity updateUserProfileWithOutImage(UserRequestObject userRequestObject, Authentication authentication) {
+    @PutMapping(path = "/noimage", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity updateUserProfileWithOutImage(@RequestPart("user") UserRequestObject userRequestObject, Authentication authentication) {
         return ResponseEntity.ok(userService.updateUserProfile(userRequestObject,
                 userService.getUserFromUserName(authentication.getName()).getId()));
     }

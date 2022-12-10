@@ -46,18 +46,15 @@ export const registerUser = async (user) => {
 
 
 export const updateUser = async (user) => {
-    console.log(user)
+    const json = JSON.stringify(user);
+    const blob = new Blob([json], {
+        type: 'application/json'
+    });
+    const formData = new FormData();
+    formData.append("user", blob);
     if ("image" in user) {
         const imageData = user.image;
         delete user.image;
-
-        const json = JSON.stringify(user);
-        const blob = new Blob([json], {
-            type: 'application/json'
-        });
-
-        const formData = new FormData();
-        formData.append("user", blob);
         formData.append("image", imageData);
 
         return (await axios.put(USER_API + "/withimage", formData, {
@@ -70,9 +67,9 @@ export const updateUser = async (user) => {
             return response
         })).data
     } else {
-        return (await axios.put(USER_API + "/noimage", user, {
+        return (await axios.put(USER_API + "/noimage", formData, {
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'multipart/form-data'
             }
         }).then(async (response) => {
             console.log("update success")
