@@ -75,12 +75,13 @@ public class ProductController {
 
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity createProductWithQuantity(@RequestPart("image") MultipartFile multipartFile,
-                                                    @RequestPart("product") ProductRequestObject productRequestObject) throws Exception {
+                                                    @RequestPart("product") ProductRequestObject productRequestObject,
+                                                    Authentication authentication) throws Exception {
         String fileName = UUID.randomUUID() + "." + Objects.requireNonNull(multipartFile.getOriginalFilename()).split("\\.")[1];
         productRequestObject.setImageUrl(PRODUCT_IMAGE_DIR + fileName);
         ImageUtil.saveFileAndCreateDirectory(PRODUCT_IMAGE_DIR, fileName, multipartFile);
 
-        Store store = storeService.getStoreById(productRequestObject.getStoreId());
+        Store store = userService.getUserFromUserName(authentication.getName()).getStore();
         if (store == null)
             return ResponseEntity.badRequest().body("Invalid store id : " + productRequestObject.getStoreId());
 
