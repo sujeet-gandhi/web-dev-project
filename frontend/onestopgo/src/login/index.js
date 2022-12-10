@@ -120,9 +120,9 @@ export const LoginForm = () => {
                                       onChange={event => setPassword(event.target.value)}
                                       onKeyDown={event => handleEnterKeyPressed(event)}
                                       value={password}/>
-
+                            {!loggedIn && signInPressed && <p className="text-center" style={{color: "red"}}>Bad Credentials, Try again</p>}
                             <MDBBtn onClick={handleSubmit} className="mb-4 w-100" style={{backgroundColor: "teal"}}>Sign in</MDBBtn>
-                            {!loggedIn && signInPressed && <p className="text-center" style={{color: "red", backgroundColor: "lightskyblue"}}>Bad Credentials, Try again</p>}
+
 
                         </MDBTabsPane>
 
