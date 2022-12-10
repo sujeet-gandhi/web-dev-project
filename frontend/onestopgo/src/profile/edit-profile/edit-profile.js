@@ -37,7 +37,7 @@ const EditProfileComponent = () => {
             }
         }
         dispatch(updateUserThunk(updatedUser))
-        nav('/profile/' + updatedUser.id)
+        // nav('/profile/' + updatedUser.id)
     }
 
     if (!loggedIn) return <UnauthorisedView/>
