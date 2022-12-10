@@ -47,6 +47,13 @@ export const LoginForm = () => {
         dispatch(loginThunk(loginDetails))
     };
 
+    const handleEnterKeyPressed = event => {
+        if (event.key === 'Enter' || event.code ==='Enter') {
+           handleSubmit(event)
+        }
+    };
+
+
     const handleRegistration = event => {
       const userDetails = {
           email: registerEmail,
@@ -98,9 +105,13 @@ export const LoginForm = () => {
                     <MDBTabsContent>
 
                         <MDBTabsPane show={activeTab === 'login'}>
-                            <MDBInput wrapperClass='mb-4' label='Email address' id='form1' type='email' onChange={event => setEmail(event.target.value)}
+                            <MDBInput wrapperClass='mb-4' label='Email address' id='form1' type='email'
+                                      onChange={event => setEmail(event.target.value)}
+                                      onKeyDown={event => handleEnterKeyPressed(event)}
                                       value={email}/>
-                            <MDBInput wrapperClass='mb-4' label='Password' id='form2' type='password' onChange={event => setPassword(event.target.value)}
+                            <MDBInput wrapperClass='mb-4' label='Password' id='form2' type='password'
+                                      onChange={event => setPassword(event.target.value)}
+                                      onKeyDown={event => handleEnterKeyPressed(event)}
                                       value={password}/>
 
                             <div className="d-flex justify-content-between mx-4 mb-4">
