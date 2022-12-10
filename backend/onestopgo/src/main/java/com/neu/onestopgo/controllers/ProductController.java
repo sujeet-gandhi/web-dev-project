@@ -4,7 +4,6 @@ import com.neu.onestopgo.dao.ProductRequestObject;
 import com.neu.onestopgo.models.Product;
 import com.neu.onestopgo.models.Store;
 import com.neu.onestopgo.models.StoreItemQuantity;
-import com.neu.onestopgo.models.User;
 import com.neu.onestopgo.response.StoreItemQuantityResponseObject;
 import com.neu.onestopgo.services.*;
 import com.neu.onestopgo.utils.ImageUtil;
