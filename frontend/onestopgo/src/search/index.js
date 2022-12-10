@@ -7,10 +7,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {getSearchDataThunk} from "../home/home-thunk";
 import {useLocation} from "react-router";
 import ProductList from "../products/product-list";
-import StoreMap from "../store-map";
 import Lottie from "lottie-react";
 import searching from "../lottie/searching.json";
 import {getUserDataThunk} from "../login/login-thunk";
+import notFound from "../lottie/nothingFound.json";
 
 export const SearchComponent = () => {
     const {searchData, loading} = useSelector(state => state.search)
@@ -39,16 +39,21 @@ export const SearchComponent = () => {
             }
             {!loading &&
                 <>
-                    <h1>Products</h1>
+                    {searchData.products.length !== 0 && <h1>Products</h1>}
                     <ProductList storeItemQuantityArray={searchData.products} userType={loggedInUser.type}/>
 
-                    <h1>Stores</h1>
+                    {searchData.stores.length !== 0 && <h1>Stores</h1>}
                     <StoreList storeArray={searchData.stores}/>
 
-                    <h1>Categories</h1>
+                    {searchData.categories.length !== 0 && <h1>Categories</h1>}
                     <CategoriesList categoriesArray={searchData.categories}/>
 
-                    {searchData.stores && <StoreMap storeArray={searchData.stores}/>}
+                    {searchData.products.length === 0 && searchData.stores.length === 0 && searchData.categories.length === 0 &&
+                        <center>
+                            <Lottie className={'w-50 h-50 wd-screen-top-lottie'} animationData={notFound} loop={true}/>
+                            <h3>No results found for "{searchText}"</h3>
+                        </center>}
+
 
                 </>
             }

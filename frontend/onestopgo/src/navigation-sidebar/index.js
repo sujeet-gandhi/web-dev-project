@@ -33,7 +33,7 @@ const NavigationSidebar = () => {
             </Link>
             {loggedIn
                 &&
-                <Link to="/profile"
+                <Link to={"/profile/" + loggedInUser.id}
                       className={`list-group-item wd-sidenav-side-item ${active === 'profile' || active === 'edit-profile' ? 'teal' : ''}`}>
                     <FontAwesomeIcon icon={faUser} className="wd-sidenav-icon" /> Profile
                 </Link>

@@ -30,8 +30,8 @@ export const HomeComponent = () => {
                     <div className="position-relative mb-2 border-3 card">
                         <img src="/images/one.png" className="w-100 rounded-3"/>
                     </div>
-                    <StoreList storeArray={homeData.stores}/>
                     <CategoriesList categoriesArray={homeData.categories}/>
+                    <StoreList storeArray={homeData.stores}/>
                     <StoreMap storeArray={homeData.stores}/>
                 </>
             }

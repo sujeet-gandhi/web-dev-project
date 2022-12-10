@@ -25,6 +25,9 @@ import StoreAdmin from "../store-admin";
 import StoreDetailItem from "../store/detail-page/store-detail-item";
 import CategorySummary from "../categories";
 import {useLocation} from "react-router";
+import {AllStoreComponent} from "../store/all-stores-page";
+import {AllProductsComponent} from "../products/all-products-page";
+import EditProfileComponent from "../profile/edit-profile/edit-profile";
 
 const store = configureStore({
     reducer: {home: homeReducer, store: storeReducer, user: userReducer, search: searchReducer,
@@ -49,15 +52,15 @@ function OneStopGo() {
                     <Routes>
                         <Route path="" element={<HomeComponent/>}/>
                         <Route path="orders" element={<OrdersComponents/>}/>
-                        <Route path="products" element={<h1>We will display all the products here</h1>}/>
-                        <Route path="stores" element={<h1>All Store list here</h1>}/>
-                        <Route path="store/:storeId" element={<StoreDetailItem/>}/>
+                        <Route path="products" element={<AllProductsComponent/>}/>
+                        <Route path="stores" element={<AllStoreComponent/>}/>
+                        <Route path="stores/:storeId" element={<StoreDetailItem/>}/>
                         <Route path="product/:productId" element={<ProductDetailItem/>}/>
                         <Route path="profile/:userId" element={<ProfileComponent/>}/>
                         <Route path="cart" element={<CartComponent/>}/>
                         <Route path="search" element={<EmptySearchView/>}/>
                         <Route path="results/*" element={<SearchComponent/>}/>
-                        <Route path="edit-profile" element={<ProfileComponent/>}/>
+                        <Route path="edit-profile" element={<EditProfileComponent/>}/>
                         <Route path="root" element={<RootOperations/>}/>
                         <Route path="storeadmin" element={<StoreAdmin/>}/>
                         <Route path="logout" element={<Logout/>}/>

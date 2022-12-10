@@ -20,6 +20,7 @@ import {faArrowLeft} from "@fortawesome/free-solid-svg-icons";
 
 export const LoginForm = () => {
     const [activeTab, setActiveTab] = useState('login');
+    const [regName, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [registerEmail, setRegisterEmail] = useState('');
@@ -49,6 +50,7 @@ export const LoginForm = () => {
 
     const handleRegistration = event => {
       const userDetails = {
+          name: regName,
           email: registerEmail,
           password:registerPassword,
           address:registerAddress,
@@ -98,9 +100,9 @@ export const LoginForm = () => {
                     <MDBTabsContent>
 
                         <MDBTabsPane show={activeTab === 'login'}>
-                            <MDBInput wrapperClass='mb-4' label='Email address' id='form1' type='email' onChange={event => setEmail(event.target.value)}
+                            <MDBInput placeholder={'john.doe@onestopgo.com'} wrapperClass='mb-4' label='Email address' id='form1' type='email' onChange={event => setEmail(event.target.value)}
                                       value={email}/>
-                            <MDBInput wrapperClass='mb-4' label='Password' id='form2' type='password' onChange={event => setPassword(event.target.value)}
+                            <MDBInput placeholder={'Your Super Secret Password'} wrapperClass='mb-4' label='Password' id='form2' type='password' onChange={event => setPassword(event.target.value)}
                                       value={password}/>
 
                             <div className="d-flex justify-content-between mx-4 mb-4">
@@ -115,15 +117,13 @@ export const LoginForm = () => {
 
                         <MDBTabsPane show={activeTab === 'register'}>
 
-                            <MDBInput wrapperClass='mb-4' label='Email' type='email' onChange={event => setRegisterEmail(event.target.value)}/>
-                            <MDBInput wrapperClass='mb-4' label='Password'  type='password' onChange={event => setRegisterPassword(event.target.value)}/>
-                            <MDBInput wrapperClass='mb-4' label='Address' type='text' onChange={event => setRegisterAddress(event.target.value)}/>
-                            <MDBInput wrapperClass='mb-4' label='Contact' type='tel' onChange={event => setRegisterContact(event.target.value)}/>
+                            <MDBInput wrapperClass='mb-4' placeholder={'John Doe'} label='Name' type='text' onChange={event => setName(event.target.value)}/>
+                            <MDBInput wrapperClass='mb-4' placeholder={'john.doe@onestopgo.com'} label='Email' type='email' onChange={event => setRegisterEmail(event.target.value)}/>
+                            <MDBInput wrapperClass='mb-4' placeholder={'Your Super Secret Password'} label='Password'  type='password' onChange={event => setRegisterPassword(event.target.value)}/>
+                            <MDBInput wrapperClass='mb-4' placeholder={'A Place You Call Home'} label='Address' type='text' onChange={event => setRegisterAddress(event.target.value)}/>
+                            <MDBInput wrapperClass='mb-4' placeholder={'XXX-XXX-XXXX'} label='Contact' type='tel' onChange={event => setRegisterContact(event.target.value)}/>
                             <MDBInput wrapperClass='mb-4' label='Image' type='file' onChange={event => setImage(event.target.files[0])}/>
 
-                            <div className='d-flex justify-content-center mb-4'>
-                                <MDBCheckbox name='flexCheck' id='flexCheckDefault' label='I have read and agree to the terms'/>
-                            </div>
 
                             <MDBBtn onClick={handleRegistration} className="mb-4 w-100" style={{backgroundColor: "teal"}}>Sign up</MDBBtn>
 

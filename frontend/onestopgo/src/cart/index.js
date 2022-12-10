@@ -29,29 +29,29 @@ export const CartComponent = () => {
         handleOnOrdersClicked()
     }
 
-    if (!loggedIn) return <LoginSuggest pageName={'Shopping Cart'}/>;
     return (
         <>
             {loading && <Loader/>}
-            {!loading &&
+            {!loading && loggedIn &&
                 <div className={'card wd-cart-item'}>
                     <CartList cartItems={cartData.cart.items} userType={loggedInUser.type}/>
+                    {
+                        (loggedInUser.type === "USER") &&
+                        <div>
+                            <h4 className={'right'}>Total: ${cartData.cart.orderTotal}</h4>
+                        </div>
+                    }
                     <div>
                         {
-                            (loggedInUser.type === "USER") && <>
-                                <div>
-                                    <h4 className={'right'}>Total: ${cartData.cart.orderTotal}</h4>
-                                </div>
-                                <button onClick={handleOnCheckoutClicked}
-                                        className="btn waves-effect waves-light teal white-text wd-margin-top-bottom right"
-                                        type="submit" name="action">
-                                    Checkout <i className="material-icons right">shopping_cart</i>
-                                </button>
-                            </>
+                            (loggedInUser.type === "USER") &&
+                            <button onClick={handleOnCheckoutClicked} className="btn waves-effect waves-light teal white-text wd-margin-top-bottom right" type="submit" name="action">
+                                Checkout <i className="material-icons right">shopping_cart</i>
+                            </button>
                         }
                     </div>
                 </div>
             }
+            {!loggedIn && <LoginSuggest pageName={'Shopping Cart'}/>}
         </>
     );
 }
