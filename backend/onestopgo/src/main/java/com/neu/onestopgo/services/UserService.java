@@ -69,7 +69,8 @@ public class UserService {
 
     public User updateUserProfile(UserRequestObject userRequestObject, int userId) {
         User currentUser = userRepository.findById(userId).orElseThrow();
-        currentUser.setAddress(userRequestObject.getAddress())
+        currentUser.setName(userRequestObject.getName())
+                .setAddress(userRequestObject.getAddress())
                 .setPassword(userRequestObject.getPassword())
                 .setContact(userRequestObject.getContact())
                 .setImageUrl(userRequestObject.getImageUrl());
@@ -92,6 +93,7 @@ public class UserService {
 
         return new UserResponseObject()
                 .setFavourites(favouritesOfUser)
+                .setName(user.getName())
                 .setId(user.getId())
                 .setContact(user.getContact())
                 .setAddress(user.getAddress())
@@ -107,6 +109,7 @@ public class UserService {
         Map<String, List<Object>> favouritesOfUser = favouriteService.getAllFavouriteOfUsers(user.getId());
 
         return new UserResponseObject()
+                .setName(user.getName())
                 .setFavourites(favouritesOfUser)
                 .setId(user.getId())
                 .setEmail(user.getEmail())

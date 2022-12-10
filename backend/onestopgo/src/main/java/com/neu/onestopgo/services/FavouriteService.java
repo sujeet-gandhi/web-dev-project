@@ -50,9 +50,9 @@ public class FavouriteService {
         if (allFavourites != null) {
             allFavourites.forEach(each -> {
                 if (each.getFavouriteProduct() != null) {
-                    favourites.get("products").add(List.of(each.getFavouriteProduct().getName(), each.getFavouriteProduct().getId().toString()));
+                    favourites.get("products").add(List.of(each.getFavouriteProduct().getName(), each.getFavouriteProduct().getId().toString(), each.getFavouriteProduct().getImageUrl()));
                 } else {
-                    favourites.get("stores").add(List.of(each.getFavouriteStore().getName(), each.getFavouriteStore().getId()));
+                    favourites.get("stores").add(List.of(each.getFavouriteStore().getName(), each.getFavouriteStore().getId(), each.getFavouriteStore().getImageUrl()));
                 }
             });
         }

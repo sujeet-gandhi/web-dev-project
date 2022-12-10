@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class UserResponseObject {
     private int id;
+    private String name;
     private String email;
     private boolean enabled;
     private String password;
@@ -13,6 +14,15 @@ public class UserResponseObject {
     private String type;
     private String imageUrl;
     public Map<String, List<Object>> favourites;
+
+    public String getName() {
+        return name;
+    }
+
+    public UserResponseObject setName(String name) {
+        this.name = name;
+        return this;
+    }
 
     public int getId() {
         return id;

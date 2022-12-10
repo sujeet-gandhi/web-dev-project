@@ -3,12 +3,21 @@ package com.neu.onestopgo.dao;
 import com.neu.onestopgo.models.User;
 
 public class UserRequestObject {
+    private String name;
     private String email;
     private String password;
     private String address;
     private String contact;
     private int storeId;
     private String imageUrl;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getEmail() {
         return email;
