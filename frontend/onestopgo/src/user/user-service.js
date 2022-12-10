@@ -45,7 +45,8 @@ export const registerUser = async (user) => {
 }
 
 
-export const updateUser = async (user, userId) => {
+export const updateUser = async (user) => {
+    console.log(user)
     const imageData = user.image;
     delete user.image;
 
@@ -58,7 +59,7 @@ export const updateUser = async (user, userId) => {
     formData.append("user", blob);
     formData.append("image", imageData);
 
-    return (await axios.put(USER_API + '/' + userId, formData, {
+    return (await axios.put(USER_API, formData, {
         headers: {
             'Content-Type': 'multipart/form-data'
         }

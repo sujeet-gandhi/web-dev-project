@@ -8,6 +8,7 @@ import com.neu.onestopgo.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -55,23 +56,32 @@ public class UserController {
     }
   }
 
-  @PutMapping(path = "/{userId}", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
-  public ResponseEntity updateUserProfile(@RequestPart("image") MultipartFile multipartFile,
-                                          @RequestPart("user") UserRequestObject userRequestObject, @PathVariable int userId) {
-    try {
-      String fileName = UUID.randomUUID() + "." + Objects.requireNonNull(multipartFile.getOriginalFilename()).split("\\.")[1];
-      userRequestObject.setImageUrl(USER_IMAGE_DIR + fileName);
-      ImageUtil.saveFileAndCreateDirectory(USER_IMAGE_DIR, fileName, multipartFile);
-
-      String existingImageUrlForDeletion = userService.getExistingImageUrlOfUser(userId);
-      if (!Utils.IsNullOrEmpty(existingImageUrlForDeletion))
-        ImageUtil.removeFileFromDirectory(USER_IMAGE_DIR, existingImageUrlForDeletion);
-
-      return ResponseEntity.ok(userService.updateUserProfile(userRequestObject, userId));
-    } catch (Exception e) {
-      return ResponseEntity.badRequest().body(e.getMessage());
+    @PutMapping("/noimage")
+    public ResponseEntity updateUserProfileWithOutImage(UserRequestObject userRequestObject, Authentication authentication) {
+        return ResponseEntity.ok(userService.updateUserProfile(userRequestObject,
+                userService.getUserFromUserName(authentication.getName()).getId()));
     }
-  }
+
+    @PutMapping(path = "/withimage", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity updateUserProfile(@RequestPart("image") MultipartFile multipartFile,
+                                            @RequestPart("user") UserRequestObject userRequestObject,
+                                            Authentication authentication) {
+        try {
+            String fileName = UUID.randomUUID() + "." + Objects.requireNonNull(multipartFile.getOriginalFilename()).split("\\.")[1];
+            userRequestObject.setImageUrl(USER_IMAGE_DIR + fileName);
+            ImageUtil.saveFileAndCreateDirectory(USER_IMAGE_DIR, fileName, multipartFile);
+
+            int userId = userService.getUserFromUserName(authentication.getName()).getId();
+
+            String existingImageUrlForDeletion = userService.getExistingImageUrlOfUser(userId);
+            if (!Utils.IsNullOrEmpty(existingImageUrlForDeletion))
+                ImageUtil.removeFileFromDirectory(USER_IMAGE_DIR, existingImageUrlForDeletion);
+
+            return ResponseEntity.ok(userService.updateUserProfile(userRequestObject, userId));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 
   @PostMapping(path = "/storeadmin", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
   public ResponseEntity createStoreAdmin(@RequestPart("image") MultipartFile multipartFile,
