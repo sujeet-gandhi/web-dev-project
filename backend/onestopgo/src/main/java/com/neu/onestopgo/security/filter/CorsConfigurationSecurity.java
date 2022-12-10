@@ -26,9 +26,9 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableAutoConfiguration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class CorsConfigurationSecurity implements WebMvcConfigurer {
-@Override
-public void addCorsMappings(CorsRegistry registry) {
+  @Override
+  public void addCorsMappings(CorsRegistry registry) {
     registry.addMapping("/**")
             .allowedOrigins("*");
-}
+  }
 }
