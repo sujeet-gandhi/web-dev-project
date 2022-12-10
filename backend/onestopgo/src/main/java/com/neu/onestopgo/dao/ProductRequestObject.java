@@ -3,124 +3,124 @@ package com.neu.onestopgo.dao;
 import com.neu.onestopgo.models.Product;
 
 public class ProductRequestObject {
-    private String productId;
-    private String name;
+  private String productId;
+  private String name;
 
-    private String description;
+  private String description;
 
-    private String unit;
+  private String unit;
 
-    private double quantity;
+  private double quantity;
 
-    private boolean inStock;
+  private boolean inStock;
 
-    private float price;
+  private float price;
 
-    private String type;
+  private String type;
 
-    private String imageUrl;
+  private String imageUrl;
 
-    private int storeId;
+  private int storeId;
 
-    private float storeQuantity;
+  private float storeQuantity;
 
-    public String getName() {
-        return name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public String getDescription() {
-        return description;
-    }
+  public String getDescription() {
+    return description;
+  }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+  public void setDescription(String description) {
+    this.description = description;
+  }
 
-    public String getUnit() {
-        return unit;
-    }
+  public String getUnit() {
+    return unit;
+  }
 
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
+  public void setUnit(String unit) {
+    this.unit = unit;
+  }
 
-    public double getQuantity() {
-        return quantity;
-    }
+  public double getQuantity() {
+    return quantity;
+  }
 
-    public void setQuantity(double quantity) {
-        this.quantity = quantity;
-    }
+  public void setQuantity(double quantity) {
+    this.quantity = quantity;
+  }
 
-    public boolean isInStock() {
-        return inStock;
-    }
+  public boolean isInStock() {
+    return inStock;
+  }
 
-    public void setInStock(boolean inStock) {
-        this.inStock = inStock;
-    }
+  public void setInStock(boolean inStock) {
+    this.inStock = inStock;
+  }
 
-    public float getPrice() {
-        return price;
-    }
+  public float getPrice() {
+    return price;
+  }
 
-    public void setPrice(float price) {
-        this.price = price;
-    }
+  public void setPrice(float price) {
+    this.price = price;
+  }
 
-    public String getType() {
-        return type;
-    }
+  public String getType() {
+    return type;
+  }
 
-    public void setType(String type) {
-        this.type = type;
-    }
+  public void setType(String type) {
+    this.type = type;
+  }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
+  public String getImageUrl() {
+    return imageUrl;
+  }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
+  public void setImageUrl(String imageUrl) {
+    this.imageUrl = imageUrl;
+  }
 
-    public int getStoreId() {
-        return storeId;
-    }
+  public int getStoreId() {
+    return storeId;
+  }
 
-    public void setStoreId(int storeId) {
-        this.storeId = storeId;
-    }
+  public void setStoreId(int storeId) {
+    this.storeId = storeId;
+  }
 
-    public float getStoreQuantity() {
-        return storeQuantity;
-    }
+  public float getStoreQuantity() {
+    return storeQuantity;
+  }
 
-    public void setStoreQuantity(float storeQuantity) {
-        this.storeQuantity = storeQuantity;
-    }
+  public void setStoreQuantity(float storeQuantity) {
+    this.storeQuantity = storeQuantity;
+  }
 
-    public String getProductId() {
-        return productId;
-    }
+  public String getProductId() {
+    return productId;
+  }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
-    }
+  public void setProductId(String productId) {
+    this.productId = productId;
+  }
 
-    public Product getModelObject() {
-        return new Product()
-                .setName(name)
-                .setDescription(description)
-                .setUnit(unit)
-                .setQuantity(quantity)
-                .setInStock(inStock)
-                .setPrice(price)
-                .setType(type)
-                .setImageUrl(imageUrl);
-    }
+  public Product getModelObject() {
+    return new Product()
+            .setName(name)
+            .setDescription(description)
+            .setUnit(unit)
+            .setQuantity(quantity)
+            .setInStock(inStock)
+            .setPrice(price)
+            .setType(type)
+            .setImageUrl(imageUrl);
+  }
 }

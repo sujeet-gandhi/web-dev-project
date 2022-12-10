@@ -9,34 +9,35 @@ import javax.persistence.*;
 @Indexed
 public class Authorities {
 
-    @Column(name = "username", columnDefinition = "VARCHAR(255)")
-    private String username;
-    @Column(name = "authority", columnDefinition = "VARCHAR(255)")
-    private String authority;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+  @Column(name = "username", columnDefinition = "VARCHAR(255)")
+  private String username;
+  @Column(name = "authority", columnDefinition = "VARCHAR(255)")
+  private String authority;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private long id;
 
-    public void setId(long id) {
-        this.id = id;
-    }
-    public long getId() {
-        return id;
-    }
+  public void setId(long id) {
+    this.id = id;
+  }
 
-    public String getUsername() {
-        return username;
-    }
+  public long getId() {
+    return id;
+  }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+  public String getUsername() {
+    return username;
+  }
 
-    public String getAuthority() {
-        return authority;
-    }
+  public void setUsername(String username) {
+    this.username = username;
+  }
 
-    public void setAuthority(String authority) {
-        this.authority = authority;
-    }
+  public String getAuthority() {
+    return authority;
+  }
+
+  public void setAuthority(String authority) {
+    this.authority = authority;
+  }
 }
