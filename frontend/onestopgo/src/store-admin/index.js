@@ -1,6 +1,11 @@
 import {useDispatch, useSelector} from "react-redux";
 import React, {useEffect, useState} from "react";
-import {createProductThunk, getAllProductsOfStoreAdminThunk, updateProductThunk} from "../products/product-thunk";
+import {
+    createProductThunk,
+    getAllProductsOfStoreAdminThunk,
+    updateProductPriceThunk,
+    updateProductThunk
+} from "../products/product-thunk";
 import {getHomeDataThunk} from "../home/home-thunk";
 import {getUserDataThunk} from "../login/login-thunk";
 import Loader from "../components/loader";
@@ -50,6 +55,18 @@ const StoreAdmin = () => {
 
     const handleCreateProductSubmit = () => {
         dispatch(createProductThunk(createProductState));
+    }
+
+    const handlePriceChange = (id) => {
+        const changedPrice = document.getElementById('product_price_' + id).value
+        const changedDescription = document.getElementById('product_description_' + id).value
+        const incrementPriceData = {
+            productId: id,
+            price: changedPrice,
+            description: changedDescription
+        }
+
+        dispatch(updateProductPriceThunk(incrementPriceData))
     }
 
     if (loading) return <Loader />
@@ -157,8 +174,11 @@ const StoreAdmin = () => {
                                                         </div>
                                                         <div className="card-content">
                                                             <p><span className={'card-title fw-bold'}>{each.product.name} </span></p>
-                                                            <p><span className={'fw-bold'}>${each.product.price} / <span className={'fw-lighter'}>{each.product.quantity} {each.product.unit}</span> </span></p>
                                                             <p><span className={'fw-bold'}>Quantity At Store : {each.quantity}</span></p>
+                                                            <textarea defaultValue={each.product.description} className={'card-subtitle'} id={'product_description_' + each.product.id}/>
+                                                            <br/>
+                                                            <label className={'left'}> Price per {each.product.quantity} {each.product.unit} $<input id={'product_price_' + each.product.id} type={'text'} maxLength={4} defaultValue={each.product.price}/> </label>
+                                                            <button className={'btn waves-effect waves-light teal text-white right'} onClick={() => handlePriceChange(each.product.id)}>Save</button>
                                                         </div>
                                                     </div>
                                             </div>)
@@ -175,15 +195,3 @@ const StoreAdmin = () => {
 }
 
 export default StoreAdmin;
-
-// <div className="border border-1 rounded-3">
-//     <div>Name : {each.product.name}</div>
-//     <div>Price : {each.product.price}</div>
-//     <div>Item Quantity : {each.product.quantity}</div>
-//     <div>Quantity At Store : {each.quantity} : <button
-//         className="rounded-pill btn btn-secondary"
-//         >+10</button>
-//     </div>
-//     <img width={150} height={150}
-//          src={ONESTOPGO_API + "/" + each.product.imageUrl}
-//          alt={each.product.name}/>

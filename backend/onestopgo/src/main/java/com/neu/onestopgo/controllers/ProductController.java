@@ -74,6 +74,20 @@ public class ProductController {
     return ResponseEntity.ok(productService.getProductById(UUID.fromString(productId)));
   }
 
+  @PutMapping("/price")
+  public ResponseEntity updatePriceOfProduct(@RequestBody ProductRequestObject productRequestObject) {
+    try {
+      productService.updatePriceAndDescriptionOfProduct(productRequestObject.getProductId(),
+              productRequestObject.getPrice(),
+              productRequestObject.getDescription());
+      return ResponseEntity.ok(storeItemService
+              .getByProductId(UUID.fromString(productRequestObject.getProductId()))
+              .getResponseObject());
+    } catch (Exception e) {
+      return ResponseEntity.badRequest().body("Invalid request : " + e.getMessage());
+    }
+  }
+
   @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
   public ResponseEntity createProductWithQuantity(@RequestPart("image") MultipartFile multipartFile,
                                                   @RequestPart("product") ProductRequestObject productRequestObject,
@@ -102,13 +116,17 @@ public class ProductController {
   @PutMapping
   public ResponseEntity updateProductWithQuantity(@RequestBody ProductRequestObject productRequestObject,
                                                   Authentication authentication) {
-    return ResponseEntity.ok(
-            storeItemService.updateStoreIdAndProductIdQuantity(
-                    userService.getStoreIdOfStoreAdmin(authentication.getName()),
-                    productRequestObject.getProductId(),
-                    productRequestObject.getStoreQuantity(),
-                    true
-            )
-    );
+    try {
+      return ResponseEntity.ok(
+              storeItemService.updateStoreIdAndProductIdQuantity(
+                      userService.getStoreIdOfStoreAdmin(authentication.getName()),
+                      productRequestObject.getProductId(),
+                      productRequestObject.getStoreQuantity(),
+                      true
+              )
+      );
+    } catch (Exception e) {
+      return ResponseEntity.badRequest().body("Invalid request : " + e.getMessage());
+    }
   }
 }

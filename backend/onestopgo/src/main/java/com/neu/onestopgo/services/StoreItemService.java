@@ -32,11 +32,16 @@ public class StoreItemService {
     return storeItemRepository.findByProductId(productId);
   }
 
-  public StoreItemQuantityResponseObject updateStoreIdAndProductIdQuantity(int storeId, String productId, float quantity, boolean increment) {
+  public StoreItemQuantityResponseObject updateStoreIdAndProductIdQuantity(int storeId, String productId, float quantity, boolean increment) throws Exception {
     StoreItemQuantity storeItemQuantity = storeItemRepository.findByStoreIdAndProductId(storeId, UUID.fromString(productId));
     float newQuantity = quantity;
     if (increment)
       newQuantity += storeItemQuantity.getQuantity();
+
+    if (newQuantity < 0) {
+      throw new Exception("Invalid quantity : " + newQuantity);
+    }
+
     storeItemQuantity.setQuantity(newQuantity);
     return storeItemRepository.save(storeItemQuantity).getResponseObject();
   }
