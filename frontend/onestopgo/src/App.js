@@ -1,5 +1,5 @@
 import './App.css';
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {BrowserRouter, HashRouter, Route, Routes} from "react-router-dom";
 import '@fortawesome/fontawesome-free/css/all.css';
 import {configureStore} from "@reduxjs/toolkit";
 import homeReducer from "./home/home-reducer";
@@ -21,7 +21,7 @@ function App() {
     });
     return (
         <Provider store={store}>
-            <BrowserRouter>
+            <HashRouter>
                 <div className={'w-100'}>
                     <Routes>
                         <Route path="/*" element={<OneStopGo/>}/>
@@ -29,7 +29,7 @@ function App() {
                     </Routes>
                     {/*<Footer/>*/}
                 </div>
-            </BrowserRouter>
+            </HashRouter>
         </Provider>
     );
 }
