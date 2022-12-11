@@ -30,6 +30,7 @@ export const LoginForm = () => {
     const [userImage, setImage] = useState({});
     const [signInPressed, setSignInPressed] = useState(false);
     const {loggedIn, loggedInUser} = useSelector(state => state.login)
+    const [errMessage, setErrMessage] = useState('')
     const dispatch= useDispatch();
     const navigate = useNavigate();
 
@@ -48,7 +49,9 @@ export const LoginForm = () => {
             email : email,
             password : password};
 
-        dispatch(loginThunk(loginDetails))
+        dispatch(loginThunk(loginDetails)).unwrap().catch((error) => {
+            setErrMessage("Bad Credentials, Try again")
+        });
     };
 
     const handleEnterKeyPressed = event => {
@@ -120,7 +123,7 @@ export const LoginForm = () => {
                                       onChange={event => setPassword(event.target.value)}
                                       onKeyDown={event => handleEnterKeyPressed(event)}
                                       value={password}/>
-                            {!loggedIn && signInPressed && <p className="text-center" style={{color: "red"}}>Bad Credentials, Try again</p>}
+                            <p className="text-center" style={{color: "red"}}>{errMessage}</p>
                             <MDBBtn onClick={handleSubmit} className="mb-4 w-100" style={{backgroundColor: "teal"}}>Sign in</MDBBtn>
 
 

@@ -25,9 +25,6 @@ export const hitLogin = async (loginDetails) => {
         console.log("login success")
         window.location.replace("/");
         return (await axios.get(USER_DETAILS_API)).data
-    }).catch(error => {
-        console.log("login failed")
-        return error
     })).data
 }
 

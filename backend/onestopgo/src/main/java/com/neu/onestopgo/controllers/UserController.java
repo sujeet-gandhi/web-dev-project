@@ -74,7 +74,7 @@ public class UserController {
             int userId = userService.getUserFromUserName(authentication.getName()).getId();
 
             String existingImageUrlForDeletion = userService.getExistingImageUrlOfUser(userId);
-            if (!Utils.IsNullOrEmpty(existingImageUrlForDeletion))
+            if (!Utils.IsNullOrEmpty(existingImageUrlForDeletion) && !existingImageUrlForDeletion.contains("empty_profile"))
                 ImageUtil.removeFileFromDirectory(USER_IMAGE_DIR, existingImageUrlForDeletion);
 
             return ResponseEntity.ok(userService.updateUserProfile(userRequestObject, userId));
