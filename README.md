@@ -10,7 +10,7 @@
 | Sujeet Kumar Gandhi          | CS5610.20040       | gandhi.su@northeastern.edu    |
 
 ## Problem Statement
-**A single shot multi-store e-commerce website, that allows the user to place one order**
+**A single shot multi-store e-commerce website, that allows the user to place one order which covers multiple stores**
 
 ![OneStopGo Logo](./frontend/onestopgo/public/images/one.png)
 
