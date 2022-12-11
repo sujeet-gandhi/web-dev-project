@@ -8,7 +8,7 @@ const static_server = express();
 
 static_server.use(express.static(path.join(__dirname, 'build')));
 
-static_server.get('/*', function (req, res) {
+static_server.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
