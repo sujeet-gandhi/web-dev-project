@@ -1,6 +1,6 @@
 
 # Project Web Development - CS5610 - Team 34
-
+## OneStopGO
 ## Team members
 | Name                         | Section            | Email                         |
 |------------------------------|--------------------|-------------------------------|
@@ -9,7 +9,6 @@
 | Mitali Ghotgalkar            | CS5610.20040       | ghotgalkar.m@northeastern.edu |
 | Sujeet Kumar Gandhi          | CS5610.20040       | gandhi.su@northeastern.edu    |
 
-## OneStopGO
 ## Problem Statement
 **A single shot multi-store e-commerce website, that allows the user to place one order**
 
