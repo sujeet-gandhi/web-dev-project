@@ -77,7 +77,9 @@ public class ProductController {
   @PutMapping("/price")
   public ResponseEntity updatePriceOfProduct(@RequestBody ProductRequestObject productRequestObject) {
     try {
-      productService.updatePriceOfProduct(productRequestObject.getProductId(), productRequestObject.getPrice());
+      productService.updatePriceAndDescriptionOfProduct(productRequestObject.getProductId(),
+              productRequestObject.getPrice(),
+              productRequestObject.getDescription());
       return ResponseEntity.ok(storeItemService
               .getByProductId(UUID.fromString(productRequestObject.getProductId()))
               .getResponseObject());

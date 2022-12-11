@@ -59,10 +59,13 @@ const StoreAdmin = () => {
 
     const handlePriceChange = (id) => {
         const changedPrice = document.getElementById('product_price_' + id).value
+        const changedDescription = document.getElementById('product_description_' + id).value
         console.log(changedPrice)
+        console.log(changedDescription)
         const incrementPriceData = {
             productId: id,
-            price: changedPrice
+            price: changedPrice,
+            description: changedDescription
         }
 
         dispatch(updateProductPriceThunk(incrementPriceData))
@@ -174,7 +177,7 @@ const StoreAdmin = () => {
                                                         <div className="card-content">
                                                             <p><span className={'card-title fw-bold'}>{each.product.name} </span></p>
                                                             <p><span className={'fw-bold'}>Quantity At Store : {each.quantity}</span></p>
-                                                            <textarea defaultValue={each.product.description} className={'card-subtitle'}/>
+                                                            <textarea defaultValue={each.product.description} className={'card-subtitle'} id={'product_description_' + each.product.id}/>
                                                             <br/>
                                                             <label className={'left'}> Price per {each.product.quantity} {each.product.unit} $<input id={'product_price_' + each.product.id} type={'text'} maxLength={4} defaultValue={each.product.price}/> </label>
                                                             <button className={'btn waves-effect waves-light teal text-white right'} onClick={() => handlePriceChange(each.product.id)}>Save</button>

@@ -50,13 +50,14 @@ public class ProductService {
     return productRepository.findById(productId).orElseThrow();
   }
 
-  public void updatePriceOfProduct(String productId, float price) throws Exception {
+  public void updatePriceAndDescriptionOfProduct(String productId, float price, String description) throws Exception {
     if (price <= 0) {
       throw new Exception("Invalid price :" + price);
     }
 
     Product product = productRepository.findById(UUID.fromString(productId)).orElseThrow();
     product.setPrice(price);
+    product.setDescription(description);
 
     productRepository.save(product);
   }
