@@ -5,6 +5,7 @@
 * Bootstrap
 * Materialize CSS
 * React
+* Redux
 * Axios
 
 ## Requirements
@@ -21,7 +22,7 @@
 ## 1. Landing Page
 View basic details of app.
 
-![](./public/images/landing1.gif)
+![](./public/images/readme/landing1.gif)
 
 ## 2. Login as:
 * Customer
@@ -30,33 +31,33 @@ View basic details of app.
 
 **Sample login screen for Customer**
 
-![Customer login](./public/images/login.png)
+![Customer login](./public/images/readme/login.png)
 
 **Customer Profile Screen**
 
-![Customer profile](./public/images/customerLoginProfile.png)
+![Customer profile](./public/images/readme/customerProfile1.png)
 
 ## 3. Landing Page after customer login
 
-![After Customer login](./public/images/afterLogin.gif)
+![After Customer login](./public/images/readme/afterLoginLanding2.gif)
 
 ## 4. Listed Stores in OneStopGo
 View all the listed stores as a customer
 
-![Stores](./public/images/ourStores.gif)
+![Stores](./public/images/readme/ourStores1.gif)
 
 ## 5. Search for a product
 
-![Search Product](./public/images/ourStores.gif)
+![Search Product](./public/images/readme/search1.gif)
 
 ### 6. View All Orders
 
-![All Orders](./public/images/all_orders.gif)
+![All Orders](./public/images/readme/allOrders1.gif)
 
 ### 7. Create Store As a Root
 
-![Create Stores](./public/images/createStoreRoot.gif)
+![Create Stores](./public/images/readme/createStoreRoot1.gif)
 
 ### 8. Manage Store as Store Manager
 
-![Manage Stores](./public/images/storeManagement.gif)
+![Manage Stores](./public/images/readme/storeManage.gif)
