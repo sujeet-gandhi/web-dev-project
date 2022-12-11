@@ -32,7 +32,7 @@ const cartSlice = createSlice({
             state.loading = true
         },
         [removeFromCartThunk.fulfilled]: (state, {payload}) => {
-            state.cartData.push(payload)
+            state.cartData = payload
             state.loading = false
         },
 
