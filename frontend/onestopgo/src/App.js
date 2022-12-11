@@ -21,7 +21,7 @@ function App() {
     });
     return (
         <Provider store={store}>
-            <HashRouter>
+            <BrowserRouter>
                 <div className={'w-100'}>
                     <Routes>
                         <Route path="/*" element={<OneStopGo/>}/>
@@ -29,7 +29,7 @@ function App() {
                     </Routes>
                     {/*<Footer/>*/}
                 </div>
-            </HashRouter>
+            </BrowserRouter>
         </Provider>
     );
 }
