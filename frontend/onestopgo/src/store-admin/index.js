@@ -157,8 +157,12 @@ const StoreAdmin = () => {
                                                         </div>
                                                         <div className="card-content">
                                                             <p><span className={'card-title fw-bold'}>{each.product.name} </span></p>
-                                                            <p><span className={'fw-bold'}>${each.product.price} / <span className={'fw-lighter'}>{each.product.quantity} {each.product.unit}</span> </span></p>
-                                                            <p><span className={'fw-bold'}>Quantity At Store : {each.quantity}</span></p>
+                                                            <textarea defaultValue={each.product.description} className={'card-subtitle'}/>
+                                                            <br/>
+                                                            <label className={'left'}> Price per {each.product.quantity} {each.product.unit} $<input id={'price'} type={'text'} maxLength={2} size={2} defaultValue={each.product.price}/> </label>
+
+                                                            <label className={'right'}>Quantity At Store <input id={'quantity'} defaultValue={each.quantity}  maxLength={2} size={2}/></label>
+                                                            <button className={'btn waves-effect waves-light teal text-white right'}>Save</button>
                                                         </div>
                                                     </div>
                                             </div>)
