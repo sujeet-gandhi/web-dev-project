@@ -4,6 +4,7 @@ import com.neu.onestopgo.models.Category;
 import com.neu.onestopgo.models.StoreItemQuantity;
 import com.neu.onestopgo.repositories.StoreItemRepository;
 
+import com.neu.onestopgo.response.StoreItemQuantityResponseObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,13 +32,13 @@ public class StoreItemService {
     return storeItemRepository.findByProductId(productId);
   }
 
-  public StoreItemQuantity updateStoreIdAndProductIdQuantity(int storeId, String productId, float quantity, boolean increment) {
+  public StoreItemQuantityResponseObject updateStoreIdAndProductIdQuantity(int storeId, String productId, float quantity, boolean increment) {
     StoreItemQuantity storeItemQuantity = storeItemRepository.findByStoreIdAndProductId(storeId, UUID.fromString(productId));
     float newQuantity = quantity;
     if (increment)
       newQuantity += storeItemQuantity.getQuantity();
     storeItemQuantity.setQuantity(newQuantity);
-    return storeItemRepository.save(storeItemQuantity);
+    return storeItemRepository.save(storeItemQuantity).getResponseObject();
   }
 
   public StoreItemQuantity updateStoreItemQuantity(StoreItemQuantity storeItemQuantity) {

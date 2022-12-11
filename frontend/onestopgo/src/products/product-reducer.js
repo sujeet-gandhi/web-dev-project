@@ -47,7 +47,7 @@ const productSlice = createSlice({
             state.categoryProductDataLoading = true
         },
         [updateProductThunk.fulfilled]: (state, {payload}) => {
-            const index = state.productData.findIndex((each) => each.productId === payload.productId)
+            const index = state.productData.findIndex((each) => each.product.id === payload.product.id)
             state.productData[index] = payload
             state.productLoading = false
         },
