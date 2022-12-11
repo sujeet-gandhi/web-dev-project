@@ -24,6 +24,6 @@ Please visit [here](https://docs.google.com/spreadsheets/d/1SwVI6TtURl8vidpJ_8WP
 
 
 ## Backend
-* [Server deployment link](http://onestopgo.eastus.cloudapp.azure.com:8080/)
+* [Server deployment link](http://onestopgo-server.eastus.cloudapp.azure.com:8080/api/v1/home)
 * [Backend Readme](./backend/onestopgo/README.md)
 
