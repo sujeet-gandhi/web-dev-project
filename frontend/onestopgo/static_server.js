@@ -1,4 +1,5 @@
-// inspired from : creating production deployment using create react app
+// inspired from : creating production deployment using create react app documentation
+// express server to handle routes in production
 // https://create-react-app.dev/docs/deployment/
 
 const express = require('express');
