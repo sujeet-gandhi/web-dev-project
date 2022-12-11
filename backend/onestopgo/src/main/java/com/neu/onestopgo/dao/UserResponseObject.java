@@ -90,14 +90,15 @@ public class UserResponseObject {
   }
 
     public String getImageUrl() {
-        if (TextUtils.isEmpty(imageUrl)) {
-            return "images/user/empty_profile.jpg";
-        }
         return imageUrl;
     }
 
   public UserResponseObject setImageUrl(String imageUrl) {
-    this.imageUrl = imageUrl;
+    if (TextUtils.isEmpty(imageUrl)) {
+      this.imageUrl = "images/user/empty_profile.jpg";
+    } else {
+      this.imageUrl = imageUrl;
+    }
     return this;
   }
 

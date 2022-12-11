@@ -36,7 +36,7 @@ export const OrdersComponents = () => {
                     </center>
                     <ul style={{marginTop:20}} className={'wd-screen-top-lottie'}>
                         {
-                            ordersData.orders.filter((order) => order.orderState !== 'IN_CART').map ((order) =>
+                            ordersData.orders.filter((order) => (loggedInUser.type !== "USER" || order.orderState !== 'IN_CART')).map ((order) =>
                                 <l1>
                                     <OrderItem order={order} userType={loggedInUser.type}/>
                                 </l1>
