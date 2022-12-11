@@ -84,11 +84,10 @@ nav {
 
 .wd-cart-item {
   padding: 0.5rem;
-  margin-right: 1rem;
 }
 
 .wd-side-nav {
-  margin-left: 1rem;
+  margin-left: 0rem;
 }
 
 .wd-remove-link-text-decor {

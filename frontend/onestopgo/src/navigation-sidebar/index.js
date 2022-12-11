@@ -2,7 +2,16 @@ import React from "react";
 import {Link} from "react-router-dom";
 import {useLocation} from "react-router";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faBicycle, faBoxes, faHome, faSearch, faStore, faUser} from "@fortawesome/free-solid-svg-icons";
+import {
+    faBicycle,
+    faBoxes,
+    faGears,
+    faHome,
+    faSearch,
+    faStore,
+    faStoreAlt,
+    faUser
+} from "@fortawesome/free-solid-svg-icons";
 import "./index.css"
 import {useSelector} from "react-redux";
 
@@ -16,7 +25,18 @@ const NavigationSidebar = () => {
             <Link to="/" className={`list-group-item wd-sidenav-side-item ${active === '' ? 'teal' : ''}`}>
                 <FontAwesomeIcon className="wd-sidenav-icon" icon={faHome}/> Home
             </Link>
-
+            {
+                loggedIn && loggedInUser.type === 'ROOT' &&
+                <Link to="/root" className={`list-group-item wd-sidenav-side-item ${active === 'root' ? 'teal' : ''}`}>
+                    <FontAwesomeIcon icon={faGears} className="wd-sidenav-icon" /> Root Operations
+                </Link>
+            }
+            {
+                loggedIn && loggedInUser.type === 'STOREADMIN' &&
+                <Link to="/storeadmin" className={`list-group-item wd-sidenav-side-item ${active === 'storeadmin' ? 'teal' : ''}`}>
+                    <FontAwesomeIcon icon={faStoreAlt} className="wd-sidenav-icon" /> Store Admin
+                </Link>
+            }
             <Link to="/search" className={`list-group-item wd-sidenav-side-item ${active === 'search' || active === 'results' ? 'teal' : ''}`}>
                 <FontAwesomeIcon className="wd-sidenav-icon" icon={faSearch}/> Search
             </Link>

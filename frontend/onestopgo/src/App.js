@@ -22,7 +22,7 @@ function App() {
     return (
         <Provider store={store}>
             <BrowserRouter>
-                <div className={'w-100'}>
+                <div>
                     <Routes>
                         <Route path="/*" element={<OneStopGo/>}/>
                         <Route path="/login" element={<LoginForm/>}/>

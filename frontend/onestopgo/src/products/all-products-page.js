@@ -5,15 +5,17 @@ import Lottie from "lottie-react";
 import product from "../lottie/product.json";
 import '../index.css';
 import {getHomeDataThunk} from "../home/home-thunk";
-import StoreList from "../store/store-list";
+import ProductList from "./product-list";
+import {getUserDataThunk} from "../login/login-thunk";
 
 export const AllProductsComponent = () => {
     const {homeData, loading} = useSelector(state => state.home)
     const dispatch = useDispatch();
-
+    const {loggedIn, loggedInUser} = useSelector(state => state.login)
 
     useEffect(() => {
         dispatch(getHomeDataThunk())
+        dispatch(getUserDataThunk())
     }, []);
 
     if (!homeData) return null;
@@ -28,7 +30,7 @@ export const AllProductsComponent = () => {
                             <h2>Our Products</h2>
                         </div>
                     </center>
-                    <StoreList storeArray={homeData.stores}/>
+                    <ProductList storeItemQuantityArray={homeData.products} userType={loggedIn && loggedInUser.type}/>
                 </>
             }
         </>
