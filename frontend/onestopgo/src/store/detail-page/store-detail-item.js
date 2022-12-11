@@ -49,31 +49,14 @@ const StoreDetailItem = () => {
             }
             {!singleStoreDataLoading && <>
                 <div>
-                    <div style={{cursor: 'pointer', marginRight: 30}} className="right me-2">
-                        {
-                            loggedIn && checkIfStoreIsFavourite(loggedInUser.favourites) && <>
-                                <i className="medium teal-text material-icons">star</i>
-
-                                {/*<button className="btn btn-secondary" disabled>Favourite</button>*/}
-                            </>
-                        }
-                        {
-                            loggedIn && !checkIfStoreIsFavourite(loggedInUser.favourites) && <>
-                                <i className="medium teal-text material-icons">star_border</i>
-
-                                {/*<button className="btn btn-primary" onClick={handleMarkAsFavourite}>Mark as favourite*/}
-                                {/*</button>*/}
-                            </>
-                        }
-                    </div>
                     <div className="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                        <div className="card-panel center">
-                            <div className={'container'}>
-                                <img width={200} height={200} className={'rounded-circle border-3'}
+                        <div className="card-panel">
+                            <div className={'container center'}>
+                                <img width={200} height={200} className={'rounded-circle border border-3'}
                                      src={ONESTOPGO_API + "/" + singleStoreData.imageUrl}/>
                                 <p className="card-title fw-bolder black-text">{singleStoreData.name}</p>
                                 <p className="green-text">
-                                    {singleStoreData.openingTime} - {singleStoreData.closingTime}<br/>
+                                    {singleStoreData.openingTime} to {singleStoreData.closingTime}<br/>
                                     <span className="card-title text-secondary">
                                         {singleStoreData.type}
 
@@ -89,13 +72,28 @@ const StoreDetailItem = () => {
                                         </div>}
                                     </span>
                                 </p>
+                                <div className={'row wd-100'}>
+                                    <div style={{cursor: 'pointer', marginRight: 30}} className="right">
+                                        {
+                                            loggedIn && checkIfStoreIsFavourite(loggedInUser.favourites) && <>
+                                                <i title={'Favorite'} className="small teal-text material-icons">star</i>
+                                            </>
+                                        }
+                                        {
+                                            loggedIn && !checkIfStoreIsFavourite(loggedInUser.favourites) && <>
+                                                <i onClick={handleMarkAsFavourite} className="small teal-text material-icons">star_border</i>
+                                            </>
+                                        }
+                                    </div>
+                                </div>
+                                <div style={{marginTop: 40}}>
+                                    {productLoading && <Loader/>}
+                                    {!productLoading &&
+                                        <ProductList storeItemQuantityArray={productData} userType={loggedIn && loggedInUser.type}/>}
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <h1>Our Products</h1>
-                    {productLoading && <Loader/>}
-                    {!productLoading &&
-                        <ProductList storeItemQuantityArray={productData} userType={loggedIn && loggedInUser.type}/>}
                 </div>
             </>}
         </>

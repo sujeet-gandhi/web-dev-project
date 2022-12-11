@@ -16,14 +16,14 @@ const StoreItem = ({store}) => {
         <div className="col-6" style={{cursor: 'pointer'}}>
             <a>
                 <div className="card wd-remove-text-decoration"  onClick={handleOnStoreClicked}>
-                    <div className="card-content center white-text wd-category-text">
-                        <img width={100} height={100} className={'rounded-circle border-3 wd-margin-bottom'} src={ONESTOPGO_API + "/" + store.imageUrl}/>
+                    <div className="card-content center white-text">
+                        <img width={100} height={100} className={'rounded-circle border-3'} src={ONESTOPGO_API + "/" + store.imageUrl}/>
                         <p className="card-title fw-bolder black-text">{store.name}</p>
-                        <p className="green-text">
-                            {store.openingTime} - {store.closingTime}<br/>
-                            <span className="card-title text-secondary">
+                        <span className="text-secondary">
                                         {store.type}
                                     </span>
+                        <p className="green-text">
+                            {store.openingTime} - {store.closingTime}<br/>
                         </p>
                     </div>
                 </div>

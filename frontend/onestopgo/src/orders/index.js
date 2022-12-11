@@ -20,6 +20,7 @@ export const OrdersComponents = () => {
         dispatch(getUserDataThunk())
     }, []);
 
+    if (loading) return <Loader/>
     if (!loggedIn) return <LoginSuggest pageName={'Orders'}/>;
     if (!ordersData) return null;
     return (
@@ -27,7 +28,7 @@ export const OrdersComponents = () => {
             {loading && <Loader/>}
             {!loading &&
                 <>
-                    <center className={'wd-screen-top-lottie'}>
+                    <center className={'wd-screen-top-lottie hide-on-med-and-down'}>
                         <div className={'container w-50 h-50 wd-screen-top-lottie'}>
                             <Lottie style={{marginTop:-110}} className={'w-50 h-50 wd-screen-top-lottie'} width={10} animationData={order} loop={false} />
                             <h2 style={{marginTop:-80, marginBottom:20}}>Your Orders</h2>
@@ -35,7 +36,7 @@ export const OrdersComponents = () => {
                     </center>
                     <ul style={{marginTop:20}} className={'wd-screen-top-lottie'}>
                         {
-                            ordersData.orders.map ((order) =>
+                            ordersData.orders.filter((order) => (loggedInUser.type !== "USER" || order.orderState !== 'IN_CART')).map ((order) =>
                                 <l1>
                                     <OrderItem order={order} userType={loggedInUser.type}/>
                                 </l1>

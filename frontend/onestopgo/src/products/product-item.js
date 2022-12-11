@@ -11,7 +11,7 @@ const ProductItem = ({product, storeId, userType}) => {
     const nav = useNavigate();
 
     const handleOnProductClicked = () => {
-        nav("/product/" + product.id)
+        nav("/products/detail/" + product.id)
     }
 
     const handleAddToCartClick = () => {
@@ -27,10 +27,10 @@ const ProductItem = ({product, storeId, userType}) => {
 
     if (!product) return null;
     return (
-        <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-6">
+        <div style={{cursor: 'pointer'}} className="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-6">
             <div className="card">
                 <div className="card-image">
-                    <img height={200} src={ONESTOPGO_API + "/" + product.imageUrl} className={'fw-bolder'} alt={product.name}/>
+                    <img onClick={handleOnProductClicked} height={200} src={ONESTOPGO_API + "/" + product.imageUrl} className={'fw-bolder'} alt={product.name}/>
                     {
                         (userType === "USER") && <a onClick={handleAddToCartClick} className="btn-floating halfway-fab waves-effect waves-light teal"><i
                             className="material-icons">add_shopping_cart</i></a>

@@ -39,7 +39,7 @@ const NavBar = ({links}) => {
                     </ul>
                     {loggedIn &&
                         <ul className="right hide-on-med-and-down">
-                            {
+                            {(loggedInUser.type === "USER") &&
                                 links.map((each) =>
                                     <li onClick={() => nav('/' + each.link)}>
                                         <a data-toggle="tooltip" data-placement="top" title={each.name}>
@@ -66,22 +66,6 @@ const NavBar = ({links}) => {
                             <li onClick={() => nav('/login')}><a
                                 className="waves-effect waves-light btn light-blue">Login</a></li>
                         </ul>
-                    }
-                    {
-                        loggedIn && <>
-                            {
-                                (loggedInUser.type === "STOREADMIN") && <ul className="right hide-on-med-and-down">
-                                    <li onClick={() => nav('/storeadmin')}><a
-                                        className="waves-effect waves-light btn light-blue">Store Management</a></li>
-                                </ul>
-                            }
-                            {
-                                (loggedInUser.type === "ROOT") && <ul className="right hide-on-med-and-down">
-                                    <li onClick={() => nav('/root')}><a
-                                        className="waves-effect waves-light btn light-blue">Root Operations</a></li>
-                                </ul>
-                            }
-                        </>
                     }
                 </div>
             </nav>
