@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+# [OneStopGo - Frontend](http://onestopgo.eastus.cloudapp.azure.com:8080/)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Technologies Used
+* CSS, JS
+* Bootstrap
+* Materialize CSS
+* React
+* Axios
 
-## Available Scripts
+## Requirements
+[To Do]
 
-In the project directory, you can run:
+## How to run locally
+* Add the environment variable using: `export REACT_APP_ONESTOPGO_API_BASE="http://localhost:8080`
+* Run the code by typing `npm start` on the directory terminal
+* Navigate to `http://localhost:3000`
 
-### `npm start`
+## Website Usage Examples
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 1. Landing Page
+View basic details of app.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+![](./public/images/landing1.gif)
 
-### `npm test`
+## 2. Login as:
+* Customer
+* Root ( To create/delete  stores )
+* Store Manager ( To manage the store, add/remove products )
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Sample login screen for Customer**
 
-### `npm run build`
+![Customer login](./public/images/login.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**Customer Profile Screen**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![Customer profile](./public/images/customerLoginProfile.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 3. Landing Page after customer login
 
-### `npm run eject`
+![After Customer login](./public/images/afterLogin.gif)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 4. Listed Stores in OneStopGo
+View all the listed stores as a customer
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![Stores](./public/images/ourStores.gif)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 5. Search for a product
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+![Search Product](./public/images/ourStores.gif)
 
-## Learn More
+### 6. View All Orders
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![All Orders](./public/images/all_orders.gif)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 7. Create Store As a Root
 
-### Code Splitting
+![Create Stores](./public/images/createStoreRoot.gif)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### 8. Manage Store as Store Manager
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![Manage Stores](./public/images/storeManagement.gif)

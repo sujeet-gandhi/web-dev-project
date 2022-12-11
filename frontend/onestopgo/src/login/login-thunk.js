@@ -24,5 +24,5 @@ export const getUserSafeDetailsThunk = createAsyncThunk (
 
 export const updateUserThunk = createAsyncThunk (
     'onestopgo/updateUser',
-    async (userDetails, userId) => await updateUser(userDetails, userId)
+    async (userDetails) => await updateUser(userDetails)
 )
