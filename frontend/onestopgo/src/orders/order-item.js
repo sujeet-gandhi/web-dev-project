@@ -22,10 +22,12 @@ export const OrderItem = ({order, userType}) => {
     const storeAndStoreOrderItems = {}
     uniqueStoreNames.forEach((eachStore) => {
         order.items.forEach((eachCartItem) => {
-            if (eachStore in storeAndStoreOrderItems) {
-                storeAndStoreOrderItems[eachStore].push(eachCartItem)
-            } else {
-                storeAndStoreOrderItems[eachStore] = [eachCartItem]
+            if (eachCartItem.storeName === eachStore) {
+                if (eachStore in storeAndStoreOrderItems) {
+                    storeAndStoreOrderItems[eachStore].push(eachCartItem)
+                } else {
+                    storeAndStoreOrderItems[eachStore] = [eachCartItem]
+                }
             }
         })
     })
