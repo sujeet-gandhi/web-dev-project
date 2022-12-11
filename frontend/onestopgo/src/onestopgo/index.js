@@ -64,6 +64,7 @@ function OneStopGo() {
                         <Route path="stores/:storeId" element={<StoreDetailItem/>}/>
                         <Route path="products/detail/:productId" element={<ProductDetailItem/>}/>
                         <Route path="profile/:userId" element={<ProfileComponent/>}/>
+                        <Route path="cart" element={<CartComponent/>}/>
                         <Route path="search" element={<EmptySearchView/>}/>
                         <Route path="results/*" element={<SearchComponent/>}/>
                         <Route path="edit-profile" element={<EditProfileComponent/>}/>
