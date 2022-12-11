@@ -71,7 +71,9 @@ export const LoginForm = () => {
           image: userImage
       }
 
-        dispatch(registerThunk(userDetails));
+        dispatch(registerThunk(userDetails)).unwrap().then((response) => {
+            setActiveTab('login');
+        });
     };
 
     const handleBackClicked = () => {
