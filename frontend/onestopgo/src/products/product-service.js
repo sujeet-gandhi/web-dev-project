@@ -45,6 +45,10 @@ export const updateProductQuantity = async (updateProductQuantity) => {
     return (await axios.put(PRODUCT_API, updateProductQuantity)).data
 }
 
+export const updateProductPrice = async (newPriceProduct) => {
+    return (await axios.put(PRODUCT_API + "/price", newPriceProduct)).data
+}
+
 export const getProductFromId = async (productId) => {
     return (await axios.get(PRODUCT_API + '/single/' + productId)).data
 }

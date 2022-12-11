@@ -90,10 +90,14 @@ public class OrderService {
       cart.getOrderItemQuantitySet().remove(orderItem);
       orderItemQuantityRepository.deleteById(orderItem.getId());
 
-      storeItemService.updateStoreIdAndProductIdQuantity(orderItem.getStore().getId(),
-              orderItem.getProduct().getId().toString(),
-              orderItem.getQuantity(),
-              true);
+      try {
+        storeItemService.updateStoreIdAndProductIdQuantity(orderItem.getStore().getId(),
+                orderItem.getProduct().getId().toString(),
+                orderItem.getQuantity(),
+                true);
+      } catch (Exception e) {
+        throw new IllegalStateException("Item not reduced from store : " + e.getMessage());
+      }
 
       return orderRepository.save(cart).getResponseObject();
     } else {

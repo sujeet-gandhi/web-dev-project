@@ -50,6 +50,17 @@ public class ProductService {
     return productRepository.findById(productId).orElseThrow();
   }
 
+  public void updatePriceOfProduct(String productId, float price) throws Exception {
+    if (price <= 0) {
+      throw new Exception("Invalid price :" + price);
+    }
+
+    Product product = productRepository.findById(UUID.fromString(productId)).orElseThrow();
+    product.setPrice(price);
+
+    productRepository.save(product);
+  }
+
   public Product createProduct(Product product) {
     return productRepository.save(product);
   }
@@ -65,5 +76,7 @@ public class ProductService {
 
     return productList;
   }
+
+
 
 }

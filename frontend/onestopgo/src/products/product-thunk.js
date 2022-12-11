@@ -30,3 +30,8 @@ export const getProductFromIdThunk = createAsyncThunk (
     'onestopgo/getproductFromId',
     async (productId) => await service.getProductFromId(productId)
 )
+
+export const updateProductPriceThunk = createAsyncThunk (
+    'onestopgo/updateProductPrice',
+    async (newPriceProduct) => await service.updateProductPrice(newPriceProduct)
+)
