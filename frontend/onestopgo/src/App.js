@@ -1,5 +1,5 @@
 import './App.css';
-import {BrowserRouter, HashRouter, Route, Routes} from "react-router-dom";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import '@fortawesome/fontawesome-free/css/all.css';
 import {configureStore} from "@reduxjs/toolkit";
 import homeReducer from "./home/home-reducer";
