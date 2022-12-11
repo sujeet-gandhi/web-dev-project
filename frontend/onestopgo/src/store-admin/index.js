@@ -60,8 +60,6 @@ const StoreAdmin = () => {
     const handlePriceChange = (id) => {
         const changedPrice = document.getElementById('product_price_' + id).value
         const changedDescription = document.getElementById('product_description_' + id).value
-        console.log(changedPrice)
-        console.log(changedDescription)
         const incrementPriceData = {
             productId: id,
             price: changedPrice,
