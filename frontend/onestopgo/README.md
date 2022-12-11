@@ -8,10 +8,11 @@
 * Axios
 
 ## Requirements
-[To Do]
+* Goto to `web-dev-project/frontend/onestopgo` folder and do `npm install --force`.
 
 ## How to run locally
-* Add the environment variable using: `export REACT_APP_ONESTOPGO_API_BASE="http://localhost:8080`
+* Add the backend environment variable using: `export REACT_APP_ONESTOPGO_API_BASE=http://localhost:8080`
+* Add the google maps environment variable using: `export REACT_APP_GOOGLE_MAPS_API_KEY=<google-maps-api-key>` (Ask any of the project members for api key)
 * Run the code by typing `npm start` on the directory terminal
 * Navigate to `http://localhost:3000`
 
