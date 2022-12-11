@@ -1,5 +1,7 @@
 package com.neu.onestopgo.dao;
 
+import org.apache.http.util.TextUtils;
+
 import java.util.List;
 import java.util.Map;
 
@@ -87,12 +89,16 @@ public class UserResponseObject {
     return this;
   }
 
-  public String getImageUrl() {
-    return imageUrl;
-  }
+    public String getImageUrl() {
+        return imageUrl;
+    }
 
   public UserResponseObject setImageUrl(String imageUrl) {
-    this.imageUrl = imageUrl;
+    if (TextUtils.isEmpty(imageUrl)) {
+      this.imageUrl = "images/user/empty_profile.jpg";
+    } else {
+      this.imageUrl = imageUrl;
+    }
     return this;
   }
 

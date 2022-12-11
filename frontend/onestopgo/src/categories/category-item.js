@@ -11,7 +11,6 @@ const CategoryItem = ({category: category}) => {
                     <div className="card-image">
                         <img width={400} height={200} src={ONESTOPGO_API + "/" + category.imageUrl}/>
                         <p className="card-title fw-bold mb-5">{category.name} </p>
-                        <p className="card-title hide-on-med-and-down">{category.description}</p>
                     </div>
                 </div>
             </Link>

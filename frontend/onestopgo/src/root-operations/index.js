@@ -5,20 +5,25 @@ import {createStoreThunk, getStoresThunk} from "../store/store-thunk";
 import {createUserThunk} from "../user/user-thunk";
 import {createCategoriesThunk} from "../categories/category-thunk";
 import LocationPicker from "../store-map/location-picker";
+import {MDBInput} from "mdb-react-ui-kit";
+import {getUserDataThunk} from "../login/login-thunk";
+import {LoginSuggest} from "../components/login-prompt";
 import {UnauthorisedView} from "../components/unauthorised";
+import Loader from "../components/loader";
 
 const RootOperations = () => {
     const {storeData, loading} = useSelector(state => state.store)
     const {userData, _} = useSelector(state => state.user)
-    const {loggedIn, loggedInUser} = useSelector(state => state.login)
     const dispatch = useDispatch();
     const [createStoreState, setCreateStoreState] = useState({
         location: "USE LOCATION PICKER BELOW"
     });
     const [createStoreAdminState, setCreateStoreAdminState] = useState({});
     const [createCategoryState, setCreateCategoryState] = useState({});
+    const {loggedIn, loggedInUser, safeDetailsUserLoading, safeDetailsUser} = useSelector(state => state.login)
 
     useEffect(() => {
+        dispatch(getUserDataThunk())
         dispatch(getStoresThunk())
     }, [userData]);
 
@@ -85,38 +90,28 @@ const RootOperations = () => {
         dispatch(createUserThunk(createStoreAdminState))
     }
 
+    if (loading) return <Loader />
+    else if (!loggedIn) return <div style={{marginTop:80}}> <LoginSuggest pageName={'root operations'}/> </div>
+    else if (loggedIn && loggedInUser.type !== 'ROOT') return <div style={{marginTop:80}}> <UnauthorisedView/> </div>
+
     return (
         <div className="mt-2">
-            {!(loggedInUser.type === 'ROOT')
-                && <UnauthorisedView/>}
-            {(loggedInUser.type === 'ROOT') &&
             <div className="row">
-                <div className="col-3 scrolling">
-                    {loading && <h3>Loading ...</h3>}
-                    {!loading &&
-                        <>
-                            <ul>
-                                {storeData.map((store) => <StoreItemDetails key={store.id} store={store}/>)}
-                            </ul>
-                        </>
-                    }
-                </div>
-                <div className="col-9">
+                <div className="col-xl-9 col-lg-9 col-md-12 col-sm-12">
                     <div className="border border-1 ">
                         <div className="ms-2 me-2 mt-2 mb-2 ">
                             <div className="fs-2 text-center ">
                                 Create Store
                             </div>
-                            <div className="input-field wd-top-margin-form">
-                                <input type="text" className="form-control text-bg-light" id="name" name="name"
-                                       value={createStoreState.name} onChange={handleDataEntryStore}/>
-                                <label htmlFor="name">Name</label>
-                            </div>
+                            <MDBInput wrapperClass='mb-4' placeholder={'Store Name'} label='Name' type='text' id="name" name="name"
+                                      value={createStoreState.name} onChange={handleDataEntryStore}/>
+
                             <div className="input-field mt-2">
-                                <input type="text" className="form-control text-bg-light" id="location" name="location"
+                                <input type="button" className="form-control text-bg-light" id="location" name="location"
                                        value={createStoreState.location} disabled/>
-                                <label htmlFor="location">Location</label>
                             </div>
+
+
                             <div className="form-floating mt-2">
                                 <select className="form-control text-bg-light" id="type" name="type"
                                         onChange={handleDataEntryStore}>
@@ -148,7 +143,7 @@ const RootOperations = () => {
                                 <label htmlFor="imageUrl">Store Image</label>
                             </div>
                             <div className="text-center">
-                                <button className="btn waves-effect waves-light btn-primary" type="submit"
+                                <button className="btn waves-effect waves-light teal white-text" type="submit"
                                         onClick={handleCreateStoreSubmit}>Create Store
                                 </button>
                             </div>
@@ -160,28 +155,19 @@ const RootOperations = () => {
                             <div className="fs-2 text-center">
                                 Create Store Admin
                             </div>
-                            <div className="input-field ">
-                                <input type="email" className="form-control text-bg-light" id="email" name="email"
-                                       value={createStoreAdminState.email} onChange={handleDataEntryStoreAdmin}/>
-                                <label htmlFor="email">Email</label>
-                            </div>
-                            <div className="input-field">
-                                <input type="text" className="form-control text-bg-light" id="password" name="password"
-                                       value={createStoreAdminState.password} onChange={handleDataEntryStoreAdmin}/>
-                                <label htmlFor="password">Password</label>
-                            </div>
-                            <div className="input-field">
-                                <input type="text" className="form-control text-bg-light" id="adminAddress"
-                                       name="adminAddress"
-                                       value={createStoreAdminState.address} onChange={handleDataEntryStoreAdmin}/>
-                                <label htmlFor="adminAddress">Address</label>
-                            </div>
-                            <div className="input-field mt-2">
-                                <input type="text" className="form-control text-bg-light" id="adminContact"
-                                       name="adminContact"
-                                       value={createStoreAdminState.contact} onChange={handleDataEntryStoreAdmin}/>
-                                <label htmlFor="adminContact">Admin Contact</label>
-                            </div>
+
+                            <MDBInput wrapperClass='mb-4' placeholder={'Secret Password for admin'} label='Email' type='email' id="email" name="email"
+                                      value={createStoreAdminState.email} onChange={handleDataEntryStoreAdmin}/>
+
+                            <MDBInput wrapperClass='mb-4' placeholder={'Secret Password for admin'} label='Password' type='password' id="password" name="password"
+                                      value={createStoreAdminState.password} onChange={handleDataEntryStoreAdmin}/>
+
+                            <MDBInput wrapperClass='mb-4' placeholder={'Admin\'s Address'} label='Address' type='text' id="adminAddress" name="adminAddress"
+                                      value={createStoreAdminState.address} onChange={handleDataEntryStoreAdmin}/>
+
+                            <MDBInput wrapperClass='mb-4' placeholder={'Phone Number'} label='Admin Contact' type='tel' id="adminContact" name="adminContact"
+                                      value={createStoreAdminState.contact} onChange={handleDataEntryStoreAdmin}/>
+
                             {!loading &&
                                 <div className="form-floating mt-2">
                                     <select className="form-control text-bg-light" id="storeId" name="storeId"
@@ -203,7 +189,7 @@ const RootOperations = () => {
                                 <label htmlFor="storeAdminImage">Store Admin Image</label>
                             </div>
                             <div className="text-center">
-                                <button className="btn waves-effect waves-light btn-primary"
+                                <button className="btn waves-effect waves-light teal white-text"
                                         onClick={handleCreateStoreAdminSubmit}>Create Store Admin
                                 </button>
                             </div>
@@ -215,18 +201,12 @@ const RootOperations = () => {
                             <div className="fs-2 text-center">
                                 Create Category
                             </div>
-                            <div className="input-field wd-top-margin-form">
-                                <input type="text" className="form-control text-bg-light" id="categoryName" name="name"
-                                       value={createCategoryState.name} onChange={handleDataEntryCreateCategory}/>
-                                <label htmlFor="categoryName">Name</label>
-                            </div>
-                            <div className="input-field wd-top-margin-form">
-                                <input type="text" className="form-control text-bg-light" id="categoryDes"
-                                       name="description"
-                                       value={createCategoryState.description}
-                                       onChange={handleDataEntryCreateCategory}/>
-                                <label htmlFor="categoryDes">Description</label>
-                            </div>
+                            <MDBInput wrapperClass='mb-4' placeholder={'eg. Grocery'} label='Name' type='text' id="categoryName" name="name"
+                                      value={createCategoryState.name} onChange={handleDataEntryCreateCategory}/>
+
+                            <MDBInput wrapperClass='mb-4' placeholder={'eg. Short description'} label='Description' type='text' id="categoryDes" name="description"
+                                      value={createCategoryState.description} onChange={handleDataEntryCreateCategory}/>
+
                             <div>
                                 <input type="file" className="form-control text-bg-light" id="categoryImageUrl"
                                        name="imageUrl"
@@ -234,13 +214,13 @@ const RootOperations = () => {
                                 <label htmlFor="categoryImageUrl">Category Image URL</label>
                             </div>
                             <div className="text-center">
-                                <button className="btn waves-effect waves-light btn-primary"
+                                <button className="btn waves-effect waves-light teal white-text"
                                         onClick={handleCreateCategorySubmit}>Create Category
                                 </button>
                             </div>
                         </div>
                     </div>
-                    <div className="mt-5">
+                    <div className="mt-4">
                         <div className="ms-2 me-2 mt-2 mb-2">
                             <div className="fs-2 text-center">
                                 For Picking Location of Store
@@ -249,8 +229,17 @@ const RootOperations = () => {
                         </div>
                     </div>
                 </div>
-
-            </div> }
+                <div className="col-3 scrolling hide-on-med-and-down">
+                    {loading && <Loader/>}
+                    {!loading &&
+                        <>
+                            <ul>
+                                {storeData.map((store) => <StoreItemDetails key={store.id} store={store}/>)}
+                            </ul>
+                        </>
+                    }
+                </div>
+            </div>
         </div>
     );
 }

@@ -29,10 +29,12 @@ export const CartComponent = () => {
         handleOnOrdersClicked()
     }
 
+    if (loading) return <Loader/>
+    else if (!loggedIn) return <LoginSuggest pageName={'Shopping Cart'}/>
+
     return (
         <>
-            {loading && <Loader/>}
-            {!loading && loggedIn &&
+            {loggedIn && loggedInUser.type === "USER" &&
                 <div className={'card wd-cart-item'}>
                     <CartList cartItems={cartData.cart.items} userType={loggedInUser.type}/>
                     {
@@ -51,7 +53,6 @@ export const CartComponent = () => {
                     </div>
                 </div>
             }
-            {!loggedIn && <LoginSuggest pageName={'Shopping Cart'}/>}
         </>
     );
 }

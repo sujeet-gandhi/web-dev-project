@@ -1,20 +1,18 @@
 package com.neu.onestopgo.controllers;
 
+import com.neu.onestopgo.models.StoreItemQuantity;
 import com.neu.onestopgo.services.CategoryService;
 import com.neu.onestopgo.services.ProductService;
 import com.neu.onestopgo.services.StoreItemService;
 import com.neu.onestopgo.services.StoreService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.websocket.server.PathParam;
 
 import java.util.HashMap;
@@ -44,12 +42,15 @@ public class HomeController {
     this.storeItemService = storeItemService;
   }
 
-  @GetMapping(path = "/home")
-  public ResponseEntity<Map<String, Object>> getHome() {
-    Map<String, Object> response = new HashMap<>();
-    response.put(USER_ID, 1);
-    response.put(STORES, storeService.getAllStores());
-    response.put(CATEGORIES, categoryService.getAllCategories());
+    @GetMapping(path = "/home")
+    public ResponseEntity<Map<String, Object>> getHome() {
+        Map<String, Object> response = new HashMap<>();
+        response.put(USER_ID, 1);
+        response.put(STORES, storeService.getAllStores());
+        response.put(CATEGORIES, categoryService.getAllCategories());
+        response.put(PRODUCTS, storeItemService.getAllProducts().stream()
+                .map(StoreItemQuantity::getResponseObject)
+                .collect(Collectors.toList()));
 
     return ResponseEntity.ok(response);
   }

@@ -1,11 +1,13 @@
 import React from "react";
 import {useDispatch} from "react-redux";
 import {removeFromCartThunk, updateCartThunk} from "./cart-thunk";
+import {useNavigate} from "react-router";
 
 const ONESTOPGO_API = process.env.REACT_APP_ONESTOPGO_API_BASE;
 
 const CartItem = ({cartItem, orderState}) => {
     const dispatch = useDispatch();
+    const nav = useNavigate();
     if (!cartItem) return null;
 
     function roundUpTwoPlaces(n) {
@@ -15,6 +17,10 @@ const CartItem = ({cartItem, orderState}) => {
     const handleRemoveCartClick = () => {
         console.log("Delete Invoked")
         dispatch(removeFromCartThunk(cartItem.id))
+    }
+
+    const handleOnProductClicked = () => {
+        nav("/products/detail/" + cartItem.product.id)
     }
 
     const handleIncreaseOneCount = () => {
@@ -39,7 +45,7 @@ const CartItem = ({cartItem, orderState}) => {
 
     return (
         <li className="collection-item avatar">
-            <img src={ONESTOPGO_API + "/" + cartItem.product.imageUrl} alt="" className="circle"/>
+            <img style={{cursor:'pointer'}} onClick={handleOnProductClicked} src={ONESTOPGO_API + "/" + cartItem.product.imageUrl} alt="" className="circle border border-1"/>
                 <span className={'title fw-bold'}>{cartItem.product.name}</span>
             <p>
                 <span className={'fw-bold'}>${cartItem.product.price} per <span className={'fw-lighter'}>{cartItem.product.quantity} {cartItem.product.unit}</span> </span><br/>
