@@ -11,10 +11,12 @@ const CartList = ({cartItems, userType}) => {
     const storeAndStoreCartItems = {}
     uniqueStoreNames.forEach((eachStore) => {
         cartItems.forEach((eachCartItem) => {
-            if (eachStore in storeAndStoreCartItems) {
-                storeAndStoreCartItems[eachStore].push(eachCartItem)
-            } else {
-                storeAndStoreCartItems[eachStore] = [eachCartItem]
+            if (eachCartItem.storeName === eachStore) {
+                if (eachStore in storeAndStoreCartItems) {
+                    storeAndStoreCartItems[eachStore].push(eachCartItem)
+                } else {
+                    storeAndStoreCartItems[eachStore] = [eachCartItem]
+                }
             }
         })
     })
