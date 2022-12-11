@@ -5,7 +5,7 @@
 | Name                         | Section            | Email                         |
 |------------------------------|--------------------|-------------------------------|
 | Anantha Sashi Sekhar Karedla | CS5610.11744       | karedla.a@northeastern.edu    |
-| Anuj Potdar                  | CS5610.20040       | potdar.a@northeastern.edu     |
+| Anuj Ashok Potdar            | CS5610.20040       | potdar.a@northeastern.edu     |
 | Mitali Ghotgalkar            | CS5610.20040       | ghotgalkar.m@northeastern.edu |
 | Sujeet Kumar Gandhi          | CS5610.20040       | gandhi.su@northeastern.edu    |
 
