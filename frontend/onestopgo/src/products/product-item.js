@@ -30,7 +30,7 @@ const ProductItem = ({product, storeId, userType}) => {
         <div style={{cursor: 'pointer'}} className="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-6">
             <div className="card">
                 <div className="card-image">
-                    <img onClick={handleOnProductClicked} height={200} src={ONESTOPGO_API + "/" + product.imageUrl} className={'fw-bolder'} alt={product.name}/>
+                    <img onClick={handleOnProductClicked} width={300} height={300} src={ONESTOPGO_API + "/" + product.imageUrl} className={'fw-bolder'} alt={product.name}/>
                     {
                         (userType === "USER") && <a onClick={handleAddToCartClick} className="btn-floating halfway-fab waves-effect waves-light teal"><i
                             className="material-icons">add_shopping_cart</i></a>

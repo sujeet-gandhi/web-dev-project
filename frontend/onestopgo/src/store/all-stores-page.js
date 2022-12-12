@@ -24,8 +24,8 @@ export const AllStoreComponent = () => {
                 <>
                     <center className={'wd-screen-top-lottie'}>
                         <div className={'container w-75 h-75 wd-screen-top-lottie'}>
-                            <Lottie style={{marginTop:-100}} className={'w-50 h-50 wd-screen-top-lottie'} width={10} animationData={store} loop={false} />
-                            <h2 style={{marginTop:-80, marginBottom:20}}>Our Stores</h2>
+                            <Lottie className={'w-50 h-50 wd-screen-top-lottie'} width={10} animationData={store} loop={false} />
+                            <h2>Our Stores</h2>
                         </div>
                     </center>
                     <StoreList storeArray={homeData.stores}/>

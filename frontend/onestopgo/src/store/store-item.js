@@ -17,7 +17,7 @@ const StoreItem = ({store}) => {
             <a>
                 <div className="card wd-remove-text-decoration"  onClick={handleOnStoreClicked}>
                     <div className="card-content center white-text">
-                        <img width={100} height={100} className={'rounded-circle border-3'} src={ONESTOPGO_API + "/" + store.imageUrl}/>
+                        <img width={100} height={100} className={'rounded-circle border border-1'} src={ONESTOPGO_API + "/" + store.imageUrl}/>
                         <p className="card-title fw-bolder black-text">{store.name}</p>
                         <span className="text-secondary">
                                         {store.type}
