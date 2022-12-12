@@ -24,10 +24,10 @@ export const AllProductsComponent = () => {
             {loading && <Loader/>}
             {!loading &&
                 <>
-                    <center className={'wd-screen-top-lottie'}>
+                    <center style={{marginTop:30}} className={'wd-screen-top-lottie'}>
                         <div className={'container w-50 h-50 wd-screen-top-lottie'}>
                             <Lottie className={'w-50 h-50 wd-screen-top-lottie'} width={10} animationData={product} loop={true} />
-                            <h2>Our Products</h2>
+                            <h2 style={{marginTop:20}} >Our Products</h2>
                         </div>
                     </center>
                     <ProductList storeItemQuantityArray={homeData.products} userType={loggedIn && loggedInUser.type}/>

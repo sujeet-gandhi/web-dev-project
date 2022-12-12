@@ -4,14 +4,14 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Lottie from "lottie-react";
 import notFound from "../lottie/nothingFound.json";
 
-export const NotFoundView = () => {
+export const NotFoundView = ({text}) => {
 
     return (
         <>
             <div className={'container w-75'}>
                 <center>
                     <Lottie width={100} animationData={notFound} loop={true} />
-                    <h3>Could not find what you were looking for</h3>
+                    <h3>{text}</h3>
                 </center>
             </div>
         </>

@@ -5,7 +5,7 @@ const ONESTOPGO_API = process.env.REACT_APP_ONESTOPGO_API_BASE;
 
 const CategoryItem = ({category: category}) => {
     return (
-        <div className="col-4 wd-small-padding">
+        <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6 wd-small-padding">
             <Link to={'/category/'+category.id} className="wd-remove-text-decoration">
                 <div className="card">
                     <div className="card-image">

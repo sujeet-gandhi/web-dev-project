@@ -21,7 +21,10 @@ export const updateCart = async (orderItemQuantity) => {
 }
 
 export const placeOrder = async (orderId) => {
-    return (await axios.put(ORDER_API + "/placeOrder/" + orderId)).data
+    return (await axios.put(ORDER_API + "/placeOrder/" + orderId).then(async () => {
+        console.log("Order placed successfully")
+        window.location.replace("/orders")
+    })).data
 }
 
 
